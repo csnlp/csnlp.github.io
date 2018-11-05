@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="NLP,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="本文的Motivation最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NLP上">
+<meta name="keywords" content="NLP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/11/02/hello-world/index.html">
+<meta property="og:title" content="BERT的发展历程">
+<meta property="og:url" content="http://yoursite.com/2018/11/04/BERT/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="本文的Motivation最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NLP上">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-02T13:22:27.398Z">
+<meta property="og:updated_time" content="2018-11-05T01:52:29.175Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="BERT的发展历程">
+<meta name="twitter:description" content="本文的Motivation最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NLP上">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/02/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/04/BERT/">
 
 
 
 
 
-  <title>Hello World | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>BERT的发展历程 | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -232,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/BERT/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CSNLP Apprentice">
@@ -249,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">BERT的发展历程</h1>
         
 
         <div class="post-meta">
@@ -261,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T21:22:27+08:00">
-                2018-11-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-04T09:52:20+08:00">
+                2018-11-04
               </time>
             
 
@@ -299,15 +300,63 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="本文的Motivation"><a href="#本文的Motivation" class="headerlink" title="本文的Motivation"></a>本文的Motivation</h2><p>最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。</p>
+<h2 id="BERT是用来做什么呢？"><a href="#BERT是用来做什么呢？" class="headerlink" title="BERT是用来做什么呢？"></a>BERT是用来做什么呢？</h2><p>谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NLP上尚未有这样公认的ImageNet的存在。这里写一下NLP如果采用ImageNet这样的形式它的upper-stream task 和 down-stream task 是什么</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">task</th>
+<th style="text-align:left">数据</th>
+<th style="text-align:left">目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">upper-stream task</td>
+<td style="text-align:left">非常大的语料，理论上越大越好</td>
+<td style="text-align:left">得到一个general, good, robust 的语言表示</td>
+</tr>
+<tr>
+<td style="text-align:left">down-stream task</td>
+<td style="text-align:left">就是特定任务的语料</td>
+<td style="text-align:left">解决特定task, 譬如sentiment analysis, question answering</td>
+</tr>
+</tbody>
+</table>
+<p>BERT 目标是处理down-stream task, i.e.,得到一个语言表示模型(language representation model), 或者说是 “pre-trained language representations”。 从这个意义上来讲，我们之前用的Word2Vec 或者 GloVe 其实也是预先训练好的”WORD-LEVEL”的表达。目前，将pre-trained language representations 应用到下游任务(down stream task)中有两种方式, </p>
+<ul>
+<li>feature-based<br>feature-based 典型代表有ELMo (2018年NAACL Best Paper),将这些 representation作为新的features加入到 task-speacific architecture中</li>
+<li>fine-tunning<br>典型代表: OpenAI GPT。直接在预训练好的模型上利用 task-specific 数据fine tune</li>
+</ul>
+<h2 id="BERT-之前需要有的知识储备"><a href="#BERT-之前需要有的知识储备" class="headerlink" title="BERT 之前需要有的知识储备"></a>BERT 之前需要有的知识储备</h2><ul>
+<li>LSTM基本知识(本文不讲)</li>
+<li>Attention机制的理解 (参考我的专门的博客<a href="https://csnlp.github.io/2018/11/03/Attention/" target="_blank" rel="noopener">Attention机制</a>)</li>
+<li>Self-Attention: Self-Attention 就是BERT提到的Transformer，是现在非常流行的基本组件(Block), 最好能理解的十分深入,这里也单独开一个博文</li>
+</ul>
+<h2 id="为什么会出现BERT"><a href="#为什么会出现BERT" class="headerlink" title="为什么会出现BERT"></a>为什么会出现BERT</h2><ul>
+<li>在Word2Vec和GloVe中，一个词无论在任何语境下都是一个向量，显然这不是完美的。“温暖的 阳光 照射在 我身上” “他的 话 很 温暖”，显然这里的“温暖” 如果是一个向量来表示显然不太精确，我们期待一个向量能够融入上下文信息(Context), ELMo 抓住了这一痛点，提出了一种新的Word Embedding 方法。</li>
+<li>尽管ELMo出现了，但是其出现仍然是希望能够代替Word2Vec,学到一个更加具有(context) 信息的Word Embedding, 然而，对于一些复杂的任务，有些逻辑更复杂(dialogue之类的)，一个好的Embedding 可能还不够。</li>
+<li>BERT希望能够在预训练模型上就能捕捉到很复杂的关系: 上下文逻辑、语料场景等</li>
+</ul>
+<h2 id="为什么谷歌能想出来BERT"><a href="#为什么谷歌能想出来BERT" class="headerlink" title="为什么谷歌能想出来BERT"></a>为什么谷歌能想出来BERT</h2><p>这个问题其实也是BERT的Motivation。 首先BERT选择了fine-tune的思路。然后，研究者意识到大家在upper-stream 这个任务上，也就是在学general language representation时候，都选择<strong>Unidirectional Language Model</strong>, 原因在于这种单向的结构在进行预训练时候，只能在当前位置之前的词汇中做Self-Attention操作 <blockquote><p>The major limitation is that standard language models are unidirectional, and this limits the choice of architectures that can be used during pre-training. For example, in OpenAI GPT, the authors use a left-to-right architecture, where every token can only attend to previous tokens in the self-attention layers of the Transformer.  </p>
+</blockquote><br>BERT不用Unidirectional Language Model 而采用全新的任务 <strong>Masked Language Model</strong>, 其实就是英文考试常考的 “Cloze Task(完形填空)”。这个怎样理解: 譬如BERT想要得到一个NLP能力很强的预训练模型，<strong>完形填空相当于没一个空格都需要你去靠自己的NLP能力去补充上去</strong>，因此，我们可以对整个语料库随机遮住 15% 的tokens，这些被遮住的部分记为[MASK], 然后去将这些[MASK] 重新预测为真实词语。但是这样也存在问题</p>
+<ul>
+<li>Pre-train 和 fine-tune 阶段目标函数不一致<br>毕竟在Pre-train时候，存在[MASK], 而在fine-tune 阶段真实NLP任务中是没有[MASK] 存在的<br>解决方案:<ul>
+<li>80% 的情况下选择的词语就是替换成[MASK] E.g.: A cat is walking.–&gt; A cat [MASK] walking.</li>
+<li>10% 的情况下: 选择的词语随机替换成一个词语  E.g&gt;: A cat is walking –&gt; A cat good walking.</li>
+<li>10 的情况下: 选择的词语还是替换成原来的词语 E.g., A cat is walking –&gt; A cat is walking. </li>
+</ul>
+</li>
+</ul>
+<p>分析一下，这里在做什么<blockquote><p>The Transformer encoder does not konw which words it will be asked to predict or which have been replaced by random words, so it is forced to keep a distributional contextual representation of every input token</p>
+</blockquote></p>
+<ul>
+<li>因为只有15% 的token 被预测，而在Unidirectional Language Model 中所有的token都会被预测，显然Masked Language Model效率是很低的。</li>
+</ul>
+<h2 id="总的想法"><a href="#总的想法" class="headerlink" title="总的想法"></a>总的想法</h2><p>就是很多NLP上的任务可以重新思考一下，谷歌其实在避免一种倾向,这种倾向是<br><blockquote><p>NLP的各个任务越来越专，针对特定任务设计的模型越来越复杂，网络层数越来越深，各种Attention</p>
+</blockquote></p>
+<p>我这里没有资格评价这种倾向好或者不好。但是谷歌就是反其道而行，证明了<br><blockquote><p>我这里搭建一个十分General的基础<strong>BERT</strong>，在BERT的基础上，针对特定任务，一个很简单的小修小补就足以解决问题</p>
+</blockquote><br>当然，谷歌也出了很多在特定任务上十分impressive 的work。。<br>谷歌的模型，越来越证明产业界的学术潜力，产业界大手笔，大计算能力，大资源，服气!!!</p>
 
       
     </div>
@@ -323,6 +372,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+        </div>
+      
 
       
       
@@ -332,8 +387,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/02/Transformer/" rel="next" title="Transformer">
-                <i class="fa fa-chevron-left"></i> Transformer
+              <a href="/2018/11/02/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
           </div>
@@ -342,8 +397,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/04/BERT/" rel="prev" title="BERT的发展历程">
-                BERT的发展历程 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/01/HELLO/" rel="prev" title="人工置顶">
+                人工置顶 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -467,7 +522,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文的Motivation"><span class="nav-number">1.</span> <span class="nav-text">本文的Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BERT是用来做什么呢？"><span class="nav-number">2.</span> <span class="nav-text">BERT是用来做什么呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BERT-之前需要有的知识储备"><span class="nav-number">3.</span> <span class="nav-text">BERT 之前需要有的知识储备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么会出现BERT"><span class="nav-number">4.</span> <span class="nav-text">为什么会出现BERT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么谷歌能想出来BERT"><span class="nav-number">5.</span> <span class="nav-text">为什么谷歌能想出来BERT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总的想法"><span class="nav-number">6.</span> <span class="nav-text">总的想法</span></a></li></ol></div>
             
 
           </div>
