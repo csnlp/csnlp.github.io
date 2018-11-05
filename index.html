@@ -187,12 +187,42 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-github">
+          <a href="https://github.com/csnlp" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            github
           </a>
         </li>
       
@@ -300,10 +330,16 @@
       
         
           
-            <p>开这个博客主要记录一些NLP领域最新的进展，如果读者朋友感觉写作的内容有不妥之处或者侵害了您的版权，请随时联系我, 我看到后会第一时间处理，联系邮箱: csnlp16 AT 126.com. 十分感谢。</p>
-<p>This blog is to document the progress in NLP field. If you have any question about the content or you find this site infringes your copyright, please feal ease to contact me immediately,I will be the first time related to treatment. I will be found in: csnlp16 AT 126.com. Thanks a lot.</p>
-
-          
+          开这个博客主要记录一些NLP领域最新的进展，如果读者朋友感觉写作的内容有不妥之处或者侵害了您的版权，请随时联系我, 我看到后会第一时间处理，联系邮箱: csnlp16 AT 126.com. 十分感谢。
+This blog is to document the progress in NLP fie
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/11/01/HELLO/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -392,193 +428,27 @@
           </span>
 
           
-
-          
+            <span class="post-category">
             
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。</p>
-<h2 id="BERT的Background"><a href="#BERT的Background" class="headerlink" title="BERT的Background"></a>BERT的Background</h2><h3 id="BERT是用来做什么呢？"><a href="#BERT是用来做什么呢？" class="headerlink" title="BERT是用来做什么呢？"></a>BERT是用来做什么呢？</h3><p>谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NLP上尚未有这样公认的ImageNet的存在。这里写一下NLP如果采用ImageNet这样的形式它的upper-stream task 和 down-stream task 是什么</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">task</th>
-<th style="text-align:left">数据</th>
-<th style="text-align:left">目标</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">upper-stream task</td>
-<td style="text-align:left">非常大的语料，理论上越大越好</td>
-<td style="text-align:left">得到一个general, good, robust 的语言表示</td>
-</tr>
-<tr>
-<td style="text-align:left">down-stream task</td>
-<td style="text-align:left">就是特定任务的语料</td>
-<td style="text-align:left">解决特定task, 譬如sentiment analysis, question answering</td>
-</tr>
-</tbody>
-</table>
-<p>BERT 目标是处理down-stream task, i.e.,得到一个语言表示模型(language representation model), 或者说是 “pre-trained language representations”。 从这个意义上来讲，我们之前用的Word2Vec 或者 GloVe 其实也是预先训练好的”WORD-LEVEL”的表达。目前，将pre-trained language representations 应用到下游任务(down stream task)中有两种方式, </p>
-<ul>
-<li>feature-based<br>feature-based 典型代表有ELMo (2018年NAACL Best Paper),将这些 representation作为新的features加入到 task-speacific architecture中</li>
-<li>fine-tunning<br>典型代表: OpenAI GPT。直接在预训练好的模型上利用 task-specific 数据fine tune</li>
-</ul>
-<h3 id="为什么会出现BERT"><a href="#为什么会出现BERT" class="headerlink" title="为什么会出现BERT"></a>为什么会出现BERT</h3><ul>
-<li>在Word2Vec和GloVe中，一个词无论在任何语境下都是一个向量，显然这不是完美的。“温暖的 阳光 照射在 我身上” “他的 话 很 温暖”，显然这里的“温暖” 如果是一个向量来表示显然不太精确，我们期待一个向量能够融入上下文信息(Context), ELMo 抓住了这一痛点，提出了一种新的Word Embedding 方法。</li>
-<li>尽管ELMo出现了，但是其出现仍然是希望能够代替Word2Vec,学到一个更加具有(context) 信息的Word Embedding, 然而，对于一些复杂的任务，有些逻辑更复杂(dialogue之类的)，一个好的Embedding 可能还不够。</li>
-<li>BERT希望能够在预训练模型上就能捕捉到很复杂的关系: 上下文逻辑、语料场景等</li>
-</ul>
-<h2 id="BERT-之前需要有的知识储备"><a href="#BERT-之前需要有的知识储备" class="headerlink" title="BERT 之前需要有的知识储备"></a>BERT 之前需要有的知识储备</h2><ul>
-<li>LSTM基本知识(本文不讲)</li>
-<li>Attention机制的理解 (参考我的专门的博客<a href="https://csnlp.github.io/2018/11/03/Attention/" target="_blank" rel="noopener">Attention机制</a>)</li>
-<li>Self-Attention: Self-Attention 就是BERT提到的Transformer，是现在非常流行的基本组件(Block), 最好能理解的十分深入,这里也单独开一个博文<h2 id="谷歌选择的方法-BERT"><a href="#谷歌选择的方法-BERT" class="headerlink" title="谷歌选择的方法-BERT"></a>谷歌选择的方法-BERT</h2><h3 id="预训练模型"><a href="#预训练模型" class="headerlink" title="预训练模型"></a>预训练模型</h3>首先BERT选择了fine-tune的思路,也就是通过做upper-stream task来pre-train一个模型, 然后微调。目前学术界在upper-stream 这个任务上，也就是在学general language representation时候，都选择<strong>Unidirectional Language Model</strong>, 原因在于这种单向的结构在进行预训练时候，只能在当前位置之前的词汇中做Self-Attention操作 <blockquote><p>The major limitation is that standard language models are unidirectional, and this limits the choice of architectures that can be used during pre-training. For example, in OpenAI GPT, the authors use a left-to-right architecture, where every token can only attend to previous tokens in the self-attention layers of the Transformer.  </p>
-</blockquote><br>BERT不用Unidirectional Language Model 而采用全新的任务 <strong>Masked Language Model</strong>, 其实就是英文考试常考的 “Cloze Task(完形填空)”。这个怎样理解: 譬如BERT想要得到一个NLP能力很强的预训练模型，<strong>完形填空相当于没一个空格都需要你去靠自己的NLP能力去补充上去</strong>，因此，我们可以对整个语料库随机遮住 15% 的tokens，这些被遮住的部分记为[MASK], 然后去将这些[MASK] 重新预测为真实词语。但是这样也存在问题</li>
-</ul>
-<ul>
-<li>Pre-train 和 fine-tune 阶段目标函数不一致<br>毕竟在Pre-train时候，存在[MASK], 而在fine-tune 阶段真实NLP任务中是没有[MASK] 存在的<br>解决方案:<ul>
-<li>80% 的情况下选择的词语就是替换成[MASK] E.g.: A cat is walking.–&gt; A cat [MASK] walking.</li>
-<li>10% 的情况下: 选择的词语随机替换成一个词语  E.g&gt;: A cat is walking –&gt; A cat good walking.</li>
-<li>10 的情况下: 选择的词语还是替换成原来的词语 E.g., A cat is walking –&gt; A cat is walking. </li>
-</ul>
-</li>
-</ul>
-<p>分析一下，这里在做什么<blockquote><p>The Transformer encoder does not konw which words it will be asked to predict or which have been replaced by random words, so it is forced to keep a distributional contextual representation of every input token</p>
-</blockquote></p>
-<ul>
-<li>因为只有15% 的token 被预测，而在Unidirectional Language Model 中所有的token都会被预测，显然Masked Language Model效率是很低的。</li>
-</ul>
-<h3 id="BERT的训练方法"><a href="#BERT的训练方法" class="headerlink" title="BERT的训练方法"></a>BERT的训练方法</h3><p>为了方便理解: 我从 Input, Output, Model Structure, Loss Function 来讲这个问题。</p>
-<ul>
-<li>Input<br><img src="BERT_input.jpg" alt=""></li>
-</ul>
-<ul>
-<li>Token Embedding: 就是最常见的Word Embedding, 注意[CLS]是指的一个分类标签，是为了分类任务存在的</li>
-<li>Segment Embedding: 针对一些对话语料 A代表第一句，B代表第二句</li>
-<li>Position Embedding: 因为BERT是基于Transformer建立的,而Transformer不像RNN， Transformer是没有位置信息的，因此需要Position Embedding 来额外的表示位置信息</li>
-</ul>
-<p>最后Input就是： $\text{Input} = \text{Token Embedding} + \text{Segment Embedding} + \text{Position Embedding}$</p>
-<ul>
-<li>Output<br>譬如我们的Input是“My dog is cute, he likes play leaves.” 我们挖空了 “cute”, 也就是将”cute”替换成了”MASK”, 那么现在我们Transformer的Input就是 “My dog is [MASK], he likes play”output就是 “cute”</li>
-</ul>
-<h3 id="down-strem-任务如何接入？"><a href="#down-strem-任务如何接入？" class="headerlink" title="down-strem 任务如何接入？"></a>down-strem 任务如何接入？</h3><h2 id="总的想法"><a href="#总的想法" class="headerlink" title="总的想法"></a>总的想法</h2><p>就是很多NLP上的任务可以重新思考一下，谷歌其实在避免一种倾向,这种倾向是<br><blockquote><p>NLP的各个任务越来越专，针对特定任务设计的模型越来越复杂，网络层数越来越深，各种Attention</p>
-</blockquote></p>
-<p>我这里没有资格评价这种倾向好或者不好。但是谷歌就是反其道而行，证明了<br><blockquote><p>我这里搭建一个十分General的基础<strong>BERT</strong>，在BERT的基础上，针对特定任务，一个很简单的小修小补就足以解决问题</p>
-</blockquote><br>当然，谷歌也出了很多在特定任务上十分impressive 的work。。<br>谷歌的模型，越来越证明产业界的学术潜力，产业界大手笔，大计算能力，大资源，服气!!!</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="CSNLP Apprentice">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CSNLP学徒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/02/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+              <span class="post-meta-divider">|</span>
             
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">In</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-02T21:22:27+08:00">
-                2018-11-02
-              </time>
-            
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
 
-            
-
-            
-          </span>
-
+                
+                
+              
+            </span>
           
 
           
@@ -609,17 +479,16 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。
+BERT的BackgroundBERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/04/BERT/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -708,6 +577,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -737,45 +628,20 @@
       
         
           
-            <p>本文其实写的有些迟到，毕竟这是谷歌17年6月的工作，不过好戏不怕晚，这项工作亮点在于不用CNN,RNN也能得到STOA的效果, 而理论上的指导意义在于</p>
-<ul>
-<li>Self-Attention思想</li>
-<li>Transformer 结构</li>
-</ul>
-<p>这里模型结构强推另一个博客，讲的十分清楚，按照数据的处理流程来讲，十分清楚。<br><a href="https://nlppupil.github.io/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/2018/06/09/Attention-is-all-you-need-%E8%A7%A3%E8%AF%BB.html" title="Transformer" target="_blank" rel="noopener">Transformer</a><br>其实Transformer 还是一个Seq2Seq 的结构，但是Transformer 却打破了一种观点，Seq2Seq 一定是基于RNN，LSTM 来进行的。</p>
-<h2 id="Encoder-部分"><a href="#Encoder-部分" class="headerlink" title="Encoder 部分"></a>Encoder 部分</h2><p>Encoder的组件</p>
-<ul>
-<li>Multi-Head Attention 组件</li>
-<li>Feed-Forward 组件</li>
-</ul>
-<p>我这里用组件，是因为每一个Multi-Head Attention &amp; Feed-Forward 操作之后都会紧跟</p>
-<ul>
-<li>residual connection</li>
-<li>layer normalization<br>这里对这些操作放在介绍完Multi-Head Attention 和 Feed-Forward之后谈</li>
-</ul>
-<h3 id="Multi-Head-Attention组件"><a href="#Multi-Head-Attention组件" class="headerlink" title="Multi-Head Attention组件"></a>Multi-Head Attention组件</h3><p><img src="transformer_encoder_selfattention.jpg" alt=""><br>反映到公式上<br>$$\text{MultiHead}(Q, K, V) = \text{Concat}(head_1, \dots, head_h)W^{O}$$<br>where   $$\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$   $$\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_v}})V$$<br>其中 对于Self-Attention来讲$K = Q = K \in R^{d_{model}}$ ,$W_i^Q \in R^{d_{model} \times d_k}$, $W_i^K \in R^{d_{model} \times d_k}$, $W_i^V \in R^{d_{model} \times d_V}$</p>
-<p>这么做的Motivation是什么<br><blockquote><p>Instead of performing a single attention fuction with $d_{model}$ dimensional keys, values and queries, we found it benefical to linearly project the queries, keys and values h times with different learned linear projects to $d_k, d_k$ and $d_v$ dimensions respectively. </p>
-</blockquote></p>
-<h3 id="Feed-Forward组件"><a href="#Feed-Forward组件" class="headerlink" title="Feed-Forward组件"></a>Feed-Forward组件</h3><p>每一个Multi-Head Attention之后都会紧跟Feed-Forward组件, Feed-Forward 相对简单,只有两层，第一层后加了一个ReLU. 用公式表示:  $$FFN(x) = max(0, xW_1 + b_1) W_2 + b_2$$ 其中 $x \in R^{lenght \times d_{model}}, W_1 \in R^{d_{model} \times d_m}, W_2 \in R^{d_m \times d_{model}}$</p>
-<h3 id="Residual-Connection-amp-Layer-Normalization"><a href="#Residual-Connection-amp-Layer-Normalization" class="headerlink" title="Residual Connection &amp; Layer Normalization"></a>Residual Connection &amp; Layer Normalization</h3><p>庖丁解牛这里讲清楚这两个操作</p>
-<ul>
-<li>Residual Connection<br>是针对一个网络函数来讲，我们假定这个网络的输入为x,输出为Layer(x), 那么Residual Connection对于这个Layer的操作就是$$Residual(x) = x + Layer(x)$$， 残差网络是为了让深层网络梯度更易传播，可以理解为为了训练方便采取的策略(这里我的理解不一定深入，希望同道能指出)</li>
-<li>Layer Normalization<br>这个也是为了让训练稳定采取的策略，这里Normalization的策略很多Batch Normalization, Layer Normalization等,落实到代码上可能就是一个调用库的操作 $LayerNorm(x)$ 最后经过Residual Connection和 Layer Normalization得到的操作就是<br>$$\text{LayerNorm}(x + SubLayer(x))$$</li>
-</ul>
-<p>一个Multh-Head Attention组件 和 一个Feed-Forward组件 组成一个Layer, 而多个Layer 组成了Encoder。(Encoder is composed of a stack of N=6 identical layers)<br>在这里我们捋一下输入和输出: 对于Layer 的输入其维度为 $R^{\text{length} \times {d_{model}}}$, 而经过 (Multi-Head Attention, Feed-Forward) 仍然是$R^{\text{length} \times {d_{model}}}$。</p>
-<h3 id="关于Position-Embedding"><a href="#关于Position-Embedding" class="headerlink" title="关于Position Embedding"></a>关于Position Embedding</h3><p><em>Attention Is All You Need</em> 的很大的亮点在于没用RNN的结构，但是对于语言这样的序列数据，Position信息还是很重要的，为此需要人为的引入Position Embedding信息，原文直接就给了公式，我说不上来这是怎么得到,这里仅仅记录一下有这个Position Embedding <img src="transformer_position_embedding.jpg" alt=""> </p>
-<p>基本上到这里，对Encoder的结构应该很熟悉，参见下图<img src="transformer_encoder.jpg" alt="" title="Transformer Encoder结构"> 我这里最后从下到上捋一遍: Input进来，先进行词嵌入(Input Embedding), 然后加入位置信息(Position Embedding), 而后进入Self-Attention模块(Multi-Head Attention), 注意图中的<em>Add &amp; Norm</em> 其实也就是指的<strong>Residual &amp; Layer Normalization</strong>. 完成了Self Attention 之后记住此时输出仍然和原来输入维度是一样的仍然是$R^{d_{model}}$。 接下来就是Feed-Forward 组件，同样的 Add &amp; Normalization一样就是 <strong>Residual &amp; Layer Normalization</strong>。这时候输出仍然是与输入维度是一样的。如果把上述所有操作看成一个Big Layer, 这些Big Layer 叠加多次(谷歌论文是叠加了6次，就得到了Encoder结构)</p>
-<h2 id="Decoder的结构"><a href="#Decoder的结构" class="headerlink" title="Decoder的结构"></a>Decoder的结构</h2><p>有了前面Encoder的讲解，后续相对简单,为了便于理解我贴一张Transformer的整体结构图<img src="transformer_structure.jpg" alt="" title="Transformer Structure"> 先是Self-Attention， 然后是Encoder-Decoder Attention(其实也就是传统的Seq2Seq中的Attention 机制，可以参考我之前的博文<a href="https://csnlp.github.io/2018/11/03/Attention/" title="Attention机制" target="_blank" rel="noopener">Attention机制</a><br>我们不妨🤔一下：这个流程是怎样的，那机器翻译举例”I like eating apples”, 翻译“我 喜欢 吃 苹果”，问题来了在Encoder中， “like” 注意到 (attends to)”I” “eating” 固然没有问题,毕竟输入语料都一下子给到Encoder, like 同时注意到上文的 “I” 和 下文的“eating”, “apples” 这显然是好事，这样Attends得到的like 显然更加有重点。 然而，对于decoder 来讲，如果从 start 要翻译得到“我”，而同时注意到接下来是”我” “喜欢” “吃” “苹果”, 那么翻译“我”时，直接从下一个序列拿下来第一个“我” 即可，同理，翻译“喜欢”时候(注意这时候是decoder输出了“我”)，注意到接下来是”喜欢”，那么直接copy 就行了，根本就不需要训练了。看起来貌似说的通，但是训练的模型是为了解决任务，当训练完成后，给了一个source 语句，此时没有target 语句，显然这时候模型就没有办法了。因此，有以下注意点 &lt;%centerquote%&gt; decoder的Self-Attention组件与encoder中的不同，decoder中的Self-Attention只能注意到(attends) 当前output 之前的位置的output信息&lt;%centerquote%&gt;  也就是譬如“我” “喜欢”，接下来翻译“吃”，输入是“喜欢” &amp; “我”的Self-Attention。  </p>
-<p>除此之外,Decoder其实有两种Attention</p>
-<ul>
-<li>Self-Attention</li>
-<li>Encoder-Decoder Attention</li>
-</ul>
-<p>可以着重理解一下，至于K, V, Q 的具体含义，可以参考我之前的博文<a href="https://csnlp.github.io/2018/11/03/Attention/" title="Attention泛化" target="_blank" rel="noopener">Attention的泛化</a></p>
-<h2 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h2><p>对于两个概率分布的Loss Function， 既可以用Cross-Entropy 也可以用 Kullback-Leibler Divergence。对于概率分布p和概率分布q而言，他们的Cross-Entropy可以定义为 $$CE_p(q) = -E[ q(x) \log(p(x))]$$</p>
-<h2 id="对现有工作的启发"><a href="#对现有工作的启发" class="headerlink" title="对现有工作的启发"></a>对现有工作的启发</h2><p>现在Transformer 已经作为Tensorflow的一个模块上线了 <a href="https://github.com/tensorflow/tensor2tensor" title="Tensor2Tensor" target="_blank" rel="noopener">Tensor2Tensor</a>。而Attention也红火了一段时间，尤其是提出的Self-Attention思想，可能是相比于模型结构更加能引人思考之处。</p>
+          本文其实写的有些迟到，毕竟这是谷歌17年6月的工作，不过好戏不怕晚，这项工作亮点在于不用CNN,RNN也能得到STOA的效果, 而理论上的指导意义在于
 
-          
+Self-Attention思想
+Transformer 结构
+
+这里模型结构强推另一个博客，讲的十分清楚，按照数据的处理流程来讲，十分清楚。Tr
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/02/Transformer/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -864,6 +730,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -893,30 +781,16 @@
       
         
           
-            <p>如果按照时间顺序来讲，谷歌的Seq2Seq之后另一个非常大的进展就是Attention机制了，一时间各种Attention层出不穷，这里我按照自己的理解写一写Attention 机制。除此之外，Attention也是另外一个重大突破:Transformer的基础，希望大家能够认真理解精髓。</p>
-<h1 id="Attention的Motivation"><a href="#Attention的Motivation" class="headerlink" title="Attention的Motivation"></a>Attention的Motivation</h1><p>在Seq2Seq模型提出之后，Machine Translation性能得到了一个飞跃，NMT也被认为是MT的基本方法，一切看起来都很美好，但是问题仍然存在:<br>制约瓶颈(Bottleneck): encoder 的最后一个隐向量的表示性能<br>参加下图: 图片来自于Stanford CS224N lecture 10 slides<br><img src="bottleneck.jpg" alt=""><br>由此可见，Encoder的最后一个隐向量需要表达的信息量很大，后续Decoder的decode过程都严重依赖于这一个隐向量。而拿Machine Translation 举例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">I like eating oranges . </span><br><span class="line">我 喜欢 吃 桔子 。</span><br></pre></td></tr></table></figure></p>
-<p>显然， 在翻译时，“我” 需要更多关注“I”， “吃” 需要更多关注“eating”。这个motivation 就启发了Attention 的诞生。 </p>
-<h1 id="Seq2Seq模型中Attention的具体实现"><a href="#Seq2Seq模型中Attention的具体实现" class="headerlink" title="Seq2Seq模型中Attention的具体实现"></a>Seq2Seq模型中Attention的具体实现</h1><p>放一张Stanford CS224N lecture 10 slides 对于Attention的理解，很清晰<br><img src="attention_mechanism.jpg" alt="attention mechanism first units" title="Attention Mechanism"><br>对这个图的解读如下,从下往上</p>
-<ol>
-<li>RNN(LSTM,GRU) 组成的Encoder的hidden state: $e_1, \dots, e_N \in R^h$</li>
-<li>On timestep $t$, decoder的hidden state 是$d_t$</li>
-<li>Attention Score的计算:<br>$$s^t = d^T_t \cdot e_1, d^T_t \cdot e_2, \dots, d^T_t \cdot e_N$$</li>
-<li>有Attentions score 转化为attention distribution:<br>$$\alpha^t = softmax(s^t) \in R^N$$</li>
-<li>Attention的输出<br>$$o^t = \sum_{i=1}^{N} \alpha^t_i h_i \in R^h$$</li>
-<li>Attention的输出与Decoder 的隐状态拼接$$[o^t; d^t] \in R^{2h}$$ 得到向量与$U$($U \in R^{\vert V \vert * 2h}$)进行线性网络层,后续在进行Softmax得到在整个词典上的概率分布. 其实后续都是和Seq2Seq 中的RNN 结构是一样的，只是现在$U$ 扩大了，而且现在Decoder的RNN的下一个序列是由当前隐状态和一个attention输出拼接而成的。<br><img src="RNN_LM.jpg" alt="RNN LM" title="RNN Language Model"> </li>
-</ol>
-<h1 id="Attention的泛化"><a href="#Attention的泛化" class="headerlink" title="Attention的泛化"></a>Attention的泛化</h1><p>这里之所以讲Attention的泛化在于会极大的促进对<em>Attention Is All You Need</em> 也就是Transformer的理解。<br>这里先引用摘自<em>Attention Is All You Need</em> 的论文一段论述:<br><blockquote><p>An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.</p>
-</blockquote></p>
-<p>$$Attention(Q,K,V) = softmax(QK^T)V$$</p>
-<p>这里列出各个项维度</p>
-<ul>
-<li>$Q$: 代表query, $Q \in R^{1 * d_{KQ}}$ </li>
-<li>$K$: 代表key, $K \in R^{N * d_{KQ}}$ </li>
-<li>$V$: 代表value, $V \in R^{N * d_v}$ </li>
-</ul>
-<p>在Seq2Seq的Attention 中, query为decoder的隐状态$d^t$, key为encoder的各个隐向量，value同key也是encoder的各个隐向量。</p>
-
-          
+          如果按照时间顺序来讲，谷歌的Seq2Seq之后另一个非常大的进展就是Attention机制了，一时间各种Attention层出不穷，这里我按照自己的理解写一写Attention 机制。除此之外，Attention也是另外一个重大突破:Transformer的基础，希望大家能够认真理解精髓。
+Atte
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/01/Attention/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -996,22 +870,31 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">1</span>
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
-                
+                </a>
               </div>
             
 

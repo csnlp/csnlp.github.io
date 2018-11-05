@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="NLP,">
+  <meta name="keywords" content="预训练,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的BackgroundBERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NL">
-<meta name="keywords" content="NLP">
+<meta name="keywords" content="预训练">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BERT的发展历程">
 <meta property="og:url" content="http://yoursite.com/2018/11/04/BERT/index.html">
@@ -88,7 +88,7 @@
 <meta property="og:description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的BackgroundBERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NL">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/11/04/BERT/BERT_input.jpg">
-<meta property="og:updated_time" content="2018-11-05T05:11:29.446Z">
+<meta property="og:updated_time" content="2018-11-05T08:21:51.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BERT的发展历程">
 <meta name="twitter:description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的BackgroundBERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NL">
@@ -193,12 +193,42 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-github">
+          <a href="https://github.com/csnlp" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            github
           </a>
         </li>
       
@@ -274,6 +304,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -356,16 +408,15 @@
 </ul>
 <h3 id="BERT的训练方法"><a href="#BERT的训练方法" class="headerlink" title="BERT的训练方法"></a>BERT的训练方法</h3><p>为了方便理解: 我从 Input, Output, Model Structure, Loss Function 来讲这个问题。</p>
 <ul>
-<li>Input<br><img src="BERT_input.jpg" alt=""></li>
-</ul>
+<li><p>Input<br><img src="BERT_input.jpg" alt=""></p>
 <ul>
 <li>Token Embedding: 就是最常见的Word Embedding, 注意[CLS]是指的一个分类标签，是为了分类任务存在的</li>
 <li>Segment Embedding: 针对一些对话语料 A代表第一句，B代表第二句</li>
-<li>Position Embedding: 因为BERT是基于Transformer建立的,而Transformer不像RNN， Transformer是没有位置信息的，因此需要Position Embedding 来额外的表示位置信息</li>
+<li>Position Embedding: 因为BERT是基于Transformer建立的,而Transformer不像RNN， Transformer是没有位置信息的，因此需要Position Embedding 来额外的表示位置信息<br>最后Input就是： $\text{Input} = \text{Token Embedding} + \text{Segment Embedding} + \text{Position Embedding}$</li>
 </ul>
-<p>最后Input就是： $\text{Input} = \text{Token Embedding} + \text{Segment Embedding} + \text{Position Embedding}$</p>
-<ul>
-<li>Output<br>譬如我们的Input是“My dog is cute, he likes play leaves.” 我们挖空了 “cute”, 也就是将”cute”替换成了”MASK”, 那么现在我们Transformer的Input就是 “My dog is [MASK], he likes play”output就是 “cute”</li>
+</li>
+<li><p>Output<br>譬如我们的Input是“My dog is cute, he likes play leaves.” 我们挖空了 “cute”, 也就是将”cute”替换成了”MASK”, 那么现在我们Transformer的Input就是 “My dog is [MASK], he likes play”output就是 “cute”</p>
+</li>
 </ul>
 <h3 id="down-strem-任务如何接入？"><a href="#down-strem-任务如何接入？" class="headerlink" title="down-strem 任务如何接入？"></a>down-strem 任务如何接入？</h3><h2 id="总的想法"><a href="#总的想法" class="headerlink" title="总的想法"></a>总的想法</h2><p>就是很多NLP上的任务可以重新思考一下，谷歌其实在避免一种倾向,这种倾向是<br><blockquote><p>NLP的各个任务越来越专，针对特定任务设计的模型越来越复杂，网络层数越来越深，各种Attention</p>
 </blockquote></p>
@@ -388,7 +439,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NLP/" rel="tag"># NLP</a>
+            <a href="/tags/预训练/" rel="tag"># 预训练</a>
           
         </div>
       
@@ -401,8 +452,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/02/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/11/02/Transformer/" rel="next" title="Transformer">
+                <i class="fa fa-chevron-left"></i> Transformer
               </a>
             
           </div>
@@ -490,22 +541,31 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">1</span>
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
-                
+                </a>
               </div>
             
 
