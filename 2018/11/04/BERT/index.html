@@ -88,7 +88,7 @@
 <meta property="og:description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的BackgroundBERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NL">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/11/04/BERT/BERT_input.jpg">
-<meta property="og:updated_time" content="2018-11-05T08:21:51.051Z">
+<meta property="og:updated_time" content="2018-11-05T10:23:01.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BERT的发展历程">
 <meta name="twitter:description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的BackgroundBERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NL">
@@ -390,9 +390,11 @@
 <h2 id="BERT-之前需要有的知识储备"><a href="#BERT-之前需要有的知识储备" class="headerlink" title="BERT 之前需要有的知识储备"></a>BERT 之前需要有的知识储备</h2><ul>
 <li>LSTM基本知识(本文不讲)</li>
 <li>Attention机制的理解 (参考我的专门的博客<a href="https://csnlp.github.io/2018/11/03/Attention/" target="_blank" rel="noopener">Attention机制</a>)</li>
-<li>Self-Attention: Self-Attention 就是BERT提到的Transformer，是现在非常流行的基本组件(Block), 最好能理解的十分深入,这里也单独开一个博文<h2 id="谷歌选择的方法-BERT"><a href="#谷歌选择的方法-BERT" class="headerlink" title="谷歌选择的方法-BERT"></a>谷歌选择的方法-BERT</h2><h3 id="预训练模型"><a href="#预训练模型" class="headerlink" title="预训练模型"></a>预训练模型</h3>首先BERT选择了fine-tune的思路,也就是通过做upper-stream task来pre-train一个模型, 然后微调。目前学术界在upper-stream 这个任务上，也就是在学general language representation时候，都选择<strong>Unidirectional Language Model</strong>, 原因在于这种单向的结构在进行预训练时候，只能在当前位置之前的词汇中做Self-Attention操作 <blockquote><p>The major limitation is that standard language models are unidirectional, and this limits the choice of architectures that can be used during pre-training. For example, in OpenAI GPT, the authors use a left-to-right architecture, where every token can only attend to previous tokens in the self-attention layers of the Transformer.  </p>
-</blockquote><br>BERT不用Unidirectional Language Model 而采用全新的任务 <strong>Masked Language Model</strong>, 其实就是英文考试常考的 “Cloze Task(完形填空)”。这个怎样理解: 譬如BERT想要得到一个NLP能力很强的预训练模型，<strong>完形填空相当于没一个空格都需要你去靠自己的NLP能力去补充上去</strong>，因此，我们可以对整个语料库随机遮住 15% 的tokens，这些被遮住的部分记为[MASK], 然后去将这些[MASK] 重新预测为真实词语。但是这样也存在问题</li>
+<li>Self-Attention: Self-Attention 就是BERT提到的Transformer，是现在非常流行的基本组件(Block), 最好能理解的十分深入,这里也单独开一个博文</li>
 </ul>
+<h2 id="谷歌选择的方法-BERT"><a href="#谷歌选择的方法-BERT" class="headerlink" title="谷歌选择的方法-BERT"></a>谷歌选择的方法-BERT</h2><h3 id="预训练模型"><a href="#预训练模型" class="headerlink" title="预训练模型"></a>预训练模型</h3><p>首先BERT选择了fine-tune的思路,也就是通过做upper-stream task来pre-train一个模型, 然后微调。在预训练时， BERT采用了两个目标</p>
+<h4 id="Masked-Language-Model"><a href="#Masked-Language-Model" class="headerlink" title="Masked Language Model"></a>Masked Language Model</h4><p>+目前学术界在upper-stream 这个任务上，也就是在学general language representation时候，都选择<strong>Unidirectional Language Model</strong>, 原因在于这种单向的结构在进行预训练时候，只能在当前位置之前的词汇中做Self-Attention操作 <blockquote><p>The major limitation is that standard language models are unidirectional, and this limits the choice of architectures that can be used during pre-training. For example, in OpenAI GPT, the authors use a left-to-right architecture, where every token can only attend to previous tokens in the self-attention layers of the Transformer.  </p>
+</blockquote><br>BERT不用Unidirectional Language Model 而采用全新的任务 <strong>Masked Language Model</strong>, 其实就是英文考试常考的 “Cloze Task(完形填空)”。这个怎样理解: 譬如BERT想要得到一个NLP能力很强的预训练模型，<strong>完形填空相当于没一个空格都需要你去靠自己的NLP能力去补充上去</strong>，因此，我们可以对整个语料库随机遮住 15% 的tokens，这些被遮住的部分记为[MASK], 然后去将这些[MASK] 重新预测为真实词语。但是这样也存在问题</p>
 <ul>
 <li>Pre-train 和 fine-tune 阶段目标函数不一致<br>毕竟在Pre-train时候，存在[MASK], 而在fine-tune 阶段真实NLP任务中是没有[MASK] 存在的<br>解决方案:<ul>
 <li>80% 的情况下选择的词语就是替换成[MASK] E.g.: A cat is walking.–&gt; A cat [MASK] walking.</li>
@@ -406,6 +408,7 @@
 <ul>
 <li>因为只有15% 的token 被预测，而在Unidirectional Language Model 中所有的token都会被预测，显然Masked Language Model效率是很低的。</li>
 </ul>
+<h4 id="Next-Sentence-Generation"><a href="#Next-Sentence-Generation" class="headerlink" title="Next Sentence Generation"></a>Next Sentence Generation</h4><p>Masked Language Model 更多的还是学到的一种句内关系，为了能学到句间关系(譬如Question Answering等任务依赖句间关系)，引入 Next Sentence Generation 任务。注意，这里的任务不是完全生成下一个句子，而是做分类任务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: [CLS] the man went to [MASK] store [SEP] he bought a gallow [MASK] milk [SEP]</span><br><span class="line">Label: IsNext</span><br><span class="line">Input: [CLS] the man went to [MASK] store [SEP] penguin [MASK] not flightless bird [SEP]</span><br><span class="line">Label: NotNext</span><br></pre></td></tr></table></figure></p>
 <h3 id="BERT的训练方法"><a href="#BERT的训练方法" class="headerlink" title="BERT的训练方法"></a>BERT的训练方法</h3><p>为了方便理解: 我从 Input, Output, Model Structure, Loss Function 来讲这个问题。</p>
 <ul>
 <li><p>Input<br><img src="BERT_input.jpg" alt=""></p>
@@ -421,7 +424,7 @@
 <h3 id="down-strem-任务如何接入？"><a href="#down-strem-任务如何接入？" class="headerlink" title="down-strem 任务如何接入？"></a>down-strem 任务如何接入？</h3><h2 id="总的想法"><a href="#总的想法" class="headerlink" title="总的想法"></a>总的想法</h2><p>就是很多NLP上的任务可以重新思考一下，谷歌其实在避免一种倾向,这种倾向是<br><blockquote><p>NLP的各个任务越来越专，针对特定任务设计的模型越来越复杂，网络层数越来越深，各种Attention</p>
 </blockquote></p>
 <p>我这里没有资格评价这种倾向好或者不好。但是谷歌就是反其道而行，证明了<br><blockquote><p>我这里搭建一个十分General的基础<strong>BERT</strong>，在BERT的基础上，针对特定任务，一个很简单的小修小补就足以解决问题</p>
-</blockquote><br>当然，谷歌也出了很多在特定任务上十分impressive 的work。。<br>谷歌的模型，越来越证明产业界的学术潜力，产业界大手笔，大计算能力，大资源，服气!!!</p>
+</blockquote><br>当然，谷歌也出了很多在特定任务上十分impressive 的work。。<br>谷歌的模型，越来越证明产业界的学术潜力，产业界大手笔，大计算能力，大资源，服气!!!<br>除此之外，谷歌已经将模型开源<a href="https://github.com/google-research/bert#fine-tuning-with-bert" target="_blank" rel="noopener">BERT代码模型开源</a></p>
 
       
     </div>
@@ -462,8 +465,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/01/HELLO/" rel="prev" title="人工置顶">
-                人工置顶 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/05/Pre-trained-representation/" rel="prev" title="预训练模型">
+                预训练模型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -541,7 +544,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -563,7 +566,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -596,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BERT的Background"><span class="nav-number">1.</span> <span class="nav-text">BERT的Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BERT是用来做什么呢？"><span class="nav-number">1.1.</span> <span class="nav-text">BERT是用来做什么呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么会出现BERT"><span class="nav-number">1.2.</span> <span class="nav-text">为什么会出现BERT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BERT-之前需要有的知识储备"><span class="nav-number">2.</span> <span class="nav-text">BERT 之前需要有的知识储备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谷歌选择的方法-BERT"><span class="nav-number">3.</span> <span class="nav-text">谷歌选择的方法-BERT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预训练模型"><span class="nav-number">3.1.</span> <span class="nav-text">预训练模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BERT的训练方法"><span class="nav-number">3.2.</span> <span class="nav-text">BERT的训练方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#down-strem-任务如何接入？"><span class="nav-number">3.3.</span> <span class="nav-text">down-strem 任务如何接入？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总的想法"><span class="nav-number">4.</span> <span class="nav-text">总的想法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BERT的Background"><span class="nav-number">1.</span> <span class="nav-text">BERT的Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BERT是用来做什么呢？"><span class="nav-number">1.1.</span> <span class="nav-text">BERT是用来做什么呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么会出现BERT"><span class="nav-number">1.2.</span> <span class="nav-text">为什么会出现BERT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BERT-之前需要有的知识储备"><span class="nav-number">2.</span> <span class="nav-text">BERT 之前需要有的知识储备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谷歌选择的方法-BERT"><span class="nav-number">3.</span> <span class="nav-text">谷歌选择的方法-BERT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预训练模型"><span class="nav-number">3.1.</span> <span class="nav-text">预训练模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Masked-Language-Model"><span class="nav-number">3.1.1.</span> <span class="nav-text">Masked Language Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Next-Sentence-Generation"><span class="nav-number">3.1.2.</span> <span class="nav-text">Next Sentence Generation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BERT的训练方法"><span class="nav-number">3.2.</span> <span class="nav-text">BERT的训练方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#down-strem-任务如何接入？"><span class="nav-number">3.3.</span> <span class="nav-text">down-strem 任务如何接入？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总的想法"><span class="nav-number">4.</span> <span class="nav-text">总的想法</span></a></li></ol></div>
             
 
           </div>
