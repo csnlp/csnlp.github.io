@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="NLP,">
 
 
 
@@ -79,17 +79,21 @@
 
 
 
-<meta name="description" content="开这个博客主要记录一些NLP领域最新的进展，如果读者朋友感觉写作的内容有不妥之处或者侵害了您的版权，请随时联系我, 我看到后会第一时间处理，联系邮箱: csnlp16 AT 126.com. 十分感谢。 This blog is to document the progress in NLP field. If you have any question about the content or">
+<meta name="description" content="句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作通过Stanford CS224N 课程来讲解这一课题 句法分析手推过程每一步保留三个结构  stack: stack 存着目前正在处理的words buffer: buffer">
+<meta name="keywords" content="NLP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="人工置顶">
-<meta property="og:url" content="http://yoursite.com/2019/11/01/HELLO/index.html">
+<meta property="og:title" content="Dependency Parsing 依存句法分析">
+<meta property="og:url" content="http://yoursite.com/2018/11/08/dependency-parsing/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="开这个博客主要记录一些NLP领域最新的进展，如果读者朋友感觉写作的内容有不妥之处或者侵害了您的版权，请随时联系我, 我看到后会第一时间处理，联系邮箱: csnlp16 AT 126.com. 十分感谢。 This blog is to document the progress in NLP field. If you have any question about the content or">
+<meta property="og:description" content="句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作通过Stanford CS224N 课程来讲解这一课题 句法分析手推过程每一步保留三个结构  stack: stack 存着目前正在处理的words buffer: buffer">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-04T05:24:16.217Z">
+<meta property="og:image" content="http://yoursite.com/2018/11/08/dependency-parsing/dependency_parser_sent.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/08/dependency-parsing/adam.jpg">
+<meta property="og:updated_time" content="2018-11-11T03:33:21.568Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="人工置顶">
-<meta name="twitter:description" content="开这个博客主要记录一些NLP领域最新的进展，如果读者朋友感觉写作的内容有不妥之处或者侵害了您的版权，请随时联系我, 我看到后会第一时间处理，联系邮箱: csnlp16 AT 126.com. 十分感谢。 This blog is to document the progress in NLP field. If you have any question about the content or">
+<meta name="twitter:title" content="Dependency Parsing 依存句法分析">
+<meta name="twitter:description" content="句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作通过Stanford CS224N 课程来讲解这一课题 句法分析手推过程每一步保留三个结构  stack: stack 存着目前正在处理的words buffer: buffer">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/08/dependency-parsing/dependency_parser_sent.jpg">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/01/HELLO/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/08/dependency-parsing/">
 
 
 
 
 
-  <title>人工置顶 | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Dependency Parsing 依存句法分析 | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -262,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/01/HELLO/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/08/dependency-parsing/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CSNLP Apprentice">
@@ -279,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">人工置顶</h1>
+          <h1 class="post-title" itemprop="name headline">Dependency Parsing 依存句法分析</h1>
         
 
         <div class="post-meta">
@@ -291,8 +295,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-01T13:12:45+08:00">
-                2019-11-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-08T22:03:49+08:00">
+                2018-11-08
               </time>
             
 
@@ -329,8 +333,45 @@
       
 
       
-        <p>开这个博客主要记录一些NLP领域最新的进展，如果读者朋友感觉写作的内容有不妥之处或者侵害了您的版权，请随时联系我, 我看到后会第一时间处理，联系邮箱: csnlp16 AT 126.com. 十分感谢。</p>
-<p>This blog is to document the progress in NLP field. If you have any question about the content or you find this site infringes your copyright, please feal ease to contact me immediately,I will be the first time related to treatment. I will be found in: csnlp16 AT 126.com. Thanks a lot.</p>
+        <p>句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作<br>通过Stanford CS224N 课程来讲解这一课题</p>
+<h2 id="句法分析手推过程"><a href="#句法分析手推过程" class="headerlink" title="句法分析手推过程"></a>句法分析手推过程</h2><p>每一步保留三个结构</p>
+<ul>
+<li>stack: stack 存着目前正在处理的words</li>
+<li>buffer: buffer 存着目前尚未处理的words</li>
+<li>dependencies: 通过parser预测得到的dependencies</li>
+</ul>
+<p>初始状态下，stack 是空的， buffer是满的。<br>在每一步，都可以应用一种transition， 一共有三种类型的transition会被操作</p>
+<ul>
+<li>SHIFT: 将buffer的第一个item 从buffer 移动到stack 中去</li>
+<li>LEFT-ARC: 将stack 的第二个item 标记为依赖于 stack 的第一个item, 并且将stack 中的第二个item 从stack 中删除 得到一组依存关系:first item –&gt; second item</li>
+<li>RIGHT-ARC:将stack的第一个item 标注为依赖于stack的第二个item, 并且将stack的第一个item 从stack 中删除 得到一组依存关系: second item –&gt; first item</li>
+</ul>
+<p>这里按照Stanford CS224N 课程举例来做了一个 dependency parser 分析<br>Root I parsed this sentence correctly. </p>
+<ol>
+<li>初始状态 stack = [ROOT] buffer = [I parsed this sentence correctly] </li>
+<li>SHIFT 操作<br>此时， stack = [ROOT I] buffer = [parsed this sentence correctly]<br>I 和 ROOT 之间没有什么关系，无需进一步操作<br>而对于 SHIFT, LEFT-ARC, RIGHT-ARC 这三种操作可以看成是一个分类器的结果，因此parser 可以使用一个分类器来进行操作的选择</li>
+<li>SHIFT 操作<br>此时 stack = [ROOT I parsed] buffer = [this sentence correctly]</li>
+<li>LEFT-ARC<br>I 用来修饰 parsed 得到一组依存关系 parsed –&gt; I<br>此时 stack = [ROOT, parsed], buffer = [this sentence correctly]</li>
+<li>SHIFT 操作<br>此时， stack = [ROOT, parsed, this], buffer = [sentence correctly]</li>
+<li>SHIFT 操作<br>此时， stack = [ROOT, parsed, this, sentence], buffer = [correctly]</li>
+<li>LEFT-ARC<br>得到一组依存关系 sentence –&gt; this<br>此时，stack = [ROOT, parsed, sentence], buffer = [correctly]</li>
+<li>RIGHT-ARC<br>得到一组依存关系 parsed –&gt; sentence<br>此时， stack = [ROOT, parsed], buffer = [correctly]</li>
+<li>SHIFT<br>此时， stack = [ROOT, parsed, correctly], buffer = []</li>
+<li>RIGHT-ARC<br>得到一组依存关系 parsed –&gt; correctly<br>此时， stack = [ROOT, parsed], buffer = []</li>
+<li>RIGHT-ARC<br>得到一组依存关系 ROOT –&gt; parsed<br>此时， stack = [ROOT], buffer = []<br><img src="dependency_parser_sent.jpg" alt=""><h2 id="句法分析需要多少步骤"><a href="#句法分析需要多少步骤" class="headerlink" title="句法分析需要多少步骤"></a>句法分析需要多少步骤</h2>一个含有n 个词语的sentence, 需要多少步骤才能完全分析完？<br>其实分析一下起点和终点即可 起点: stack = [ROOT], 终点: stack = [ROOT], 每一步都会向stack 中增加或者减少一个元素，因此一共需要 $2n$ 步才能分析完一个句子</li>
+</ol>
+<h2 id="init-和-parse-step-函数"><a href="#init-和-parse-step-函数" class="headerlink" title="init 和 parse_step 函数"></a>init 和 parse_step 函数</h2><h2 id="minibatch-parse"><a href="#minibatch-parse" class="headerlink" title="minibatch_parse"></a>minibatch_parse</h2><h2 id="参数初始化函数"><a href="#参数初始化函数" class="headerlink" title="参数初始化函数"></a>参数初始化函数</h2><h2 id="drop-out-函数"><a href="#drop-out-函数" class="headerlink" title="drop out 函数"></a>drop out 函数</h2><p>为了保证期望不变，也就是 $\mathbf{E}_{P_{drop}}[h_{drop}] = h$, 显然是$h_{drop} = \frac{1}{1-p_{drop}} h$</p>
+<h2 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h2><p>先直接看Adam 的最终形式<br><img src="adam.jpg" alt=""></p>
+<ol>
+<li>关于$\boldsymbol{m}$ 的更新其实是用了动量机制，动量机制有两个解释</li>
+</ol>
+<ul>
+<li>m 的$\beta_1$ 部分仍然保持不变，仅仅改变$1 - \beta_1$, 原因在于如果此时 $\nabla_{\theta} J_{minibatch}(\theta)$比较小(也就是来到了一个局部最优点)，但是此时梯度还残留着上一步梯度值，能够突破这个“local optimum(局部最优)” </li>
+<li>$\beta_1$ 部分是之前的各个minibatch 的梯度， $(1-\beta_1)$ 是现在这个minibatch 的，这样的梯度更新形式更像是全局梯度，也就是更加接近 gradient descent. </li>
+</ul>
+<ol start="2">
+<li>至于$\boldsymbol{v}$ 而言，这是adaptive learning rate的内容<br>对于梯度的每个维度进行放缩，对于$\boldsymbol{v}$ 比较小的维度梯度变得相对大一些，对于比较大的维度梯度更新的小一些</li>
+</ol>
 
       
     </div>
@@ -346,6 +387,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+        </div>
+      
 
       
       
@@ -355,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/08/dependency-parsing/" rel="next" title="Dependency Parsing 依存句法分析">
-                <i class="fa fa-chevron-left"></i> Dependency Parsing 依存句法分析
+              <a href="/2018/11/08/CS224N-assignment2/" rel="next" title="CS224N Assignment2">
+                <i class="fa fa-chevron-left"></i> CS224N Assignment2
               </a>
             
           </div>
@@ -364,6 +411,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/01/HELLO/" rel="prev" title="人工置顶">
+                人工置顶 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -415,8 +466,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -476,6 +536,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#句法分析手推过程"><span class="nav-number">1.</span> <span class="nav-text">句法分析手推过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#句法分析需要多少步骤"><span class="nav-number">2.</span> <span class="nav-text">句法分析需要多少步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-和-parse-step-函数"><span class="nav-number">3.</span> <span class="nav-text">init 和 parse_step 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#minibatch-parse"><span class="nav-number">4.</span> <span class="nav-text">minibatch_parse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数初始化函数"><span class="nav-number">5.</span> <span class="nav-text">参数初始化函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drop-out-函数"><span class="nav-number">6.</span> <span class="nav-text">drop out 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adam"><span class="nav-number">7.</span> <span class="nav-text">Adam</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
