@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Attention,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,22 +79,17 @@
 
 
 
-<meta name="description" content="如果按照时间顺序来讲，谷歌的Seq2Seq之后另一个非常大的进展就是Attention机制了，一时间各种Attention层出不穷，这里我按照自己的理解写一写Attention 机制。除此之外，Attention也是另外一个重大突破:Transformer的基础，希望大家能够认真理解精髓。 Attention的Motivation在Seq2Seq模型提出之后，Machine Translation">
-<meta name="keywords" content="Attention">
+<meta name="description" content="最近看到一些公众号已经在总结2018年NLP领域的突破进行总结，我这里也对这些经典的论文进行简单总结，我并没有直接从公众号上往下搬，而是大致过了一遍论文。 无监督机器翻译预训练的语言模型参看之前写的BERT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Attention机制">
-<meta property="og:url" content="http://yoursite.com/2018/11/01/Attention/index.html">
+<meta property="og:title" content="2018 年NLP 大的进展总结">
+<meta property="og:url" content="http://yoursite.com/2018/12/30/2018-summary/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="如果按照时间顺序来讲，谷歌的Seq2Seq之后另一个非常大的进展就是Attention机制了，一时间各种Attention层出不穷，这里我按照自己的理解写一写Attention 机制。除此之外，Attention也是另外一个重大突破:Transformer的基础，希望大家能够认真理解精髓。 Attention的Motivation在Seq2Seq模型提出之后，Machine Translation">
+<meta property="og:description" content="最近看到一些公众号已经在总结2018年NLP领域的突破进行总结，我这里也对这些经典的论文进行简单总结，我并没有直接从公众号上往下搬，而是大致过了一遍论文。 无监督机器翻译预训练的语言模型参看之前写的BERT">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/11/01/Attention/bottleneck.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/11/01/Attention/attention_mechanism.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/11/01/Attention/RNN_LM.jpg">
-<meta property="og:updated_time" content="2018-11-05T08:20:37.350Z">
+<meta property="og:updated_time" content="2018-12-30T13:42:38.797Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Attention机制">
-<meta name="twitter:description" content="如果按照时间顺序来讲，谷歌的Seq2Seq之后另一个非常大的进展就是Attention机制了，一时间各种Attention层出不穷，这里我按照自己的理解写一写Attention 机制。除此之外，Attention也是另外一个重大突破:Transformer的基础，希望大家能够认真理解精髓。 Attention的Motivation在Seq2Seq模型提出之后，Machine Translation">
-<meta name="twitter:image" content="http://yoursite.com/2018/11/01/Attention/bottleneck.jpg">
+<meta name="twitter:title" content="2018 年NLP 大的进展总结">
+<meta name="twitter:description" content="最近看到一些公众号已经在总结2018年NLP领域的突破进行总结，我这里也对这些经典的论文进行简单总结，我并没有直接从公众号上往下搬，而是大致过了一遍论文。 无监督机器翻译预训练的语言模型参看之前写的BERT">
 
 
 
@@ -124,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/01/Attention/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/30/2018-summary/">
 
 
 
 
 
-  <title>Attention机制 | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>2018 年NLP 大的进展总结 | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -267,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/Attention/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/30/2018-summary/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CSNLP Apprentice">
@@ -284,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Attention机制</h1>
+          <h1 class="post-title" itemprop="name headline">2018 年NLP 大的进展总结</h1>
         
 
         <div class="post-meta">
@@ -296,8 +291,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T10:35:20+08:00">
-                2018-11-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-30T21:07:09+08:00">
+                2018-12-30
               </time>
             
 
@@ -306,28 +301,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/NLP/" itemprop="url" rel="index">
-                    <span itemprop="name">NLP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -356,28 +329,8 @@
       
 
       
-        <p>如果按照时间顺序来讲，谷歌的Seq2Seq之后另一个非常大的进展就是Attention机制了，一时间各种Attention层出不穷，这里我按照自己的理解写一写Attention 机制。除此之外，Attention也是另外一个重大突破:Transformer的基础，希望大家能够认真理解精髓。</p>
-<h1 id="Attention的Motivation"><a href="#Attention的Motivation" class="headerlink" title="Attention的Motivation"></a>Attention的Motivation</h1><p>在Seq2Seq模型提出之后，Machine Translation性能得到了一个飞跃，NMT也被认为是MT的基本方法，一切看起来都很美好，但是问题仍然存在:<br>制约瓶颈(Bottleneck): encoder 的最后一个隐向量的表示性能<br>参加下图: 图片来自于Stanford CS224N lecture 10 slides<br><img src="bottleneck.jpg" alt=""><br>由此可见，Encoder的最后一个隐向量需要表达的信息量很大，后续Decoder的decode过程都严重依赖于这一个隐向量。而拿Machine Translation 举例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">I like eating oranges . </span><br><span class="line">我 喜欢 吃 桔子 。</span><br></pre></td></tr></table></figure></p>
-<p>显然， 在翻译时，“我” 需要更多关注“I”， “吃” 需要更多关注“eating”。这个motivation 就启发了Attention 的诞生。 </p>
-<h1 id="Seq2Seq模型中Attention的具体实现"><a href="#Seq2Seq模型中Attention的具体实现" class="headerlink" title="Seq2Seq模型中Attention的具体实现"></a>Seq2Seq模型中Attention的具体实现</h1><p>放一张Stanford CS224N lecture 10 slides 对于Attention的理解，很清晰<br><img src="attention_mechanism.jpg" alt="attention mechanism first units" title="Attention Mechanism"><br>对这个图的解读如下,从下往上</p>
-<ol>
-<li>RNN(LSTM,GRU) 组成的Encoder的hidden state: $e_1, \dots, e_N \in R^h$</li>
-<li>On timestep $t$, decoder的hidden state 是$d_t$</li>
-<li>Attention Score的计算:<br>$$s^t = d^T_t \cdot e_1, d^T_t \cdot e_2, \dots, d^T_t \cdot e_N$$</li>
-<li>有Attentions score 转化为attention distribution:<br>$$\alpha^t = softmax(s^t) \in R^N$$</li>
-<li>Attention的输出<br>$$o^t = \sum_{i=1}^{N} \alpha^t_i h_i \in R^h$$</li>
-<li>Attention的输出与Decoder 的隐状态拼接$$[o^t; d^t] \in R^{2h}$$ 得到向量与$U$($U \in R^{\vert V \vert * 2h}$)进行线性网络层,后续在进行Softmax得到在整个词典上的概率分布. 其实后续都是和Seq2Seq 中的RNN 结构是一样的，只是现在$U$ 扩大了，而且现在Decoder的RNN的下一个序列是由当前隐状态和一个attention输出拼接而成的。<br><img src="RNN_LM.jpg" alt="RNN LM" title="RNN Language Model"> </li>
-</ol>
-<h1 id="Attention的泛化"><a href="#Attention的泛化" class="headerlink" title="Attention的泛化"></a>Attention的泛化</h1><p>这里之所以讲Attention的泛化在于会极大的促进对<em>Attention Is All You Need</em> 也就是Transformer的理解。<br>这里先引用摘自<em>Attention Is All You Need</em> 的论文一段论述:<br><blockquote><p>An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.</p>
-</blockquote></p>
-<p>$$Attention(Q,K,V) = softmax(QK^T)V$$</p>
-<p>这里列出各个项维度</p>
-<ul>
-<li>$Q$: 代表query, $Q \in R^{1 * d_{KQ}}$ </li>
-<li>$K$: 代表key, $K \in R^{N * d_{KQ}}$ </li>
-<li>$V$: 代表value, $V \in R^{N * d_v}$ </li>
-</ul>
-<p>在Seq2Seq的Attention 中, query为decoder的隐状态$d^t$, key为encoder的各个隐向量，value同key也是encoder的各个隐向量。</p>
+        <p>最近看到一些公众号已经在总结2018年NLP领域的突破进行总结，我这里也对这些经典的论文进行简单总结，我并没有直接从公众号上往下搬，而是大致过了一遍论文。</p>
+<h1 id="无监督机器翻译"><a href="#无监督机器翻译" class="headerlink" title="无监督机器翻译"></a>无监督机器翻译</h1><h1 id="预训练的语言模型"><a href="#预训练的语言模型" class="headerlink" title="预训练的语言模型"></a>预训练的语言模型</h1><p>参看之前写的BERT </p>
 
       
     </div>
@@ -393,12 +346,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Attention/" rel="tag"># Attention</a>
-          
-        </div>
-      
 
       
       
@@ -408,14 +355,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/11/14/seq2seq-chatbot-tensorflow/" rel="next" title="基于Seq2Seq的Chatbot 实现(Tensorflow)">
+                <i class="fa fa-chevron-left"></i> 基于Seq2Seq的Chatbot 实现(Tensorflow)
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/02/Transformer/" rel="prev" title="Transformer">
-                Transformer <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/30/Meta-Learning/" rel="prev" title="Meta_Learning">
+                Meta_Learning <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -548,7 +499,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Attention的Motivation"><span class="nav-number">1.</span> <span class="nav-text">Attention的Motivation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Seq2Seq模型中Attention的具体实现"><span class="nav-number">2.</span> <span class="nav-text">Seq2Seq模型中Attention的具体实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Attention的泛化"><span class="nav-number">3.</span> <span class="nav-text">Attention的泛化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无监督机器翻译"><span class="nav-number">1.</span> <span class="nav-text">无监督机器翻译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预训练的语言模型"><span class="nav-number">2.</span> <span class="nav-text">预训练的语言模型</span></a></li></ol></div>
             
 
           </div>
