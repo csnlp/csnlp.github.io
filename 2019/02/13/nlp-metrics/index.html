@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="最近看到一些公众号已经在总结2018年NLP领域的突破进行总结，我这里也对这些经典的论文进行简单总结，我并没有直接从公众号上往下搬，而是大致过了一遍论文。 无监督机器翻译预训练的语言模型参看之前写的BERT">
+<meta name="description" content="本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标 基于词重叠的指标(word overlap-based metrics)词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,用$">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018 年NLP 大的进展总结">
-<meta property="og:url" content="http://yoursite.com/2018/12/30/2018-summary/index.html">
+<meta property="og:title" content="NLP对话任务常用指标及其实现代码">
+<meta property="og:url" content="http://yoursite.com/2019/02/13/nlp-metrics/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="最近看到一些公众号已经在总结2018年NLP领域的突破进行总结，我这里也对这些经典的论文进行简单总结，我并没有直接从公众号上往下搬，而是大致过了一遍论文。 无监督机器翻译预训练的语言模型参看之前写的BERT">
+<meta property="og:description" content="本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标 基于词重叠的指标(word overlap-based metrics)词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,用$">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-30T13:42:38.797Z">
+<meta property="og:updated_time" content="2019-02-16T15:20:01.145Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2018 年NLP 大的进展总结">
-<meta name="twitter:description" content="最近看到一些公众号已经在总结2018年NLP领域的突破进行总结，我这里也对这些经典的论文进行简单总结，我并没有直接从公众号上往下搬，而是大致过了一遍论文。 无监督机器翻译预训练的语言模型参看之前写的BERT">
+<meta name="twitter:title" content="NLP对话任务常用指标及其实现代码">
+<meta name="twitter:description" content="本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标 基于词重叠的指标(word overlap-based metrics)词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,用$">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/30/2018-summary/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/13/nlp-metrics/">
 
 
 
 
 
-  <title>2018 年NLP 大的进展总结 | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>NLP对话任务常用指标及其实现代码 | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/30/2018-summary/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/13/nlp-metrics/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CSNLP Apprentice">
@@ -279,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2018 年NLP 大的进展总结</h1>
+          <h1 class="post-title" itemprop="name headline">NLP对话任务常用指标及其实现代码</h1>
         
 
         <div class="post-meta">
@@ -291,8 +291,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-30T21:07:09+08:00">
-                2018-12-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-13T15:43:04+08:00">
+                2019-02-13
               </time>
             
 
@@ -329,9 +329,10 @@
       
 
       
-        <p>最近看到一些公众号已经在总结2018年NLP领域的突破进行总结，我这里也对这些经典的论文进行简单总结，我并没有直接从公众号上往下搬，而是大致过了一遍论文。</p>
-<h1 id="无监督机器翻译"><a href="#无监督机器翻译" class="headerlink" title="无监督机器翻译"></a>无监督机器翻译</h1><h1 id="预训练的语言模型"><a href="#预训练的语言模型" class="headerlink" title="预训练的语言模型"></a>预训练的语言模型</h1><p>参看之前写的BERT </p>
-
+        <p>本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现<br>对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标</p>
+<h3 id="基于词重叠的指标-word-overlap-based-metrics"><a href="#基于词重叠的指标-word-overlap-based-metrics" class="headerlink" title="基于词重叠的指标(word overlap-based metrics)"></a>基于词重叠的指标(word overlap-based metrics)</h3><p>词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,用$\hat{r}$表示) 之间的近似程度的一种方式</p>
+<h4 id="BLEU-BiLingual-Evaluation-Understudy"><a href="#BLEU-BiLingual-Evaluation-Understudy" class="headerlink" title="BLEU(BiLingual Evaluation Understudy)"></a>BLEU(BiLingual Evaluation Understudy)</h4><p>$$<br>P_n = \frac<br>{\sum_{k \in n_{grams}} \min \big (\text{Count}(k,r), \text{Count}(k, \hat{r}) \big )}<br>{\sum_{k \in n_{grams}} \text{Count}(k,{r})}<br>$$<br>上述公式中,$n_{grams}$ 代表所有可能的n-grams, Count(k,r)代表句子r中的<br>Ground Truth: The book is worthy reading.<br>Candidates: The book is good to read. </p>
+<h4 id="Rouge"><a href="#Rouge" class="headerlink" title="Rouge"></a>Rouge</h4><h4 id="METEOR"><a href="#METEOR" class="headerlink" title="METEOR"></a>METEOR</h4>
       
     </div>
     
@@ -355,8 +356,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/14/seq2seq-chatbot-tensorflow/" rel="next" title="基于Seq2Seq的Chatbot 实现(Tensorflow)">
-                <i class="fa fa-chevron-left"></i> 基于Seq2Seq的Chatbot 实现(Tensorflow)
+              <a href="/2019/02/13/intent-recognition/" rel="next" title="Task-oriented Dialogue Systems(任务型对话系统)">
+                <i class="fa fa-chevron-left"></i> Task-oriented Dialogue Systems(任务型对话系统)
               </a>
             
           </div>
@@ -365,8 +366,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/30/Meta-Learning/" rel="prev" title="Meta_Learning">
-                Meta_Learning <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/01/HELLO/" rel="prev" title="人工置顶">
+                人工置顶 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -499,7 +500,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无监督机器翻译"><span class="nav-number">1.</span> <span class="nav-text">无监督机器翻译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预训练的语言模型"><span class="nav-number">2.</span> <span class="nav-text">预训练的语言模型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于词重叠的指标-word-overlap-based-metrics"><span class="nav-number">1.</span> <span class="nav-text">基于词重叠的指标(word overlap-based metrics)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BLEU-BiLingual-Evaluation-Understudy"><span class="nav-number">1.1.</span> <span class="nav-text">BLEU(BiLingual Evaluation Understudy)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Rouge"><span class="nav-number">1.2.</span> <span class="nav-text">Rouge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#METEOR"><span class="nav-number">1.3.</span> <span class="nav-text">METEOR</span></a></li></ol></li></ol></div>
             
 
           </div>
