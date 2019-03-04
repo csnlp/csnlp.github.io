@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="NLP,Deep Learning,">
+  <meta name="keywords" content="NLP,Transformer,">
 
 
 
@@ -79,23 +79,18 @@
 
 
 
-<meta name="description" content="CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。 Softmax 比较容易 代码参考可以参考我的github,写的比较详细 []  Neural Network Basics 经典的sigmod导数计算$$\frac{\text{d}(\sigma(x))}{\text{x}} = \f">
-<meta name="keywords" content="NLP,Deep Learning">
+<meta name="description" content="就像张俊林老师BERT提到的, 要想理解BERT, Transformer 是必须要知道的,而且Transformer有代替RNN,CNN成为NLP中STOA的特征提取器。说Transformer 是STOA的特征提取器的原因主要有两点  效果好: Transformer &amp;gt; CNN &amp;gt; RNN 速度快: Transformer $\approx$ CNN &amp;gt; RNN而本文基本是">
+<meta name="keywords" content="NLP,Transformer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS224N 课程作业1">
-<meta property="og:url" content="http://yoursite.com/2018/11/07/CS224N-assignment1/index.html">
+<meta property="og:title" content="跟着教程实习Transformer代码">
+<meta property="og:url" content="http://yoursite.com/2019/03/01/Transformer-implement/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。 Softmax 比较容易 代码参考可以参考我的github,写的比较详细 []  Neural Network Basics 经典的sigmod导数计算$$\frac{\text{d}(\sigma(x))}{\text{x}} = \f">
+<meta property="og:description" content="就像张俊林老师BERT提到的, 要想理解BERT, Transformer 是必须要知道的,而且Transformer有代替RNN,CNN成为NLP中STOA的特征提取器。说Transformer 是STOA的特征提取器的原因主要有两点  效果好: Transformer &amp;gt; CNN &amp;gt; RNN 速度快: Transformer $\approx$ CNN &amp;gt; RNN而本文基本是">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/11/07/CS224N-assignment1/word2vec_gradient.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/11/07/CS224N-assignment1/word2vec_negsam.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/11/07/CS224N-assignment1/word2vec_allgrad.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/11/07/CS224N-assignment1/word2vec_allgradans.jpg">
-<meta property="og:updated_time" content="2018-11-08T06:47:14.892Z">
+<meta property="og:updated_time" content="2019-03-04T02:28:01.110Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CS224N 课程作业1">
-<meta name="twitter:description" content="CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。 Softmax 比较容易 代码参考可以参考我的github,写的比较详细 []  Neural Network Basics 经典的sigmod导数计算$$\frac{\text{d}(\sigma(x))}{\text{x}} = \f">
-<meta name="twitter:image" content="http://yoursite.com/2018/11/07/CS224N-assignment1/word2vec_gradient.jpg">
+<meta name="twitter:title" content="跟着教程实习Transformer代码">
+<meta name="twitter:description" content="就像张俊林老师BERT提到的, 要想理解BERT, Transformer 是必须要知道的,而且Transformer有代替RNN,CNN成为NLP中STOA的特征提取器。说Transformer 是STOA的特征提取器的原因主要有两点  效果好: Transformer &amp;gt; CNN &amp;gt; RNN 速度快: Transformer $\approx$ CNN &amp;gt; RNN而本文基本是">
 
 
 
@@ -125,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/07/CS224N-assignment1/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/01/Transformer-implement/">
 
 
 
 
 
-  <title>CS224N 课程作业1 | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>跟着教程实习Transformer代码 | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -268,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/CS224N-assignment1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/Transformer-implement/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CSNLP Apprentice">
@@ -285,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CS224N 课程作业1</h1>
+          <h1 class="post-title" itemprop="name headline">跟着教程实习Transformer代码</h1>
         
 
         <div class="post-meta">
@@ -297,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-07T15:12:44+08:00">
-                2018-11-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-01T14:34:57+08:00">
+                2019-03-01
               </time>
             
 
@@ -335,36 +330,16 @@
       
 
       
-        <p>CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。</p>
-<h2 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h2><ol>
-<li>比较容易</li>
-<li>代码参考可以参考我的github,写的比较详细 []</li>
-</ol>
-<h2 id="Neural-Network-Basics"><a href="#Neural-Network-Basics" class="headerlink" title="Neural Network Basics"></a>Neural Network Basics</h2><ol>
-<li>经典的sigmod导数计算<br>$$\frac{\text{d}(\sigma(x))}{\text{x}} = \frac{e^{x}(1+e^x) - e^x(e^x)}{(1+e^x)^2} = \sigma(x)(1-\sigma(x))$$</li>
-<li>交叉熵公式相对于$\boldsymbol{\theta}$的导数<br>交叉熵公式<br>$$\text{CE}(\boldsymbol{y}, \boldsymbol{\hat{y}})=-\sum_{i} {y_i \log(\hat{y}_i)}$$<br>其中$\boldsymbol{y} = \text{softmax}(\boldsymbol{\theta})$</li>
-</ol>
-<p>注意$\boldsymbol{y}$是one-hot向量，我们这里假设其$k_{th}$维度是1，其余维度均为0。<br>导数推导应该分$i=k_{th}$ and $i\neq k_{th}$讨论,注意此时Cross Entropy可以表达这样形式 $$\text{CE}(\boldsymbol{y}, \boldsymbol{\hat{y}})= \log \frac{e^{\theta_{k}}}{\sum_{i}e^{\theta_i}}$$</p>
+        <p>就像<a href="&quot;https://zhuanlan.zhihu.com/p/49271699&quot;">张俊林老师BERT</a>提到的, 要想理解BERT, Transformer 是必须要知道的,而且Transformer有代替RNN,CNN成为NLP中STOA的特征提取器。说Transformer 是STOA的特征提取器的原因主要有两点</p>
 <ul>
-<li><p>当$i=k$<br>\begin{equation}<br>\begin{split}<br>\frac{\partial CE}{\partial \theta_k}&amp;=\frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{i} e^{\theta_i}}}{\partial \theta_k} \\<br>&amp;= \frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{i \neq k}e^{\theta_i}+e^{\theta_k}}} {\partial \theta_k} \\<br>&amp;= -\frac<br>{\sum_{i\neq k}e^{\theta_i}+e^{\theta_k}}{e^{\theta_k}}<br>\cdot<br>\frac{e^{\theta_k}}<br>{\sum_{i\neq k}e^{\theta_i}+e^{\theta_k}} \cdot<br>\frac{\sum_{i \neq k}e^{\theta_i}}{\sum_{i\neq k}e^{\theta_i}+e^{\theta_k}} \\<br>&amp;= \hat{y}_k - 1<br>\end{split}<br>\end{equation}</p>
-</li>
-<li><p>当$i \neq k$<br>\begin{equation}<br>\begin{split}<br>\frac{\partial CE}{\partial \theta_i}&amp;=\frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{j} e^{\theta_j}}}{\partial \theta_i} \\<br>&amp;= \frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{j \neq i}e^{\theta_i}+e^{\theta_i}}} {\partial \theta_k} \\<br>&amp;=<br>-\frac<br>{\sum_{i\neq k}e^{\theta_i}+e^{\theta_k}}{e^{\theta_k}}<br>\cdot<br>\frac{e^{\theta_k}}<br>{\sum_{j}e^{\theta_j}} \cdot<br>\frac{e^{\theta_i}}{\sum_{j}e^{\theta_j}} \\<br>&amp;= \hat{y}_i<br>\end{split}<br>\end{equation}<br>总结，可以写成<br>$$\frac{CE}{\boldsymbol{\theta}} = \boldsymbol{\hat{y}}-\boldsymbol{y}$$</p>
-</li>
+<li>效果好: Transformer &gt; CNN &gt; RNN</li>
+<li>速度快: Transformer $\approx$ CNN &gt; RNN<br>而本文基本是对 <a href="&quot;http://nlp.seas.harvard.edu/2018/04/03/attention.html&quot;">The Annotated Transformer</a> 的中文翻译(-_-)</li>
 </ul>
-<ol start="3">
-<li>有了前面的积累，这个直接用链式法则即可<br>\begin{equation}<br>\begin{split}<br>\frac{\partial CE}{\partial \boldsymbol{x}} &amp;= \frac{\partial CE}{\partial \boldsymbol{z_2}} \cdot \frac{\partial z_2}{\partial \boldsymbol{h}} \cdot \frac{\partial h}{\partial \boldsymbol{z_1}} \cdot \frac{\partial z_1}{\partial \boldsymbol{x}}   \\<br>&amp;= (\boldsymbol{\hat{y}} - \boldsymbol{y}) \cdot \boldsymbol{W}_2^T  \cdot z_1(1-z_1) \cdot \boldsymbol{W}_1^{T}<br>\end{split}<br>\end{equation}</li>
-<li>参数个数<br>其实就是统计 $\boldsymbol{W_1}, \boldsymbol{W_2}, \boldsymbol{b_1},\boldsymbol{b_2}$个数。<br>显然是 $$D_x\cdot H + H + H \cdot D_y + D_y$$</li>
-</ol>
-<h2 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h2><ol>
-<li><p><img src="word2vec_gradient.jpg" alt=""><br>这里提示了，其实就是之前cross entropy 对于softmax 的输入的求导，不妨设 $\boldsymbol{u}_w^T \boldsymbol{v}_c = \hat{y}_w$, 也就是$\boldsymbol{U}\boldsymbol{v}_c = \boldsymbol{\hat{y}}$, 其中 $\boldsymbol{U} \in R^{V \times d}$, V 代表字典大小<br>显然，由链式法则可以得到$$\frac{\partial J}{\partial \boldsymbol{v}_c} = \boldsymbol{U}(\hat{y} - \boldsymbol{y})$$</p>
-</li>
-<li><p>同样由链式法则得到<br>$$\frac{\partial J}{\partial \boldsymbol{U}} = \boldsymbol{v}_c (\hat{\boldsymbol{y}} - \boldsymbol{y})^T$$</p>
-</li>
-<li><p>Negative sampling loss 下导数的计算<br>同理，都用链式法则即可, 还是比较简单的<img src="word2vec_negsam.jpg" alt=""></p>
-</li>
-<li><p>所有梯度的计算<br><img src="word2vec_allgrad.jpg" alt=""><br><img src="word2vec_allgradans.jpg" alt=""></p>
-<h2 id="情感分析-Sentiment-Analysis"><a href="#情感分析-Sentiment-Analysis" class="headerlink" title="情感分析 Sentiment Analysis"></a>情感分析 Sentiment Analysis</h2></li>
-</ol>
+<h2 id="所需要的安装包"><a href="#所需要的安装包" class="headerlink" title="所需要的安装包"></a>所需要的安装包</h2><p>pytorch, torchtext(是的, 是基于PyTorch的实现), pytorch 用起来还是挺方便的。</p>
+<p>话不多说,还是先看一下我们的模型的总体结构。博客、论文看再多遍，不如亲自动手实现一遍，我这里从代码实现的角度来讲一下如何实现Attention is All You Need 这篇论文。（注意这里是从代码实现角度入手的哈，想要对Transformer 从原理上理解，可以参考我的这篇博文）</p>
+<h3 id="实现Positional-Encoding"><a href="#实现Positional-Encoding" class="headerlink" title="实现Positional Encoding"></a>实现Positional Encoding</h3><p>大家想一想这样完全基于Attention(Self Attention + Encoder-Decoder Attention)目前还存在什么问题 呐？<br>&nbsp;&nbsp;&nbsp;&nbsp;<br>Deadline 到了，想到了吗？</p>
+<p><font color="red">没有顺序序列</font>, 这样说吧，对于 “This book is worthy reading”, 和 “Book reading worthy is this” 在Encoder 表示中是完全一致的，这显然不对，为了像RNN,CNN那样引入位置信息，我们必须提供一种加入位置信息的方法<br>$$<br>\begin{cases}<br>PE_{(pos,2i)} = sin(pos / 10000^{2i/d_{\text{model}}}) \\<br>PE_{(pos,2i)} = sin(pos / 10000^{2i/d_{\text{model}}})<br>\end{cases}<br>$$</p>
+<p>$$\begin{cases}<br>  \displaystyle \frac 1 2 \<br>  \displaystyle \frac 3 4<br>\end{cases}$$</p>
 
       
     </div>
@@ -384,7 +359,7 @@
           
             <a href="/tags/NLP/" rel="tag"># NLP</a>
           
-            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+            <a href="/tags/Transformer/" rel="tag"># Transformer</a>
           
         </div>
       
@@ -397,8 +372,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/05/Pre-trained-representation/" rel="next" title="预训练模型">
-                <i class="fa fa-chevron-left"></i> 预训练模型
+              <a href="/2019/02/17/test/" rel="next" title="test">
+                <i class="fa fa-chevron-left"></i> test
               </a>
             
           </div>
@@ -407,8 +382,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/08/CS224N-assignment2/" rel="prev" title="CS224N Assignment2">
-                CS224N Assignment2 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/02/Normalization/" rel="prev" title="Normalization">
+                Normalization <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -541,7 +516,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax"><span class="nav-number">1.</span> <span class="nav-text">Softmax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Network-Basics"><span class="nav-number">2.</span> <span class="nav-text">Neural Network Basics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Word2Vec"><span class="nav-number">3.</span> <span class="nav-text">Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#情感分析-Sentiment-Analysis"><span class="nav-number">4.</span> <span class="nav-text">情感分析 Sentiment Analysis</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#所需要的安装包"><span class="nav-number">1.</span> <span class="nav-text">所需要的安装包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现Positional-Encoding"><span class="nav-number">1.1.</span> <span class="nav-text">实现Positional Encoding</span></a></li></ol></li></ol></div>
             
 
           </div>
