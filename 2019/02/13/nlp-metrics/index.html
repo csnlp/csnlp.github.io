@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="CSNLP学徒">
 <meta property="og:description" content="本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标 基于词重叠的指标(word overlap-based metrics)词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,用$">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-27T02:36:20.854Z">
+<meta property="og:updated_time" content="2019-03-08T08:20:50.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP对话任务常用指标及其实现代码">
 <meta name="twitter:description" content="本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标 基于词重叠的指标(word overlap-based metrics)词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,用$">
@@ -333,6 +333,7 @@
 <h3 id="基于词重叠的指标-word-overlap-based-metrics"><a href="#基于词重叠的指标-word-overlap-based-metrics" class="headerlink" title="基于词重叠的指标(word overlap-based metrics)"></a>基于词重叠的指标(word overlap-based metrics)</h3><p>词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,用$\hat{r}$表示) 之间的近似程度的一种方式</p>
 <h4 id="BLEU-BiLingual-Evaluation-Understudy"><a href="#BLEU-BiLingual-Evaluation-Understudy" class="headerlink" title="BLEU(BiLingual Evaluation Understudy)"></a>BLEU(BiLingual Evaluation Understudy)</h4><p>$$<br>P_n = \frac<br>{\sum_{k \in n_{grams}} \min \big (\text{Count}(k,r), \text{Count}(k, \hat{r}) \big )}<br>{\sum_{k \in n_{grams}} \text{Count}(k,{r})}<br>$$<br>上述公式中,$n_{grams}$ 代表所有可能的n-grams, Count(k,r)代表句子r中的<br>Ground Truth: The book is worthy reading.<br>Candidates: The book is good to read. </p>
 <p>unigram: 衡量了单个词汇的准确度,对于机器翻译来讲unigram 是衡量的逐字的翻译结果<br>而对于4-gram 或者更高的衡量的其实是句子翻译顺畅度</p>
+<p>重要:<br>BLEU 其实是一种准确率计算方法(n-gram precision), 也就是只关注准确率，换句话说BLEU只关心candidate 中有多少n-gram 是correct的(注意: 这里correct的含义是指的在译文中出现) 譬如参考译文一共有10 个n-gram&lt; 而这10个 n-grams 有7个在reference 中出现了, 那么70% 就是BLEU 准确率。哪怕reference 有100 个n-grams，而BLEU 仅仅预测了10个。当然BLEU 采用了brevity_penalty 来惩罚这种过短的candidate. 而对于ROUGE 来讲，ROUGE却是一种基于召回率的</p>
 <h4 id="Rouge"><a href="#Rouge" class="headerlink" title="Rouge"></a>Rouge</h4><h4 id="METEOR"><a href="#METEOR" class="headerlink" title="METEOR"></a>METEOR</h4>
       
     </div>
@@ -446,7 +447,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -457,7 +458,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -468,7 +469,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

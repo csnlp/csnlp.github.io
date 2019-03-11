@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="NLP,Dialogue,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="这个博客主要写一下hexo编写中常见的问题 数学公司多个case 不换行举个栗子123456$$\begin&amp;#123;cases&amp;#125;a = b + c \\d = e + f\end&amp;#123;cases&amp;#125;$$ 但是这样其实并不换行123456$$\begin&amp;#123;cases&amp;#125;a = b + c \\\\d = e + f\end&amp;#123;cases&amp;#125">
+<meta name="description" content="在Deep Learning, Reinforcement Learning 火爆之后，可以将 task-oriented 的对话系统看成是一个 Partially Observable Markov Decision Process(POMDP)这里先介绍 Dialogue Policy Learning 的内容, 这里直接从论文讲起 Policy Based Method代表论文Wen 201">
+<meta name="keywords" content="NLP,Dialogue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo 博客指南">
-<meta property="og:url" content="http://yoursite.com/2019/03/04/hexo-blog/index.html">
+<meta property="og:title" content="Dialogue_Policy_Learning">
+<meta property="og:url" content="http://yoursite.com/2019/03/09/Dialogue-Policy-Learning/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="这个博客主要写一下hexo编写中常见的问题 数学公司多个case 不换行举个栗子123456$$\begin&amp;#123;cases&amp;#125;a = b + c \\d = e + f\end&amp;#123;cases&amp;#125;$$ 但是这样其实并不换行123456$$\begin&amp;#123;cases&amp;#125;a = b + c \\\\d = e + f\end&amp;#123;cases&amp;#125">
+<meta property="og:description" content="在Deep Learning, Reinforcement Learning 火爆之后，可以将 task-oriented 的对话系统看成是一个 Partially Observable Markov Decision Process(POMDP)这里先介绍 Dialogue Policy Learning 的内容, 这里直接从论文讲起 Policy Based Method代表论文Wen 201">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-04T03:06:04.779Z">
+<meta property="og:updated_time" content="2019-03-10T10:33:43.669Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo 博客指南">
-<meta name="twitter:description" content="这个博客主要写一下hexo编写中常见的问题 数学公司多个case 不换行举个栗子123456$$\begin&amp;#123;cases&amp;#125;a = b + c \\d = e + f\end&amp;#123;cases&amp;#125;$$ 但是这样其实并不换行123456$$\begin&amp;#123;cases&amp;#125;a = b + c \\\\d = e + f\end&amp;#123;cases&amp;#125">
+<meta name="twitter:title" content="Dialogue_Policy_Learning">
+<meta name="twitter:description" content="在Deep Learning, Reinforcement Learning 火爆之后，可以将 task-oriented 的对话系统看成是一个 Partially Observable Markov Decision Process(POMDP)这里先介绍 Dialogue Policy Learning 的内容, 这里直接从论文讲起 Policy Based Method代表论文Wen 201">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/04/hexo-blog/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/09/Dialogue-Policy-Learning/">
 
 
 
 
 
-  <title>Hexo 博客指南 | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Dialogue_Policy_Learning | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -262,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/04/hexo-blog/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/09/Dialogue-Policy-Learning/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CSNLP Apprentice">
@@ -279,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo 博客指南</h1>
+          <h1 class="post-title" itemprop="name headline">Dialogue_Policy_Learning</h1>
         
 
         <div class="post-meta">
@@ -291,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-04T10:31:06+08:00">
-                2019-03-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-09T20:23:23+08:00">
+                2019-03-09
               </time>
             
 
@@ -301,6 +302,50 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/Task-Oriented-Dialogue-Systems/" itemprop="url" rel="index">
+                    <span itemprop="name">Task Oriented Dialogue Systems</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/Task-Oriented-Dialogue-Systems/Dialogue-Policy-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Dialogue Policy Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -329,10 +374,9 @@
       
 
       
-        <p>这个博客主要写一下hexo编写中常见的问题</p>
-<h3 id="数学公司多个case-不换行"><a href="#数学公司多个case-不换行" class="headerlink" title="数学公司多个case 不换行"></a>数学公司多个case 不换行</h3><p>举个栗子<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="formula">$$</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">begin</span><span class="string">&#123;cases&#125;</span></span></span></span><br><span class="line"><span class="formula">a = b + c <span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">d = e + f</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">end</span><span class="string">&#123;cases&#125;</span></span></span></span><br><span class="line"><span class="formula">$$</span></span><br></pre></td></tr></table></figure></p>
-<p>但是这样其实并不换行<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="formula">$$</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">begin</span><span class="string">&#123;cases&#125;</span></span></span></span><br><span class="line"><span class="formula">a = b + c <span class="tag">\<span class="name">\</span></span><span class="tag">\<span class="name">\</span></span></span></span><br><span class="line"><span class="formula">d = e + f</span></span><br><span class="line"><span class="formula"><span class="tag">\<span class="name">end</span><span class="string">&#123;cases&#125;</span></span></span></span><br><span class="line"><span class="formula">$$</span></span><br></pre></td></tr></table></figure></p>
-<p>是因为渲染的问题，详细原因参见<a href="https://segmentfault.com/a/1190000007261752" target="_blank" rel="noopener">hexo渲染</a></p>
+        <p>在Deep Learning, Reinforcement Learning 火爆之后，可以将 task-oriented 的对话系统看成是一个 Partially Observable Markov Decision Process(POMDP)<br>这里先介绍 Dialogue Policy Learning 的内容, 这里直接从论文讲起</p>
+<h2 id="Policy-Based-Method"><a href="#Policy-Based-Method" class="headerlink" title="Policy Based Method"></a>Policy Based Method</h2><p>代表论文<br><a href="https://arxiv.org/abs/1604.04562" target="_blank" rel="noopener">Wen 2016</a></p>
+<h2 id="基于Reinforcement-Learning-方法"><a href="#基于Reinforcement-Learning-方法" class="headerlink" title="基于Reinforcement Learning 方法"></a>基于Reinforcement Learning 方法</h2><p>将Dialogue Management 视为一个决策问题，并采用Reinforcement Learning 方法来优化 dialogue policy. 其中的Reward 定义为最终的用户满意度减去对话轮数。其中用户满意度是为了达成服务目标，而对话轮数则是尽可能少的对话轮数达成沟通目的。</p>
 
       
     </div>
@@ -348,6 +392,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+            <a href="/tags/Dialogue/" rel="tag"># Dialogue</a>
+          
+        </div>
+      
 
       
       
@@ -357,8 +409,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/02/Normalization/" rel="next" title="Normalization">
-                <i class="fa fa-chevron-left"></i> Normalization
+              <a href="/2019/03/09/Task-Oriented-Dialogue/" rel="next" title="任务型对话系统">
+                <i class="fa fa-chevron-left"></i> 任务型对话系统
               </a>
             
           </div>
@@ -367,8 +419,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/09/Task-Oriented-Dialogue/" rel="prev" title="任务型对话系统">
-                任务型对话系统 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/01/HELLO/" rel="prev" title="人工置顶">
+                人工置顶 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -501,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数学公司多个case-不换行"><span class="nav-number">1.</span> <span class="nav-text">数学公司多个case 不换行</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Policy-Based-Method"><span class="nav-number">1.</span> <span class="nav-text">Policy Based Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Reinforcement-Learning-方法"><span class="nav-number">2.</span> <span class="nav-text">基于Reinforcement Learning 方法</span></a></li></ol></div>
             
 
           </div>
