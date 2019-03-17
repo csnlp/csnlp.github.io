@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="本篇文章重点介绍CNN在NLP领域的应用 为什么图像领域CNN如此广泛CNN中的两大操作  卷积(Convolution) 池化(Pooling)卷积是CNN的核心操作,卷积为什么可以提取特征:如上动图所示，卷积核(kernel)其实可以是一个 [X] 元素的检测器，观察最终得到的卷积输出,在需要检测的部分会得到更大的数值，从而将检测元素凸显出来。类似，如果我们期待检测出来一个 横线，那么卷积核形">
+<meta name="description" content="本篇文章重点介绍CNN在NLP领域的应用 为什么图像领域CNN如此广泛 CNN中的两大操作  卷积(Convolution)  池化(Pooling) 卷积是CNN的核心操作,卷积为什么可以提取特征:如上动图所示，卷积核(kernel)其实可以是一个 [X] 元素的检测器，观察最终得到的卷积输出,在需要检测的部分会得到更大的数值，从而将检测元素凸显出来。类似，如果我们期待检测出来一个 横线，那么卷">
 <meta property="og:type" content="article">
 <meta property="og:title" content="卷积神经网络在自然语言处理中的应用">
 <meta property="og:url" content="http://yoursite.com/2019/01/31/CNN-NLP/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="本篇文章重点介绍CNN在NLP领域的应用 为什么图像领域CNN如此广泛CNN中的两大操作  卷积(Convolution) 池化(Pooling)卷积是CNN的核心操作,卷积为什么可以提取特征:如上动图所示，卷积核(kernel)其实可以是一个 [X] 元素的检测器，观察最终得到的卷积输出,在需要检测的部分会得到更大的数值，从而将检测元素凸显出来。类似，如果我们期待检测出来一个 横线，那么卷积核形">
+<meta property="og:description" content="本篇文章重点介绍CNN在NLP领域的应用 为什么图像领域CNN如此广泛 CNN中的两大操作  卷积(Convolution)  池化(Pooling) 卷积是CNN的核心操作,卷积为什么可以提取特征:如上动图所示，卷积核(kernel)其实可以是一个 [X] 元素的检测器，观察最终得到的卷积输出,在需要检测的部分会得到更大的数值，从而将检测元素凸显出来。类似，如果我们期待检测出来一个 横线，那么卷">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/01/31/CNN-NLP/Convolution.gif">
 <meta property="og:image" content="http://yoursite.com/2019/01/31/CNN-NLP/CNN_NLP_classification.jpg">
 <meta property="og:updated_time" content="2019-02-02T15:42:50.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="卷积神经网络在自然语言处理中的应用">
-<meta name="twitter:description" content="本篇文章重点介绍CNN在NLP领域的应用 为什么图像领域CNN如此广泛CNN中的两大操作  卷积(Convolution) 池化(Pooling)卷积是CNN的核心操作,卷积为什么可以提取特征:如上动图所示，卷积核(kernel)其实可以是一个 [X] 元素的检测器，观察最终得到的卷积输出,在需要检测的部分会得到更大的数值，从而将检测元素凸显出来。类似，如果我们期待检测出来一个 横线，那么卷积核形">
+<meta name="twitter:description" content="本篇文章重点介绍CNN在NLP领域的应用 为什么图像领域CNN如此广泛 CNN中的两大操作  卷积(Convolution)  池化(Pooling) 卷积是CNN的核心操作,卷积为什么可以提取特征:如上动图所示，卷积核(kernel)其实可以是一个 [X] 元素的检测器，观察最终得到的卷积输出,在需要检测的部分会得到更大的数值，从而将检测元素凸显出来。类似，如果我们期待检测出来一个 横线，那么卷">
 <meta name="twitter:image" content="http://yoursite.com/2019/01/31/CNN-NLP/Convolution.gif">
 
 
@@ -333,24 +333,34 @@
 
       
         <p>本篇文章重点介绍CNN在NLP领域的应用</p>
-<h3 id="为什么图像领域CNN如此广泛"><a href="#为什么图像领域CNN如此广泛" class="headerlink" title="为什么图像领域CNN如此广泛"></a>为什么图像领域CNN如此广泛</h3><p>CNN中的两大操作</p>
+<h3>为什么图像领域CNN如此广泛</h3>
+<p>CNN中的两大操作</p>
 <ul>
-<li>卷积(Convolution)<br><img src="Convolution.gif" alt=""></li>
-<li>池化(Pooling)<br>卷积是CNN的核心操作,卷积为什么可以提取特征:如上动图所示，卷积核(kernel)其实可以是一个 [X] 元素的检测器，观察最终得到的卷积输出,在需要检测的部分会得到更大的数值，从而将检测元素凸显出来。类似，如果我们期待检测出来一个 横线，那么卷积核形式是其中一行为大于1的数值，而其他行元素都是0或者接近0的元素。</li>
+<li>卷积(Convolution)
+<img src="Convolution.gif" alt=""></li>
+<li>池化(Pooling)
+卷积是CNN的核心操作,卷积为什么可以提取特征:如上动图所示，卷积核(kernel)其实可以是一个 [X] 元素的检测器，观察最终得到的卷积输出,在需要检测的部分会得到更大的数值，从而将检测元素凸显出来。类似，如果我们期待检测出来一个 横线，那么卷积核形式是其中一行为大于1的数值，而其他行元素都是0或者接近0的元素。</li>
 </ul>
-<p>CNN 可以看成一系列&lt;卷积, 池化, 激活函数(ReLU)&gt; 当然，顺序也可以是 &lt;卷积, 激活, 池化&gt;<br>卷积本身具有平移不变性,而图像本身就适合平移不变性,也即无论图像任意位置有一个苹果，我们都可以说图像里边有一个苹果。</p>
+<p>CNN 可以看成一系列&lt;卷积, 池化, 激活函数(ReLU)&gt; 当然，顺序也可以是 &lt;卷积, 激活, 池化&gt;
+卷积本身具有平移不变性,而图像本身就适合平移不变性,也即无论图像任意位置有一个苹果，我们都可以说图像里边有一个苹果。</p>
 <p>池化可以保留主要特征的同时减少参数，防止过拟合，同时池化可以还有不变性的特点  <a href="https://zhuanlan.zhihu.com/p/35769417" target="_blank" rel="noopener">池化的理解</a></p>
-<p>CNN的操作可以看成每一层CNN都是提取图片中某一特征，而后续CNN就对之前提取的特征进行合成，得到更抽象的特征表示。而显然，图像是符合这一总结的。例如对于一张含有车的图片进行分类，图像低层次抽象可能是“横线”，“竖线(edge)”等，结合“横线，竖线” 可能提取出 “车的车轮”，“车的车窗”等(simple shape)。更高层次的CNN负责识别车的整个架构(more abstract shape)。</p>
+<p>CNN的操作可以看成每一层CNN都是提取图片中某一特征，而后续CNN就对之前提取的特征进行合成，得到更抽象的特征表示。而显然，图像是符合这一总结的。例如对于一张含有车的图片进行分类，图像低层次抽象可能是“横线”，“竖线(edge)”等，结合“横线，竖线” 可能提取出 &quot;车的车轮&quot;，“车的车窗”等(simple shape)。更高层次的CNN负责识别车的整个架构(more abstract shape)。</p>
 <p>在卷积神经网络中，卷积核是作为神经网络的参数学习出来的，也就是特征工程可以通过网络自己学到。</p>
-<h3 id="附加问题-为什么NLP领域RNN如此广泛"><a href="#附加问题-为什么NLP领域RNN如此广泛" class="headerlink" title="附加问题: 为什么NLP领域RNN如此广泛"></a>附加问题: 为什么NLP领域RNN如此广泛</h3><p>CNN的假设: 要求卷积对象有局部相关性<br>RNN的假设: 要求数据在时序上有局部相关性</p>
-<p>显然文本更加符合时序相关性特征, 但是一定程度上譬如文本分类问题 含有”小猫”的文本很大程度上可以划分到 “动物” 体裁中，而无论出现在文本的那个位置，另外，模型无所谓对错，而是要找准适用场景,显然可以在NLP任务中尝试适用CNN</p>
-<h3 id="NLP中的CNN模型"><a href="#NLP中的CNN模型" class="headerlink" title="NLP中的CNN模型"></a>NLP中的CNN模型</h3><p>应用最广泛的CNN模型<br><img src="CNN_NLP_classification.jpg" alt=""></p>
-<h3 id="Dynamic-CNN-对自然语句进行建模"><a href="#Dynamic-CNN-对自然语句进行建模" class="headerlink" title="Dynamic CNN 对自然语句进行建模"></a>Dynamic CNN 对自然语句进行建模</h3><p>相较于Kim 模型的CNN, DCNN的改变有两点:</p>
+<h3>附加问题: 为什么NLP领域RNN如此广泛</h3>
+<p>CNN的假设: 要求卷积对象有局部相关性
+RNN的假设: 要求数据在时序上有局部相关性</p>
+<p>显然文本更加符合时序相关性特征, 但是一定程度上譬如文本分类问题 含有&quot;小猫&quot;的文本很大程度上可以划分到 “动物” 体裁中，而无论出现在文本的那个位置，另外，模型无所谓对错，而是要找准适用场景,显然可以在NLP任务中尝试适用CNN</p>
+<h3>NLP中的CNN模型</h3>
+<p>应用最广泛的CNN模型
+<img src="CNN_NLP_classification.jpg" alt=""></p>
+<h3>Dynamic CNN 对自然语句进行建模</h3>
+<p>相较于Kim 模型的CNN, DCNN的改变有两点:</p>
 <ul>
 <li>宽卷积(wide convolution)</li>
 <li>k-max pooling</li>
 </ul>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
+<h3>参考文献</h3>
+<ol>
 <li>Kim Y. Convolutional neural networks for sentence classification[J]. arXiv preprint arXiv:1408.5882, 2014.</li>
 <li>Kalchbrenner N, Grefenstette E, Blunsom P. A convolutional neural network for modelling sentences[J]. arXiv preprint arXiv:1404.2188, 2014.</li>
 </ol>
@@ -467,7 +477,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -489,7 +499,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -522,7 +532,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么图像领域CNN如此广泛"><span class="nav-number">1.</span> <span class="nav-text">为什么图像领域CNN如此广泛</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#附加问题-为什么NLP领域RNN如此广泛"><span class="nav-number">2.</span> <span class="nav-text">附加问题: 为什么NLP领域RNN如此广泛</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NLP中的CNN模型"><span class="nav-number">3.</span> <span class="nav-text">NLP中的CNN模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-CNN-对自然语句进行建模"><span class="nav-number">4.</span> <span class="nav-text">Dynamic CNN 对自然语句进行建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">为什么图像领域CNN如此广泛</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">附加问题: 为什么NLP领域RNN如此广泛</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">NLP中的CNN模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Dynamic CNN 对自然语句进行建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -748,7 +758,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

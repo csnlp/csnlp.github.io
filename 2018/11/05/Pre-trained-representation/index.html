@@ -333,7 +333,8 @@
         <p>这里随着BERT的大火，预训练语言表示(pre-training languag representation)也受到了更多的关注。预训练方法也就是</p>
 <ul>
 <li>Firstly train a general-purpose <strong>language understanding</strong> model on a large text corpus</li>
-<li>Use this model for downstream NLP task (分为两种<em>feature-based, fine-tune</em>)<br>而Pre-train representation 有两种</li>
+<li>Use this model for downstream NLP task (分为两种<em>feature-based, fine-tune</em>)
+而Pre-train representation 有两种</li>
 </ul>
 <table>
 <thead>
@@ -347,7 +348,7 @@
 <tr>
 <td style="text-align:left">Context-free</td>
 <td style="text-align:left">Word2Vec or Glove</td>
-<td style="text-align:left">一个词汇对应特定表达, “mouse” 无论是在上下文中真正表达“鼠标”还是“老鼠”，都是一个向量形式，难以解决歧义问题</td>
+<td style="text-align:left">一个词汇对应特定表达, &quot;mouse&quot; 无论是在上下文中真正表达“鼠标”还是“老鼠”，都是一个向量形式，难以解决歧义问题</td>
 </tr>
 <tr>
 <td style="text-align:left">Contextual</td>
@@ -466,7 +467,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -488,7 +489,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -731,7 +732,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

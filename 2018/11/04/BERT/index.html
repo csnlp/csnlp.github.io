@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的BackgroundBERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NL">
+<meta name="description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的Background BERT是用来做什么呢？ 谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是">
 <meta name="keywords" content="预训练">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BERT的发展历程">
 <meta property="og:url" content="http://yoursite.com/2018/11/04/BERT/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的BackgroundBERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NL">
+<meta property="og:description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的Background BERT是用来做什么呢？ 谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/11/04/BERT/BERT_input.jpg">
 <meta property="og:updated_time" content="2019-02-13T08:18:57.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BERT的发展历程">
-<meta name="twitter:description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的BackgroundBERT是用来做什么呢？谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NL">
+<meta name="twitter:description" content="最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。 BERT的Background BERT是用来做什么呢？ 谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是">
 <meta name="twitter:image" content="http://yoursite.com/2018/11/04/BERT/BERT_input.jpg">
 
 
@@ -355,7 +355,9 @@
 
       
         <p>最近看到BERT模型各个公众号都在推送，但是对于BERT的解读资料目前稍显不足，而且BERT的发展历程目前缺乏一个详细的解释，我这里抛砖引玉，总结一下BERT相关的论文，权当做个笔记。</p>
-<h2 id="BERT的Background"><a href="#BERT的Background" class="headerlink" title="BERT的Background"></a>BERT的Background</h2><h3 id="BERT是用来做什么呢？"><a href="#BERT是用来做什么呢？" class="headerlink" title="BERT是用来做什么呢？"></a>BERT是用来做什么呢？</h3><p>谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NLP上尚未有这样公认的ImageNet的存在。这里写一下NLP如果采用ImageNet这样的形式它的upper-stream task 和 down-stream task 是什么</p>
+<h2>BERT的Background</h2>
+<h3>BERT是用来做什么呢？</h3>
+<p>谷歌的目标是期待能够打造图像领域的ImageNet, 我们知道现在CV领域的一些任务都一般不是从零开始，而是在ImageNet这些预训练好的模型上微调。但是NLP上尚未有这样公认的ImageNet的存在。这里写一下NLP如果采用ImageNet这样的形式它的upper-stream task 和 down-stream task 是什么</p>
 <table>
 <thead>
 <tr>
@@ -377,29 +379,40 @@
 </tr>
 </tbody>
 </table>
-<p>BERT 目标是处理down-stream task, i.e.,得到一个语言表示模型(language representation model), 或者说是 “pre-trained language representations”。 从这个意义上来讲，我们之前用的Word2Vec 或者 GloVe 其实也是预先训练好的”WORD-LEVEL”的表达。目前，将pre-trained language representations 应用到下游任务(down stream task)中有两种方式, </p>
+<p>BERT 目标是处理down-stream task, i.e.,得到一个语言表示模型(language representation model), 或者说是 “pre-trained language representations”。 从这个意义上来讲，我们之前用的Word2Vec 或者 GloVe 其实也是预先训练好的&quot;WORD-LEVEL&quot;的表达。目前，将pre-trained language representations 应用到下游任务(down stream task)中有两种方式,</p>
 <ul>
-<li>feature-based<br>feature-based 典型代表有ELMo (2018年NAACL Best Paper),将这些 representation作为新的features加入到 task-speacific architecture中</li>
-<li>fine-tunning<br>典型代表: OpenAI GPT。直接在预训练好的模型上利用 task-specific 数据fine tune</li>
+<li>feature-based
+feature-based 典型代表有ELMo (2018年NAACL Best Paper),将这些 representation作为新的features加入到 task-speacific architecture中</li>
+<li>fine-tunning
+典型代表: OpenAI GPT。直接在预训练好的模型上利用 task-specific 数据fine tune</li>
 </ul>
-<h3 id="为什么会出现BERT"><a href="#为什么会出现BERT" class="headerlink" title="为什么会出现BERT"></a>为什么会出现BERT</h3><ul>
+<h3>为什么会出现BERT</h3>
+<ul>
 <li>在Word2Vec和GloVe中，一个词无论在任何语境下都是一个向量，显然这不是完美的。“温暖的 阳光 照射在 我身上” “他的 话 很 温暖”，显然这里的“温暖” 如果是一个向量来表示显然不太精确，我们期待一个向量能够融入上下文信息(Context), ELMo 抓住了这一痛点，提出了一种新的Word Embedding 方法。</li>
 <li>尽管ELMo出现了，但是其出现仍然是希望能够代替Word2Vec,学到一个更加具有(context) 信息的Word Embedding, 然而，对于一些复杂的任务，有些逻辑更复杂(dialogue之类的)，一个好的Embedding 可能还不够。</li>
 <li>BERT希望能够在预训练模型上就能捕捉到很复杂的关系: 上下文逻辑、语料场景等</li>
 </ul>
-<h2 id="BERT-之前需要有的知识储备"><a href="#BERT-之前需要有的知识储备" class="headerlink" title="BERT 之前需要有的知识储备"></a>BERT 之前需要有的知识储备</h2><ul>
+<h2>BERT 之前需要有的知识储备</h2>
+<ul>
 <li>LSTM基本知识(本文不讲)</li>
 <li>Attention机制的理解 (参考我的专门的博客<a href="https://csnlp.github.io/2018/11/03/Attention/" target="_blank" rel="noopener">Attention机制</a>)</li>
 <li>Self-Attention: Self-Attention 就是BERT提到的Transformer，是现在非常流行的基本组件(Block), 最好能理解的十分深入,这里也单独开一个博文</li>
 </ul>
-<h2 id="谷歌选择的方法-BERT"><a href="#谷歌选择的方法-BERT" class="headerlink" title="谷歌选择的方法-BERT"></a>谷歌选择的方法-BERT</h2><h3 id="预训练模型"><a href="#预训练模型" class="headerlink" title="预训练模型"></a>预训练模型</h3><p>首先BERT选择了fine-tune的思路,也就是通过做upper-stream task来pre-train一个模型, 然后微调。在预训练时， BERT采用了两个目标</p>
-<h4 id="Masked-Language-Model"><a href="#Masked-Language-Model" class="headerlink" title="Masked Language Model"></a>Masked Language Model</h4><p>+目前学术界在upper-stream 这个任务上，也就是在学general language representation时候，都选择<strong>Unidirectional Language Model</strong>, 原因在于这种单向的结构在进行预训练时候，只能在当前位置之前的词汇中做Self-Attention操作 <blockquote><p>The major limitation is that standard language models are unidirectional, and this limits the choice of architectures that can be used during pre-training. For example, in OpenAI GPT, the authors use a left-to-right architecture, where every token can only attend to previous tokens in the self-attention layers of the Transformer.  </p>
-</blockquote><br>BERT不用Unidirectional Language Model 而采用全新的任务 <strong>Masked Language Model</strong>, 其实就是英文考试常考的 “Cloze Task(完形填空)”。这个怎样理解: 譬如BERT想要得到一个NLP能力很强的预训练模型，<strong>完形填空相当于没一个空格都需要你去靠自己的NLP能力去补充上去</strong>，因此，我们可以对整个语料库随机遮住 15% 的tokens，这些被遮住的部分记为[MASK], 然后去将这些[MASK] 重新预测为真实词语。但是这样也存在问题</p>
+<h2>谷歌选择的方法-BERT</h2>
+<h3>预训练模型</h3>
+<p>首先BERT选择了fine-tune的思路,也就是通过做upper-stream task来pre-train一个模型, 然后微调。在预训练时， BERT采用了两个目标</p>
+<h4>Masked Language Model</h4>
+<p>+目前学术界在upper-stream 这个任务上，也就是在学general language representation时候，都选择<strong>Unidirectional Language Model</strong>, 原因在于这种单向的结构在进行预训练时候，只能在当前位置之前的词汇中做Self-Attention操作 <blockquote><p>The major limitation is that standard language models are unidirectional, and this limits the choice of architectures that can be used during pre-training. For example, in OpenAI GPT, the authors use a left-to-right architecture, where every token can only attend to previous tokens in the self-attention layers of the Transformer.</p>
+</blockquote>
+BERT不用Unidirectional Language Model 而采用全新的任务 <strong>Masked Language Model</strong>, 其实就是英文考试常考的 &quot;Cloze Task(完形填空)&quot;。这个怎样理解: 譬如BERT想要得到一个NLP能力很强的预训练模型，<strong>完形填空相当于没一个空格都需要你去靠自己的NLP能力去补充上去</strong>，因此，我们可以对整个语料库随机遮住 15% 的tokens，这些被遮住的部分记为[MASK], 然后去将这些[MASK] 重新预测为真实词语。但是这样也存在问题</p>
 <ul>
-<li>Pre-train 和 fine-tune 阶段目标函数不一致<br>毕竟在Pre-train时候，存在[MASK], 而在fine-tune 阶段真实NLP任务中是没有[MASK] 存在的<br>解决方案:<ul>
-<li>80% 的情况下选择的词语就是替换成[MASK] E.g.: A cat is walking.–&gt; A cat [MASK] walking.</li>
-<li>10% 的情况下: 选择的词语随机替换成一个词语  E.g&gt;: A cat is walking –&gt; A cat good walking.</li>
-<li>10 的情况下: 选择的词语还是替换成原来的词语 E.g., A cat is walking –&gt; A cat is walking. </li>
+<li>Pre-train 和 fine-tune 阶段目标函数不一致
+毕竟在Pre-train时候，存在[MASK], 而在fine-tune 阶段真实NLP任务中是没有[MASK] 存在的
+解决方案:
+<ul>
+<li>80% 的情况下选择的词语就是替换成[MASK] E.g.: A cat is walking.--&gt; A cat [MASK] walking.</li>
+<li>10% 的情况下: 选择的词语随机替换成一个词语  E.g&gt;: A cat is walking --&gt; A cat good walking.</li>
+<li>10 的情况下: 选择的词语还是替换成原来的词语 E.g., A cat is walking --&gt; A cat is walking.</li>
 </ul>
 </li>
 </ul>
@@ -408,23 +421,38 @@
 <ul>
 <li>因为只有15% 的token 被预测，而在Unidirectional Language Model 中所有的token都会被预测，显然Masked Language Model效率是很低的。</li>
 </ul>
-<h4 id="Next-Sentence-Generation"><a href="#Next-Sentence-Generation" class="headerlink" title="Next Sentence Generation"></a>Next Sentence Generation</h4><p>Masked Language Model 更多的还是学到的一种句内关系，为了能学到句间关系(譬如Question Answering等任务依赖句间关系)，引入 Next Sentence Generation 任务。注意，这里的任务不是完全生成下一个句子，而是做分类任务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: [CLS] the man went to [MASK] store [SEP] he bought a gallow [MASK] milk [SEP]</span><br><span class="line">Label: IsNext</span><br><span class="line">Input: [CLS] the man went to [MASK] store [SEP] penguin [MASK] not flightless bird [SEP]</span><br><span class="line">Label: NotNext</span><br></pre></td></tr></table></figure></p>
-<h3 id="BERT的训练方法"><a href="#BERT的训练方法" class="headerlink" title="BERT的训练方法"></a>BERT的训练方法</h3><p>为了方便理解: 我从 Input, Output, Model Structure, Loss Function 来讲这个问题。</p>
+<h4>Next Sentence Generation</h4>
+<p>Masked Language Model 更多的还是学到的一种句内关系，为了能学到句间关系(譬如Question Answering等任务依赖句间关系)，引入 Next Sentence Generation 任务。注意，这里的任务不是完全生成下一个句子，而是做分类任务。
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: [CLS] the man went to [MASK] store [SEP] he bought a gallow [MASK] milk [SEP]</span><br><span class="line">Label: IsNext</span><br><span class="line">Input: [CLS] the man went to [MASK] store [SEP] penguin [MASK] not flightless bird [SEP]</span><br><span class="line">Label: NotNext</span><br></pre></td></tr></table></figure></p>
+<h3>BERT的训练方法</h3>
+<p>为了方便理解: 我从 Input, Output, Model Structure, Loss Function 来讲这个问题。</p>
 <ul>
-<li><p>Input<br><img src="BERT_input.jpg" alt=""></p>
+<li>
+<p>Input
+<img src="BERT_input.jpg" alt=""></p>
 <ul>
 <li>Token Embedding: 就是最常见的Word Embedding, 注意[CLS]是指的一个分类标签，是为了分类任务存在的</li>
 <li>Segment Embedding: 针对一些对话语料 A代表第一句，B代表第二句</li>
-<li>Position Embedding: 因为BERT是基于Transformer建立的,而Transformer不像RNN， Transformer是没有位置信息的，因此需要Position Embedding 来额外的表示位置信息<br>最后Input就是： $\text{Input} = \text{Token Embedding} + \text{Segment Embedding} + \text{Position Embedding}$</li>
+<li>Position Embedding: 因为BERT是基于Transformer建立的,而Transformer不像RNN， Transformer是没有位置信息的，因此需要Position Embedding 来额外的表示位置信息
+最后Input就是： $\text{Input} = \text{Token Embedding} + \text{Segment Embedding} + \text{Position Embedding}$</li>
 </ul>
 </li>
-<li><p>Output<br>譬如我们的Input是“My dog is cute, he likes play leaves.” 我们挖空了 “cute”, 也就是将”cute”替换成了”MASK”, 那么现在我们Transformer的Input就是 “My dog is [MASK], he likes play”output就是 “cute”</p>
+<li>
+<p>Output
+譬如我们的Input是“My dog is cute, he likes play leaves.” 我们挖空了 “cute”, 也就是将&quot;cute&quot;替换成了&quot;MASK&quot;, 那么现在我们Transformer的Input就是 “My dog is [MASK], he likes play”output就是 “cute”</p>
 </li>
 </ul>
-<h3 id="down-strem-任务如何接入？"><a href="#down-strem-任务如何接入？" class="headerlink" title="down-strem 任务如何接入？"></a>down-strem 任务如何接入？</h3><h2 id="总的想法"><a href="#总的想法" class="headerlink" title="总的想法"></a>总的想法</h2><p>就是很多NLP上的任务可以重新思考一下，谷歌其实在避免一种倾向,这种倾向是<br><blockquote><p>NLP的各个任务越来越专，针对特定任务设计的模型越来越复杂，网络层数越来越深，各种Attention</p>
+<h3>down-strem 任务如何接入？</h3>
+<h2>总的想法</h2>
+<p>就是很多NLP上的任务可以重新思考一下，谷歌其实在避免一种倾向,这种倾向是
+<blockquote><p>NLP的各个任务越来越专，针对特定任务设计的模型越来越复杂，网络层数越来越深，各种Attention</p>
 </blockquote></p>
-<p>我这里没有资格评价这种倾向好或者不好。但是谷歌就是反其道而行，证明了<br><blockquote><p>我这里搭建一个十分General的基础<strong>BERT</strong>，在BERT的基础上，针对特定任务，一个很简单的小修小补就足以解决问题</p>
-</blockquote><br>当然，谷歌也出了很多在特定任务上十分impressive 的work。。<br>谷歌的模型，越来越证明产业界的学术潜力，产业界大手笔，大计算能力，大资源，服气!!!<br>除此之外，谷歌已经将模型开源<a href="https://github.com/google-research/bert#fine-tuning-with-bert" target="_blank" rel="noopener">BERT代码模型开源</a></p>
+<p>我这里没有资格评价这种倾向好或者不好。但是谷歌就是反其道而行，证明了
+<blockquote><p>我这里搭建一个十分General的基础<strong>BERT</strong>，在BERT的基础上，针对特定任务，一个很简单的小修小补就足以解决问题</p>
+</blockquote>
+当然，谷歌也出了很多在特定任务上十分impressive 的work。。
+谷歌的模型，越来越证明产业界的学术潜力，产业界大手笔，大计算能力，大资源，服气!!!
+除此之外，谷歌已经将模型开源<a href="https://github.com/google-research/bert#fine-tuning-with-bert" target="_blank" rel="noopener">BERT代码模型开源</a></p>
 
       
     </div>
@@ -544,7 +572,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -566,7 +594,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -599,7 +627,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BERT的Background"><span class="nav-number">1.</span> <span class="nav-text">BERT的Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BERT是用来做什么呢？"><span class="nav-number">1.1.</span> <span class="nav-text">BERT是用来做什么呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么会出现BERT"><span class="nav-number">1.2.</span> <span class="nav-text">为什么会出现BERT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BERT-之前需要有的知识储备"><span class="nav-number">2.</span> <span class="nav-text">BERT 之前需要有的知识储备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谷歌选择的方法-BERT"><span class="nav-number">3.</span> <span class="nav-text">谷歌选择的方法-BERT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预训练模型"><span class="nav-number">3.1.</span> <span class="nav-text">预训练模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Masked-Language-Model"><span class="nav-number">3.1.1.</span> <span class="nav-text">Masked Language Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Next-Sentence-Generation"><span class="nav-number">3.1.2.</span> <span class="nav-text">Next Sentence Generation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BERT的训练方法"><span class="nav-number">3.2.</span> <span class="nav-text">BERT的训练方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#down-strem-任务如何接入？"><span class="nav-number">3.3.</span> <span class="nav-text">down-strem 任务如何接入？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总的想法"><span class="nav-number">4.</span> <span class="nav-text">总的想法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">BERT的Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">BERT是用来做什么呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">为什么会出现BERT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">BERT 之前需要有的知识储备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">谷歌选择的方法-BERT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">预训练模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">Masked Language Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.2.</span> <span class="nav-text">Next Sentence Generation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">BERT的训练方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">down-strem 任务如何接入？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">总的想法</span></a></li></ol></div>
             
 
           </div>
@@ -825,7 +853,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
