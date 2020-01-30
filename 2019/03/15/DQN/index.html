@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="Reinforcement Learning 有两大类算法  Policy-Based: 典型的如Policy Gradient,针对连续场景,直接优化得到policy Value-Based: 典型的就是DQN,一般适合离散空间,通过value 反推policy, 会出现策略退化  CartPole 问题 我们先看这个CartPole问题:  CartPole 就是期望杆一直朝上; Reward">
+<meta name="description" content="Reinforcement Learning 有两大类算法  Policy-Based: 典型的如Policy Gradient,针对连续场景,直接优化得到policy Value-Based: 典型的就是DQN,一般适合离散空间,通过value 反推policy, 会出现策略退化CartPole 问题我们先看这个CartPole问题: CartPole 就是期望杆一直朝上; Reward 定义成">
 <meta name="keywords" content="Deep Learning,Reinforcement Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用DQN实现CartPole">
 <meta property="og:url" content="http://yoursite.com/2019/03/15/DQN/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Reinforcement Learning 有两大类算法  Policy-Based: 典型的如Policy Gradient,针对连续场景,直接优化得到policy Value-Based: 典型的就是DQN,一般适合离散空间,通过value 反推policy, 会出现策略退化  CartPole 问题 我们先看这个CartPole问题:  CartPole 就是期望杆一直朝上; Reward">
+<meta property="og:description" content="Reinforcement Learning 有两大类算法  Policy-Based: 典型的如Policy Gradient,针对连续场景,直接优化得到policy Value-Based: 典型的就是DQN,一般适合离散空间,通过value 反推policy, 会出现策略退化CartPole 问题我们先看这个CartPole问题: CartPole 就是期望杆一直朝上; Reward 定义成">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/15/DQN/gym.gif">
 <meta property="og:updated_time" content="2019-03-17T13:46:25.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用DQN实现CartPole">
-<meta name="twitter:description" content="Reinforcement Learning 有两大类算法  Policy-Based: 典型的如Policy Gradient,针对连续场景,直接优化得到policy Value-Based: 典型的就是DQN,一般适合离散空间,通过value 反推policy, 会出现策略退化  CartPole 问题 我们先看这个CartPole问题:  CartPole 就是期望杆一直朝上; Reward">
+<meta name="twitter:description" content="Reinforcement Learning 有两大类算法  Policy-Based: 典型的如Policy Gradient,针对连续场景,直接优化得到policy Value-Based: 典型的就是DQN,一般适合离散空间,通过value 反推policy, 会出现策略退化CartPole 问题我们先看这个CartPole问题: CartPole 就是期望杆一直朝上; Reward 定义成">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/15/DQN/gym.gif">
 
 
@@ -335,52 +335,16 @@
         <p>Reinforcement Learning 有两大类算法</p>
 <ul>
 <li>Policy-Based: 典型的如Policy Gradient,针对连续场景,直接优化得到policy</li>
-<li>Value-Based: 典型的就是DQN,一般适合离散空间,通过value 反推policy, 会出现策略退化</li>
+<li>Value-Based: 典型的就是DQN,一般适合离散空间,通过value 反推policy, 会出现策略退化<h3 id="CartPole-问题"><a href="#CartPole-问题" class="headerlink" title="CartPole 问题"></a>CartPole 问题</h3>我们先看这个CartPole问题: <img src="gym.gif" alt=""><br>CartPole 就是期望杆一直朝上; Reward 定义成竖直向上的时间,时间越长Reward 越高</li>
 </ul>
-<h3>CartPole 问题</h3>
-<p>我们先看这个CartPole问题: <img src="gym.gif" alt="">
-CartPole 就是期望杆一直朝上; Reward 定义成竖直向上的时间,时间越长Reward 越高</p>
-<h2>Q-learning</h2>
-<p>Deep Q Network 之说以称之为 Deep Network 在于它其实只是 Q learning的一种特殊形式
-我们先看一下什么是Q-Learning, Q-Learning 定义了一个函数$Q^{*}$,
-$$
-State \times Action \rightarrow \mathbb{R}
-$$
-如果我们能够得到 function, 那么我们就能够很容易构建出我们的RL ageng的policy:
-$$
-\pi^*(s) = \arg\max_a \ Q^*(s, a)
-$$
-根据Bellman equation:
-$$
-Q^{\pi}(s, a) = r + \gamma Q^{\pi}(s', \pi(s'))
-$$
-好了，问题的关键在于如何去得到$Q^*$, 答案是很难得到😅，只能去近似
-对于上述公式, 等式左右相减可以得到 temporal difference error $\delta$,
-$$
-\delta = Q(s, a) - (r + \gamma \max_a Q(s', a))
-$$
-我们Q-learning 为了得到Q function, loss函数减小这个$\delta$,我们采用Huber Loss</p>
-<p>$$
-\mathcal{L} = \frac{1}{|B|}\sum_{(s, a, s', r) \ \in \ B} \mathcal{L}(\delta)
-$$
-$$
-\begin{split}\text{where} \quad \mathcal{L}(\delta) = \begin{cases}
-\frac{1}{2}{\delta^2}  &amp; \text{for } |\delta| \le 1, \\
-|\delta| - \frac{1}{2} &amp; \text{otherwise.}
-\end{cases}\end{split}
-$$</p>
-<h3>Deep Q Network(DQN) 算法</h3>
-<p>那么Deep Q Network 是如何进行Q-learning的呢？ 其实道理很简单，就是有一个Deep Network 对这个Q function进行近似，好了既然涉及到写代码，我们必然要将输入和输出写清楚</p>
+<h2 id="Q-learning"><a href="#Q-learning" class="headerlink" title="Q-learning"></a>Q-learning</h2><p>Deep Q Network 之说以称之为 Deep Network 在于它其实只是 Q learning的一种特殊形式<br>我们先看一下什么是Q-Learning, Q-Learning 定义了一个函数$Q^{*}$,<br>$$<br>State \times Action \rightarrow \mathbb{R}<br>$$<br>如果我们能够得到 function, 那么我们就能够很容易构建出我们的RL ageng的policy:<br>$$<br>\pi^*(s) = \arg\max_a \ Q^*(s, a)<br>$$<br>根据Bellman equation:<br>$$<br>Q^{\pi}(s, a) = r + \gamma Q^{\pi}(s’, \pi(s’))<br>$$<br>好了，问题的关键在于如何去得到$Q^*$, 答案是很难得到😅，只能去近似<br>对于上述公式, 等式左右相减可以得到 temporal difference error $\delta$,<br>$$<br>\delta = Q(s, a) - (r + \gamma \max_a Q(s’, a))<br>$$<br>我们Q-learning 为了得到Q function, loss函数减小这个$\delta$,我们采用Huber Loss</p>
+<p>$$<br>\mathcal{L} = \frac{1}{|B|}\sum_{(s, a, s’, r) \ \in \ B} \mathcal{L}(\delta)<br>$$<br>$$<br>\begin{split}\text{where} \quad \mathcal{L}(\delta) = \begin{cases}<br>  \frac{1}{2}{\delta^2}  &amp; \text{for } |\delta| \le 1, \\<br>  |\delta| - \frac{1}{2} &amp; \text{otherwise.}<br>\end{cases}\end{split}<br>$$</p>
+<h3 id="Deep-Q-Network-DQN-算法"><a href="#Deep-Q-Network-DQN-算法" class="headerlink" title="Deep Q Network(DQN) 算法"></a>Deep Q Network(DQN) 算法</h3><p>那么Deep Q Network 是如何进行Q-learning的呢？ 其实道理很简单，就是有一个Deep Network 对这个Q function进行近似，好了既然涉及到写代码，我们必然要将输入和输出写清楚</p>
 <ul>
 <li>input: state &amp; action</li>
 <li>output: return</li>
 </ul>
-<h3>训练过程</h3>
-<p>在Reinforcement Learning 中,我们的目标是训练policy 使得累计Reward达到最大: 累计Reward 可以表示为:
-$$
-R_{t_0} = \sum_{t=t_0}^{\infty} \gamma^{t - t_0} r_t
-$$
-其中, $\gamma$ 为discount factor.</p>
+<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p>在Reinforcement Learning 中,我们的目标是训练policy 使得累计Reward达到最大: 累计Reward 可以表示为:<br>$$<br>R_{t_0} = \sum_{t=t_0}^{\infty} \gamma^{t - t_0} r_t<br>$$<br>其中, $\gamma$ 为discount factor. </p>
 
       
     </div>
@@ -502,7 +466,7 @@ $$
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -524,7 +488,7 @@ $$
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -557,7 +521,7 @@ $$
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">CartPole 问题</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Q-learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Deep Q Network(DQN) 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">训练过程</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CartPole-问题"><span class="nav-number">1.</span> <span class="nav-text">CartPole 问题</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-learning"><span class="nav-number"></span> <span class="nav-text">Q-learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep-Q-Network-DQN-算法"><span class="nav-number">1.</span> <span class="nav-text">Deep Q Network(DQN) 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练过程"><span class="nav-number">2.</span> <span class="nav-text">训练过程</span></a></li></ol></li></div>
             
 
           </div>
@@ -577,7 +541,7 @@ $$
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

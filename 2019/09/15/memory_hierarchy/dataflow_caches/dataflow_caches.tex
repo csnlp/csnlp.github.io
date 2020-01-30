@@ -1,0 +1,104 @@
+\documentclass[preview,border=2pt,convert={density=300,outext=.png}]{standalone}
+%\documentclass[usenames,dvipsnames]{standalone}
+%\documentclass[convert=pdf2svg,multi=false]{standalone}
+
+
+\usepackage{caption}
+\usepackage{tabularx}
+\usepackage{multirow}
+
+
+% *** THE BEGIN ***
+\newcommand\tablewidth{0.92}
+
+% for equation
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+% for the graph insertion
+\usepackage{graphicx}
+
+% for algorithm
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% for tabular
+\usepackage{tabularx}
+
+% for inline itemize
+\usepackage[inline, shortlabels]{enumitem}
+
+%for multirow
+\usepackage{multirow}
+
+% for table position   **BE CAREFUL**
+\usepackage{placeins}
+\usepackage{blindtext}
+
+% for table fixation
+\usepackage{float}
+
+% for advanced colors
+\usepackage[dvipsnames]{xcolor}
+
+% for structure figure
+\usepackage{tikz}
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{arrows, arrows.meta, calc, snakes, positioning, quotes, shapes}
+
+% for subfigure
+\usepackage{graphicx}
+%\usepackage[caption=false]{subfig}
+%\usepackage{subcaption}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
+% for upscription in text mode
+\usepackage{fixltx2e}
+
+
+% *** THE END ***
+
+% *** The command defined by Shaobo Cui *** %
+% for vector bold symbol
+\newcommand{\vect}[1]{\boldsymbol{#1}}
+
+% for argmax
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% *** THE END ***
+
+\usepackage{float}
+
+\begin{document} 
+\begin{minipage}{\linewidth}
+\centering
+\begin{figure}[H]
+\newcommand{\modelsize}{\Large}
+\resizebox {\columnwidth} {!} {
+\begin{tikzpicture}
+    [
+    ProcessorNode/.style={rectangle, rounded corners=3, draw=cyan!50, fill=cyan!20, very thick, minimum height=3cm, minimum width=3cm},
+    CacheNode/.style={rectangle, rounded corners=3, draw=yellow!80, fill=yellow!50, very thick, minimum width=2cm, minimum height=2cm},
+    MemoryNode/.style={rectangle, rounded corners=3, draw=blue!50, fill=blue!20, very thick, minimum width=3cm, minimum height=3cm},    
+    FakeQRNode/.style={rectangle, rounded corners=3, draw=cyan!50, fill=Goldenrod, very thick, minimum size=1cm},
+    GNode/.style={circle,draw=blue!50, fill=blue!20, very thick, minimum size=1.2cm},
+    DNode/.style={circle,draw=red!50, fill=red!20, very thick, minimum size=1.2cm},
+    RWDNode/.style={ellipse, draw=green!70, fill=green!40, very thick, minimum height=0.5cm, minimum width = 1cm},
+	DualNode/.style={rectangle, draw=magenta!40, fill=magenta!40, very thick, minimum height=0.5cm, minimum width = 1.5cm},
+	MyArrow/.style={single arrow, fill=magenta!40, minimum width=10mm, minimum height=7.1mm,inner sep=0mm, single arrow head extend=1mm},
+	Arrow/.style={-{Triangle[length=3mm,width=5mm]},line width=2mm,gray},
+	PolicyArrow/.style={-{Triangle[length=3mm,width=5mm]},line width=2mm,JungleGreen},
+	mylabel/.style={text width=20em, text centered}]
+    		%\node[QRNode] (r_real) at (0, 0) {\large r};
+    		\node[ProcessorNode] (processor) at (0, 0) {\huge Processor};
+     	\node[CacheNode] (cache) at (5, 0) {\huge Cache};
+     	\node[MemoryNode, align=center] (cache) at (10, 0) { \huge Main \\ \huge Memory };
+
+
+    		%\draw [ultra thick] (, 0) -- (20, 0);
+\end{tikzpicture}
+}
+\end{figure}
+\end{minipage}
+\end{document}

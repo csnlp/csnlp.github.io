@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Computer Architecture,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Life-Cycle of An Instruction Instruction Fetch: the instruction is fetched from memory or an instruction cache.  Issue: the instruction is renamed.  Register Fetch: The instruction waits, if necessary">
+<meta name="keywords" content="Computer Architecture">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction to Out-of-Order Processors">
+<meta property="og:url" content="http://yoursite.com/2019/09/22/out-of-order-processor/index.html">
+<meta property="og:site_name" content="CSNLP学徒">
+<meta property="og:description" content="Life-Cycle of An Instruction Instruction Fetch: the instruction is fetched from memory or an instruction cache.  Issue: the instruction is renamed.  Register Fetch: The instruction waits, if necessary">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/09/22/out-of-order-processor/renaming_example.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/09/22/out-of-order-processor/renaming_source_1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/09/22/out-of-order-processor/renaming_source_2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/09/22/out-of-order-processor/renaming_implementation.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/09/22/out-of-order-processor/superscalar_control_logic.jpg">
+<meta property="og:updated_time" content="2019-11-03T05:29:07.718Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Introduction to Out-of-Order Processors">
+<meta name="twitter:description" content="Life-Cycle of An Instruction Instruction Fetch: the instruction is fetched from memory or an instruction cache.  Issue: the instruction is renamed.  Register Fetch: The instruction waits, if necessary">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/22/out-of-order-processor/renaming_example.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/22/out-of-order-processor/">
+
+
+
+
+
+  <title>Introduction to Out-of-Order Processors | CSNLP学徒</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CSNLP学徒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-github">
+          <a href="https://github.com/csnlp" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            github
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/out-of-order-processor/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="CSNLP Apprentice">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CSNLP学徒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Introduction to Out-of-Order Processors</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-22T07:23:37+08:00">
+                2019-09-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Life-Cycle-of-An-Instruction"><a href="#Life-Cycle-of-An-Instruction" class="headerlink" title="Life-Cycle of An Instruction"></a>Life-Cycle of An Instruction</h1><ol>
+<li><strong>Instruction Fetch</strong>: the instruction is fetched from memory or an instruction cache. </li>
+<li><strong>Issue</strong>: the instruction is renamed. </li>
+<li><strong>Register Fetch:</strong> The instruction waits, if necessary, in a resevation station until its source operands have valid status and a suitable functional unit is available. </li>
+<li><strong>Execution:</strong> when all source operands are ready and a suitable functional unit is available the execution begins. Different operations can have different latencies. </li>
+<li><strong>Write Back</strong>: when the assigned functional unit completes its execution, it writes the destination operand value to the designated value register. </li>
+<li><strong>Commitment:</strong> the value register that was previously assigned to the instruction’s destination architectural register can be freed for reuse by another instruction. <h3 id="Categories-of-Out-Of-Order"><a href="#Categories-of-Out-Of-Order" class="headerlink" title="Categories of Out-Of-Order"></a>Categories of Out-Of-Order</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Frontend</th>
+<th>Issue</th>
+<th>Writeback</th>
+<th>Commit</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I4</td>
+<td>IO</td>
+<td>IO</td>
+<td>IO</td>
+<td>IO</td>
+<td>..</td>
+</tr>
+<tr>
+<td>I2O2</td>
+<td>IO</td>
+<td>IO</td>
+<td>OOO</td>
+<td>OOO</td>
+<td>..</td>
+</tr>
+<tr>
+<td>I2OI</td>
+<td>IO</td>
+<td>IO</td>
+<td>OOO</td>
+<td>IO</td>
+<td>..</td>
+</tr>
+<tr>
+<td>IO3</td>
+<td>IO</td>
+<td>OOO</td>
+<td>OOO</td>
+<td>OOO</td>
+<td>..</td>
+</tr>
+<tr>
+<td>IO2I</td>
+<td>IO</td>
+<td>OOO</td>
+<td>OOO</td>
+<td>IO</td>
+<td>..</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="Motivation-of-OOO"><a href="#Motivation-of-OOO" class="headerlink" title="Motivation of OOO"></a>Motivation of OOO</h3><p>What causes independent instruction subgraph in a sequential program?</p>
+<p>Instruction level parallelism, i.e, multiple instructions can be executed in the same cycle when there is no data dependency. </p>
+<h3 id="I2O2-Processors"><a href="#I2O2-Processors" class="headerlink" title="I2O2 Processors"></a>I2O2 Processors</h3><h3 id="I2OI-Processors"><a href="#I2OI-Processors" class="headerlink" title="I2OI Processors"></a>I2OI Processors</h3><h3 id="IO3-Processors"><a href="#IO3-Processors" class="headerlink" title="IO3 Processors"></a>IO3 Processors</h3><h3 id="IO2I-Processors"><a href="#IO2I-Processors" class="headerlink" title="IO2I Processors"></a>IO2I Processors</h3><h1 id="Speculation-and-Register-Renaming"><a href="#Speculation-and-Register-Renaming" class="headerlink" title="Speculation and Register Renaming"></a>Speculation and Register Renaming</h1><h2 id="Speculation-and-Branches"><a href="#Speculation-and-Branches" class="headerlink" title="Speculation and Branches"></a>Speculation and Branches</h2><h3 id="The-Motivation-of-Branch-Prediction"><a href="#The-Motivation-of-Branch-Prediction" class="headerlink" title="The Motivation of Branch Prediction"></a>The Motivation of Branch Prediction</h3><p>Branch penalties limit performance of deeply pipelined processors. Modern branch predictors have high accuracy(&gt;95%) and can reduce branch penalties significantly. </p>
+<h3 id="Required-Support-of-Branch-Prediction"><a href="#Required-Support-of-Branch-Prediction" class="headerlink" title="Required Support of Branch Prediction"></a>Required Support of Branch Prediction</h3><ol>
+<li>Prediction structures: branch history tables, branch target buffers, etc. </li>
+<li>Mispredict recovery mechanisms: <ul>
+<li>In-order machines: kill instructions following branch in pipeline. </li>
+<li>Out-of-order machines: shadow registers and memory buffers for each speculated branch. </li>
+</ul>
+</li>
+</ol>
+<h3 id="Dynamic-Branch-Prediction-Learning-Based-on-Past-Behavior"><a href="#Dynamic-Branch-Prediction-Learning-Based-on-Past-Behavior" class="headerlink" title="Dynamic Branch Prediction: Learning Based on Past Behavior"></a>Dynamic Branch Prediction: Learning Based on Past Behavior</h3><ol>
+<li><strong>Temporal Correlation:</strong> the way a branch resolves may be a good predictor of the way it will resolve at the next execution. </li>
+<li><strong>Spatial Correlation:</strong> several branches may resolve in a highly correlated manner. </li>
+</ol>
+<h3 id="WAW-and-WAR-Name-Dependency"><a href="#WAW-and-WAR-Name-Dependency" class="headerlink" title="WAW and WAR Name Dependency"></a>WAW and WAR Name Dependency</h3><ol>
+<li>WAW and WAR are not true data dependencies. </li>
+<li>RAW is true data dependency because reader truely needs result of writer. </li>
+<li>WAW and WAR are name dependencies, which exist because we have limited number of names(register specifiers or memory addresses)</li>
+</ol>
+<h1 id="Register-Renaming"><a href="#Register-Renaming" class="headerlink" title="Register Renaming"></a>Register Renaming</h1><p><strong>Reference</strong>: <a href="https://www.d.umn.edu/~gshute/arch/register-renaming.xhtml" target="_blank" rel="noopener">https://www.d.umn.edu/~gshute/arch/register-renaming.xhtml</a><br>Register renaming is a form of pipeline that deal with data dependencies between instructions by <em>renaming their register operands</em>. An assembly language programmer or a compiler specifies these operands using architectural registers, which are registers that are explicit in the instruction set architecture. <strong>Renaming</strong> replaces architectural names by value names with a new value name for each instruction destination operand. This eliminates the name dependencies between instructions and automatically recongnized true dependencies. </p>
+<h2 id="A-Example"><a href="#A-Example" class="headerlink" title="A Example"></a>A Example</h2><p><img src="renaming_example.jpg" alt=""><br>Then a new instruction come in: sub.d $f2, $2, $6. </p>
+<h3 id="Step-1-Source-Operand"><a href="#Step-1-Source-Operand" class="headerlink" title="Step 1: Source Operand"></a>Step 1: Source Operand</h3><p>Replace each source operand by the most recent value name in the designated register column: to better illustrate the process, the values that one instruction depends on are shown in light green while the remaed operand are shown in light blue. </p>
+<ol>
+<li>First replace $f2 by the most <strong>recent</strong> value name in the $f2 column.<br><img src="renaming_source_1.jpg" alt=""></li>
+<li>Then replace $f6 by the most <strong>recent</strong> value name in the $f6 column.<br><img src="renaming_source_2.jpg" alt=""><h3 id="Step-2-Target-Operand"><a href="#Step-2-Target-Operand" class="headerlink" title="Step 2: Target Operand"></a>Step 2: Target Operand</h3>Replace the destination operand by a new name and place the new name in the designated register column.  </li>
+<li>Replace the $f2 destination operand by a new value name V7 and also put V7 into the column for $f2. </li>
+</ol>
+<h3 id="Benefits-Brought-By-Renaming"><a href="#Benefits-Brought-By-Renaming" class="headerlink" title="Benefits Brought By Renaming"></a>Benefits Brought By Renaming</h3><p>With the renaming strategy, WAR and WAW, not true data dependencies, can be eliminated. </p>
+<p><em>What problems exist with adding infinite number of registers to a computer instruction set architecture?</em><br>It takes up encoding space and encoding space is quite limited. </p>
+<h3 id="Hardware-Implementation-of-Renaming"><a href="#Hardware-Implementation-of-Renaming" class="headerlink" title="Hardware Implementation of Renaming"></a>Hardware Implementation of Renaming</h3><p><img src="renaming_implementation.jpg" alt=""></p>
+<ol>
+<li><strong>Instruction Fetch:</strong> fetch instructions from memory or an instruction cache. </li>
+<li><strong>Issue:</strong> rename instructions. </li>
+<li><strong>Reservation:</strong> holds renamed instructions until they are ready to be executed. </li>
+<li><strong>Execution:</strong> perform operations required for instructions. </li>
+<li><strong>Values:</strong> manages a numbered set of value registers. The register number are used by issue circuitry for renaming operands. The value registers can also named as <em>rename registers</em></li>
+<li><strong>Commit:</strong> free value register that are no longer needed. </li>
+</ol>
+<h3 id="Possible-ENhancements"><a href="#Possible-ENhancements" class="headerlink" title="Possible ENhancements"></a>Possible ENhancements</h3><ul>
+<li><strong>Speculative Execution:</strong> it involves predicting whether or not conditional branches will be taken and speculative issue of either the instruction at the branch target or the instruction following the branch, depending on the prediction. </li>
+<li><strong>Super-scalar Execution:</strong> it involves issuing multiple instruction in each cycle. </li>
+<li><strong>Multi-threaded Execution:</strong> </li>
+</ul>
+<h2 id="Register-Renaming-Two-Schemes"><a href="#Register-Renaming-Two-Schemes" class="headerlink" title="Register Renaming: Two Schemes"></a>Register Renaming: Two Schemes</h2><h3 id="Register-Renaming-with-Pointers-in-IQ-and-ROB"><a href="#Register-Renaming-with-Pointers-in-IQ-and-ROB" class="headerlink" title="Register Renaming with Pointers in IQ and ROB"></a>Register Renaming with Pointers in IQ and ROB</h3><h3 id="Register-Renaming-with-Values-in-IQ-and-ROB"><a href="#Register-Renaming-with-Values-in-IQ-and-ROB" class="headerlink" title="Register Renaming with Values in IQ and ROB"></a>Register Renaming with Values in IQ and ROB</h3><h2 id="Memory-Disambiguation"><a href="#Memory-Disambiguation" class="headerlink" title="Memory Disambiguation"></a>Memory Disambiguation</h2><p>Give a sequence of instructions: </p>
+<ol>
+<li><em>st R1, 0(R2)</em></li>
+<li><em>ld R3, 0(R4)</em></li>
+</ol>
+<h3 id="In-Order-Memory-Queue"><a href="#In-Order-Memory-Queue" class="headerlink" title="In-Order Memory Queue"></a>In-Order Memory Queue</h3><ol>
+<li>Execute all loads and stores in program order, which means load and store cannot leave IQ for execution until all previous loads and stores have completed execution. </li>
+</ol>
+<h3 id="Conservative-OOO-Load-Execution"><a href="#Conservative-OOO-Load-Execution" class="headerlink" title="Conservative OOO Load Execution"></a>Conservative OOO Load Execution</h3><ol>
+<li>Split execution of store instruction into two phases: address calculation and data write. </li>
+<li>Can execute load before store, if addresses know and R4 != R2. </li>
+<li>Each load address compared with addresses of all previous uncommitted stores</li>
+<li>Don’t execute load if any previous store address not known</li>
+</ol>
+<h3 id="Memory-Dependence-Prediction"><a href="#Memory-Dependence-Prediction" class="headerlink" title="Memory Dependence Prediction"></a>Memory Dependence Prediction</h3><ol>
+<li>Guess that R4 != R2 and execute load before store</li>
+<li>If later find that R4 == R2, squash load and all following instructions, but mark load instruction as store-wait. </li>
+<li>Subsequent executions of the same load instruction will wait for all previous stores to complete. </li>
+<li>Periodically clear store-wait bits. </li>
+</ol>
+<h1 id="VLIW-Very-Long-Instruction-Word-Processors"><a href="#VLIW-Very-Long-Instruction-Word-Processors" class="headerlink" title="VLIW: Very Long Instruction Word Processors"></a>VLIW: Very Long Instruction Word Processors</h1><p>一些DSP可能还在用，但是通用的处理器很少采用VLIW structure. </p>
+<h2 id="Limits-of-Out-of-Order-Design-Complexity"><a href="#Limits-of-Out-of-Order-Design-Complexity" class="headerlink" title="Limits of Out-of-Order Design Complexity"></a>Limits of Out-of-Order Design Complexity</h2><p>Firstly, give a figure to elaborate the superscalar control logic:<br><img src="superscalar_control_logic.jpg" alt=""><br>We can observe that:</p>
+<ol>
+<li>Each issued instruction must somehow check against $W*L$ instructions, i.e., growth in hardware in O(W<em>W</em>L)</li>
+<li>For in-order machines, L is related to pipeline latencies and check is done during issue. </li>
+<li>For out-of-order machines, L also includes time spent in IQ, SB and check is done by broadcasting tags to waiting instructions at completion. </li>
+<li>As W increases, larger instructions window is needed to find enough parallelism to keep machine busy  ==&gt; greater L. As you go wider, your pipeline needs to get deeper. </li>
+</ol>
+<p>All of these mean that out-of-order control logic grows faster than $W^2$, almost $W^3$. </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Computer-Architecture/" rel="tag"># Computer Architecture</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/21/superscalar2-and-exceptions/" rel="next" title="Superscalar 2 and Exceptions">
+                <i class="fa fa-chevron-left"></i> Superscalar 2 and Exceptions
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/22/ISA/" rel="prev" title="Fundamentals of Instruction Set Architecture">
+                Fundamentals of Instruction Set Architecture <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">CSNLP Apprentice</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Life-Cycle-of-An-Instruction"><span class="nav-number">1.</span> <span class="nav-text">Life-Cycle of An Instruction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Categories-of-Out-Of-Order"><span class="nav-number">1.0.1.</span> <span class="nav-text">Categories of Out-Of-Order</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation-of-OOO"><span class="nav-number">1.0.2.</span> <span class="nav-text">Motivation of OOO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I2O2-Processors"><span class="nav-number">1.0.3.</span> <span class="nav-text">I2O2 Processors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#I2OI-Processors"><span class="nav-number">1.0.4.</span> <span class="nav-text">I2OI Processors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO3-Processors"><span class="nav-number">1.0.5.</span> <span class="nav-text">IO3 Processors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO2I-Processors"><span class="nav-number">1.0.6.</span> <span class="nav-text">IO2I Processors</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Speculation-and-Register-Renaming"><span class="nav-number">2.</span> <span class="nav-text">Speculation and Register Renaming</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Speculation-and-Branches"><span class="nav-number">2.1.</span> <span class="nav-text">Speculation and Branches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Motivation-of-Branch-Prediction"><span class="nav-number">2.1.1.</span> <span class="nav-text">The Motivation of Branch Prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Required-Support-of-Branch-Prediction"><span class="nav-number">2.1.2.</span> <span class="nav-text">Required Support of Branch Prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-Branch-Prediction-Learning-Based-on-Past-Behavior"><span class="nav-number">2.1.3.</span> <span class="nav-text">Dynamic Branch Prediction: Learning Based on Past Behavior</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAW-and-WAR-Name-Dependency"><span class="nav-number">2.1.4.</span> <span class="nav-text">WAW and WAR Name Dependency</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Register-Renaming"><span class="nav-number">3.</span> <span class="nav-text">Register Renaming</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Example"><span class="nav-number">3.1.</span> <span class="nav-text">A Example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-1-Source-Operand"><span class="nav-number">3.1.1.</span> <span class="nav-text">Step 1: Source Operand</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-2-Target-Operand"><span class="nav-number">3.1.2.</span> <span class="nav-text">Step 2: Target Operand</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Benefits-Brought-By-Renaming"><span class="nav-number">3.1.3.</span> <span class="nav-text">Benefits Brought By Renaming</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hardware-Implementation-of-Renaming"><span class="nav-number">3.1.4.</span> <span class="nav-text">Hardware Implementation of Renaming</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Possible-ENhancements"><span class="nav-number">3.1.5.</span> <span class="nav-text">Possible ENhancements</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Register-Renaming-Two-Schemes"><span class="nav-number">3.2.</span> <span class="nav-text">Register Renaming: Two Schemes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Register-Renaming-with-Pointers-in-IQ-and-ROB"><span class="nav-number">3.2.1.</span> <span class="nav-text">Register Renaming with Pointers in IQ and ROB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Register-Renaming-with-Values-in-IQ-and-ROB"><span class="nav-number">3.2.2.</span> <span class="nav-text">Register Renaming with Values in IQ and ROB</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Disambiguation"><span class="nav-number">3.3.</span> <span class="nav-text">Memory Disambiguation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#In-Order-Memory-Queue"><span class="nav-number">3.3.1.</span> <span class="nav-text">In-Order Memory Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conservative-OOO-Load-Execution"><span class="nav-number">3.3.2.</span> <span class="nav-text">Conservative OOO Load Execution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-Dependence-Prediction"><span class="nav-number">3.3.3.</span> <span class="nav-text">Memory Dependence Prediction</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VLIW-Very-Long-Instruction-Word-Processors"><span class="nav-number">4.</span> <span class="nav-text">VLIW: Very Long Instruction Word Processors</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Limits-of-Out-of-Order-Design-Complexity"><span class="nav-number">4.1.</span> <span class="nav-text">Limits of Out-of-Order Design Complexity</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CSNLP Apprentice</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
