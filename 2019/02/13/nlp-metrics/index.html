@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="NLP, Metrics,">
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标 基于词重叠的指标(word overlap-based metrics)词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,用$">
+<meta name="keywords" content="NLP, Metrics">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NLP对话任务常用指标及其实现代码">
 <meta property="og:url" content="http://yoursite.com/2019/02/13/nlp-metrics/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
 <meta property="og:description" content="本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标 基于词重叠的指标(word overlap-based metrics)词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,用$">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-08T08:20:50.811Z">
+<meta property="og:updated_time" content="2020-01-30T06:36:29.476Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP对话任务常用指标及其实现代码">
 <meta name="twitter:description" content="本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标 基于词重叠的指标(word overlap-based metrics)词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,用$">
@@ -302,6 +303,39 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/NLP-Metrics/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP Metrics</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -349,6 +383,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/NLP-Metrics/" rel="tag"># NLP, Metrics</a>
+          
+        </div>
+      
 
       
       
@@ -358,8 +398,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/13/intent-recognition/" rel="next" title="Task-oriented Dialogue Systems(任务型对话系统)">
-                <i class="fa fa-chevron-left"></i> Task-oriented Dialogue Systems(任务型对话系统)
+              <a href="/2019/01/31/CNN-NLP/" rel="next" title="卷积神经网络在自然语言处理中的应用">
+                <i class="fa fa-chevron-left"></i> 卷积神经网络在自然语言处理中的应用
               </a>
             
           </div>
@@ -368,8 +408,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/17/test/" rel="prev" title="test">
-                test <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/01/Transformer-implement/" rel="prev" title="跟着教程实习Transformer代码">
+                跟着教程实习Transformer代码 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -447,7 +487,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -458,7 +498,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -469,7 +509,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
