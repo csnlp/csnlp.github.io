@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Parallel Programming and MultiprocessorsSynchronizationThe need for synchronization arises wheneven there are concurrent processes in a system.There are two kinds of scenorios:   Producer-Consumer: a">
+<meta name="description" content="Parallel Programming and Multiprocessors Synchronization The need for synchronization arises wheneven there are concurrent processes in a system. There are two kinds of scenorios:   Producer-Consumer:">
 <meta name="keywords" content="Computer Architecture">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Thread Level Parallelism">
 <meta property="og:url" content="http://yoursite.com/2019/10/23/parallel-programming/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Parallel Programming and MultiprocessorsSynchronizationThe need for synchronization arises wheneven there are concurrent processes in a system.There are two kinds of scenorios:   Producer-Consumer: a">
+<meta property="og:description" content="Parallel Programming and Multiprocessors Synchronization The need for synchronization arises wheneven there are concurrent processes in a system. There are two kinds of scenorios:   Producer-Consumer:">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/10/23/parallel-programming/dekker_mutual_exclusion.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/10/23/parallel-programming/cache_coherence.jpg">
@@ -107,7 +107,7 @@
 <meta property="og:updated_time" content="2020-01-30T06:47:42.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Thread Level Parallelism">
-<meta name="twitter:description" content="Parallel Programming and MultiprocessorsSynchronizationThe need for synchronization arises wheneven there are concurrent processes in a system.There are two kinds of scenorios:   Producer-Consumer: a">
+<meta name="twitter:description" content="Parallel Programming and Multiprocessors Synchronization The need for synchronization arises wheneven there are concurrent processes in a system. There are two kinds of scenorios:   Producer-Consumer:">
 <meta name="twitter:image" content="http://yoursite.com/2019/10/23/parallel-programming/dekker_mutual_exclusion.jpg">
 
 
@@ -381,240 +381,339 @@
       
 
       
-        <h1 id="Parallel-Programming-and-Multiprocessors"><a href="#Parallel-Programming-and-Multiprocessors" class="headerlink" title="Parallel Programming and Multiprocessors"></a>Parallel Programming and Multiprocessors</h1><h2 id="Synchronization"><a href="#Synchronization" class="headerlink" title="Synchronization"></a>Synchronization</h2><p>The need for synchronization arises wheneven there are concurrent processes in a system.<br>There are two kinds of scenorios: </p>
+        <h1>Parallel Programming and Multiprocessors</h1>
+<h2>Synchronization</h2>
+<p>The need for synchronization arises wheneven there are concurrent processes in a system.
+There are two kinds of scenorios:</p>
 <ol>
-<li><p><strong>Producer-Consumer</strong>: a consumer process must wait until the producer process has produced data. </p>
+<li>
+<p><strong>Producer-Consumer</strong>: a consumer process must wait until the producer process has produced data.</p>
 </li>
-<li><p><strong>Mutual Exclusion</strong>: ensure that only one process uses a resouce at a given time. </p>
+<li>
+<p><strong>Mutual Exclusion</strong>: ensure that only one process uses a resouce at a given time.</p>
 </li>
 </ol>
-<h2 id="Sequential-Consistency"><a href="#Sequential-Consistency" class="headerlink" title="Sequential Consistency"></a>Sequential Consistency</h2><p>A system is sequentially consistent if the result of any execution is the same as if the operations of all the processors were executed in some sequential order and the operation of each individual proceessor appera in the order specified by the program. </p>
+<h2>Sequential Consistency</h2>
+<p>A system is sequentially consistent if the result of any execution is the same as if the operations of all the processors were executed in some sequential order and the operation of each individual proceessor appera in the order specified by the program.</p>
 <p>For instance: A: 1, 2, 3, 4  B: 5, 6, 7, 8</p>
-<p>Then, {1, 5, 2, 3, 4, 6, 7, 8} is valid, while {1, 2, 6, 3, 4, 5, 7, 8} is invalid. </p>
-<p>Sequential consistency = arbitrary order preserving interleaving of memory references of sequential programs.  </p>
-<h2 id="Locks-and-Semaphores"><a href="#Locks-and-Semaphores" class="headerlink" title="Locks and Semaphores"></a>Locks and Semaphores</h2><p>Semaphores(mutual exclusion) can be implemented using ordinary Load and Store instructions in the Sequential Consistency memory model. However, protocols for mutual exclusion are difficult to design…</p>
-<h2 id="Atomic-Operations"><a href="#Atomic-Operations" class="headerlink" title="Atomic Operations"></a>Atomic Operations</h2><h2 id="Sequential-Consistency-and-Memory-Fences"><a href="#Sequential-Consistency-and-Memory-Fences" class="headerlink" title="Sequential Consistency and Memory Fences"></a>Sequential Consistency and Memory Fences</h2><p>Implementation of sequential consistency is complicated by two issues: </p>
+<p>Then, {1, 5, 2, 3, 4, 6, 7, 8} is valid, while {1, 2, 6, 3, 4, 5, 7, 8} is invalid.</p>
+<p>Sequential consistency = arbitrary order preserving interleaving of memory references of sequential programs.</p>
+<h2>Locks and Semaphores</h2>
+<p>Semaphores(mutual exclusion) can be implemented using ordinary Load and Store instructions in the Sequential Consistency memory model. However, protocols for mutual exclusion are difficult to design...</p>
+<h2>Atomic Operations</h2>
+<h2>Sequential Consistency and Memory Fences</h2>
+<p>Implementation of sequential consistency is complicated by two issues:</p>
 <ol>
-<li>Out-of-order execution capability: </li>
-<li>Cache: cache can prevent the effect of a store from being seen by other processors. </li>
+<li>Out-of-order execution capability:</li>
+<li>Cache: cache can prevent the effect of a store from being seen by other processors.</li>
 </ol>
-<h2 id="Dekker’s-Algorithm"><a href="#Dekker’s-Algorithm" class="headerlink" title="Dekker’s Algorithm"></a>Dekker’s Algorithm</h2><h3 id="Mutual-Exclusion-Using-Load-Store"><a href="#Mutual-Exclusion-Using-Load-Store" class="headerlink" title="Mutual Exclusion Using Load/Store"></a>Mutual Exclusion Using Load/Store</h3><p>A protocol based on two shared variables c1 and c2<br>How to implement mutual exclusion without Load/Store?</p>
-<h3 id="A-Protocol-for-Mutual-Exclusion"><a href="#A-Protocol-for-Mutual-Exclusion" class="headerlink" title="A Protocol for Mutual Exclusion"></a>A Protocol for Mutual Exclusion</h3><p>A protocol on 3 shared variable c1, c2 and turn. Intially, both c1 and c2 are 0. Turn variable is shared between process 1 and process 2.<br><img src="dekker_mutual_exclusion.jpg" alt=""></p>
+<h2>Dekker's Algorithm</h2>
+<h3>Mutual Exclusion Using Load/Store</h3>
+<p>A protocol based on two shared variables c1 and c2
+How to implement mutual exclusion without Load/Store?</p>
+<h3>A Protocol for Mutual Exclusion</h3>
+<p>A protocol on 3 shared variable c1, c2 and turn. Intially, both c1 and c2 are 0. Turn variable is shared between process 1 and process 2.
+<img src="dekker_mutual_exclusion.jpg" alt=""></p>
 <ul>
-<li>turn == i ensures that only process i can wait. </li>
-<li>Variable c1 and c2 ensure mutual exclusion solutioin for n process was given by Dijkstra and it quite tricky. </li>
+<li>turn == i ensures that only process i can wait.</li>
+<li>Variable c1 and c2 ensure mutual exclusion solutioin for n process was given by Dijkstra and it quite tricky.</li>
 </ul>
-<p>Given a bakery issue: the bakery had several cashiers, but if more than one person approached a single cashier at the same time, that cashier would try to talk to all of them at once and become confused: </p>
-<p>Lamport’s Bakery Algorithm: people choose numbers when they enter the bakery, and then get served according to their number ordering. To choose a number, a customer asks for the number of everyone around her and choose a number higher than all the others. </p>
-<p>Dijkstra’s algorithm, while correct, depends on shared memory accesses being atomic, which means one processor reading when another is writing will be made to wait, rather that returning a possibly garbled value. In a sense, it constructs a high-level solution out of low-level mutual exclusion already implemented by the hardware. </p>
-<p>Lamport’s remarkably elegant and intuitive “Lamport’s Bakery Algorithm” doesn’t do that. His solution arranges contending processes in an implicit queue according to their arrival order, much like a wait-queue in a Bakery. Yet it doesn’t matter if a processor reading data that is being updated by another processor gets grabage. </p>
-<h2 id="The-Difference-between-Deadlock-and-LiveLock"><a href="#The-Difference-between-Deadlock-and-LiveLock" class="headerlink" title="The Difference between Deadlock and LiveLock"></a>The Difference between Deadlock and LiveLock</h2><ul>
-<li>A deadlock is a state in which each member of a group of actions is waiting for some other member to release a lock. </li>
-<li>A livelock is similar to a deadlock, except that the states of the processes involved in the livelock constantly change with regard to one another, no progressing. Livelock is a special case of resource starvation. A thread often acts in response to the action of another thread. Assuming that the other thread’s action is also a response to the action of another thread, the livelock may result. Give an instance, two people meets in a narrow corridor, and each tries to be polite by moving side to side without making any progress since they both repeatly move the same way at the same time. </li>
+<p>Given a bakery issue: the bakery had several cashiers, but if more than one person approached a single cashier at the same time, that cashier would try to talk to all of them at once and become confused:</p>
+<p>Lamport's Bakery Algorithm: people choose numbers when they enter the bakery, and then get served according to their number ordering. To choose a number, a customer asks for the number of everyone around her and choose a number higher than all the others.</p>
+<p>Dijkstra's algorithm, while correct, depends on shared memory accesses being atomic, which means one processor reading when another is writing will be made to wait, rather that returning a possibly garbled value. In a sense, it constructs a high-level solution out of low-level mutual exclusion already implemented by the hardware.</p>
+<p>Lamport's remarkably elegant and intuitive &quot;Lamport's Bakery Algorithm&quot; doesn't do that. His solution arranges contending processes in an implicit queue according to their arrival order, much like a wait-queue in a Bakery. Yet it doesn't matter if a processor reading data that is being updated by another processor gets grabage.</p>
+<h2>The Difference between Deadlock and LiveLock</h2>
+<ul>
+<li>A deadlock is a state in which each member of a group of actions is waiting for some other member to release a lock.</li>
+<li>A livelock is similar to a deadlock, except that the states of the processes involved in the livelock constantly change with regard to one another, no progressing. Livelock is a special case of resource starvation. A thread often acts in response to the action of another thread. Assuming that the other thread's action is also a response to the action of another thread, the livelock may result. Give an instance, two people meets in a narrow corridor, and each tries to be polite by moving side to side without making any progress since they both repeatly move the same way at the same time.</li>
 </ul>
-<p>Though neither deadlock nor livelock make any progress, they are different. For livelock, the threads are not blocked, they are simply too busy responding to each other to resume work. They’re blocking each other.  </p>
-<h1 id="Multiprocessors"><a href="#Multiprocessors" class="headerlink" title="Multiprocessors"></a>Multiprocessors</h1><h2 id="Bus-Implementation"><a href="#Bus-Implementation" class="headerlink" title="Bus Implementation"></a>Bus Implementation</h2><h2 id="Cache-Coherence"><a href="#Cache-Coherence" class="headerlink" title="Cache Coherence"></a>Cache Coherence</h2><p>Each CPU have their own separate cache.<br>Suppose that CPU-1 updates A to 200. There two kinds of cache write strategy: </p>
+<p>Though neither deadlock nor livelock make any progress, they are different. For livelock, the threads are not blocked, they are simply too busy responding to each other to resume work. They're blocking each other.</p>
+<h1>Multiprocessors</h1>
+<h2>Bus Implementation</h2>
+<h2>Cache Coherence</h2>
+<p>Each CPU have their own separate cache.
+Suppose that CPU-1 updates A to 200. There two kinds of cache write strategy:</p>
 <ul>
 <li>Write-back: both memory and cache-2 have stale(outdated) values.</li>
-<li>Write-through: cache-2 has a stale calue.<br>Give a simple figure to better illustrate this:<br><img src="cache_coherence.jpg" alt=""></li>
+<li>Write-through: cache-2 has a stale calue.
+Give a simple figure to better illustrate this:
+<img src="cache_coherence.jpg" alt=""></li>
 </ul>
-<h3 id="Cache-Coherence-VS-Memory-Consistency"><a href="#Cache-Coherence-VS-Memory-Consistency" class="headerlink" title="Cache Coherence VS. Memory Consistency"></a>Cache Coherence VS. Memory Consistency</h3><ol>
-<li>A cache coherence protocol ensures that all writes by one processor are eventually visible to other processors, for one memory address: all processors see the same view of memory at the same time. </li>
-<li>A memory consistency model gives the rules on when a write by one processor can be observed by a read on another, across different addresses. </li>
-<li>A cache coherence protocol is not enough to ensure sequential consistency, but if sequentially consistent, then caches must be coherent. </li>
-<li>Combination of cache coherence protocol plus processor memory reorder buffer implements a given machine’s memory consistency model. </li>
+<h3>Cache Coherence VS. Memory Consistency</h3>
+<ol>
+<li>A cache coherence protocol ensures that all writes by one processor are eventually visible to other processors, for one memory address: all processors see the same view of memory at the same time.</li>
+<li>A memory consistency model gives the rules on when a write by one processor can be observed by a read on another, across different addresses.</li>
+<li>A cache coherence protocol is not enough to ensure sequential consistency, but if sequentially consistent, then caches must be coherent.</li>
+<li>Combination of cache coherence protocol plus processor memory reorder buffer implements a given machine's memory consistency model.</li>
 </ol>
-<h2 id="Cache-Coherence-Protocols"><a href="#Cache-Coherence-Protocols" class="headerlink" title="Cache Coherence Protocols"></a>Cache Coherence Protocols</h2><h3 id="Snoopy-Cache"><a href="#Snoopy-Cache" class="headerlink" title="Snoopy Cache"></a>Snoopy Cache</h3><p>The idea is that have cache watch(snoop upon) DMA transfers, and then <em>do the right thing</em>. </p>
-<p>Snoopy cache tags are dual-ported:<br><img src="snoopy_cache.jpg" alt=""></p>
-<h2 id="Shared-Memory-Multiprocessor"><a href="#Shared-Memory-Multiprocessor" class="headerlink" title="Shared Memory Multiprocessor"></a>Shared Memory Multiprocessor</h2><p><img src="shared_memory_multiprocessor.jpg" alt=""></p>
-<p>There are two types of strategies: </p>
+<h2>Cache Coherence Protocols</h2>
+<h3>Snoopy Cache</h3>
+<p>The idea is that have cache watch(snoop upon) DMA transfers, and then <em>do the right thing</em>.</p>
+<p>Snoopy cache tags are dual-ported:
+<img src="snoopy_cache.jpg" alt=""></p>
+<h2>Shared Memory Multiprocessor</h2>
+<p><img src="shared_memory_multiprocessor.jpg" alt=""></p>
+<p>There are two types of strategies:</p>
 <ol>
 <li><strong>Write Update(Broadcast):</strong> writes are broadcast and update all other cache copies</li>
-<li><strong>Write Invalidate:</strong> writes invalidate all other cache copies. </li>
+<li><strong>Write Invalidate:</strong> writes invalidate all other cache copies.</li>
 </ol>
-<h2 id="Write-Update-Broadcast-Protocols"><a href="#Write-Update-Broadcast-Protocols" class="headerlink" title="Write Update (Broadcast) Protocols"></a>Write Update (Broadcast) Protocols</h2><ol>
-<li>Write miss: broadcast on bus, other processors update copies. </li>
-<li>Read miss: memory is always up to date. </li>
+<h2>Write Update (Broadcast) Protocols</h2>
+<ol>
+<li>Write miss: broadcast on bus, other processors update copies.</li>
+<li>Read miss: memory is always up to date.</li>
 </ol>
-<h2 id="Write-Invalidate-Protocols"><a href="#Write-Invalidate-Protocols" class="headerlink" title="Write Invalidate Protocols"></a>Write Invalidate Protocols</h2><ol>
-<li>Write miss: the address is invalidated in all other caches before the write is performed. </li>
-<li>Read miss: if a dirty is found in some cache, a write-back is performed before the memory is read. This means if processor A want to read address M, however, Processor B has update the value in its own cache but not on main memory. In this case, Processor A has to wait Processor B to write back its updated value from cache to main memory. </li>
+<h2>Write Invalidate Protocols</h2>
+<ol>
+<li>Write miss: the address is invalidated in all other caches before the write is performed.</li>
+<li>Read miss: if a dirty is found in some cache, a write-back is performed before the memory is read. This means if processor A want to read address M, however, Processor B has update the value in its own cache but not on main memory. In this case, Processor A has to wait Processor B to write back its updated value from cache to main memory.</li>
 </ol>
-<h2 id="Basic-MSI-for-Invalidate-Protocol"><a href="#Basic-MSI-for-Invalidate-Protocol" class="headerlink" title="Basic MSI for Invalidate Protocol"></a>Basic MSI for Invalidate Protocol</h2><ol>
-<li><strong>M:</strong> modified, the data in the cache is has been modified compared with that in memory. </li>
-<li><strong>S:</strong> shared, you have read-only copy of data and the other processors whose caches have also read-only copies. </li>
+<h2>Basic MSI for Invalidate Protocol</h2>
+<ol>
+<li><strong>M:</strong> modified, the data in the cache is has been modified compared with that in memory.</li>
+<li><strong>S:</strong> shared, you have read-only copy of data and the other processors whose caches have also read-only copies.</li>
 <li><strong>I:</strong> invalid, the data in the cache is invalid.</li>
 </ol>
-<p><img src="msi_protocol.jpg" alt=""><br>If a line is in the M state then no other cache can have a copy of the line. </p>
-<h2 id="MSEI-An-Enhanced-MSI-Protocol"><a href="#MSEI-An-Enhanced-MSI-Protocol" class="headerlink" title="MSEI: An Enhanced MSI Protocol"></a>MSEI: An Enhanced MSI Protocol</h2><p>It adds an <em>exclusive</em> state. It separated the <em>modified state</em> into <em>modified state</em>(modified exclusive) and <em>exclusive state</em>(exclusive but unmodified)</p>
-<h1 id="Multiprocessor-Interconnect"><a href="#Multiprocessor-Interconnect" class="headerlink" title="Multiprocessor Interconnect"></a>Multiprocessor Interconnect</h1><h2 id="Introduction-to-Interconnection-Networks"><a href="#Introduction-to-Interconnection-Networks" class="headerlink" title="Introduction to Interconnection Networks"></a>Introduction to Interconnection Networks</h2><h2 id="Network-Performance"><a href="#Network-Performance" class="headerlink" title="Network Performance"></a>Network Performance</h2><ol>
-<li>Bandwidth: the rate of daa that can be transmitted over the network(network link) in a given time. </li>
-<li>Latency: the time taken for a message to be sender to receiver. </li>
-</ol>
-<p>Actually, bandwidth can affect latency since increase in bandwidth can reduce congestion and messages take fewer flits and phlits.<br>Besides, latency can affect bandwidth, round trip communication can be limmited by latency. Round trip flow-control can be limited by latency. </p>
-<h3 id="Anatomy-of-Message-Latency"><a href="#Anatomy-of-Message-Latency" class="headerlink" title="Anatomy of Message Latency"></a>Anatomy of Message Latency</h3><p>$$T = T_{head} + L/b$$, </p>
-<p>where $T_{head}$ is head phit latency, includes $t_C$ and $t_R$, hop count, and contention. </p>
-<h2 id="Routing-and-Flow-Control"><a href="#Routing-and-Flow-Control" class="headerlink" title="Routing and Flow Control"></a>Routing and Flow Control</h2><p>There are two types of routing strategies: </p>
+<p><img src="msi_protocol.jpg" alt="">
+If a line is in the M state then no other cache can have a copy of the line.</p>
+<h2>MSEI: An Enhanced MSI Protocol</h2>
+<p>It adds an <em>exclusive</em> state. It separated the <em>modified state</em> into <em>modified state</em>(modified exclusive) and <em>exclusive state</em>(exclusive but unmodified)</p>
+<h1>Multiprocessor Interconnect</h1>
+<h2>Introduction to Interconnection Networks</h2>
+<h2>Network Performance</h2>
 <ol>
-<li>Oblivious: routing path is independent of state of network. </li>
-<li>Adaptive: routing path depends on state of network. </li>
+<li>Bandwidth: the rate of daa that can be transmitted over the network(network link) in a given time.</li>
+<li>Latency: the time taken for a message to be sender to receiver.</li>
+</ol>
+<p>Actually, bandwidth can affect latency since increase in bandwidth can reduce congestion and messages take fewer flits and phlits.
+Besides, latency can affect bandwidth, round trip communication can be limmited by latency. Round trip flow-control can be limited by latency.</p>
+<h3>Anatomy of Message Latency</h3>
+<p>$$T = T_{head} + L/b$$,</p>
+<p>where $T_{head}$ is head phit latency, includes $t_C$ and $t_R$, hop count, and contention.</p>
+<h2>Routing and Flow Control</h2>
+<p>There are two types of routing strategies:</p>
+<ol>
+<li>Oblivious: routing path is independent of state of network.</li>
+<li>Adaptive: routing path depends on state of network.</li>
 </ol>
 <p><strong>Flow Control</strong></p>
 <ol>
-<li>Local(link or hop-based) flow control. </li>
+<li>Local(link or hop-based) flow control.</li>
 <li>End-to-end flow control(long distance)</li>
 </ol>
-<h1 id="Directory-Protocol"><a href="#Directory-Protocol" class="headerlink" title="Directory Protocol"></a>Directory Protocol</h1><h2 id="Directory-Coherence-Motivation"><a href="#Directory-Coherence-Motivation" class="headerlink" title="Directory Coherence Motivation"></a>Directory Coherence Motivation</h2><ol>
-<li><p>Snoopy protocols requires every cache to broadcast, which faces lots of challenges: </p>
+<h1>Directory Protocol</h1>
+<h2>Directory Coherence Motivation</h2>
+<ol>
+<li>
+<p>Snoopy protocols requires every cache to broadcast, which faces lots of challenges:</p>
 <ul>
 <li>Requires large bus bandwidht, O(N)</li>
 <li>Requires large cache snooping bandwidth, O(N^2)</li>
 </ul>
 </li>
-<li><p>Directory protocols enable further scaling: </p>
+<li>
+<p>Directory protocols enable further scaling:</p>
 <ul>
-<li>Directory can track all caches holding a memory blocks and use point to point message to maintain coherence. </li>
-<li>Communication done via scalable point to point interconnet.<br><img src="directory_cache_coherence.jpg" alt=""></li>
+<li>Directory can track all caches holding a memory blocks and use point to point message to maintain coherence.</li>
+<li>Communication done via scalable point to point interconnet.
+<img src="directory_cache_coherence.jpg" alt=""></li>
 </ul>
 </li>
 </ol>
-<h2 id="Implementation-of-Directory"><a href="#Implementation-of-Directory" class="headerlink" title="Implementation of Directory"></a>Implementation of Directory</h2><h2 id="Performance-of-Symmetric-Shared-Memory-Multiprocessors"><a href="#Performance-of-Symmetric-Shared-Memory-Multiprocessors" class="headerlink" title="Performance of Symmetric Shared-Memory Multiprocessors"></a>Performance of Symmetric Shared-Memory Multiprocessors</h2><p>Cache performance is combination of: </p>
+<h2>Implementation of Directory</h2>
+<h2>Performance of Symmetric Shared-Memory Multiprocessors</h2>
+<p>Cache performance is combination of:</p>
 <ol>
 <li>Uniprocessor cache miss traffic</li>
-<li>Traffic caused by communication. </li>
+<li>Traffic caused by communication.</li>
 </ol>
-<h2 id="Coherency-Misses"><a href="#Coherency-Misses" class="headerlink" title="Coherency Misses"></a>Coherency Misses</h2><ol>
-<li><p><strong>True sharing misses:</strong> this type of miss arises from the communication of data through the cache coherence mechanism</p>
+<h2>Coherency Misses</h2>
+<ol>
+<li>
+<p><strong>True sharing misses:</strong> this type of miss arises from the communication of data through the cache coherence mechanism</p>
 <ul>
-<li>Invalidates due to 1st write to shared block. </li>
-<li>Reads by another CPU of modified block in different cache. </li>
-<li>Miss would occur if block size were 1 word. </li>
+<li>Invalidates due to 1st write to shared block.</li>
+<li>Reads by another CPU of modified block in different cache.</li>
+<li>Miss would occur if block size were 1 word.</li>
 </ul>
 </li>
-<li><p><strong>False sharing misses:</strong> when a block is invalidated because some word in the blcok, other than the one being read, is writen ito. </p>
+<li>
+<p><strong>False sharing misses:</strong> when a block is invalidated because some word in the blcok, other than the one being read, is writen ito.</p>
 <ul>
-<li>invalidation does not cause a new value to be communicated, but only causes an extra cache miss. </li>
-<li>Block is shared, but no word in block is actually shared miss would occur if block size were 1 word. </li>
+<li>invalidation does not cause a new value to be communicated, but only causes an extra cache miss.</li>
+<li>Block is shared, but no word in block is actually shared miss would occur if block size were 1 word.</li>
 </ul>
 </li>
 </ol>
-<h2 id="Deadlock"><a href="#Deadlock" class="headerlink" title="Deadlock"></a>Deadlock</h2><p>Deadlock can occur if cycle possible in “Waits-for” graph. </p>
+<h2>Deadlock</h2>
+<p>Deadlock can occur if cycle possible in &quot;Waits-for&quot; graph.</p>
 <ul>
 <li>Dead avoidance: protocol designed to never deadlock, which is quite expensive.</li>
-<li>Deadlock recovery: allow deadlock to occur and then resolve deadlock usually through use of more buffering. </li>
+<li>Deadlock recovery: allow deadlock to occur and then resolve deadlock usually through use of more buffering.</li>
 </ul>
-<h2 id="False-Sharing"><a href="#False-Sharing" class="headerlink" title="False Sharing"></a>False Sharing</h2><h3 id="Definition-of-True-Sharing-Miss-and-False-Sharing-Misses"><a href="#Definition-of-True-Sharing-Miss-and-False-Sharing-Misses" class="headerlink" title="Definition of True Sharing Miss and False Sharing Misses"></a>Definition of True Sharing Miss and False Sharing Misses</h3><p>The misses that arise from interprocessor communication, which are often called <em>coherence misses</em>, can be broken into two separate sources: </p>
+<h2>False Sharing</h2>
+<h3>Definition of True Sharing Miss and False Sharing Misses</h3>
+<p>The misses that arise from interprocessor communication, which are often called <em>coherence misses</em>, can be broken into two separate sources:</p>
 <ol>
-<li><strong>True sharing misses:</strong> it arises from the communication of data through the cache coherence mechanism. </li>
-<li><strong>False sharing misses:</strong> it arises from the use of invalidation-based coherence algorithm with a single valid bit per cache block. False sharing occurs when a block is invalidated because some word in the block, other than the one being read, is writen to. </li>
+<li><strong>True sharing misses:</strong> it arises from the communication of data through the cache coherence mechanism.</li>
+<li><strong>False sharing misses:</strong> it arises from the use of invalidation-based coherence algorithm with a single valid bit per cache block. False sharing occurs when a block is invalidated because some word in the block, other than the one being read, is writen to.</li>
 </ol>
-<h3 id="Some-experiments-given-by-H-amp-P-5"><a href="#Some-experiments-given-by-H-amp-P-5" class="headerlink" title="Some experiments given by H&amp;P-5."></a>Some experiments given by H&amp;P-5.</h3><p><img src="cachesize_sharing.jpg" alt=""><br>We can conclude that: </p>
+<h3>Some experiments given by H&amp;P-5.</h3>
+<p><img src="cachesize_sharing.jpg" alt="">
+We can conclude that:</p>
 <ol>
-<li>The misses caused by true sharing and false sharing are almost unchanged with the cache size increasing from 1MB to 8MB. </li>
-<li>The misses caused by (Capacity, Conflict, Compulsory) decrease. </li>
+<li>The misses caused by true sharing and false sharing are almost unchanged with the cache size increasing from 1MB to 8MB.</li>
+<li>The misses caused by (Capacity, Conflict, Compulsory) decrease.</li>
 </ol>
-<p><img src="processor_no_sharing.jpg" alt=""><br>We can observe that: </p>
+<p><img src="processor_no_sharing.jpg" alt="">
+We can observe that:</p>
 <ol>
-<li>With the increase of number of processors, true sharing and false sharing misses both increase. </li>
+<li>With the increase of number of processors, true sharing and false sharing misses both increase.</li>
 </ol>
-<h1 id="Directory-Coherence-Protocols"><a href="#Directory-Coherence-Protocols" class="headerlink" title="Directory Coherence Protocols"></a>Directory Coherence Protocols</h1><h2 id="Snooping-Coherence-VS-Directory-Coherence-From-slides-of-Edinburgh-http-www-inf-ed-ac-uk-teaching-courses-pa-Notes-lecture06-directory-pdf"><a href="#Snooping-Coherence-VS-Directory-Coherence-From-slides-of-Edinburgh-http-www-inf-ed-ac-uk-teaching-courses-pa-Notes-lecture06-directory-pdf" class="headerlink" title="Snooping Coherence VS Directory Coherence(From slides of Edinburgh: http://www.inf.ed.ac.uk/teaching/courses/pa/Notes/lecture06-directory.pdf)"></a>Snooping Coherence VS Directory Coherence(From slides of Edinburgh: <a href="http://www.inf.ed.ac.uk/teaching/courses/pa/Notes/lecture06-directory.pdf" target="_blank" rel="noopener">http://www.inf.ed.ac.uk/teaching/courses/pa/Notes/lecture06-directory.pdf</a>)</h2><p><strong>Snooping Coherence:</strong></p>
+<h1>Directory Coherence Protocols</h1>
+<h2>Snooping Coherence VS Directory Coherence(From slides of Edinburgh: http://www.inf.ed.ac.uk/teaching/courses/pa/Notes/lecture06-directory.pdf)</h2>
+<p><strong>Snooping Coherence:</strong></p>
 <ol>
-<li>Global state of a memory line is the collection of its state in all caches, and there is no summary state anywhere. </li>
-<li>All cache controllers monitor all other caches’ activities and maintain the state of their lines. </li>
-<li>Requires a <strong>Broadcast</strong> shared medium (e.g., bus or ring) that also maintains a total order of all transactions. </li>
-<li>Bus acts as a serialization point to provide ordering. </li>
+<li>Global state of a memory line is the collection of its state in all caches, and there is no summary state anywhere.</li>
+<li>All cache controllers monitor all other caches' activities and maintain the state of their lines.</li>
+<li>Requires a <strong>Broadcast</strong> shared medium (e.g., bus or ring) that also maintains a total order of all transactions.</li>
+<li>Bus acts as a serialization point to provide ordering.</li>
 </ol>
 <p><strong>Directory Coherence:</strong></p>
 <ol>
-<li>Global state of a memory line is the collection of its state in all caches, but there is a summary state at the directory. </li>
-<li>Cache controllers interact only with directory rather than observe all activatiy. </li>
-<li>Can be implemented on scalable networks, where there is no total order and no simple broadcast, but only one-to-one communication. </li>
-<li>Directory acts as a serialization point to provide ordering. </li>
+<li>Global state of a memory line is the collection of its state in all caches, but there is a summary state at the directory.</li>
+<li>Cache controllers interact only with directory rather than observe all activatiy.</li>
+<li>Can be implemented on scalable networks, where there is no total order and no simple broadcast, but only one-to-one communication.</li>
+<li>Directory acts as a serialization point to provide ordering.</li>
 </ol>
-<h2 id="How-to-Construct-A-Directory-Directory-Structure"><a href="#How-to-Construct-A-Directory-Directory-Structure" class="headerlink" title="How to Construct A Directory? Directory Structure"></a>How to Construct A Directory? Directory Structure</h2><h3 id="Directory-Information"><a href="#Directory-Information" class="headerlink" title="Directory Information"></a>Directory Information</h3><ol>
-<li>Line state bits<ul>
-<li><em>Shared</em>: one or more nodes have the block cached, and the value in memory is up to date as well as in all the caches. </li>
-<li><em>Uncached</em>: no node has a copy of the cache block. </li>
-<li><em>Modified</em>: exactly one node has a ppoy of the cache block, and it has writen the blcok, so the memory copy is out of date. The processor is called the owner of the block. </li>
+<h2>How to Construct A Directory? Directory Structure</h2>
+<h3>Directory Information</h3>
+<ol>
+<li>Line state bits
+<ul>
+<li><em>Shared</em>: one or more nodes have the block cached, and the value in memory is up to date as well as in all the caches.</li>
+<li><em>Uncached</em>: no node has a copy of the cache block.</li>
+<li><em>Modified</em>: exactly one node has a ppoy of the cache block, and it has writen the blcok, so the memory copy is out of date. The processor is called the owner of the block.</li>
 </ul>
 </li>
-<li>Sharing bit-vector: one bit for each processor that is sharing or for the single processor that has the modified block. </li>
+<li>Sharing bit-vector: one bit for each processor that is sharing or for the single processor that has the modified block.</li>
 </ol>
-<p>Directory of each block is organizaed as a table indexed by the memory line address.<br><img src="directory_information.jpg" alt=""></p>
-<h3 id="Directory-Controller"><a href="#Directory-Controller" class="headerlink" title="Directory Controller"></a>Directory Controller</h3><p>Directory hardware is hardware logic that interacts with cache controllers and enforces cache coherence. </p>
-<h2 id="Scalability-of-Directory-Information"><a href="#Scalability-of-Directory-Information" class="headerlink" title="Scalability of Directory Information"></a>Scalability of Directory Information</h2><p><strong>Scalability Problem:</strong> number of bits in sharing vector limits the maximum bumber of processors in the system since </p>
+<p>Directory of each block is organizaed as a table indexed by the memory line address.
+<img src="directory_information.jpg" alt=""></p>
+<h3>Directory Controller</h3>
+<p>Directory hardware is hardware logic that interacts with cache controllers and enforces cache coherence.</p>
+<h2>Scalability of Directory Information</h2>
+<p><strong>Scalability Problem:</strong> number of bits in sharing vector limits the maximum bumber of processors in the system since</p>
 <ol>
 <li>larger nu machines are not possible once we decide on the size of the vector and smal</li>
 </ol>
-<h2 id="Directory-Cache-Coherence"><a href="#Directory-Cache-Coherence" class="headerlink" title="Directory Cache Coherence"></a>Directory Cache Coherence</h2><p><img src="directory_cache_coherence.jpg" alt=""></p>
-<h1 id="SIMD"><a href="#SIMD" class="headerlink" title="SIMD"></a>SIMD</h1><h1 id="Hetergeneous-Parallelism"><a href="#Hetergeneous-Parallelism" class="headerlink" title="Hetergeneous Parallelism"></a>Hetergeneous Parallelism</h1><p>Assumptions: Parallelizable work distributes perfectly onto $n$ processors of equal capability.<br>However, there are some processors with asymmetric set of processing cores:<br>Firstly, give a figure to illustrate what asymmetric set of processing cores means:<br><img src="asymmetric_processor.jpg" alt=""><br>See the speedup brought by hetergeneous architecture:<br><img src="speedup_hetergeneous.jpg" alt=""></p>
-<h2 id="The-Motivation-of-Hetergeneous-Computing"><a href="#The-Motivation-of-Hetergeneous-Computing" class="headerlink" title="The Motivation of Hetergeneous Computing"></a>The Motivation of Hetergeneous Computing</h2><p>Most real world application have complex wordload characteristics: </p>
+<h2>Directory Cache Coherence</h2>
+<p><img src="directory_cache_coherence.jpg" alt=""></p>
+<h1>SIMD</h1>
+<h1>Hetergeneous Parallelism</h1>
+<p>Assumptions: Parallelizable work distributes perfectly onto $n$ processors of equal capability.
+However, there are some processors with asymmetric set of processing cores:
+Firstly, give a figure to illustrate what asymmetric set of processing cores means:
+<img src="asymmetric_processor.jpg" alt="">
+See the speedup brought by hetergeneous architecture:
+<img src="speedup_hetergeneous.jpg" alt=""></p>
+<h2>The Motivation of Hetergeneous Computing</h2>
+<p>Most real world application have complex wordload characteristics:</p>
 <ol>
-<li>They have components that can be widely parallelized and those that are difficult to parallelize. </li>
-<li>They have components that are amenable to wide SIMD execution and components that are divergent control flow. </li>
-<li>They have components with predictable data access and those with unpredictable access. </li>
+<li>They have components that can be widely parallelized and those that are difficult to parallelize.</li>
+<li>They have components that are amenable to wide SIMD execution and components that are divergent control flow.</li>
+<li>They have components with predictable data access and those with unpredictable access.</li>
 </ol>
-<p>All of these characteristics can lead to an important idea about hetergeneous computing:<br><strong>The most efficient processor is a hetergeneous mixture of resource, which uses the most efficient tool for the job.</strong></p>
-<h1 id="Implementing-Synchronization"><a href="#Implementing-Synchronization" class="headerlink" title="Implementing Synchronization"></a>Implementing Synchronization</h1><h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><ol>
-<li>Primitives for ensuring mutual exclusion: <ul>
+<p>All of these characteristics can lead to an important idea about hetergeneous computing:
+<strong>The most efficient processor is a hetergeneous mixture of resource, which uses the most efficient tool for the job.</strong></p>
+<h1>Implementing Synchronization</h1>
+<h2>Overview</h2>
+<ol>
+<li>Primitives for ensuring mutual exclusion:
+<ul>
 <li>Locks</li>
 <li>Atomic primitives</li>
 <li>Transactions</li>
 </ul>
 </li>
-<li>Primitives for event signaling: <ul>
+<li>Primitives for event signaling:
+<ul>
 <li>Barriers</li>
 <li>Flags</li>
 </ul>
 </li>
 </ol>
-<h2 id="Three-Phases-of-A-Synchronization-Event"><a href="#Three-Phases-of-A-Synchronization-Event" class="headerlink" title="Three Phases of A Synchronization Event"></a>Three Phases of A Synchronization Event</h2><ol>
-<li>Acquire Method: </li>
-<li>Waiting Algorithm: </li>
-<li>Release Method: </li>
-</ol>
-<h2 id="Busy-Waiting-VS-Blocking-Synchronization"><a href="#Busy-Waiting-VS-Blocking-Synchronization" class="headerlink" title="Busy Waiting VS Blocking Synchronization"></a>Busy Waiting VS Blocking Synchronization</h2><h3 id="What’s-Blocking-Synchronization"><a href="#What’s-Blocking-Synchronization" class="headerlink" title="What’s Blocking Synchronization"></a>What’s Blocking Synchronization</h3><p>If progress cannot be made because a resource cannot be acquired, it is desirable to free up execution resources for another threads. </p>
-<h2 id="Barrier"><a href="#Barrier" class="headerlink" title="Barrier"></a>Barrier</h2><p>Definition: coordination mechanism that forces process which participate in a concurrent algorithm to wait until each one of them has reached a certain point in its program. The collection of these coordination points is called the barrier. Once all the processes have reached the barrier, they are all permitted to continue past the barrier. </p>
-<p>The following figure clearly illustrates this idea:<br><img src="barrier.jpg" alt=""></p>
-<h3 id="Memory-Barrier"><a href="#Memory-Barrier" class="headerlink" title="Memory Barrier"></a>Memory Barrier</h3><p><strong>Why Memory Barrier</strong></p>
+<h2>Three Phases of A Synchronization Event</h2>
 <ol>
-<li>For synchronization primitives: </li>
-<li>For lock-free data structure: </li>
+<li>Acquire Method:</li>
+<li>Waiting Algorithm:</li>
+<li>Release Method:</li>
 </ol>
-<h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h2><h3 id="Lock-free-Data-Structure"><a href="#Lock-free-Data-Structure" class="headerlink" title="Lock-free Data Structure"></a>Lock-free Data Structure</h3><h1 id="Transaction-Memory"><a href="#Transaction-Memory" class="headerlink" title="Transaction Memory"></a>Transaction Memory</h1><p>Memory transaction is an atomic and isolated sequence of memory accesses inspired by database transaction. </p>
+<h2>Busy Waiting VS Blocking Synchronization</h2>
+<h3>What's Blocking Synchronization</h3>
+<p>If progress cannot be made because a resource cannot be acquired, it is desirable to free up execution resources for another threads.</p>
+<h2>Barrier</h2>
+<p>Definition: coordination mechanism that forces process which participate in a concurrent algorithm to wait until each one of them has reached a certain point in its program. The collection of these coordination points is called the barrier. Once all the processes have reached the barrier, they are all permitted to continue past the barrier.</p>
+<p>The following figure clearly illustrates this idea:
+<img src="barrier.jpg" alt=""></p>
+<h3>Memory Barrier</h3>
+<p><strong>Why Memory Barrier</strong></p>
 <ol>
-<li><strong>Atomicity:</strong><br>Upon transaction commit, all memory writes in transaction take effect at one. On transaction abort, none of the writes appear to take effect as if transaction never happened. </li>
-<li><strong>Isolation:</strong> No other processor can observe writes before transaction cmmits. </li>
-<li><strong>Serializability:</strong> Transactions appear to commit in a single serial order. </li>
+<li>For synchronization primitives:</li>
+<li>For lock-free data structure:</li>
 </ol>
-<p><img src="transaction_examples.jpg" alt=""><br>Transaction memory attempts to simplify parallel programming by grouping read and write operations and running them like a single operation. Transaction memory is like database transactions where all shard memory accesses and their effects are either commmitted all together or discarded as a group. All threads can enter the critical region simultaneously. If there are conflicts in accessing the shared memory data, threads try accessing the shared memory data again or are stopped without updating the shared memory data. </p>
-<h3 id="Dekker’s-Algorithm-1"><a href="#Dekker’s-Algorithm-1" class="headerlink" title="Dekker’s Algorithm"></a>Dekker’s Algorithm</h3><h2 id="Amdahl’s-Law"><a href="#Amdahl’s-Law" class="headerlink" title="Amdahl’s Law"></a>Amdahl’s Law</h2><p>If F is the fraction of a calculation that is sequential then maximum speed-up that can be achieved by using P processers is<br>$$<br>\frac{1}{F + \frac{1-F}{P}}<br>$$</p>
-<h2 id="Different-Level-of-Parallelism"><a href="#Different-Level-of-Parallelism" class="headerlink" title="Different Level of Parallelism"></a>Different Level of Parallelism</h2><ol>
-<li>Instruction Level Parallelism<ul>
+<h2>Lock</h2>
+<h3>Lock-free Data Structure</h3>
+<h1>Transaction Memory</h1>
+<p>Memory transaction is an atomic and isolated sequence of memory accesses inspired by database transaction.</p>
+<ol>
+<li><strong>Atomicity:</strong>
+Upon transaction commit, all memory writes in transaction take effect at one. On transaction abort, none of the writes appear to take effect as if transaction never happened.</li>
+<li><strong>Isolation:</strong> No other processor can observe writes before transaction cmmits.</li>
+<li><strong>Serializability:</strong> Transactions appear to commit in a single serial order.</li>
+</ol>
+<p><img src="transaction_examples.jpg" alt="">
+Transaction memory attempts to simplify parallel programming by grouping read and write operations and running them like a single operation. Transaction memory is like database transactions where all shard memory accesses and their effects are either commmitted all together or discarded as a group. All threads can enter the critical region simultaneously. If there are conflicts in accessing the shared memory data, threads try accessing the shared memory data again or are stopped without updating the shared memory data.</p>
+<h3>Dekker's Algorithm</h3>
+<h2>Amdahl's Law</h2>
+<p>If F is the fraction of a calculation that is sequential then maximum speed-up that can be achieved by using P processers is
+$$
+\frac{1}{F + \frac{1-F}{P}}
+$$</p>
+<h2>Different Level of Parallelism</h2>
+<ol>
+<li>Instruction Level Parallelism
+<ul>
 <li>Superscalar</li>
 <li>Out-of-order execution</li>
-<li>Speculative execution </li>
+<li>Speculative execution</li>
 </ul>
 </li>
-<li>Thread Level Parallelism<ul>
+<li>Thread Level Parallelism
+<ul>
 <li>Hyperthreading technology</li>
 <li>Multicore</li>
 </ul>
 </li>
-<li>Process Level Parallelism<ul>
+<li>Process Level Parallelism
+<ul>
 <li>Multiprocessor system</li>
 <li>Hyperthreading technology</li>
 <li>Multicore</li>
 </ul>
 </li>
 </ol>
-<h2 id="Different-Types-of-Parallel-Programming-Models"><a href="#Different-Types-of-Parallel-Programming-Models" class="headerlink" title="Different Types of Parallel Programming Models"></a>Different Types of Parallel Programming Models</h2><p><img src="parallel_programming_model.jpg" alt=""></p>
-<h1 id="Different-Level-of-Parallelism-1"><a href="#Different-Level-of-Parallelism-1" class="headerlink" title="Different Level of Parallelism"></a>Different Level of Parallelism</h1><p><strong>Reference: MIT: 6.888</strong></p>
-<h2 id="ILP-Instruction-Level-Parallelism"><a href="#ILP-Instruction-Level-Parallelism" class="headerlink" title="ILP: Instruction Level Parallelism"></a>ILP: Instruction Level Parallelism</h2><ol>
+<h2>Different Types of Parallel Programming Models</h2>
+<p><img src="parallel_programming_model.jpg" alt=""></p>
+<h1>Different Level of Parallelism</h1>
+<p><strong>Reference: MIT: 6.888</strong></p>
+<h2>ILP: Instruction Level Parallelism</h2>
+<ol>
 <li>Wide &amp; superscalar pipelines</li>
 <li>Prediction, renaming &amp; out-of-order execution</li>
 </ol>
-<p>First start from CPI:<br>$$CPI = CPI_{ideal} + CPI_{stall}$$</p>
+<p>First start from CPI:
+$$CPI = CPI_{ideal} + CPI_{stall}$$</p>
 <p>$CPI_{stall}$ $_$ contributors:</p>
 <ol>
 <li>Data dependencies: RAW, WAR, WAW</li>
@@ -622,68 +721,82 @@
 <li>Control hazard: branches, exceptions</li>
 <li>Memory latency: cache misses</li>
 </ol>
-<h3 id="5-stage-Pipelined-Processors-Adopted-in-MIPS-R3000"><a href="#5-stage-Pipelined-Processors-Adopted-in-MIPS-R3000" class="headerlink" title="5-stage Pipelined Processors:Adopted in MIPS R3000."></a>5-stage Pipelined Processors:Adopted in MIPS R3000.</h3><p><strong>Advantages</strong></p>
+<h3>5-stage Pipelined Processors:Adopted in MIPS R3000.</h3>
+<p><strong>Advantages</strong></p>
 <ol>
-<li>$CPI_{ideal}$ $_$ is 1. </li>
-<li>NO WAW or WAR hazard. </li>
-<li>Simple and elegant, it’s still used in ARM &amp; MIPS processors.  </li>
+<li>$CPI_{ideal}$ $_$ is 1.</li>
+<li>NO WAW or WAR hazard.</li>
+<li>Simple and elegant, it's still used in ARM &amp; MIPS processors.</li>
 </ol>
 <p><strong>Disadvantages</strong></p>
 <ol>
-<li>Upper performance bounds is CPI = 1. </li>
-<li>High latency instructions not handled well. <ul>
+<li>Upper performance bounds is CPI = 1.</li>
+<li>High latency instructions not handled well.
+<ul>
 <li>1 stage for accesses to large caches or multiplier</li>
-<li>Clock cycle is high. </li>
+<li>Clock cycle is high.</li>
 </ul>
 </li>
-<li>Unnessary stalls due to rigid pipeline. </li>
+<li>Unnessary stalls due to rigid pipeline.</li>
 </ol>
-<h3 id="Improving-5-stage-Pipeline-Performance"><a href="#Improving-5-stage-Pipeline-Performance" class="headerlink" title="Improving 5-stage Pipeline Performance"></a>Improving 5-stage Pipeline Performance</h3><p>Several Optimization Directions</p>
+<h3>Improving 5-stage Pipeline Performance</h3>
+<p>Several Optimization Directions</p>
 <ol>
-<li>High clock frequency: deeper pipeline. </li>
+<li>High clock frequency: deeper pipeline.</li>
 <li>High $CPI_{ideal}$ : wider pipeline</li>
-<li>LOW $CPI_{stall}$: diversified pipelines, out-of-order execution. </li>
-<li>Balance conficting goals: <ul>
-<li>Deeper &amp; wider pipelines ==&gt; more control hazards. </li>
-<li>Branch prediction. </li>
+<li>LOW $CPI_{stall}$: diversified pipelines, out-of-order execution.</li>
+<li>Balance conficting goals:
+<ul>
+<li>Deeper &amp; wider pipelines ==&gt; more control hazards.</li>
+<li>Branch prediction.</li>
 </ul>
 </li>
 </ol>
-<h4 id="Deeper-Pipeline"><a href="#Deeper-Pipeline" class="headerlink" title="Deeper Pipeline"></a>Deeper Pipeline</h4><p>Deeper pipeline can bring the advantages like higher clock frequency but at the cost of more forwarding and stall cases. It also has some crucial disadvantages: </p>
+<h4>Deeper Pipeline</h4>
+<p>Deeper pipeline can bring the advantages like higher clock frequency but at the cost of more forwarding and stall cases. It also has some crucial disadvantages:</p>
 <ol>
-<li>More overlapping, which means more dependencies and more stalls. </li>
-<li>Clock overhead becomes increaseing important. Let’s say, if each pipeline stage introduces overhead O. If origiinal CCT is T, with N stages CCT is T/N + O. If N approaches infinite, speedup = T / (T/N = O) –&gt; T/O. </li>
-<li>More power consumption. </li>
+<li>More overlapping, which means more dependencies and more stalls.</li>
+<li>Clock overhead becomes increaseing important. Let's say, if each pipeline stage introduces overhead O. If origiinal CCT is T, with N stages CCT is T/N + O. If N approaches infinite, speedup = T / (T/N = O) --&gt; T/O.</li>
+<li>More power consumption.</li>
 </ol>
-<h4 id="Wider-Pipeline"><a href="#Wider-Pipeline" class="headerlink" title="Wider Pipeline"></a>Wider Pipeline</h4><p>Wider pipeline, a.k.a superscalar pipeline, is based on the idea that we can operate on N instructions each clock cycle. </p>
-<p>Wider pipeline can have Lower $CPI_{ideal}$, but at the cost of more ALU, register, file ports and so on. It also needs more forwarding &amp; stall cases. </p>
-<p>Parallel execution ==&gt; more dependencies ==&gt; more stalls. So, $CPI_{stall}$ increases due to increasing data and control hazards. </p>
-<h4 id="Diversified-Pipeline"><a href="#Diversified-Pipeline" class="headerlink" title="Diversified Pipeline"></a>Diversified Pipeline</h4><p><img src="diversified_pipeline.jpg" alt=""></p>
-<h3 id="Modern-Superscalar-Out-of-Order-Processor"><a href="#Modern-Superscalar-Out-of-Order-Processor" class="headerlink" title="Modern Superscalar Out-of-Order Processor"></a>Modern Superscalar Out-of-Order Processor</h3><p><img src="superscalar_ooo_processor.jpg" alt=""></p>
-<h3 id="Out-of-Order-Dispatch"><a href="#Out-of-Order-Dispatch" class="headerlink" title="Out-of-Order Dispatch"></a>Out-of-Order Dispatch</h3><p>For <em>in-order</em> execution, instructions are dispatched to a functional unit when: </p>
+<h4>Wider Pipeline</h4>
+<p>Wider pipeline, a.k.a superscalar pipeline, is based on the idea that we can operate on N instructions each clock cycle.</p>
+<p>Wider pipeline can have Lower $CPI_{ideal}$, but at the cost of more ALU, register, file ports and so on. It also needs more forwarding &amp; stall cases.</p>
+<p>Parallel execution ==&gt; more dependencies ==&gt; more stalls. So, $CPI_{stall}$ increases due to increasing data and control hazards.</p>
+<h4>Diversified Pipeline</h4>
+<p><img src="diversified_pipeline.jpg" alt=""></p>
+<h3>Modern Superscalar Out-of-Order Processor</h3>
+<p><img src="superscalar_ooo_processor.jpg" alt=""></p>
+<h3>Out-of-Order Dispatch</h3>
+<p>For <em>in-order</em> execution, instructions are dispatched to a functional unit when:</p>
 <ol>
-<li>All older instructions have been dispatched. </li>
-<li>All operands are available and functional units are available. </li>
+<li>All older instructions have been dispatched.</li>
+<li>All operands are available and functional units are available.</li>
 </ol>
 <p>For <em>out-of-order</em> execution, instructions are dispatched when</p>
 <ol>
-<li>All operands are available and functional units are available. </li>
+<li>All operands are available and functional units are available.</li>
 </ol>
-<h3 id="Memory-Ordering-for-Load-and-Store"><a href="#Memory-Ordering-for-Load-and-Store" class="headerlink" title="Memory Ordering for Load and Store"></a>Memory Ordering for Load and Store</h3><ol>
+<h3>Memory Ordering for Load and Store</h3>
+<ol>
 <li>When can a load read from the cache?</li>
 </ol>
-<h3 id="The-Challenges-of-Superscalar-Processors"><a href="#The-Challenges-of-Superscalar-Processors" class="headerlink" title="The Challenges of Superscalar Processors"></a>The Challenges of Superscalar Processors</h3><ol>
-<li>Clock frequency: gettign close to pipelining limits. </li>
-<li>Branch prediction &amp; memory latency limit the practical benefits of OOO execution. </li>
-<li>Power grows superlinearly with high clock and more OOO logic. </li>
-<li>Design complexity grows exponentially with issue width. </li>
-<li>Upper bound of ILP. So, we must exploit TLP and DLP. <ul>
-<li>Thread-Level Parallelism: multithreading and multicore. </li>
-<li>Data-level parallelism: SIMD instructions. </li>
+<h3>The Challenges of Superscalar Processors</h3>
+<ol>
+<li>Clock frequency: gettign close to pipelining limits.</li>
+<li>Branch prediction &amp; memory latency limit the practical benefits of OOO execution.</li>
+<li>Power grows superlinearly with high clock and more OOO logic.</li>
+<li>Design complexity grows exponentially with issue width.</li>
+<li>Upper bound of ILP. So, we must exploit TLP and DLP.
+<ul>
+<li>Thread-Level Parallelism: multithreading and multicore.</li>
+<li>Data-level parallelism: SIMD instructions.</li>
 </ul>
 </li>
 </ol>
-<h2 id="DLP-Data-Level-Parallelism"><a href="#DLP-Data-Level-Parallelism" class="headerlink" title="DLP: Data-Level Parallelism"></a>DLP: Data-Level Parallelism</h2><h3 id="SIMD-Processing"><a href="#SIMD-Processing" class="headerlink" title="SIMD Processing"></a>SIMD Processing</h3><p>Same instruction sequence applies to multiple data elements. </p>
+<h2>DLP: Data-Level Parallelism</h2>
+<h3>SIMD Processing</h3>
+<p>Same instruction sequence applies to multiple data elements.</p>
 
       
     </div>
@@ -858,7 +971,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Parallel-Programming-and-Multiprocessors"><span class="nav-number">1.</span> <span class="nav-text">Parallel Programming and Multiprocessors</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Synchronization"><span class="nav-number">1.1.</span> <span class="nav-text">Synchronization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequential-Consistency"><span class="nav-number">1.2.</span> <span class="nav-text">Sequential Consistency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Locks-and-Semaphores"><span class="nav-number">1.3.</span> <span class="nav-text">Locks and Semaphores</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Atomic-Operations"><span class="nav-number">1.4.</span> <span class="nav-text">Atomic Operations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequential-Consistency-and-Memory-Fences"><span class="nav-number">1.5.</span> <span class="nav-text">Sequential Consistency and Memory Fences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dekker’s-Algorithm"><span class="nav-number">1.6.</span> <span class="nav-text">Dekker’s Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mutual-Exclusion-Using-Load-Store"><span class="nav-number">1.6.1.</span> <span class="nav-text">Mutual Exclusion Using Load/Store</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Protocol-for-Mutual-Exclusion"><span class="nav-number">1.6.2.</span> <span class="nav-text">A Protocol for Mutual Exclusion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Difference-between-Deadlock-and-LiveLock"><span class="nav-number">1.7.</span> <span class="nav-text">The Difference between Deadlock and LiveLock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multiprocessors"><span class="nav-number">2.</span> <span class="nav-text">Multiprocessors</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bus-Implementation"><span class="nav-number">2.1.</span> <span class="nav-text">Bus Implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache-Coherence"><span class="nav-number">2.2.</span> <span class="nav-text">Cache Coherence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Coherence-VS-Memory-Consistency"><span class="nav-number">2.2.1.</span> <span class="nav-text">Cache Coherence VS. Memory Consistency</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache-Coherence-Protocols"><span class="nav-number">2.3.</span> <span class="nav-text">Cache Coherence Protocols</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Snoopy-Cache"><span class="nav-number">2.3.1.</span> <span class="nav-text">Snoopy Cache</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shared-Memory-Multiprocessor"><span class="nav-number">2.4.</span> <span class="nav-text">Shared Memory Multiprocessor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-Update-Broadcast-Protocols"><span class="nav-number">2.5.</span> <span class="nav-text">Write Update (Broadcast) Protocols</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-Invalidate-Protocols"><span class="nav-number">2.6.</span> <span class="nav-text">Write Invalidate Protocols</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-MSI-for-Invalidate-Protocol"><span class="nav-number">2.7.</span> <span class="nav-text">Basic MSI for Invalidate Protocol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MSEI-An-Enhanced-MSI-Protocol"><span class="nav-number">2.8.</span> <span class="nav-text">MSEI: An Enhanced MSI Protocol</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multiprocessor-Interconnect"><span class="nav-number">3.</span> <span class="nav-text">Multiprocessor Interconnect</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-to-Interconnection-Networks"><span class="nav-number">3.1.</span> <span class="nav-text">Introduction to Interconnection Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Performance"><span class="nav-number">3.2.</span> <span class="nav-text">Network Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Anatomy-of-Message-Latency"><span class="nav-number">3.2.1.</span> <span class="nav-text">Anatomy of Message Latency</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Routing-and-Flow-Control"><span class="nav-number">3.3.</span> <span class="nav-text">Routing and Flow Control</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Directory-Protocol"><span class="nav-number">4.</span> <span class="nav-text">Directory Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Directory-Coherence-Motivation"><span class="nav-number">4.1.</span> <span class="nav-text">Directory Coherence Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-of-Directory"><span class="nav-number">4.2.</span> <span class="nav-text">Implementation of Directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Performance-of-Symmetric-Shared-Memory-Multiprocessors"><span class="nav-number">4.3.</span> <span class="nav-text">Performance of Symmetric Shared-Memory Multiprocessors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coherency-Misses"><span class="nav-number">4.4.</span> <span class="nav-text">Coherency Misses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deadlock"><span class="nav-number">4.5.</span> <span class="nav-text">Deadlock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#False-Sharing"><span class="nav-number">4.6.</span> <span class="nav-text">False Sharing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition-of-True-Sharing-Miss-and-False-Sharing-Misses"><span class="nav-number">4.6.1.</span> <span class="nav-text">Definition of True Sharing Miss and False Sharing Misses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Some-experiments-given-by-H-amp-P-5"><span class="nav-number">4.6.2.</span> <span class="nav-text">Some experiments given by H&amp;P-5.</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Directory-Coherence-Protocols"><span class="nav-number">5.</span> <span class="nav-text">Directory Coherence Protocols</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Snooping-Coherence-VS-Directory-Coherence-From-slides-of-Edinburgh-http-www-inf-ed-ac-uk-teaching-courses-pa-Notes-lecture06-directory-pdf"><span class="nav-number">5.1.</span> <span class="nav-text">Snooping Coherence VS Directory Coherence(From slides of Edinburgh: http://www.inf.ed.ac.uk/teaching/courses/pa/Notes/lecture06-directory.pdf)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Construct-A-Directory-Directory-Structure"><span class="nav-number">5.2.</span> <span class="nav-text">How to Construct A Directory? Directory Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Directory-Information"><span class="nav-number">5.2.1.</span> <span class="nav-text">Directory Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Directory-Controller"><span class="nav-number">5.2.2.</span> <span class="nav-text">Directory Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scalability-of-Directory-Information"><span class="nav-number">5.3.</span> <span class="nav-text">Scalability of Directory Information</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Directory-Cache-Coherence"><span class="nav-number">5.4.</span> <span class="nav-text">Directory Cache Coherence</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SIMD"><span class="nav-number">6.</span> <span class="nav-text">SIMD</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hetergeneous-Parallelism"><span class="nav-number">7.</span> <span class="nav-text">Hetergeneous Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Motivation-of-Hetergeneous-Computing"><span class="nav-number">7.1.</span> <span class="nav-text">The Motivation of Hetergeneous Computing</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementing-Synchronization"><span class="nav-number">8.</span> <span class="nav-text">Implementing Synchronization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">8.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Three-Phases-of-A-Synchronization-Event"><span class="nav-number">8.2.</span> <span class="nav-text">Three Phases of A Synchronization Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Busy-Waiting-VS-Blocking-Synchronization"><span class="nav-number">8.3.</span> <span class="nav-text">Busy Waiting VS Blocking Synchronization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#What’s-Blocking-Synchronization"><span class="nav-number">8.3.1.</span> <span class="nav-text">What’s Blocking Synchronization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Barrier"><span class="nav-number">8.4.</span> <span class="nav-text">Barrier</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-Barrier"><span class="nav-number">8.4.1.</span> <span class="nav-text">Memory Barrier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock"><span class="nav-number">8.5.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock-free-Data-Structure"><span class="nav-number">8.5.1.</span> <span class="nav-text">Lock-free Data Structure</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transaction-Memory"><span class="nav-number">9.</span> <span class="nav-text">Transaction Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dekker’s-Algorithm-1"><span class="nav-number">9.0.1.</span> <span class="nav-text">Dekker’s Algorithm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Amdahl’s-Law"><span class="nav-number">9.1.</span> <span class="nav-text">Amdahl’s Law</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Different-Level-of-Parallelism"><span class="nav-number">9.2.</span> <span class="nav-text">Different Level of Parallelism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Different-Types-of-Parallel-Programming-Models"><span class="nav-number">9.3.</span> <span class="nav-text">Different Types of Parallel Programming Models</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Different-Level-of-Parallelism-1"><span class="nav-number">10.</span> <span class="nav-text">Different Level of Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ILP-Instruction-Level-Parallelism"><span class="nav-number">10.1.</span> <span class="nav-text">ILP: Instruction Level Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-stage-Pipelined-Processors-Adopted-in-MIPS-R3000"><span class="nav-number">10.1.1.</span> <span class="nav-text">5-stage Pipelined Processors:Adopted in MIPS R3000.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Improving-5-stage-Pipeline-Performance"><span class="nav-number">10.1.2.</span> <span class="nav-text">Improving 5-stage Pipeline Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Deeper-Pipeline"><span class="nav-number">10.1.2.1.</span> <span class="nav-text">Deeper Pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Wider-Pipeline"><span class="nav-number">10.1.2.2.</span> <span class="nav-text">Wider Pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Diversified-Pipeline"><span class="nav-number">10.1.2.3.</span> <span class="nav-text">Diversified Pipeline</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modern-Superscalar-Out-of-Order-Processor"><span class="nav-number">10.1.3.</span> <span class="nav-text">Modern Superscalar Out-of-Order Processor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Out-of-Order-Dispatch"><span class="nav-number">10.1.4.</span> <span class="nav-text">Out-of-Order Dispatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory-Ordering-for-Load-and-Store"><span class="nav-number">10.1.5.</span> <span class="nav-text">Memory Ordering for Load and Store</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Challenges-of-Superscalar-Processors"><span class="nav-number">10.1.6.</span> <span class="nav-text">The Challenges of Superscalar Processors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DLP-Data-Level-Parallelism"><span class="nav-number">10.2.</span> <span class="nav-text">DLP: Data-Level Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SIMD-Processing"><span class="nav-number">10.2.1.</span> <span class="nav-text">SIMD Processing</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Parallel Programming and Multiprocessors</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Synchronization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Sequential Consistency</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Locks and Semaphores</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">Atomic Operations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.5.</span> <span class="nav-text">Sequential Consistency and Memory Fences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.</span> <span class="nav-text">Dekker&#39;s Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.1.</span> <span class="nav-text">Mutual Exclusion Using Load/Store</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.6.2.</span> <span class="nav-text">A Protocol for Mutual Exclusion</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.7.</span> <span class="nav-text">The Difference between Deadlock and LiveLock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Multiprocessors</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">Bus Implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">Cache Coherence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">Cache Coherence VS. Memory Consistency</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">Cache Coherence Protocols</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.1.</span> <span class="nav-text">Snoopy Cache</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">Shared Memory Multiprocessor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.5.</span> <span class="nav-text">Write Update (Broadcast) Protocols</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.6.</span> <span class="nav-text">Write Invalidate Protocols</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.7.</span> <span class="nav-text">Basic MSI for Invalidate Protocol</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.8.</span> <span class="nav-text">MSEI: An Enhanced MSI Protocol</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Multiprocessor Interconnect</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">Introduction to Interconnection Networks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">Network Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.1.</span> <span class="nav-text">Anatomy of Message Latency</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">Routing and Flow Control</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Directory Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">Directory Coherence Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">Implementation of Directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.</span> <span class="nav-text">Performance of Symmetric Shared-Memory Multiprocessors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.4.</span> <span class="nav-text">Coherency Misses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.5.</span> <span class="nav-text">Deadlock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.6.</span> <span class="nav-text">False Sharing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.6.1.</span> <span class="nav-text">Definition of True Sharing Miss and False Sharing Misses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.6.2.</span> <span class="nav-text">Some experiments given by H&amp;P-5.</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">Directory Coherence Protocols</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">Snooping Coherence VS Directory Coherence(From slides of Edinburgh: http://www.inf.ed.ac.uk/teaching/courses/pa/Notes/lecture06-directory.pdf)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">How to Construct A Directory? Directory Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.1.</span> <span class="nav-text">Directory Information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.2.</span> <span class="nav-text">Directory Controller</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.</span> <span class="nav-text">Scalability of Directory Information</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.</span> <span class="nav-text">Directory Cache Coherence</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">SIMD</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">Hetergeneous Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.1.</span> <span class="nav-text">The Motivation of Hetergeneous Computing</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">Implementing Synchronization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.</span> <span class="nav-text">Three Phases of A Synchronization Event</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.3.</span> <span class="nav-text">Busy Waiting VS Blocking Synchronization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.3.1.</span> <span class="nav-text">What&#39;s Blocking Synchronization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.4.</span> <span class="nav-text">Barrier</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.4.1.</span> <span class="nav-text">Memory Barrier</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.5.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">8.5.1.</span> <span class="nav-text">Lock-free Data Structure</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">Transaction Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">9.0.1.</span> <span class="nav-text">Dekker&#39;s Algorithm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">9.1.</span> <span class="nav-text">Amdahl&#39;s Law</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">9.2.</span> <span class="nav-text">Different Level of Parallelism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">9.3.</span> <span class="nav-text">Different Types of Parallel Programming Models</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">10.</span> <span class="nav-text">Different Level of Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">10.1.</span> <span class="nav-text">ILP: Instruction Level Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">10.1.1.</span> <span class="nav-text">5-stage Pipelined Processors:Adopted in MIPS R3000.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">10.1.2.</span> <span class="nav-text">Improving 5-stage Pipeline Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">10.1.2.1.</span> <span class="nav-text">Deeper Pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">10.1.2.2.</span> <span class="nav-text">Wider Pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">10.1.2.3.</span> <span class="nav-text">Diversified Pipeline</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">10.1.3.</span> <span class="nav-text">Modern Superscalar Out-of-Order Processor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">10.1.4.</span> <span class="nav-text">Out-of-Order Dispatch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">10.1.5.</span> <span class="nav-text">Memory Ordering for Load and Store</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">10.1.6.</span> <span class="nav-text">The Challenges of Superscalar Processors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">10.2.</span> <span class="nav-text">DLP: Data-Level Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">10.2.1.</span> <span class="nav-text">SIMD Processing</span></a></li></ol></li></ol></li></div>
             
 
           </div>

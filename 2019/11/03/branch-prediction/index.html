@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Reference:   http://home.deib.polimi.it/silvano/FilePDF/AAC/Lectures_2017/Lesson_2_Branch_Prediction%20_V2.pdf Coursera: Computer Architecture from Princeton University.   Branch Prediction Introducti">
+<meta name="description" content="Reference:  http://home.deib.polimi.it/silvano/FilePDF/AAC/Lectures_2017/Lesson_2_Branch_Prediction%20_V2.pdf Coursera: Computer Architecture from Princeton University.  Branch Prediction Introduction">
 <meta name="keywords" content="Computer Architecture">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Branch Prediction">
 <meta property="og:url" content="http://yoursite.com/2019/11/03/branch-prediction/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Reference:   http://home.deib.polimi.it/silvano/FilePDF/AAC/Lectures_2017/Lesson_2_Branch_Prediction%20_V2.pdf Coursera: Computer Architecture from Princeton University.   Branch Prediction Introducti">
+<meta property="og:description" content="Reference:  http://home.deib.polimi.it/silvano/FilePDF/AAC/Lectures_2017/Lesson_2_Branch_Prediction%20_V2.pdf Coursera: Computer Architecture from Princeton University.  Branch Prediction Introduction">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/11/03/branch-prediction/mips_conditional_branch.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/11/03/branch-prediction/mips_conditional_branch_execution_1.jpg">
@@ -96,7 +96,7 @@
 <meta property="og:updated_time" content="2020-01-30T06:32:10.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Branch Prediction">
-<meta name="twitter:description" content="Reference:   http://home.deib.polimi.it/silvano/FilePDF/AAC/Lectures_2017/Lesson_2_Branch_Prediction%20_V2.pdf Coursera: Computer Architecture from Princeton University.   Branch Prediction Introducti">
+<meta name="twitter:description" content="Reference:  http://home.deib.polimi.it/silvano/FilePDF/AAC/Lectures_2017/Lesson_2_Branch_Prediction%20_V2.pdf Coursera: Computer Architecture from Princeton University.  Branch Prediction Introduction">
 <meta name="twitter:image" content="http://yoursite.com/2019/11/03/branch-prediction/mips_conditional_branch.jpg">
 
 
@@ -381,70 +381,97 @@
       
 
       
-        <p>Reference: </p>
+        <p>Reference:</p>
 <ol>
-<li><a href="http://home.deib.polimi.it/silvano/FilePDF/AAC/Lectures_2017/Lesson_2_Branch_Prediction%20_V2.pdf" target="_blank" rel="noopener">http://home.deib.polimi.it/silvano/FilePDF/AAC/Lectures_2017/Lesson_2_Branch_Prediction%20_V2.pdf</a></li>
-<li>Coursera: <em>Computer Architecture</em> from Princeton University. </li>
+<li>http://home.deib.polimi.it/silvano/FilePDF/AAC/Lectures_2017/Lesson_2_Branch_Prediction%20_V2.pdf</li>
+<li>Coursera: <em>Computer Architecture</em> from Princeton University.</li>
 </ol>
-<h1 id="Branch-Prediction-Introduction"><a href="#Branch-Prediction-Introduction" class="headerlink" title="Branch Prediction Introduction"></a>Branch Prediction Introduction</h1><p><strong>Conditional Branch Instruction:</strong> the branch is taken only if the condition is satisfied. The branch target address is stored in the PC instead of the address of the next instruction in the sequential instruction stream.<br><img src="mips_conditional_branch.jpg" alt=""></p>
-<p>The execution of branch instruction:<br><img src="mips_conditional_branch_execution_1.jpg" alt=""><br><img src="mips_conditional_branch_execution_2.jpg" alt=""></p>
+<h1>Branch Prediction Introduction</h1>
+<p><strong>Conditional Branch Instruction:</strong> the branch is taken only if the condition is satisfied. The branch target address is stored in the PC instead of the address of the next instruction in the sequential instruction stream.
+<img src="mips_conditional_branch.jpg" alt=""></p>
+<p>The execution of branch instruction:
+<img src="mips_conditional_branch_execution_1.jpg" alt="">
+<img src="mips_conditional_branch_execution_2.jpg" alt=""></p>
 <p>We can observe that <strong>Branch Outcome</strong> and <strong>Branch Target Address</strong> are ready at the end of the EX stage.</p>
-<p>As pipelines get deeper and the potential penalty of branches increases, Branch penalty can be quite expensive: </p>
+<p>As pipelines get deeper and the potential penalty of branches increases, Branch penalty can be quite expensive:</p>
 <ul>
 <li>Pentium 3: 10 cycles branch penalty</li>
 <li>Pentium 4: 20 cycles branch penalty</li>
 </ul>
-<h2 id="What-to-Predict"><a href="#What-to-Predict" class="headerlink" title="What to Predict?"></a>What to Predict?</h2><p>There are two types of information processors need to predict: </p>
+<h2>What to Predict?</h2>
+<p>There are two types of information processors need to predict:</p>
 <ol>
 <li>Predict branch outcome: to decide which branch to take</li>
-<li>Predict branch/jump address: which address the processor should jump to. </li>
+<li>Predict branch/jump address: which address the processor should jump to.</li>
 </ol>
-<h1 id="More-Aggressive-Means-for-Predicting-Branches"><a href="#More-Aggressive-Means-for-Predicting-Branches" class="headerlink" title="More Aggressive Means for Predicting Branches"></a>More Aggressive Means for Predicting Branches</h1><p>Aggressive prediction schemes fall into two classes: </p>
+<h1>More Aggressive Means for Predicting Branches</h1>
+<p>Aggressive prediction schemes fall into two classes:</p>
 <ol>
-<li>Low-cost static schemes: rely on information available at compile time. The actions for a branch are fixed for each branch during the entire execution. The actions are fixed at compile time. </li>
-<li>Dynamic schemes: based on program behavior. The decision causing the branch prediction can dynamic change during the program execution. </li>
+<li>Low-cost static schemes: rely on information available at compile time. The actions for a branch are fixed for each branch during the entire execution. The actions are fixed at compile time.</li>
+<li>Dynamic schemes: based on program behavior. The decision causing the branch prediction can dynamic change during the program execution.</li>
 </ol>
-<h2 id="Static-Outcome-Prediction"><a href="#Static-Outcome-Prediction" class="headerlink" title="Static Outcome Prediction"></a>Static Outcome Prediction</h2><p>Static branch prediction is used in processors where the branch behavior is highly predictable at compile time. </p>
-<h3 id="Branch-Always-Not-Taken-Predicted-Not-Taken"><a href="#Branch-Always-Not-Taken-Predicted-Not-Taken" class="headerlink" title="Branch Always Not Taken: Predicted-Not-Taken"></a>Branch Always Not Taken: Predicted-Not-Taken</h3><p>We assume that the branch will not be taken, thus the sequential instruction flow we have fetched can continue. </p>
+<h2>Static Outcome Prediction</h2>
+<p>Static branch prediction is used in processors where the branch behavior is highly predictable at compile time.</p>
+<h3>Branch Always Not Taken: Predicted-Not-Taken</h3>
+<p>We assume that the branch will not be taken, thus the sequential instruction flow we have fetched can continue.</p>
 <ul>
 <li>If the prediction is correct, we can preserve performance.</li>
-<li>If the prediction is incorrect, we need to flush the instruction already fetched and restart the execution by fetching the instruction at the branch target address. Clearly, this will result in <em>One-cylcle penalty</em>. </li>
+<li>If the prediction is incorrect, we need to flush the instruction already fetched and restart the execution by fetching the instruction at the branch target address. Clearly, this will result in <em>One-cylcle penalty</em>.</li>
 </ul>
-<p>It can be poor accuracy, especially on backward branches. </p>
-<h3 id="Branch-Always-Taken-Predicted-Taken"><a href="#Branch-Always-Taken-Predicted-Taken" class="headerlink" title="Branch Always Taken(Predicted-Taken)"></a>Branch Always Taken(Predicted-Taken)</h3><p>It can be poor accuracy, especially on if-then-else.<br><img src="branch_always_not_taken.jpg" alt=""></p>
-<h3 id="Backward-Taken-Forward-Not-Taken-BTFNT"><a href="#Backward-Taken-Forward-Not-Taken-BTFNT" class="headerlink" title="Backward Taken Forward Not Taken(BTFNT)"></a>Backward Taken Forward Not Taken(BTFNT)</h3><p>The prediction is based on the branch direction: </p>
+<p>It can be poor accuracy, especially on backward branches.</p>
+<h3>Branch Always Taken(Predicted-Taken)</h3>
+<p>It can be poor accuracy, especially on if-then-else.
+<img src="branch_always_not_taken.jpg" alt=""></p>
+<h3>Backward Taken Forward Not Taken(BTFNT)</h3>
+<p>The prediction is based on the branch direction:</p>
 <ul>
-<li>Backward-going branches are predicted as taken: </li>
-<li>Forward-going branches are predicted as not taken:<br>It’s difficult to implement because we don’t know target until Decode stage. </li>
+<li>Backward-going branches are predicted as taken:</li>
+<li>Forward-going branches are predicted as not taken:
+It's difficult to implement because we don't know target until Decode stage.</li>
 </ul>
-<p>It is a basic rule of thumb that:<br><em>Backwards branches have a higher probability of being taken than forward branches</em><br>For a loop, it always involves backwards branches, which is the reason why it is defined as loop. However, for <em>if then</em> code, the condition is equally to be true or not true. </p>
-<h3 id="Profile-Driven-Prediction"><a href="#Profile-Driven-Prediction" class="headerlink" title="Profile-Driven Prediction"></a>Profile-Driven Prediction</h3><p>The branch prediction is based on profiling information collected from earlier runs. This type of methods can use compiler hints. </p>
-<h3 id="Delayed-Branch-Prediction"><a href="#Delayed-Branch-Prediction" class="headerlink" title="Delayed Branch Prediction"></a>Delayed Branch Prediction</h3><ol>
-<li><strong>Branch Delay Slots:</strong> change the ISA semantics so that the instruction that follows a jump or branch is always executed. </li>
+<p>It is a basic rule of thumb that:
+<em>Backwards branches have a higher probability of being taken than forward branches</em>
+For a loop, it always involves backwards branches, which is the reason why it is defined as loop. However, for <em>if then</em> code, the condition is equally to be true or not true.</p>
+<h3>Profile-Driven Prediction</h3>
+<p>The branch prediction is based on profiling information collected from earlier runs. This type of methods can use compiler hints.</p>
+<h3>Delayed Branch Prediction</h3>
+<ol>
+<li><strong>Branch Delay Slots:</strong> change the ISA semantics so that the instruction that follows a jump or branch is always executed.</li>
 </ol>
-<h2 id="Dynamic-Outcome-Prediction"><a href="#Dynamic-Outcome-Prediction" class="headerlink" title="Dynamic Outcome Prediction"></a>Dynamic Outcome Prediction</h2><p>The basic idea is to use the past branch behavior to predict the future. </p>
-<h3 id="Branch-History-Table-BHT-Exploting-Temporal-Correlation"><a href="#Branch-History-Table-BHT-Exploting-Temporal-Correlation" class="headerlink" title="Branch History Table(BHT): Exploting Temporal Correlation"></a>Branch History Table(BHT): Exploting Temporal Correlation</h3><p>The motivation is that: the way a branch resolves may be a good indicator of the way it will resolve the next time it executes(Temporal Correlation).</p>
-<p>Give a figure about 2-bit saturating counter:<br><img src="2_bit_saturating.jpg" alt=""><br><strong>Generalization:</strong> n-bit saturating counter for each entry in the prediction buffer. The counter can take on values between 0 and $2^n-1$. When the counter is greater than or equal to one-half of its maximum value. The branch is predicted as taken. Otherwise, it is predicted as untaken. </p>
-<h3 id="Correlating-Branch-Predictors-Exploiting-Spatial-Correlation"><a href="#Correlating-Branch-Predictors-Exploiting-Spatial-Correlation" class="headerlink" title="Correlating Branch Predictors: Exploiting Spatial Correlation"></a>Correlating Branch Predictors: Exploiting Spatial Correlation</h3><p>Firstly, give an example code block: </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (x[i] &lt; <span class="number">7</span>) then</span><br><span class="line">	y += <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> (x[i] &lt; <span class="number">5</span>) then</span><br><span class="line">	c -= <span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-<p>If fist condition false, second condition also false. </p>
-<p><strong>The Basic Idea:</strong> the n-bit BHT uses only the recent behavior of a single branch to predict the future behavior of that branch. However, the havior of <em>nearby</em> branch hehavior can influence the prediction of the current branch. </p>
-<p>Branch History Register(BHR) records the direction of the last N branches executed by the processor.<br>We store BHR in the Pattern History Table(PHT).<br><img src="pattern_history_table.jpg" alt=""></p>
-<h3 id="Two-Level-Branch-Predictor"><a href="#Two-Level-Branch-Predictor" class="headerlink" title="Two-Level Branch Predictor"></a>Two-Level Branch Predictor</h3><ol>
-<li>The first level history is recorded in one (or more) k-bit shift register called <strong>Branch History Register(BHR)</strong>, which records the outcomes of the k most recent branches. </li>
-<li>The second level history is recorded in one or more tables called <strong>Pattern History Table</strong> of 2-bit saturating counters. </li>
+<h2>Dynamic Outcome Prediction</h2>
+<p>The basic idea is to use the past branch behavior to predict the future.</p>
+<h3>Branch History Table(BHT): Exploting Temporal Correlation</h3>
+<p>The motivation is that: the way a branch resolves may be a good indicator of the way it will resolve the next time it executes(Temporal Correlation).</p>
+<p>Give a figure about 2-bit saturating counter:
+<img src="2_bit_saturating.jpg" alt="">
+<strong>Generalization:</strong> n-bit saturating counter for each entry in the prediction buffer. The counter can take on values between 0 and $2^n-1$. When the counter is greater than or equal to one-half of its maximum value. The branch is predicted as taken. Otherwise, it is predicted as untaken.</p>
+<h3>Correlating Branch Predictors: Exploiting Spatial Correlation</h3>
+<p>Firstly, give an example code block:
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (x[i] &lt; <span class="number">7</span>) then</span><br><span class="line">	y += <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> (x[i] &lt; <span class="number">5</span>) then</span><br><span class="line">	c -= <span class="number">4</span></span><br></pre></td></tr></table></figure></p>
+<p>If fist condition false, second condition also false.</p>
+<p><strong>The Basic Idea:</strong> the n-bit BHT uses only the recent behavior of a single branch to predict the future behavior of that branch. However, the havior of <em>nearby</em> branch hehavior can influence the prediction of the current branch.</p>
+<p>Branch History Register(BHR) records the direction of the last N branches executed by the processor.
+We store BHR in the Pattern History Table(PHT).
+<img src="pattern_history_table.jpg" alt=""></p>
+<h3>Two-Level Branch Predictor</h3>
+<ol>
+<li>The first level history is recorded in one (or more) k-bit shift register called <strong>Branch History Register(BHR)</strong>, which records the outcomes of the k most recent branches.</li>
+<li>The second level history is recorded in one or more tables called <strong>Pattern History Table</strong> of 2-bit saturating counters.</li>
 </ol>
-<p>The BHR is used to index the PHT to select which 2-bit counter to use. Once the 2-bit counter is selected, the prediction is made using the same method as in the 2-bit counter scheme. </p>
-<h3 id="Branch-Target-Buffer"><a href="#Branch-Target-Buffer" class="headerlink" title="Branch Target Buffer"></a>Branch Target Buffer</h3><p>Branch Target Buffer is a cache storing the predicted branch target address for the next instruction after a branch. </p>
-<h1 id="Target-Address-Prediction"><a href="#Target-Address-Prediction" class="headerlink" title="Target Address Prediction"></a>Target Address Prediction</h1><p>The above methods(static, dynamic) only resolve prediction of taken branches. Even with best possible prediction of branch outcome, still have to wait for branch target address to be determined. </p>
-<h2 id="Branch-Target-Buffer-1"><a href="#Branch-Target-Buffer-1" class="headerlink" title="Branch Target Buffer"></a>Branch Target Buffer</h2><p>Branch target buffer is a cache storing the predicted branch target address for the next instruction after a branch. </p>
-<p>BTB is only for control instructions: BTB contains useful information for branch and jump instruction only. </p>
+<p>The BHR is used to index the PHT to select which 2-bit counter to use. Once the 2-bit counter is selected, the prediction is made using the same method as in the 2-bit counter scheme.</p>
+<h3>Branch Target Buffer</h3>
+<p>Branch Target Buffer is a cache storing the predicted branch target address for the next instruction after a branch.</p>
+<h1>Target Address Prediction</h1>
+<p>The above methods(static, dynamic) only resolve prediction of taken branches. Even with best possible prediction of branch outcome, still have to wait for branch target address to be determined.</p>
+<h2>Branch Target Buffer</h2>
+<p>Branch target buffer is a cache storing the predicted branch target address for the next instruction after a branch.</p>
+<p>BTB is only for control instructions: BTB contains useful information for branch and jump instruction only.</p>
 <p>Question: <em>Do we need to decode the instruction in order to use the BTB to determine the address of the next instruction?</em></p>
-<p>Answer: No. Because we do a full PC match in the BTB, we do not need to decode the instruction. </p>
-<h3 id="Use-of-Jump-Register"><a href="#Use-of-Jump-Register" class="headerlink" title="Use of Jump Register"></a>Use of Jump Register</h3><ul>
-<li>Switch statements: jump to address of matching case. </li>
-<li>Dynamic function call: jump to run-time function address. </li>
+<p>Answer: No. Because we do a full PC match in the BTB, we do not need to decode the instruction.</p>
+<h3>Use of Jump Register</h3>
+<ul>
+<li>Switch statements: jump to address of matching case.</li>
+<li>Dynamic function call: jump to run-time function address.</li>
 <li>Subroutine returns: jump to return address</li>
 </ul>
 
@@ -621,7 +648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Branch-Prediction-Introduction"><span class="nav-number">1.</span> <span class="nav-text">Branch Prediction Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-to-Predict"><span class="nav-number">1.1.</span> <span class="nav-text">What to Predict?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#More-Aggressive-Means-for-Predicting-Branches"><span class="nav-number">2.</span> <span class="nav-text">More Aggressive Means for Predicting Branches</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Static-Outcome-Prediction"><span class="nav-number">2.1.</span> <span class="nav-text">Static Outcome Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Branch-Always-Not-Taken-Predicted-Not-Taken"><span class="nav-number">2.1.1.</span> <span class="nav-text">Branch Always Not Taken: Predicted-Not-Taken</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Branch-Always-Taken-Predicted-Taken"><span class="nav-number">2.1.2.</span> <span class="nav-text">Branch Always Taken(Predicted-Taken)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backward-Taken-Forward-Not-Taken-BTFNT"><span class="nav-number">2.1.3.</span> <span class="nav-text">Backward Taken Forward Not Taken(BTFNT)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Profile-Driven-Prediction"><span class="nav-number">2.1.4.</span> <span class="nav-text">Profile-Driven Prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Delayed-Branch-Prediction"><span class="nav-number">2.1.5.</span> <span class="nav-text">Delayed Branch Prediction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic-Outcome-Prediction"><span class="nav-number">2.2.</span> <span class="nav-text">Dynamic Outcome Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Branch-History-Table-BHT-Exploting-Temporal-Correlation"><span class="nav-number">2.2.1.</span> <span class="nav-text">Branch History Table(BHT): Exploting Temporal Correlation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Correlating-Branch-Predictors-Exploiting-Spatial-Correlation"><span class="nav-number">2.2.2.</span> <span class="nav-text">Correlating Branch Predictors: Exploiting Spatial Correlation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Two-Level-Branch-Predictor"><span class="nav-number">2.2.3.</span> <span class="nav-text">Two-Level Branch Predictor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Branch-Target-Buffer"><span class="nav-number">2.2.4.</span> <span class="nav-text">Branch Target Buffer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Target-Address-Prediction"><span class="nav-number">3.</span> <span class="nav-text">Target Address Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Branch-Target-Buffer-1"><span class="nav-number">3.1.</span> <span class="nav-text">Branch Target Buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-of-Jump-Register"><span class="nav-number">3.1.1.</span> <span class="nav-text">Use of Jump Register</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Branch Prediction Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">What to Predict?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">More Aggressive Means for Predicting Branches</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">Static Outcome Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.1.</span> <span class="nav-text">Branch Always Not Taken: Predicted-Not-Taken</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.2.</span> <span class="nav-text">Branch Always Taken(Predicted-Taken)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.3.</span> <span class="nav-text">Backward Taken Forward Not Taken(BTFNT)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.4.</span> <span class="nav-text">Profile-Driven Prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.5.</span> <span class="nav-text">Delayed Branch Prediction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">Dynamic Outcome Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">Branch History Table(BHT): Exploting Temporal Correlation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.2.</span> <span class="nav-text">Correlating Branch Predictors: Exploiting Spatial Correlation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.3.</span> <span class="nav-text">Two-Level Branch Predictor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.4.</span> <span class="nav-text">Branch Target Buffer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Target Address Prediction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">Branch Target Buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">Use of Jump Register</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="We elaborate the cache chapter by answering following questions? Where To Place A Block? (Block Placement)Types of cache organization:   Direct mapped: each block has only one place it can appear in t">
+<meta name="description" content="We elaborate the cache chapter by answering following questions? Where To Place A Block? (Block Placement) Types of cache organization:  Direct mapped: each block has only one place it can appear in">
 <meta name="keywords" content="Computer Architecture">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Memory Hierarchy">
 <meta property="og:url" content="http://yoursite.com/2019/09/15/memory_hierarchy/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="We elaborate the cache chapter by answering following questions? Where To Place A Block? (Block Placement)Types of cache organization:   Direct mapped: each block has only one place it can appear in t">
+<meta property="og:description" content="We elaborate the cache chapter by answering following questions? Where To Place A Block? (Block Placement) Types of cache organization:  Direct mapped: each block has only one place it can appear in">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/09/15/memory_hierarchy/dataflow_caches/dataflow_caches.png">
 <meta property="og:image" content="http://yoursite.com/2019/09/15/memory_hierarchy/multi_levels_caches.jpg">
@@ -96,7 +96,7 @@
 <meta property="og:updated_time" content="2020-01-30T05:25:28.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Memory Hierarchy">
-<meta name="twitter:description" content="We elaborate the cache chapter by answering following questions? Where To Place A Block? (Block Placement)Types of cache organization:   Direct mapped: each block has only one place it can appear in t">
+<meta name="twitter:description" content="We elaborate the cache chapter by answering following questions? Where To Place A Block? (Block Placement) Types of cache organization:  Direct mapped: each block has only one place it can appear in">
 <meta name="twitter:image" content="http://yoursite.com/2019/09/15/memory_hierarchy/dataflow_caches/dataflow_caches.png">
 
 
@@ -381,194 +381,243 @@
       
 
       
-        <p><img src="dataflow_caches/dataflow_caches.png" alt=""><br>We elaborate the cache chapter by answering following questions?</p>
-<h2 id="Where-To-Place-A-Block-Block-Placement"><a href="#Where-To-Place-A-Block-Block-Placement" class="headerlink" title="Where To Place A Block? (Block Placement)"></a>Where To Place A Block? (Block Placement)</h2><p>Types of cache organization: </p>
+        <p><img src="dataflow_caches/dataflow_caches.png" alt="">
+We elaborate the cache chapter by answering following questions?</p>
+<h2>Where To Place A Block? (Block Placement)</h2>
+<p>Types of cache organization:</p>
 <ol>
-<li>Direct mapped: each block has only one place it can appear in the cache.<center> (Block address) MOD (Number of block in cache) </center></li>
-<li>Fully associative: if a block can be placed anywhere in the cache. </li>
-<li>N-way set associative: if a block can be placed in a restricted set of places in the cache. Each set consists of N blocks. A block is first mapped onto a set, and then can be placed anywhere in that set.<br>The mapping of set choice is: <center> (Block address) MOD (Number of sets in cache) </center>
-### Which Block To Be Replaced When Cache Miss Happens? (Block Replacement Strategy)</li>
+<li>Direct mapped: each block has only one place it can appear in the cache.
+&lt;center&gt; (Block address) MOD (Number of block in cache) &lt;/center&gt;</li>
+<li>Fully associative: if a block can be placed anywhere in the cache.</li>
+<li>N-way set associative: if a block can be placed in a restricted set of places in the cache. Each set consists of N blocks. A block is first mapped onto a set, and then can be placed anywhere in that set.
+The mapping of set choice is:
+&lt;center&gt; (Block address) MOD (Number of sets in cache) &lt;/center&gt;</li>
+</ol>
+<h3>Which Block To Be Replaced When Cache Miss Happens? (Block Replacement Strategy)</h3>
+<ol>
 <li>Random: actually, it is not that bad</li>
-<li>Least Recently Used(LRU): it is used to keep temperoral </li>
+<li>Least Recently Used(LRU): it is used to keep temperoral</li>
 <li>First In, First Out (FIFO):</li>
-<li>Not Most Recently Used(NMRU): </li>
+<li>Not Most Recently Used(NMRU):</li>
 </ol>
-<h3 id="Cache-Miss"><a href="#Cache-Miss" class="headerlink" title="Cache Miss"></a>Cache Miss</h3><p>We know that:<br>Average Memory Access Time = Hit Time + (Miss Rate * Miss Penalty)</p>
-<p>For the cache misses, there are mainly three types of cache misses: </p>
+<h3>Cache Miss</h3>
+<p>We know that:
+Average Memory Access Time = Hit Time + (Miss Rate * Miss Penalty)</p>
+<p>For the cache misses, there are mainly three types of cache misses:</p>
 <ol>
-<li>Compulsory: first reference to a block, since this blook has not been seen in cache. </li>
-<li>Capacity: the capacity of cache is too small to hold all the data needed. </li>
-<li>Conflict: this occurs because of collisioins such as one cache line A kick out certain data before cache line B can read this data in. </li>
+<li>Compulsory: first reference to a block, since this blook has not been seen in cache.</li>
+<li>Capacity: the capacity of cache is too small to hold all the data needed.</li>
+<li>Conflict: this occurs because of collisioins such as one cache line A kick out certain data before cache line B can read this data in.</li>
 </ol>
-<p>Okay, how to reduce Miss Rate: </p>
+<p>Okay, how to reduce Miss Rate:</p>
 <ol>
-<li><strong>Large block size</strong>: </li>
+<li><strong>Large block size</strong>:</li>
 <li><strong>Large cache size</strong>: Empirical rule of thumb: if cache size is doubled, miss rate drop by about $\sqrt{2}$</li>
-<li><strong>High associativity</strong>: also empirical rule of thumb: direct-mapped cache of size N has about the same miss rate as a two-way set-associative cache of size N/2.  </li>
+<li><strong>High associativity</strong>: also empirical rule of thumb: direct-mapped cache of size N has about the same miss rate as a two-way set-associative cache of size N/2.</li>
 </ol>
-<h2 id="What-happens-On-A-Write-Write-Strategy"><a href="#What-happens-On-A-Write-Write-Strategy" class="headerlink" title="What happens On A Write? (Write Strategy)"></a>What happens On A Write? (Write Strategy)</h2><p>There are two basic write policies: </p>
+<h2>What happens On A Write? (Write Strategy)</h2>
+<p>There are two basic write policies:</p>
 <ol>
-<li><strong>Write-through</strong>: the results information is written to both <em>cache</em> and <em>memory</em>. </li>
-<li><strong>Write-back</strong>: the results information is written to only <em>cache</em>. The modified cache block is writen to main memory only when it is replaced. </li>
+<li><strong>Write-through</strong>: the results information is written to both <em>cache</em> and <em>memory</em>.</li>
+<li><strong>Write-back</strong>: the results information is written to only <em>cache</em>. The modified cache block is writen to main memory only when it is replaced.</li>
 </ol>
-<h1 id="Advanced-Optimizations-of-Cache-Performance"><a href="#Advanced-Optimizations-of-Cache-Performance" class="headerlink" title="Advanced Optimizations of Cache Performance"></a>Advanced Optimizations of Cache Performance</h1><h2 id="Cache-Pipelining"><a href="#Cache-Pipelining" class="headerlink" title="Cache Pipelining"></a>Cache Pipelining</h2><p>The cache hit contains three steps: </p>
+<h1>Advanced Optimizations of Cache Performance</h1>
+<h2>Cache Pipelining</h2>
+<p>The cache hit contains three steps:</p>
 <ol>
-<li>Address the tag memory using the index portion of the address. </li>
-<li>Compare the read tag value to the address. </li>
-<li>Set the multiplexor to choose the correct data item if the cache is set associative. </li>
+<li>Address the tag memory using the index portion of the address.</li>
+<li>Compare the read tag value to the address.</li>
+<li>Set the multiplexor to choose the correct data item if the cache is set associative.</li>
 </ol>
-<h3 id="Piplelining-Cache-Writes"><a href="#Piplelining-Cache-Writes" class="headerlink" title="Piplelining Cache Writes"></a>Piplelining Cache Writes</h3><p><strong>Problem</strong>: Write takes two cycles in memory stage, one cycle for tag check and one cycle for data write if hit.<br><strong>Solutions</strong>: </p>
+<h3>Piplelining Cache Writes</h3>
+<p><strong>Problem</strong>: Write takes two cycles in memory stage, one cycle for tag check and one cycle for data write if hit.
+<strong>Solutions</strong>:</p>
 <ol>
-<li>Pipeline write: hold write data for store in single buffer ahead of cache, write cache data during next store’s tag check. </li>
-<li>Fully-associative caches: word line only enabled if hit. </li>
-<li>Design data RAM that can perform read and write concurrently, restore old value after tag miss. </li>
+<li>Pipeline write: hold write data for store in single buffer ahead of cache, write cache data during next store's tag check.</li>
+<li>Fully-associative caches: word line only enabled if hit.</li>
+<li>Design data RAM that can perform read and write concurrently, restore old value after tag miss.</li>
 </ol>
-<h2 id="Write-Buffer-to-Reduce-Read-Miss-Penalty"><a href="#Write-Buffer-to-Reduce-Read-Miss-Penalty" class="headerlink" title="Write Buffer to Reduce Read Miss Penalty"></a>Write Buffer to Reduce Read Miss Penalty</h2><p>Processor is not stalled on writes, and read misses can go ahead of write to main memory.<br><strong>The Resulted Problem:</strong> Write buffer may hold updated value of location needed by a read miss. </p>
-<p><strong>A Simple Solution:</strong> on a read miss, wait for the write buffer to go empty. </p>
-<p><strong>Faster Scheme:</strong> Check write buffer addresses against read miss addresses, if no match, the read miss go ahead of writes. If there is some matches, return the value in write buffer. </p>
-<h2 id="Multilevel-Caches"><a href="#Multilevel-Caches" class="headerlink" title="Multilevel Caches"></a>Multilevel Caches</h2><p><strong>Problem:</strong> A memory cannot be both large and fast. </p>
-<p><strong>Solution:</strong> Increasing sizes of cache each level.<br><img src="multi_levels_caches.jpg" alt="Multi-level Caches"><span class="image-caption">Multi-level Caches</span></p>
+<h2>Write Buffer to Reduce Read Miss Penalty</h2>
+<p>Processor is not stalled on writes, and read misses can go ahead of write to main memory.
+<strong>The Resulted Problem:</strong> Write buffer may hold updated value of location needed by a read miss.</p>
+<p><strong>A Simple Solution:</strong> on a read miss, wait for the write buffer to go empty.</p>
+<p><strong>Faster Scheme:</strong> Check write buffer addresses against read miss addresses, if no match, the read miss go ahead of writes. If there is some matches, return the value in write buffer.</p>
+<h2>Multilevel Caches</h2>
+<p><strong>Problem:</strong> A memory cannot be both large and fast.</p>
+<p><strong>Solution:</strong> Increasing sizes of cache each level.
+<img src="multi_levels_caches.jpg" alt="Multi-level Caches"><span class="image-caption">Multi-level Caches</span></p>
 <p>Introduce some nomenclature</p>
 <ol>
 <li>Local miss rate: misses in cache / accesses to cache</li>
 <li>Global miss rate = misses in cache / CPU memory accesses</li>
 <li>Misses per instruction = misses in caches / number instructions</li>
 </ol>
-<h3 id="Presence-of-L2-influences-L1-design"><a href="#Presence-of-L2-influences-L1-design" class="headerlink" title="Presence of L2 influences L1 design"></a>Presence of L2 influences L1 design</h3><ol>
-<li>Use smaller L1 if there is also L2<ul>
+<h3>Presence of L2 influences L1 design</h3>
+<ol>
+<li>Use smaller L1 if there is also L2
+<ul>
 <li>Trade: [increased L1 miss rate] and [reduced L1 hit time] and [reduced L1 miss penalty]</li>
 <li>Reduces average access energy</li>
 </ul>
 </li>
-<li>Use simpler write-through L1 with on-chip L2: your design of L1 can be much simpler. <ul>
-<li>Write-back L2 cache absorbs write traffic, doesn’t go off-chip. </li>
-<li>At most one L1 miss request per L1 access. </li>
-<li>Simplifies coherence issues: By the way, what’s cache coherence. </li>
+<li>Use simpler write-through L1 with on-chip L2: your design of L1 can be much simpler.
+<ul>
+<li>Write-back L2 cache absorbs write traffic, doesn't go off-chip.</li>
+<li>At most one L1 miss request per L1 access.</li>
+<li>Simplifies coherence issues: By the way, what's cache coherence.</li>
 <li>Simplifies error recovery</li>
 </ul>
 </li>
 </ol>
-<h3 id="Inclusion-Policy"><a href="#Inclusion-Policy" class="headerlink" title="Inclusion Policy"></a>Inclusion Policy</h3><p>Now we have multi-levels caches</p>
+<h3>Inclusion Policy</h3>
+<p>Now we have multi-levels caches</p>
 <ol>
-<li>Inclusive multilevel cache: L1 cache 的内容一定需要在L2 中<ul>
+<li>Inclusive multilevel cache: L1 cache 的内容一定需要在L2 中
+<ul>
 <li>Inner cache holds copies of data in outer cache</li>
 <li>External coherence snoop access only need to check outer cache</li>
 </ul>
 </li>
-<li>Exclusive multilevel caches: L1 的内容不能在 L2 中, More storage<ul>
+<li>Exclusive multilevel caches: L1 的内容不能在 L2 中, More storage
+<ul>
 <li>Inner cache may hold data not in outer cache</li>
 <li>Swap lines between inner/outer caches on miss</li>
-<li>Used in AMD Athlon with 64KB primary and 256KB secondary caches. </li>
+<li>Used in AMD Athlon with 64KB primary and 256KB secondary caches.</li>
 </ul>
 </li>
 </ol>
-<h2 id="Victim-Caches"><a href="#Victim-Caches" class="headerlink" title="Victim Caches"></a>Victim Caches</h2><p>Victim is a cache line which has been evicted from your caches. It is the small fully associative cache for recently evicted lines, which is usually small(4-16 blocks). </p>
-<p>Give an instance: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int a[1M];</span><br><span class="line">int b[1M];</span><br><span class="line">int c[1M];</span><br><span class="line">for (i = 0; i &lt; 100; i++) &#123;</span><br><span class="line">    c[i] = a[i] + b[i]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>But there is only two-way set of assocaitive cache. So there are only two sets per index. So, a, b, c are always selected and then discarded. </p>
-<p>Victim cache can reduce conflict misses and can be checked in parallel or series with main cache. </p>
-<h2 id="Prefetching"><a href="#Prefetching" class="headerlink" title="Prefetching"></a>Prefetching</h2><h3 id="Basic-of-Prefetching"><a href="#Basic-of-Prefetching" class="headerlink" title="Basic of Prefetching"></a>Basic of Prefetching</h3><ul>
-<li>Speculate on future instruction and data accesses and fetch them into caches. In fact, instructions accesses are always easier to predict than data accesses. </li>
-<li>Varieties of prefetching: <ul>
+<h2>Victim Caches</h2>
+<p>Victim is a cache line which has been evicted from your caches. It is the small fully associative cache for recently evicted lines, which is usually small(4-16 blocks).</p>
+<p>Give an instance:
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int a[1M];</span><br><span class="line">int b[1M];</span><br><span class="line">int c[1M];</span><br><span class="line">for (i = 0; i &lt; 100; i++) &#123;</span><br><span class="line">    c[i] = a[i] + b[i]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>But there is only two-way set of assocaitive cache. So there are only two sets per index. So, a, b, c are always selected and then discarded.</p>
+<p>Victim cache can reduce conflict misses and can be checked in parallel or series with main cache.</p>
+<h2>Prefetching</h2>
+<h3>Basic of Prefetching</h3>
+<ul>
+<li>Speculate on future instruction and data accesses and fetch them into caches. In fact, instructions accesses are always easier to predict than data accesses.</li>
+<li>Varieties of prefetching:
+<ul>
 <li>hardware prefetching</li>
 <li>software prefetching</li>
 <li>mixed schemes</li>
 </ul>
 </li>
 </ul>
-<p>To better illustate prefetching, give a figure about data prefetching:<br><img src="prefetching.jpg" alt="Data prefetching"><span class="image-caption">Data prefetching</span></p>
-<p>What types of miss does prefetching affect? </p>
-<h3 id="Issues-in-Prefetching"><a href="#Issues-in-Prefetching" class="headerlink" title="Issues in Prefetching"></a>Issues in Prefetching</h3><ol>
+<p>To better illustate prefetching, give a figure about data prefetching:
+<img src="prefetching.jpg" alt="Data prefetching"><span class="image-caption">Data prefetching</span></p>
+<p>What types of miss does prefetching affect?</p>
+<h3>Issues in Prefetching</h3>
+<ol>
 <li>Usefulness: prefetching should produce hits.</li>
 <li>Timeliness: prefetching should not be too late or too early.</li>
-<li>Cache and bandwidth pollution: </li>
+<li>Cache and bandwidth pollution:</li>
 </ol>
-<h3 id="Hardware-Instruction-Prefetching"><a href="#Hardware-Instruction-Prefetching" class="headerlink" title="Hardware Instruction Prefetching"></a>Hardware Instruction Prefetching</h3><ol>
-<li>Fetch two blocks on a miss: the requested block i and the next consecutive block. </li>
-<li>The requested block is placed in cache while the next block(i+1) is placed in <font color="blue">instruction stream buffer. </font></li>
-<li>If miss in cache but hit in stream buffer, move stream buffer block into cache and prefetch next block(i=2)<br><img src="intruction_prefetch.jpg" alt="Hardware instruction prefetching"><span class="image-caption">Hardware instruction prefetching</span></li>
+<h3>Hardware Instruction Prefetching</h3>
+<ol>
+<li>Fetch two blocks on a miss: the requested block i and the next consecutive block.</li>
+<li>The requested block is placed in cache while the next block(i+1) is placed in &lt;font color=blue&gt;instruction stream buffer. &lt;/font&gt;</li>
+<li>If miss in cache but hit in stream buffer, move stream buffer block into cache and prefetch next block(i=2)
+<img src="intruction_prefetch.jpg" alt="Hardware instruction prefetching"><span class="image-caption">Hardware instruction prefetching</span></li>
 </ol>
-<h3 id="Hardware-Data-Prefetching"><a href="#Hardware-Data-Prefetching" class="headerlink" title="Hardware Data Prefetching"></a>Hardware Data Prefetching</h3><ul>
-<li><strong>Prefetch-on-miss:</strong> prefetch (b + 1) upon miss on b. </li>
-<li><strong>One block lookahead(OBL) scheme:</strong> Initiate prefetch for block (b + 1) when block b is accessed. </li>
+<h3>Hardware Data Prefetching</h3>
+<ul>
+<li><strong>Prefetch-on-miss:</strong> prefetch (b + 1) upon miss on b.</li>
+<li><strong>One block lookahead(OBL) scheme:</strong> Initiate prefetch for block (b + 1) when block b is accessed.</li>
 <li><strong>Strided prefetch:</strong> If observe sequence of accesses to blcok b, b + N, b + 2N, then prefetch b + 3N</li>
 </ul>
-<h3 id="Software-Prefetching-Issues"><a href="#Software-Prefetching-Issues" class="headerlink" title="Software Prefetching Issues"></a>Software Prefetching Issues</h3><p><strong>Timing is the biggest issue, not predictability</strong></p>
+<h3>Software Prefetching Issues</h3>
+<p><strong>Timing is the biggest issue, not predictability</strong></p>
 <ul>
-<li>If prefetch very close to when the data is requested, it may be too late. </li>
-<li>Prefetching too early causes pollution. </li>
-<li>Estimate how long it will take </li>
+<li>If prefetch very close to when the data is requested, it may be too late.</li>
+<li>Prefetching too early causes pollution.</li>
+<li>Estimate how long it will take</li>
 </ul>
-<h2 id="Multiporting-and-Banking-Increasing-Cache-Bandwidth"><a href="#Multiporting-and-Banking-Increasing-Cache-Bandwidth" class="headerlink" title="Multiporting and Banking: Increasing Cache Bandwidth"></a>Multiporting and Banking: Increasing Cache Bandwidth</h2><h3 id="True-Multiport-Caches"><a href="#True-Multiport-Caches" class="headerlink" title="True Multiport Caches"></a>True Multiport Caches</h3><p>Show the model structure of multiport caches:<br><img src="multiport_caches.jpg" alt="Multiport caches"><span class="image-caption">Multiport caches</span><br>Multiport caches can be quite expensive since it need to add new ports. </p>
-<h3 id="Psesudo-Multiport-Caches-Banked-Caches"><a href="#Psesudo-Multiport-Caches-Banked-Caches" class="headerlink" title="Psesudo Multiport Caches: Banked Caches"></a>Psesudo Multiport Caches: Banked Caches</h3><p>Bank caches means that address space is divided into multiple banks.<br>See in the picture: </p>
+<h2>Multiporting and Banking: Increasing Cache Bandwidth</h2>
+<h3>True Multiport Caches</h3>
+<p>Show the model structure of multiport caches:
+<img src="multiport_caches.jpg" alt="Multiport caches"><span class="image-caption">Multiport caches</span>
+Multiport caches can be quite expensive since it need to add new ports.</p>
+<h3>Psesudo Multiport Caches: Banked Caches</h3>
+<p>Bank caches means that address space is divided into multiple banks.
+See in the picture:</p>
 <p><strong>Benefits:</strong></p>
 <ul>
-<li>Higher throughput</li>
-</ul>
-<p><strong>Challenges:</strong></p>
-<ul>
+<li>Higher throughput
+<strong>Challenges:</strong></li>
 <li>Bank conflicts</li>
 <li>Extra wiring</li>
 <li>Uneven utilization</li>
 </ul>
-<h2 id="Non-Blocking-Caches"><a href="#Non-Blocking-Caches" class="headerlink" title="Non-Blocking Caches"></a>Non-Blocking Caches</h2><p>D-cache miss 时候: <strong>仍然可以执行后续load/store指令,这种设计方法称之为 Non-blocking Cache</strong>, 发生miss 后, 需要将目的寄存器状态标记为 non-available, 还需要将导致 D-cache miss 的load/store 指令保存起来,这个部件为MSHR (Miss Status Handling Register). 可以认为是 <strong>Hit under Miss</strong> 机制. </p>
-<h3 id="Basic-Knowledge"><a href="#Basic-Knowledge" class="headerlink" title="Basic Knowledge"></a>Basic Knowledge</h3><p>1.<strong>What’s is non-blocking caches?</strong><br>  Non-blocking cache enables subsequent cache accesses after a cache miss has occured. </p>
+<h2>Non-Blocking Caches</h2>
+<p>D-cache miss 时候: <strong>仍然可以执行后续load/store指令,这种设计方法称之为 Non-blocking Cache</strong>, 发生miss 后, 需要将目的寄存器状态标记为 non-available, 还需要将导致 D-cache miss 的load/store 指令保存起来,这个部件为MSHR (Miss Status Handling Register). 可以认为是 <strong>Hit under Miss</strong> 机制.</p>
+<h3>Basic Knowledge</h3>
+<p>1.<strong>What's is non-blocking caches?</strong>
+Non-blocking cache enables subsequent cache accesses after a cache miss has occured.</p>
 <ul>
 <li>Hit-under-miss</li>
 <li>Miss-under-miss (concurrent misses)</li>
 </ul>
 <ol start="2">
-<li><strong>Non-blocking challenges:</strong><ul>
+<li><strong>Non-blocking challenges:</strong>
+<ul>
 <li>Maintain order when multiple misses that might return out of order</li>
 <li>Load or store to an already pending miss address</li>
 </ul>
 </li>
 </ol>
-<h3 id="Non-Blocking-Cache-Timeline-and-MSHR"><a href="#Non-Blocking-Cache-Timeline-and-MSHR" class="headerlink" title="Non-Blocking Cache Timeline and MSHR"></a>Non-Blocking Cache Timeline and MSHR</h3><p><img src="non-blocking_timeline.jpg" alt="Non-blocking cache timeline"><span class="image-caption">Non-blocking cache timeline</span></p>
-<h3 id="Non-blocking-Cache-Operation"><a href="#Non-blocking-Cache-Operation" class="headerlink" title="Non-blocking Cache Operation"></a>Non-blocking Cache Operation</h3><ol>
-<li>When cache miss: <ul>
-<li>Check MSHR for matched address: <ul>
-<li>(1). If found: allocate <font color="red">new Load/Store entry pointing</font> to MSHR. <ul>
-<li>(2). If not found: allocate <font color="red">new MSHR entry </font>. </li>
+<h3>Non-Blocking Cache Timeline and MSHR</h3>
+<p><img src="non-blocking_timeline.jpg" alt="Non-blocking cache timeline"><span class="image-caption">Non-blocking cache timeline</span></p>
+<h3>Non-blocking Cache Operation</h3>
+<ol>
+<li>When cache miss:
+<ul>
+<li>Check MSHR for matched address:</li>
+</ul>
+<ul>
+<li>(1). If found: allocate &lt;font color='red'&gt;new Load/Store entry pointing&lt;/font&gt; to MSHR.
+<ul>
+<li>(2). If not found: allocate &lt;font color='red'&gt;new MSHR entry &lt;/font&gt;.</li>
 </ul>
 </li>
-<li>(3). If all entries full in MSHR or Load/Store entry table, stall or prevent new LDs/STs. </li>
+<li>(3). If all entries full in MSHR or Load/Store entry table, stall or prevent new LDs/STs.</li>
 </ul>
 </li>
+<li>When data is returned from memory:
+<ul>
+<li>Find Load or Store waiting for it:</li>
 </ul>
-</li>
-<li>When data is returned from memory: <ul>
-<li>Find Load or Store waiting for it: <ul>
-<li>(1). Forward load data to processor/clear store buffer. </li>
-<li>(2). Could be multiple Loads and Stores. </li>
+<ul>
+<li>(1). Forward load data to processor/clear store buffer.</li>
+<li>(2). Could be multiple Loads and Stores.</li>
 </ul>
-</li>
+<ul>
 <li>Write data to cache</li>
 </ul>
 </li>
-<li>When cache line is completely returned: <ul>
+<li>When cache line is completely returned:
+<ul>
 <li>De-allocate MSHR entry.</li>
 </ul>
 </li>
 </ol>
-<h2 id="Critical-Word-First-and-Early-Restart"><a href="#Critical-Word-First-and-Early-Restart" class="headerlink" title="Critical Word First and Early Restart"></a>Critical Word First and Early Restart</h2><p>This type of technique is based on the observation that  </p>
-<h2 id="Software-Memory-Optimization"><a href="#Software-Memory-Optimization" class="headerlink" title="Software Memory Optimization"></a>Software Memory Optimization</h2><h3 id="Cache-Optimizations"><a href="#Cache-Optimizations" class="headerlink" title="Cache Optimizations"></a>Cache Optimizations</h3><ol>
-<li>Restructuring code affects the data block access sequence. </li>
-<li>Prevent data from entering the cache. </li>
-<li>Kill data that will never be used again: if you only need to use certain data only once, you may not pull the data into your cache since it’s a waste. </li>
-<li>Lop Interchange: spatial locality<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (i = 0; i &lt; 100; i++) &#123;</span><br><span class="line">    for (j=0; j &lt; 100; j++) &#123;</span><br><span class="line">	x[i, j] = 2 * x[i, j]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<h2>Critical Word First and Early Restart</h2>
+<p>This type of technique is based on the observation that</p>
+<h2>Software Memory Optimization</h2>
+<h3>Cache Optimizations</h3>
+<ol>
+<li>Restructuring code affects the data block access sequence.</li>
+<li>Prevent data from entering the cache.</li>
+<li>Kill data that will never be used again: if you only need to use certain data only once, you may not pull the data into your cache since it's a waste.</li>
+<li>Lop Interchange: spatial locality
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (i = 0; i &lt; 100; i++) &#123;</span><br><span class="line">    for (j=0; j &lt; 100; j++) &#123;</span><br><span class="line">	x[i, j] = 2 * x[i, j]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (j = 0; j &lt; 100; i++) &#123;</span><br><span class="line">    for (i=0; i &lt; 100; i++) &#123;</span><br><span class="line">	x[i, j] = 2 * x[i, j]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (j = 0; j &lt; 100; i++) &#123;</span><br><span class="line">    for (i=0; i &lt; 100; i++) &#123;</span><br><span class="line">	x[i, j] = 2 * x[i, j]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <ol start="2">
-<li>Loop Fusion: temporal locality<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for (i = 0; i &lt; N; i++) &#123;</span><br><span class="line">    a[i] = b[i] * c[i];</span><br><span class="line">&#125;</span><br><span class="line">for (i = 0; i &lt; N; i++) &#123;</span><br><span class="line">    d[i] = a[i] * c[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>Loop Fusion: temporal locality
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for (i = 0; i &lt; N; i++) &#123;</span><br><span class="line">    a[i] = b[i] * c[i];</span><br><span class="line">&#125;</span><br><span class="line">for (i = 0; i &lt; N; i++) &#123;</span><br><span class="line">    d[i] = a[i] * c[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (i = 0; i &lt; N; i++) &#123;</span><br><span class="line">    a[i] = b[i] * c[i]</span><br><span class="line">    d[i] = a[i] * c[i]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (i = 0; i &lt; N; i++) &#123;</span><br><span class="line">    a[i] = b[i] * c[i]</span><br><span class="line">    d[i] = a[i] * c[i]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <ol start="3">
 <li>Matrix Multiply: with Cache Tiling/Blocking</li>
 </ol>
@@ -746,7 +795,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Where-To-Place-A-Block-Block-Placement"><span class="nav-number">1.</span> <span class="nav-text">Where To Place A Block? (Block Placement)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Miss"><span class="nav-number">1.1.</span> <span class="nav-text">Cache Miss</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-happens-On-A-Write-Write-Strategy"><span class="nav-number">2.</span> <span class="nav-text">What happens On A Write? (Write Strategy)</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Advanced-Optimizations-of-Cache-Performance"><span class="nav-number"></span> <span class="nav-text">Advanced Optimizations of Cache Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache-Pipelining"><span class="nav-number">1.</span> <span class="nav-text">Cache Pipelining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Piplelining-Cache-Writes"><span class="nav-number">1.1.</span> <span class="nav-text">Piplelining Cache Writes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-Buffer-to-Reduce-Read-Miss-Penalty"><span class="nav-number">2.</span> <span class="nav-text">Write Buffer to Reduce Read Miss Penalty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multilevel-Caches"><span class="nav-number">3.</span> <span class="nav-text">Multilevel Caches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Presence-of-L2-influences-L1-design"><span class="nav-number">3.1.</span> <span class="nav-text">Presence of L2 influences L1 design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inclusion-Policy"><span class="nav-number">3.2.</span> <span class="nav-text">Inclusion Policy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Victim-Caches"><span class="nav-number">4.</span> <span class="nav-text">Victim Caches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Prefetching"><span class="nav-number">5.</span> <span class="nav-text">Prefetching</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-of-Prefetching"><span class="nav-number">5.1.</span> <span class="nav-text">Basic of Prefetching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Issues-in-Prefetching"><span class="nav-number">5.2.</span> <span class="nav-text">Issues in Prefetching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hardware-Instruction-Prefetching"><span class="nav-number">5.3.</span> <span class="nav-text">Hardware Instruction Prefetching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hardware-Data-Prefetching"><span class="nav-number">5.4.</span> <span class="nav-text">Hardware Data Prefetching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Software-Prefetching-Issues"><span class="nav-number">5.5.</span> <span class="nav-text">Software Prefetching Issues</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiporting-and-Banking-Increasing-Cache-Bandwidth"><span class="nav-number">6.</span> <span class="nav-text">Multiporting and Banking: Increasing Cache Bandwidth</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#True-Multiport-Caches"><span class="nav-number">6.1.</span> <span class="nav-text">True Multiport Caches</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Psesudo-Multiport-Caches-Banked-Caches"><span class="nav-number">6.2.</span> <span class="nav-text">Psesudo Multiport Caches: Banked Caches</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Non-Blocking-Caches"><span class="nav-number">7.</span> <span class="nav-text">Non-Blocking Caches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Knowledge"><span class="nav-number">7.1.</span> <span class="nav-text">Basic Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-Blocking-Cache-Timeline-and-MSHR"><span class="nav-number">7.2.</span> <span class="nav-text">Non-Blocking Cache Timeline and MSHR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-blocking-Cache-Operation"><span class="nav-number">7.3.</span> <span class="nav-text">Non-blocking Cache Operation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Critical-Word-First-and-Early-Restart"><span class="nav-number">8.</span> <span class="nav-text">Critical Word First and Early Restart</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Software-Memory-Optimization"><span class="nav-number">9.</span> <span class="nav-text">Software Memory Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Optimizations"><span class="nav-number">9.1.</span> <span class="nav-text">Cache Optimizations</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Where To Place A Block? (Block Placement)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Which Block To Be Replaced When Cache Miss Happens? (Block Replacement Strategy)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Cache Miss</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">What happens On A Write? (Write Strategy)</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Advanced Optimizations of Cache Performance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Cache Pipelining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Piplelining Cache Writes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Write Buffer to Reduce Read Miss Penalty</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Multilevel Caches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">Presence of L2 influences L1 design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">Inclusion Policy</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Victim Caches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">Prefetching</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">Basic of Prefetching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">Issues in Prefetching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.3.</span> <span class="nav-text">Hardware Instruction Prefetching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.4.</span> <span class="nav-text">Hardware Data Prefetching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.5.</span> <span class="nav-text">Software Prefetching Issues</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">Multiporting and Banking: Increasing Cache Bandwidth</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.1.</span> <span class="nav-text">True Multiport Caches</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">6.2.</span> <span class="nav-text">Psesudo Multiport Caches: Banked Caches</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">Non-Blocking Caches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.1.</span> <span class="nav-text">Basic Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.2.</span> <span class="nav-text">Non-Blocking Cache Timeline and MSHR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">7.3.</span> <span class="nav-text">Non-blocking Cache Operation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">Critical Word First and Early Restart</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">9.</span> <span class="nav-text">Software Memory Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">9.1.</span> <span class="nav-text">Cache Optimizations</span></a></li></ol></li></ol></li></div>
             
 
           </div>
