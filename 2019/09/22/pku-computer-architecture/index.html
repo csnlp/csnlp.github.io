@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="对北大的计算机组层这门课做一个简单的笔记，北大的这门课相对要求不高，懂一些数字电路、模拟电路的知识就可以上手了。 计算机基本结构 冯.诺伊曼的要点  计算机的五大组成部分   运算器: CA: central arithmetical 存储器: M: memory 控制器:  CC: central control 输入设备: I: input 输出设备: O: output    计算机的 数据">
+<meta name="description" content="对北大的计算机组层这门课做一个简单的笔记，北大的这门课相对要求不高，懂一些数字电路、模拟电路的知识就可以上手了。 计算机基本结构冯.诺伊曼的要点 计算机的五大组成部分 运算器: CA: central arithmetical 存储器: M: memory 控制器:  CC: central control 输入设备: I: input 输出设备: O: output      计算机的 数据和程">
 <meta name="keywords" content="Computer Architecture">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Computer Organization from PKU">
 <meta property="og:url" content="http://yoursite.com/2019/09/22/pku-computer-architecture/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="对北大的计算机组层这门课做一个简单的笔记，北大的这门课相对要求不高，懂一些数字电路、模拟电路的知识就可以上手了。 计算机基本结构 冯.诺伊曼的要点  计算机的五大组成部分   运算器: CA: central arithmetical 存储器: M: memory 控制器:  CC: central control 输入设备: I: input 输出设备: O: output    计算机的 数据">
+<meta property="og:description" content="对北大的计算机组层这门课做一个简单的笔记，北大的这门课相对要求不高，懂一些数字电路、模拟电路的知识就可以上手了。 计算机基本结构冯.诺伊曼的要点 计算机的五大组成部分 运算器: CA: central arithmetical 存储器: M: memory 控制器:  CC: central control 输入设备: I: input 输出设备: O: output      计算机的 数据和程">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/09/22/pku-computer-architecture/von_neumann.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/09/22/pku-computer-architecture/key_von_neumann.jpg">
@@ -101,7 +101,7 @@
 <meta property="og:updated_time" content="2020-01-30T06:49:50.495Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Computer Organization from PKU">
-<meta name="twitter:description" content="对北大的计算机组层这门课做一个简单的笔记，北大的这门课相对要求不高，懂一些数字电路、模拟电路的知识就可以上手了。 计算机基本结构 冯.诺伊曼的要点  计算机的五大组成部分   运算器: CA: central arithmetical 存储器: M: memory 控制器:  CC: central control 输入设备: I: input 输出设备: O: output    计算机的 数据">
+<meta name="twitter:description" content="对北大的计算机组层这门课做一个简单的笔记，北大的这门课相对要求不高，懂一些数字电路、模拟电路的知识就可以上手了。 计算机基本结构冯.诺伊曼的要点 计算机的五大组成部分 运算器: CA: central arithmetical 存储器: M: memory 控制器:  CC: central control 输入设备: I: input 输出设备: O: output      计算机的 数据和程">
 <meta name="twitter:image" content="http://yoursite.com/2019/09/22/pku-computer-architecture/von_neumann.jpg">
 
 
@@ -376,190 +376,148 @@
 
       
         <p>对北大的计算机组层这门课做一个简单的笔记，北大的这门课相对要求不高，懂一些数字电路、模拟电路的知识就可以上手了。</p>
-<h1>计算机基本结构</h1>
-<h2>冯.诺伊曼的要点</h2>
-<ol>
-<li>计算机的五大组成部分</li>
-</ol>
-<ul>
+<h1 id="计算机基本结构"><a href="#计算机基本结构" class="headerlink" title="计算机基本结构"></a>计算机基本结构</h1><h2 id="冯-诺伊曼的要点"><a href="#冯-诺伊曼的要点" class="headerlink" title="冯.诺伊曼的要点"></a>冯.诺伊曼的要点</h2><ol>
+<li>计算机的五大组成部分<ul>
 <li>运算器: CA: central arithmetical</li>
 <li>存储器: M: memory</li>
 <li>控制器:  CC: central control</li>
 <li>输入设备: I: input</li>
 <li>输出设备: O: output</li>
 </ul>
+</li>
+</ol>
 <p><img src="von_neumann.jpg" alt=""></p>
 <ol start="2">
 <li>计算机的 <em>数据和程序</em> 均以 <em>二进制</em> 形式不加区别的存放在存储器中, 存放位置由存储器的地址指定</li>
 <li>计算机在工作时候能够自动地从存储器中取出指令加以执行</li>
 </ol>
 <p><img src="key_von_neumann.jpg" alt=""></p>
-<h1>计算机结构的简化模型</h1>
-<p>简化模型结构如下
-<img src="simplified_model.jpg" alt=""></p>
+<h1 id="计算机结构的简化模型"><a href="#计算机结构的简化模型" class="headerlink" title="计算机结构的简化模型"></a>计算机结构的简化模型</h1><p>简化模型结构如下<br><img src="simplified_model.jpg" alt=""></p>
 <p>接下来详细介绍: 存储器、控制器、运算器这3个重要组件。 其中, 一共</p>
 <ul>
 <li><em>控制总线</em>: 双向的, 存储器和CPU 双向交流信息。</li>
 <li><em>地址总线</em>: 单向的, CPU将内部的MAR传递个存储器的MAR。</li>
-<li><em>数据总线</em>: 双向的, CPU 和 存储器之间相互传递数据。</li>
+<li><em>数据总线</em>: 双向的, CPU 和 存储器之间相互传递数据。  </li>
 </ul>
-<h2>模型机的存储器</h2>
-<p><img src="model_memory.jpg" alt=""></p>
-<h2>模型机的控制器</h2>
-<p><img src="model_control.jpg" alt="">
-控制器代表图中彩色的部分，其主要组成部分包括6个部分,控制器用于控制计算机各部件完成 <em>取指令、分析指令、执行指令</em>等功能, 其组成部分及其功能如下:</p>
+<h2 id="模型机的存储器"><a href="#模型机的存储器" class="headerlink" title="模型机的存储器"></a>模型机的存储器</h2><p><img src="model_memory.jpg" alt=""></p>
+<h2 id="模型机的控制器"><a href="#模型机的控制器" class="headerlink" title="模型机的控制器"></a>模型机的控制器</h2><p><img src="model_control.jpg" alt=""><br>控制器代表图中彩色的部分，其主要组成部分包括6个部分,控制器用于控制计算机各部件完成 <em>取指令、分析指令、执行指令</em>等功能, 其组成部分及其功能如下: </p>
 <ol>
 <li>指令寄存器(Instruction Register, IR): 存放 正在执行或者即将执行的指令</li>
-<li>程序计数器(Program Counter, PC): PC存放 下一条指令的存储单元地址, 具有自动增量计数的功能。</li>
+<li>程序计数器(Program Counter, PC): PC存放 下一条指令的存储单元地址, 具有自动增量计数的功能。 </li>
 <li>存储器地址寄存器(Memory Address Register, MAR):  在访存时 用于存放 存储单元的地址</li>
-<li>存储器数据寄存器(Memory Data Register, MDR): MDR在访存是 用于存放 对存储单元读写的数据。</li>
-<li>指令译码部件: 对IR中的指令进行译码, 已确定IR中存放的是哪一条指令。</li>
-<li>控制电路: 产生控制信号, 在时序脉冲的同步下控制各个部件的动作。</li>
+<li>存储器数据寄存器(Memory Data Register, MDR): MDR在访存是 用于存放 对存储单元读写的数据。 </li>
+<li>指令译码部件: 对IR中的指令进行译码, 已确定IR中存放的是哪一条指令。 </li>
+<li>控制电路: 产生控制信号, 在时序脉冲的同步下控制各个部件的动作。 </li>
 </ol>
-<h2>模型机的运算器</h2>
-<p>模型机结构如下
-<img src="model_ca.jpg" alt="">
-其各个部件的功能为
-<img src="model_ca_components.jpg" alt=""></p>
-<h2>计算机执行指令的过程</h2>
-<p>过程， 以 ADD R0 [6]</p>
+<h2 id="模型机的运算器"><a href="#模型机的运算器" class="headerlink" title="模型机的运算器"></a>模型机的运算器</h2><p>模型机结构如下<br><img src="model_ca.jpg" alt=""><br>其各个部件的功能为<br><img src="model_ca_components.jpg" alt=""></p>
+<h2 id="计算机执行指令的过程"><a href="#计算机执行指令的过程" class="headerlink" title="计算机执行指令的过程"></a>计算机执行指令的过程</h2><p>过程， 以 ADD R0 [6]</p>
 <ol>
-<li>取指(Fetch): 控制器将指令地址送往存储器,存储器从给定的地址读出指令内容,送回控制器。控制器会发出信号,将PC中的信号传送到MAR中,MAR 会将地址送到地址总线上，与此同时，在控制总线上，控制电路会发出信号，代表这次存储器操作是为了读取数据。地址译码器会将这次信号翻译成地址，存储器的控制逻辑也会将这次控制信号翻译成“Read” 操作。此刻，存储器通过地址(0001)和Read 信号就能找到存储器对应地址的内容(10101010),而且会将这个内容存到MDR 中，此后，存储器控制逻辑通过控制总线会向CPU反馈当前存储已经准备好了，随后数据总线也会将数据放到MDR.
-最后的最后，需要将PC更新成为下一条指令需要访问的地址。</li>
+<li>取指(Fetch): 控制器将指令地址送往存储器,存储器从给定的地址读出指令内容,送回控制器。控制器会发出信号,将PC中的信号传送到MAR中,MAR 会将地址送到地址总线上，与此同时，在控制总线上，控制电路会发出信号，代表这次存储器操作是为了读取数据。地址译码器会将这次信号翻译成地址，存储器的控制逻辑也会将这次控制信号翻译成“Read” 操作。此刻，存储器通过地址(0001)和Read 信号就能找到存储器对应地址的内容(10101010),而且会将这个内容存到MDR 中，此后，存储器控制逻辑通过控制总线会向CPU反馈当前存储已经准备好了，随后数据总线也会将数据放到MDR.<br>最后的最后，需要将PC更新成为下一条指令需要访问的地址。</li>
 <li>译码(Decode): 控制器分析指令的操作性质,并向相关部件发出指令所需的控制信号。当前的指令寄存器(IR),会将指令编码送往指令(10101010)译码部件中去，指令译码之后会得到这是 “ADD R0 [6]”</li>
-<li>执行(Excute): 控制器从通用寄存器或存储器中取出操作数, 控制器命令运算器对操作数进行指令规定的运算。i.e.,</li>
+<li>执行(Excute): 控制器从通用寄存器或存储器中取出操作数, 控制器命令运算器对操作数进行指令规定的运算。i.e., </li>
 <li>回写(Write-Back): 将运算结果写到存储器或者通用寄存器中，运算结果目前还存放在Z寄存器中，控制电路会给出控制信号，会将Z寄存器存放在R0 中</li>
 </ol>
-<h2>计算机的输入输出</h2>
-<h1>指令体系结构(Instruction Set Architecture)</h1>
-<h2>设计自己的计算机</h2>
-<h3>一个简单的计算机指令系统</h3>
-<ol>
-<li>运算类指令: ADD R, M
-将R的内容与M的内容相加后存入R</li>
+<h2 id="计算机的输入输出"><a href="#计算机的输入输出" class="headerlink" title="计算机的输入输出"></a>计算机的输入输出</h2><h1 id="指令体系结构-Instruction-Set-Architecture"><a href="#指令体系结构-Instruction-Set-Architecture" class="headerlink" title="指令体系结构(Instruction Set Architecture)"></a>指令体系结构(Instruction Set Architecture)</h1><h2 id="设计自己的计算机"><a href="#设计自己的计算机" class="headerlink" title="设计自己的计算机"></a>设计自己的计算机</h2><h3 id="一个简单的计算机指令系统"><a href="#一个简单的计算机指令系统" class="headerlink" title="一个简单的计算机指令系统"></a>一个简单的计算机指令系统</h3><ol>
+<li>运算类指令: ADD R, M<br>将R的内容与M的内容相加后存入R</li>
 <li>传送类指令: LOAD R, M, 功能是将M中的内容传入R中, 对应的还有STORE M, R, 将R中内容存入M中。</li>
 <li>转移类指令: JMP L, 功能是转向L 所指向的下一条指令来执行.</li>
 </ol>
 <p>注意: M, L 均指的是存储器地址，而R则指的是寄存器编号。</p>
-<h3>指令的格式</h3>
-<ol>
+<h3 id="指令的格式"><a href="#指令的格式" class="headerlink" title="指令的格式"></a>指令的格式</h3><ol>
 <li>指令是等长的，均为两个字节</li>
 <li>第一个字节的高4位是操作码， 可以标注为LOAD: 0000; ADD: 0001; STORE: 0010; JMP: 0011</li>
 <li>第一个字节的低4位是寄存器好: R0-R3 分别对应 0000-0011</li>
 <li>第二个字节是存储单元地址.</li>
 </ol>
-<p>举个例子
-<img src="instruction_example.jpg" alt=""></p>
-<h3>运算任务示例</h3>
-<p>任务: 将M1 的内容与M2 内容相加后存入M3, 完成运算后程序转向L处指令继续执行</p>
+<p>举个例子<br><img src="instruction_example.jpg" alt=""></p>
+<h3 id="运算任务示例"><a href="#运算任务示例" class="headerlink" title="运算任务示例"></a>运算任务示例</h3><p>任务: 将M1 的内容与M2 内容相加后存入M3, 完成运算后程序转向L处指令继续执行</p>
 <ol>
 <li>LOAD R1, M1</li>
 <li>ADD R1, M2</li>
 <li>STORE M3, R1</li>
 <li>JMP L</li>
 </ol>
-<h2>X86 体系结构</h2>
-<h2>MIPS 体系结构</h2>
-<p>精简指令集代表(Reduced Instruction Set Computer). 而CISC 的指令操作数必须预存与寄存器中, MIPS(Microprocessor without Interlocked Piped Stages).
-MIPS 指令的主要特点:</p>
+<h2 id="X86-体系结构"><a href="#X86-体系结构" class="headerlink" title="X86 体系结构"></a>X86 体系结构</h2><h2 id="MIPS-体系结构"><a href="#MIPS-体系结构" class="headerlink" title="MIPS 体系结构"></a>MIPS 体系结构</h2><p>精简指令集代表(Reduced Instruction Set Computer). 而CISC 的指令操作数必须预存与寄存器中, MIPS(Microprocessor without Interlocked Piped Stages).<br>MIPS 指令的主要特点: </p>
 <ol>
 <li>固定的指令长度</li>
 <li>简单的寻址模式: 简化了从存储器取操作数</li>
-<li>指令数量少，指令功能简单: 一条指令只完成一个操作。</li>
-<li>只允许Load, Store 指令可以访问存储器(不支持: ADD AX, [3000H] 这种x86 指令), 也就限定了大部分的操作都不能是存储器操作数。</li>
+<li>指令数量少，指令功能简单: 一条指令只完成一个操作。 </li>
+<li>只允许Load, Store 指令可以访问存储器(不支持: ADD AX, [3000H] 这种x86 指令), 也就限定了大部分的操作都不能是存储器操作数。 </li>
 <li>需要有优秀的编译器的支持</li>
 </ol>
-<p>MIPS 指令简介: 包括了R, I, J 型3中指令形式。
-<img src="mips_instruction_format.jpg" alt="">
-<img src="mips_instruction_classification.jpg" alt=""></p>
-<h2>算术逻辑单元 与 寄存器</h2>
-<p>常见的门电路都是由NMOS 或者 PMOS 组成。 非、与、或、与或、与非 都可以用NMOS 或者 CMOS 实现。
-存储器是由D触发器实现的。</p>
-<p>逻辑运算的实现:</p>
-<h1>单周期处理器设计</h1>
-<h2>建立数据通路</h2>
-<h3>指令的需求</h3>
-<ol>
-<li>所有指令的共同需求</li>
-</ol>
+<p>MIPS 指令简介: 包括了R, I, J 型3中指令形式。<br><img src="mips_instruction_format.jpg" alt=""><br><img src="mips_instruction_classification.jpg" alt=""></p>
+<h2 id="算术逻辑单元-与-寄存器"><a href="#算术逻辑单元-与-寄存器" class="headerlink" title="算术逻辑单元 与 寄存器"></a>算术逻辑单元 与 寄存器</h2><p>常见的门电路都是由NMOS 或者 PMOS 组成。 非、与、或、与或、与非 都可以用NMOS 或者 CMOS 实现。<br>存储器是由D触发器实现的。 </p>
+<p>逻辑运算的实现: </p>
+<h1 id="单周期处理器设计"><a href="#单周期处理器设计" class="headerlink" title="单周期处理器设计"></a>单周期处理器设计</h1><h2 id="建立数据通路"><a href="#建立数据通路" class="headerlink" title="建立数据通路"></a>建立数据通路</h2><h3 id="指令的需求"><a href="#指令的需求" class="headerlink" title="指令的需求"></a>指令的需求</h3><ol>
+<li><p>所有指令的共同需求</p>
 <ul>
-<li>取指令: PC的内容是指令的地址，用PC的内容作为地址，访问存储器获得指令编码。
-[更新PC 有两种情况: (1). 顺序执行:PC = PC + 4, (2). 发生分支: PC = 分支目标的地址</li>
+<li>取指令: PC的内容是指令的地址，用PC的内容作为地址，访问存储器获得指令编码。<br>[更新PC 有两种情况: (1). 顺序执行:PC = PC + 4, (2). 发生分支: PC = 分支目标的地址</li>
 </ul>
-<ol start="2">
-<li>不同指令的需求</li>
-</ol>
+</li>
+<li><p>不同指令的需求</p>
 <ul>
 <li>加法和减法指令的需求</li>
 </ul>
+</li>
+</ol>
 <p>]</p>
-<h1>流水线处理器</h1>
-<p>MIPS 五级流水及其各自功能</p>
+<h1 id="流水线处理器"><a href="#流水线处理器" class="headerlink" title="流水线处理器"></a>流水线处理器</h1><p>MIPS 五级流水及其各自功能</p>
 <ol>
 <li>取指(Fetch): 从存储器取指令, 更新PC</li>
 <li>译码(Decode): 指令译码, 从寄存器对中读出寄存器的值</li>
-<li>执行(Execute): 运算指令: 进行算术逻辑运算, 访存指令: 计算存储器的地址。</li>
-<li>访存(Memory): Load 指令: 从存储器读数据, Store 指令: 将数据写入存储器。</li>
-<li>回写(Write-back): 将数据写入寄存器堆。
-五个阶段流水线执行: IF, ID, EX, MEM, WB
-理想形式下, 各个阶段都是等长阶段, 但是不平衡的需要采取一些划分等手段来进行平衡。</li>
+<li>执行(Execute): 运算指令: 进行算术逻辑运算, 访存指令: 计算存储器的地址。 </li>
+<li>访存(Memory): Load 指令: 从存储器读数据, Store 指令: 将数据写入存储器。 </li>
+<li>回写(Write-back): 将数据写入寄存器堆。<br>五个阶段流水线执行: IF, ID, EX, MEM, WB<br>理想形式下, 各个阶段都是等长阶段, 但是不平衡的需要采取一些划分等手段来进行平衡。 </li>
 </ol>
-<p>流水线也不是级数越多越好, 尽管可以提高时钟频率，从而提高指令的吞吐率， 过深的流水线会带来额外的性能损失。
-另一条思路, 就是超标量(Superscalar)流水线: [具有两条或者两条以上并行工作的流水线结构称为超标量结构]</p>
+<p>流水线也不是级数越多越好, 尽管可以提高时钟频率，从而提高指令的吞吐率， 过深的流水线会带来额外的性能损失。<br>另一条思路, 就是超标量(Superscalar)流水线: [具有两条或者两条以上并行工作的流水线结构称为超标量结构]</p>
 <ol>
-<li>单周期 --&gt; 标量流水线: 考虑的是时间并行性的优化, 主要是对现有硬件进行切分。</li>
-<li>标量流水线 --&gt; 超标量流水线: 空间并行性的优化, 需要成倍的增加硬件资源。</li>
+<li>单周期 –&gt; 标量流水线: 考虑的是时间并行性的优化, 主要是对现有硬件进行切分。 </li>
+<li>标量流水线 –&gt; 超标量流水线: 空间并行性的优化, 需要成倍的增加硬件资源。 </li>
 </ol>
-<h2>流水线的冒险(Hazard)</h2>
-<p>冒险: 阻止下一条指令在下一个时钟周期开始执行的情况。</p>
+<h2 id="流水线的冒险-Hazard"><a href="#流水线的冒险-Hazard" class="headerlink" title="流水线的冒险(Hazard)"></a>流水线的冒险(Hazard)</h2><p>冒险: 阻止下一条指令在下一个时钟周期开始执行的情况。 </p>
 <ol>
 <li>结构冒险: 所需硬件正在被之前指令占用。</li>
-<li>数据冒险: 当前指令需要等待之前指令完成数据的读写才能执行。</li>
-<li>控制冒险: 需要根据之前的指令结果决定下一步的行为。</li>
+<li>数据冒险: 当前指令需要等待之前指令完成数据的读写才能执行。 </li>
+<li>控制冒险: 需要根据之前的指令结果决定下一步的行为。 </li>
 </ol>
 <p>解决方案</p>
 <ol>
-<li>结构冒险:</li>
-</ol>
+<li><p>结构冒险: </p>
 <ul>
 <li>流水线停顿(stall), 会产生空泡(bubble)</li>
 <li>指令和数据放在不同的存储器中, 只是L1 Cache 会分别存放 指令和数据。</li>
 </ul>
-<ol start="2">
-<li>数据冒险:</li>
-</ol>
+</li>
+<li><p>数据冒险: </p>
 <ul>
-<li>stall 方法是万能的。
-举个例子:</li>
+<li>stall 方法是万能的。<br>举个例子: </li>
 </ul>
 <ul>
 <li>sub t0, s1, s2</li>
-<li>add s3, t0, s4
-add 指令会用到 sub 指令的结果: 此时可以通过stall 的方法，但是会产生bubble.</li>
+<li>add s3, t0, s4<br>add 指令会用到 sub 指令的结果: 此时可以通过stall 的方法，但是会产生bubble. </li>
 </ul>
 <ul>
 <li>数据前递(Forwarding): 可以解决一部分问题，但是特别棘手的 Load-Use data hazard 还是</li>
 </ul>
-<ol start="3">
-<li>控制冒险
-先理解什么叫做转移开销:</li>
-</ol>
+</li>
+<li><p>控制冒险<br>先理解什么叫做转移开销: </p>
 <ul>
-<li>将顺序预取的指令废除(也即“排空流水线”): &quot;要不要转移?&quot; 也即转移条件判定引起的开销</li>
-<li>从转移目标地址重新取指令: &quot;转移到哪里？&quot;生成目标地址引起的开销</li>
+<li>将顺序预取的指令废除(也即“排空流水线”): “要不要转移?” 也即转移条件判定引起的开销</li>
+<li>从转移目标地址重新取指令: “转移到哪里？”生成目标地址引起的开销</li>
 </ul>
-<h1>存储器层次结构</h1>
-<p>SRAM: 是由六个晶体管组成的单元组件组成。现代CPU 高速缓存一般都用SRAM 实现,  其优缺点都很明显</p>
+</li>
+</ol>
+<h1 id="存储器层次结构"><a href="#存储器层次结构" class="headerlink" title="存储器层次结构"></a>存储器层次结构</h1><p>SRAM: 是由六个晶体管组成的单元组件组成。现代CPU 高速缓存一般都用SRAM 实现,  其优缺点都很明显</p>
 <ul>
 <li>优点: 速度快</li>
 <li>缺点: 集成度低(毕竟6个晶体管)、功耗高(晶体管能耗高)、价格贵</li>
 </ul>
-<p>DRAM: 由一个电容构成。 其优缺点为:</p>
+<p>DRAM: 由一个电容构成。 其优缺点为: </p>
 <ul>
 <li>优点: 集成度高、功耗低、价格低</li>
 <li>缺点: 速度慢、定时刷新</li>
 </ul>
-<p>程序的局部性原理: 计算机程序从 <em>时间</em> 和 <em>空间</em> 都表现出局部性。 时间局部性(Temporal locality) 指的是最近被访问的存储器单元(指令或者数据) 很快还会被访问。空间局部性指的是 正在被访问的存储器单元附近的单元很快被访问。</p>
+<p>程序的局部性原理: 计算机程序从 <em>时间</em> 和 <em>空间</em> 都表现出局部性。 时间局部性(Temporal locality) 指的是最近被访问的存储器单元(指令或者数据) 很快还会被访问。空间局部性指的是 正在被访问的存储器单元附近的单元很快被访问。 </p>
 <ul>
 <li>Cache 对时间局部性的利用: 从主存中取回待访问的数据事，会同时取出相邻位置的主存单元的数据，Cache 以数据块为单位和内存进行数据交换。</li>
 <li>Cache 对空间局部性的利用: 保存近期频繁被访问的主存单元的数据。</li>
@@ -572,72 +530,64 @@ add 指令会用到 sub 指令的结果: 此时可以通过stall 的方法，但
 <p>Cache 未命中(失效) 的写策略</p>
 <ul>
 <li>写不分配(Write Non-Allocate): 直接将数据写入主存.</li>
-<li>写分配(Write Allocate): 将数据所在的块读入Cache 后，再将数据写入主存。</li>
+<li>写分配(Write Allocate): 将数据所在的块读入Cache 后，再将数据写入主存。 </li>
 </ul>
-<h2>Cache 的设计要点</h2>
-<p><img src="cache_time.jpg" alt="Cache 的访问过程"><span class="image-caption">Cache 的访问过程</span></p>
-<p>$$平均访存时间 Average Memory Access Time = Hit Time + Miss Penalty x Miss Rate$$
-由这个公式, 指明了3哥减小访存时间的方法</p>
+<h2 id="Cache-的设计要点"><a href="#Cache-的设计要点" class="headerlink" title="Cache 的设计要点"></a>Cache 的设计要点</h2><p><img src="cache_time.jpg" alt="Cache 的访问过程"><span class="image-caption">Cache 的访问过程</span></p>
+<p>$$平均访存时间 Average Memory Access Time = Hit Time + Miss Penalty x Miss Rate$$<br>由这个公式, 指明了3哥减小访存时间的方法</p>
 <ol>
 <li>降低Hit Time</li>
 <li>减少Miss Penalty</li>
 <li>降低Miss Rate</li>
 </ol>
-<p>1,2 亮点都挺难的，我们关注一下如何提高命中率,也即如何降低Miss Rate, OK, 我们先来分析一下Cache 失效的原因:</p>
+<p>1,2 亮点都挺难的，我们关注一下如何提高命中率,也即如何降低Miss Rate, OK, 我们先来分析一下Cache 失效的原因: </p>
 <ol>
 <li>义务失效(Compulsory Miss): 第一次访问某一数据块, 也称为冷启动失效(Cold Start Miss)</li>
-<li>容量失效(Capacity Miss): Cache 无法保存程序访问所需的所有的数据块。</li>
+<li>容量失效(Capacity Miss): Cache 无法保存程序访问所需的所有的数据块。 </li>
 <li>冲突失效(Conflict Miss): 多个存储器映射到了同一个Cache 位置。 这牵涉到Cache 的映射策略问题</li>
 </ol>
-<h1>中断和异常</h1>
-<ol>
-<li>中断向量表的结构
-拿8086 处理器举例: 其 00000H - 003FFH (1K 个字节) 是专门存放中断表向量区域的位置。存放了256个中断程序的入口地址，每个入口地址占4哥字节单元。</li>
-<li>中断的处理过程:</li>
-</ol>
-<ul>
+<h1 id="中断和异常"><a href="#中断和异常" class="headerlink" title="中断和异常"></a>中断和异常</h1><ol>
+<li>中断向量表的结构<br>拿8086 处理器举例: 其 00000H - 003FFH (1K 个字节) 是专门存放中断表向量区域的位置。存放了256个中断程序的入口地址，每个入口地址占4哥字节单元。</li>
+<li>中断的处理过程: <ul>
 <li>关中断: CPU 关闭中断响应, 即不再接受其他外部中断请求。</li>
 <li>保存断点: 将发生中断处的指令地址压入堆栈, 以使中断处理完后能正确地返回。</li>
 <li>识别中断源: CPU 识别中断的来源,确定中断类型，方便找到相应中断处理程序</li>
 <li>保护现场: 将发生中断处的有关寄存器(中断服务程序中要使用的寄存器) 以及 标志寄存器的内容压入堆栈。</li>
-<li>执行中断服务程序: 转到中断服务程序入口开始执行, 可在适当时刻重新开放中断, 以便允许相应较高优先级的外部中断。 重新开放中断涉及到标志寄存器(FLAGS) 的 IF 标志位。IF = 1 表明允许CPU 响应可屏蔽中断请求, IF = 0 表示不允许CPU 相应可屏蔽中断请求。</li>
-<li>恢复现场并返回: 把&quot;保护现场&quot; 时压入的堆栈信息弹回原寄存器, 然后执行中断返回指令, 从而返回主程序继续执行。</li>
+<li>执行中断服务程序: 转到中断服务程序入口开始执行, 可在适当时刻重新开放中断, 以便允许相应较高优先级的外部中断。 重新开放中断涉及到标志寄存器(FLAGS) 的 IF 标志位。IF = 1 表明允许CPU 响应可屏蔽中断请求, IF = 0 表示不允许CPU 相应可屏蔽中断请求。 </li>
+<li>恢复现场并返回: 把”保护现场” 时压入的堆栈信息弹回原寄存器, 然后执行中断返回指令, 从而返回主程序继续执行。 </li>
 </ul>
-<p>通常情况下，前3步又硬件完成，后3步由软件完成。</p>
-<ol start="3">
-<li>内部中断的分类</li>
+</li>
 </ol>
-<ul>
-<li>类型0 (除法错中断): 执行除法指令后，若所得商超过了目标寄存器所能表示范围，则促发除法错中断。</li>
-<li>类型1 (单步中断): 触发信号为 FLAGS 中 TF 位置置于1, CPU 便处于单步工作方式。 一般用于调试和发现错误。一般会将各个寄存器内容都显示出来，以便调试。</li>
-<li>类型3 (断点中断): 与单步中断类似，断点中断也是调试程序的手段。 两者的组合使用方法: 一个大的程序，先通过断点将程序某一个错误确定在程序的一小段，然后再对这一小段程序采用单步方式进行跟踪调试
-<ol>
-<li>设置断点: 用INT3 替代 用户原有指令 并 保存用户程序原有指令。</li>
-<li>发生断点: 执行INT 3.</li>
-<li>回复执行: 断点中断程序返回前, 恢复用户程序原有指令，<em>并将IP值减1</em>，中断返回后，CPU从断点处继续执行。</li>
+<p>通常情况下，前3步又硬件完成，后3步由软件完成。 </p>
+<ol start="3">
+<li>内部中断的分类<ul>
+<li>类型0 (除法错中断): 执行除法指令后，若所得商超过了目标寄存器所能表示范围，则促发除法错中断。 </li>
+<li>类型1 (单步中断): 触发信号为 FLAGS 中 TF 位置置于1, CPU 便处于单步工作方式。 一般用于调试和发现错误。一般会将各个寄存器内容都显示出来，以便调试。 </li>
+<li>类型3 (断点中断): 与单步中断类似，断点中断也是调试程序的手段。 两者的组合使用方法: 一个大的程序，先通过断点将程序某一个错误确定在程序的一小段，然后再对这一小段程序采用单步方式进行跟踪调试<ol>
+<li>设置断点: 用INT3 替代 用户原有指令 并 保存用户程序原有指令。 </li>
+<li>发生断点: 执行INT 3. </li>
+<li>回复执行: 断点中断程序返回前, 恢复用户程序原有指令，<em>并将IP值减1</em>，中断返回后，CPU从断点处继续执行。 </li>
 </ol>
 </li>
-<li>类型4 (溢出中断):</li>
+<li>类型4 (溢出中断): </li>
 </ul>
-<p>注意，类型2(非屏蔽中断) 其实是一种外部中断。</p>
+</li>
+</ol>
+<p>注意，类型2(非屏蔽中断) 其实是一种外部中断。  </p>
 <p><strong>内部中断的特点</strong></p>
 <ol>
-<li>中断类型号: 内部中断的类型号由 CPU 内部产生, 而外部中断则需要从外部设备中读取中断类型号。</li>
-<li>屏蔽方式: 除了单步中断外, 所有的内部中断都不能用软件方法来屏蔽。 但是单步中断则可以通过软件将TF标志置为1或者0 来允许或者禁止。</li>
-<li>优先级: 除了单步中断外, 所有内部中断优先级都比外部中断高。</li>
+<li>中断类型号: 内部中断的类型号由 CPU 内部产生, 而外部中断则需要从外部设备中读取中断类型号。 </li>
+<li>屏蔽方式: 除了单步中断外, 所有的内部中断都不能用软件方法来屏蔽。 但是单步中断则可以通过软件将TF标志置为1或者0 来允许或者禁止。 </li>
+<li>优先级: 除了单步中断外, 所有内部中断优先级都比外部中断高。 </li>
 </ol>
-<p><strong>基于中断功能的调用</strong>
-X86 中专门提供了一条中断指令: INT n. 其中n 为 0-255 某个数，对应中断类型码, 中断指令执行过程如下</p>
+<p><strong>基于中断功能的调用</strong><br>X86 中专门提供了一条中断指令: INT n. 其中n 为 0-255 某个数，对应中断类型码, 中断指令执行过程如下</p>
 <ol>
 <li>将FLAGS寄存器内容压栈</li>
-<li>清除中断标志IF 和 单步标志TF.</li>
+<li>清除中断标志IF 和 单步标志TF. </li>
 <li>将 CS 和 IP 寄存器的内容压栈。</li>
 <li>根据中断类型码查找中断向量表，取得对应的中断服务程序的入口地址</li>
-<li>将入口地址分别装入CS 和 IP 寄存器中。</li>
+<li>将入口地址分别装入CS 和 IP 寄存器中。 </li>
 </ol>
-<h1>输入输出设备</h1>
-<h2>输入输出接口</h2>
-<p><strong>输入输出接口的基本功能</strong></p>
+<h1 id="输入输出设备"><a href="#输入输出设备" class="headerlink" title="输入输出设备"></a>输入输出设备</h1><h2 id="输入输出接口"><a href="#输入输出接口" class="headerlink" title="输入输出接口"></a>输入输出接口</h2><p><strong>输入输出接口的基本功能</strong></p>
 <ol>
 <li>数据缓冲突: 解决CPU 与 外设之间速度差异</li>
 <li>提供联络信息: 协调同步数据交换过程</li>
@@ -648,57 +598,55 @@ X86 中专门提供了一条中断指令: INT n. 其中n 为 0-255 某个数，�
 </ol>
 <p><strong>常见的I/O 端口编址方式</strong></p>
 <ol>
-<li>I/O 端口和存储器分开编址方式(也即I/O映像的I/O方式): x86 采用此方式。在分开编址情况下, 除了地址单元外，还需要MIO信号 来表明当前地址属于 <em>存储器</em> or <em>I/O 接口</em></li>
-</ol>
-<ul>
-<li>不用占用存储器地址, 不占用存储器地址空间。</li>
-<li>执行速度快。</li>
-<li>I/O 指令的地址码较短, 地址译码方便。</li>
-<li>采用单独的I/O 指令, 使得程序中I/O 操作和其他操作层次清晰, 便于理解。</li>
+<li>I/O 端口和存储器分开编址方式(也即I/O映像的I/O方式): x86 采用此方式。在分开编址情况下, 除了地址单元外，还需要MIO信号 来表明当前地址属于 <em>存储器</em> or <em>I/O 接口</em><ul>
+<li>不用占用存储器地址, 不占用存储器地址空间。 </li>
+<li>执行速度快。 </li>
+<li>I/O 指令的地址码较短, 地址译码方便。 </li>
+<li>采用单独的I/O 指令, 使得程序中I/O 操作和其他操作层次清晰, 便于理解。 </li>
 </ul>
+</li>
+</ol>
 <ol start="2">
-<li>I/O 端口和存储器统一编址: 两者地址共享，不会冲突。</li>
-</ol>
-<ul>
-<li>优点: 可以用访问存储器的指令来访问I/O 端口,访问存储器的指令功能比较齐全, 可以实现直接对I/O端口内的数据进行处理。 同时, 可以将CPU的I/O操作和访问存储器共用一套控制逻辑, 简化了内部结构, 同时减少了CPU的引脚数目。</li>
-<li>缺点: 由于I/O 端口占用了一部分存储器地址空间, 因而使得存储地址空间减小。而且共用一套访问存储器指令来进行I/O 操作，指令比单独I/O 指令要长, 因此指令执行时间也长。</li>
+<li>I/O 端口和存储器统一编址: 两者地址共享，不会冲突。 <ul>
+<li>优点: 可以用访问存储器的指令来访问I/O 端口,访问存储器的指令功能比较齐全, 可以实现直接对I/O端口内的数据进行处理。 同时, 可以将CPU的I/O操作和访问存储器共用一套控制逻辑, 简化了内部结构, 同时减少了CPU的引脚数目。 </li>
+<li>缺点: 由于I/O 端口占用了一部分存储器地址空间, 因而使得存储地址空间减小。而且共用一套访问存储器指令来进行I/O 操作，指令比单独I/O 指令要长, 因此指令执行时间也长。 </li>
 </ul>
-<h2>I/O 控制方式</h2>
-<ol>
-<li>程序控制方式:</li>
-<li>中断控制方式:</li>
+</li>
 </ol>
-<p>数据的输入过程:</p>
+<h2 id="I-O-控制方式"><a href="#I-O-控制方式" class="headerlink" title="I/O 控制方式"></a>I/O 控制方式</h2><ol>
+<li><p>程序控制方式: </p>
+</li>
+<li><p>中断控制方式: </p>
+<p>数据的输入过程: </p>
 <ul>
-<li>系统初始化是，CPU 执行指令, 将控制字写入接口的控制寄存器, 设置接口的工作模式。</li>
-<li>外设将数据发到 “并行数据输入” 信号, 并将“输入准备好” 信号置为有效。</li>
-<li>接口发现 &quot;输入准备好&quot; 信号有效后, 从&quot;并行数据输入&quot; 信号接收数据, 放入“输入缓存存储器” 并将 &quot;输入回答&quot; 信号置为有效, 防止外设输入新数据。</li>
-<li>接口通过<em>中断控制逻辑</em> 向CPU 发出中断请求信号, 并将 &quot;状态寄存器&quot; 中的“输入缓冲满” 置为有效。</li>
-<li>CPU 收到中断请求后，进入中断服务程序, 执行指令从“状态寄存器” 中读出状态字, 发现“输入缓冲满”, 因此执行指令, 从“输入缓冲寄存器” 中读出数据。</li>
-<li>接口将 &quot;输入回答&quot; 信号置为无效, 等待外设输入新数据.</li>
+<li>系统初始化是，CPU 执行指令, 将控制字写入接口的控制寄存器, 设置接口的工作模式。 </li>
+<li>外设将数据发到 “并行数据输入” 信号, 并将“输入准备好” 信号置为有效。 </li>
+<li>接口发现 “输入准备好” 信号有效后, 从”并行数据输入” 信号接收数据, 放入“输入缓存存储器” 并将 “输入回答” 信号置为有效, 防止外设输入新数据。 </li>
+<li>接口通过<em>中断控制逻辑</em> 向CPU 发出中断请求信号, 并将 “状态寄存器” 中的“输入缓冲满” 置为有效。 </li>
+<li>CPU 收到中断请求后，进入中断服务程序, 执行指令从“状态寄存器” 中读出状态字, 发现“输入缓冲满”, 因此执行指令, 从“输入缓冲寄存器” 中读出数据。 </li>
+<li>接口将 “输入回答” 信号置为无效, 等待外设输入新数据. </li>
 </ul>
-<p>数据的输出过程:</p>
-<p>其优点包括:</p>
+<p>数据的输出过程: </p>
+</li>
+</ol>
+<p>其优点包括: </p>
 <ul>
-<li>CPU 可以和外设并行工作, 提高了工作效率。</li>
+<li>CPU 可以和外设并行工作, 提高了工作效率。 </li>
 <li>外设拥有了主动申请服务的主动权</li>
-<li>一定程度上瞒住了I/O 处理的实时性要求。
-缺点包括:</li>
-<li>外设和存储器之间的数据交换仍由CPU承担。</li>
+<li>一定程度上瞒住了I/O 处理的实时性要求。<br>缺点包括: </li>
+<li>外设和存储器之间的数据交换仍由CPU承担。 </li>
 </ul>
 <ol start="3">
-<li>存储器直接控制方式(DMA):</li>
+<li>存储器直接控制方式(DMA): </li>
 </ol>
-<h2>外部中断处理过程</h2>
-<p>来自于外设的可屏蔽中断的处理过程</p>
+<h2 id="外部中断处理过程"><a href="#外部中断处理过程" class="headerlink" title="外部中断处理过程"></a>外部中断处理过程</h2><p>来自于外设的可屏蔽中断的处理过程</p>
 <p>中断嵌套</p>
 <ol>
 <li>当CPU正在执行中断服务程序时, 发生了优先级更高的中断请求</li>
 <li>CPU 响应优先级更高的中断请求, 将正在处理的中断暂时挂起</li>
-<li>CPU 完成优先级更高的中断服务后，返回此前优先级较低的中断服务程序继续执行。</li>
+<li>CPU 完成优先级更高的中断服务后，返回此前优先级较低的中断服务程序继续执行。 </li>
 </ol>
-<h2>直接存储器访问</h2>
-<ol>
+<h2 id="直接存储器访问"><a href="#直接存储器访问" class="headerlink" title="直接存储器访问"></a>直接存储器访问</h2><ol>
 <li></li>
 </ol>
 
@@ -831,7 +779,7 @@ X86 中专门提供了一条中断指令: INT n. 其中n 为 0-255 某个数，�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -875,7 +823,7 @@ X86 中专门提供了一条中断指令: INT n. 其中n 为 0-255 某个数，�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">计算机基本结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">冯.诺伊曼的要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">计算机结构的简化模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">模型机的存储器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">模型机的控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">模型机的运算器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">计算机执行指令的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.5.</span> <span class="nav-text">计算机的输入输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">指令体系结构(Instruction Set Architecture)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">设计自己的计算机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.1.</span> <span class="nav-text">一个简单的计算机指令系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.2.</span> <span class="nav-text">指令的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.3.</span> <span class="nav-text">运算任务示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">X86 体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">MIPS 体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.4.</span> <span class="nav-text">算术逻辑单元 与 寄存器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">单周期处理器设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">建立数据通路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.1.</span> <span class="nav-text">指令的需求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">流水线处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">流水线的冒险(Hazard)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">存储器层次结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.1.</span> <span class="nav-text">Cache 的设计要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">中断和异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">8.</span> <span class="nav-text">输入输出设备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.1.</span> <span class="nav-text">输入输出接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.2.</span> <span class="nav-text">I/O 控制方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.3.</span> <span class="nav-text">外部中断处理过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">8.4.</span> <span class="nav-text">直接存储器访问</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机基本结构"><span class="nav-number">1.</span> <span class="nav-text">计算机基本结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#冯-诺伊曼的要点"><span class="nav-number">1.1.</span> <span class="nav-text">冯.诺伊曼的要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机结构的简化模型"><span class="nav-number">2.</span> <span class="nav-text">计算机结构的简化模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型机的存储器"><span class="nav-number">2.1.</span> <span class="nav-text">模型机的存储器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型机的控制器"><span class="nav-number">2.2.</span> <span class="nav-text">模型机的控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型机的运算器"><span class="nav-number">2.3.</span> <span class="nav-text">模型机的运算器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机执行指令的过程"><span class="nav-number">2.4.</span> <span class="nav-text">计算机执行指令的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机的输入输出"><span class="nav-number">2.5.</span> <span class="nav-text">计算机的输入输出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指令体系结构-Instruction-Set-Architecture"><span class="nav-number">3.</span> <span class="nav-text">指令体系结构(Instruction Set Architecture)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计自己的计算机"><span class="nav-number">3.1.</span> <span class="nav-text">设计自己的计算机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的计算机指令系统"><span class="nav-number">3.1.1.</span> <span class="nav-text">一个简单的计算机指令系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令的格式"><span class="nav-number">3.1.2.</span> <span class="nav-text">指令的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算任务示例"><span class="nav-number">3.1.3.</span> <span class="nav-text">运算任务示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X86-体系结构"><span class="nav-number">3.2.</span> <span class="nav-text">X86 体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIPS-体系结构"><span class="nav-number">3.3.</span> <span class="nav-text">MIPS 体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算术逻辑单元-与-寄存器"><span class="nav-number">3.4.</span> <span class="nav-text">算术逻辑单元 与 寄存器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单周期处理器设计"><span class="nav-number">4.</span> <span class="nav-text">单周期处理器设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建立数据通路"><span class="nav-number">4.1.</span> <span class="nav-text">建立数据通路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指令的需求"><span class="nav-number">4.1.1.</span> <span class="nav-text">指令的需求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流水线处理器"><span class="nav-number">5.</span> <span class="nav-text">流水线处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流水线的冒险-Hazard"><span class="nav-number">5.1.</span> <span class="nav-text">流水线的冒险(Hazard)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储器层次结构"><span class="nav-number">6.</span> <span class="nav-text">存储器层次结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache-的设计要点"><span class="nav-number">6.1.</span> <span class="nav-text">Cache 的设计要点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中断和异常"><span class="nav-number">7.</span> <span class="nav-text">中断和异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入输出设备"><span class="nav-number">8.</span> <span class="nav-text">输入输出设备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出接口"><span class="nav-number">8.1.</span> <span class="nav-text">输入输出接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O-控制方式"><span class="nav-number">8.2.</span> <span class="nav-text">I/O 控制方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外部中断处理过程"><span class="nav-number">8.3.</span> <span class="nav-text">外部中断处理过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接存储器访问"><span class="nav-number">8.4.</span> <span class="nav-text">直接存储器访问</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。 Softmax  比较容易 代码参考可以参考我的github,写的比较详细 []  Neural Network Basics  经典的sigmod导数计算 $$\frac{\text{d}(\sigma(x))}{\text{x}} =">
+<meta name="description" content="CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。 Softmax 比较容易 代码参考可以参考我的github,写的比较详细 []  Neural Network Basics 经典的sigmod导数计算$$\frac{\text{d}(\sigma(x))}{\text{x}} = \f">
 <meta name="keywords" content="NLP,Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS224N 课程作业1">
 <meta property="og:url" content="http://yoursite.com/2018/11/07/CS224N-assignment1/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。 Softmax  比较容易 代码参考可以参考我的github,写的比较详细 []  Neural Network Basics  经典的sigmod导数计算 $$\frac{\text{d}(\sigma(x))}{\text{x}} =">
+<meta property="og:description" content="CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。 Softmax 比较容易 代码参考可以参考我的github,写的比较详细 []  Neural Network Basics 经典的sigmod导数计算$$\frac{\text{d}(\sigma(x))}{\text{x}} = \f">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/CS224N-assignment1/word2vec_gradient.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/CS224N-assignment1/word2vec_negsam.jpg">
@@ -94,7 +94,7 @@
 <meta property="og:updated_time" content="2018-11-08T06:47:14.892Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS224N 课程作业1">
-<meta name="twitter:description" content="CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。 Softmax  比较容易 代码参考可以参考我的github,写的比较详细 []  Neural Network Basics  经典的sigmod导数计算 $$\frac{\text{d}(\sigma(x))}{\text{x}} =">
+<meta name="twitter:description" content="CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。 Softmax 比较容易 代码参考可以参考我的github,写的比较详细 []  Neural Network Basics 经典的sigmod导数计算$$\frac{\text{d}(\sigma(x))}{\text{x}} = \f">
 <meta name="twitter:image" content="http://yoursite.com/2018/11/07/CS224N-assignment1/word2vec_gradient.jpg">
 
 
@@ -336,93 +336,36 @@
 
       
         <p>CS224N 是目前斯坦福开设的一门用Deep Learning 来做NLP问题的一门课程，这个博客主要是完成CS224N的课程作业，并讲解一下思路，欢迎指正。</p>
-<h2>Softmax</h2>
-<ol>
+<h2 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h2><ol>
 <li>比较容易</li>
 <li>代码参考可以参考我的github,写的比较详细 []</li>
 </ol>
-<h2>Neural Network Basics</h2>
-<ol>
-<li>经典的sigmod导数计算
-$$\frac{\text{d}(\sigma(x))}{\text{x}} = \frac{e<sup>{x}(1+e</sup>x) - e<sup>x(e</sup>x)}{(1+e<sup>x)</sup>2} = \sigma(x)(1-\sigma(x))$$</li>
-<li>交叉熵公式相对于$\boldsymbol{\theta}$的导数
-交叉熵公式
-$$\text{CE}(\boldsymbol{y}, \boldsymbol{\hat{y}})=-\sum_{i} {y_i \log(\hat{y}_i)}$$<br>
-其中$\boldsymbol{y} = \text{softmax}(\boldsymbol{\theta})$</li>
+<h2 id="Neural-Network-Basics"><a href="#Neural-Network-Basics" class="headerlink" title="Neural Network Basics"></a>Neural Network Basics</h2><ol>
+<li>经典的sigmod导数计算<br>$$\frac{\text{d}(\sigma(x))}{\text{x}} = \frac{e^{x}(1+e^x) - e^x(e^x)}{(1+e^x)^2} = \sigma(x)(1-\sigma(x))$$</li>
+<li>交叉熵公式相对于$\boldsymbol{\theta}$的导数<br>交叉熵公式<br>$$\text{CE}(\boldsymbol{y}, \boldsymbol{\hat{y}})=-\sum_{i} {y_i \log(\hat{y}_i)}$$<br>其中$\boldsymbol{y} = \text{softmax}(\boldsymbol{\theta})$</li>
 </ol>
-<p>注意$\boldsymbol{y}$是one-hot向量，我们这里假设其$k_{th}$维度是1，其余维度均为0。
-导数推导应该分$i=k_{th}$ and $i\neq k_{th}$讨论,注意此时Cross Entropy可以表达这样形式 $$\text{CE}(\boldsymbol{y}, \boldsymbol{\hat{y}})= \log \frac{e<sup>{\theta_{k}}}{\sum_{i}e</sup>{\theta_i}}$$</p>
+<p>注意$\boldsymbol{y}$是one-hot向量，我们这里假设其$k_{th}$维度是1，其余维度均为0。<br>导数推导应该分$i=k_{th}$ and $i\neq k_{th}$讨论,注意此时Cross Entropy可以表达这样形式 $$\text{CE}(\boldsymbol{y}, \boldsymbol{\hat{y}})= \log \frac{e^{\theta_{k}}}{\sum_{i}e^{\theta_i}}$$</p>
 <ul>
-<li>
-<p>当$i=k$
-\begin{equation}
-\begin{split}
-\frac{\partial CE}{\partial \theta_k}&amp;=\frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{i} e^{\theta_i}}}{\partial \theta_k} \\
-&amp;= \frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{i \neq k}e<sup>{\theta_i}+e</sup>{\theta_k}}} {\partial \theta_k} \\
-&amp;= -\frac
-{\sum_{i\neq k}e<sup>{\theta_i}+e</sup>{\theta_k}}{e^{\theta_k}}
-\cdot
-\frac{e^{\theta_k}}
-{\sum_{i\neq k}e<sup>{\theta_i}+e</sup>{\theta_k}} \cdot
-\frac{\sum_{i \neq k}e^{\theta_i}}{\sum_{i\neq k}e<sup>{\theta_i}+e</sup>{\theta_k}} \\
-&amp;= \hat{y}_k - 1
-\end{split}
-\end{equation}</p>
+<li><p>当$i=k$<br>\begin{equation}<br>\begin{split}<br>\frac{\partial CE}{\partial \theta_k}&amp;=\frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{i} e^{\theta_i}}}{\partial \theta_k} \\<br>&amp;= \frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{i \neq k}e^{\theta_i}+e^{\theta_k}}} {\partial \theta_k} \\<br>&amp;= -\frac<br>{\sum_{i\neq k}e^{\theta_i}+e^{\theta_k}}{e^{\theta_k}}<br>\cdot<br>\frac{e^{\theta_k}}<br>{\sum_{i\neq k}e^{\theta_i}+e^{\theta_k}} \cdot<br>\frac{\sum_{i \neq k}e^{\theta_i}}{\sum_{i\neq k}e^{\theta_i}+e^{\theta_k}} \\<br>&amp;= \hat{y}_k - 1<br>\end{split}<br>\end{equation}</p>
 </li>
-<li>
-<p>当$i \neq k$
-\begin{equation}
-\begin{split}
-\frac{\partial CE}{\partial \theta_i}&amp;=\frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{j} e^{\theta_j}}}{\partial \theta_i} \\
-&amp;= \frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{j \neq i}e<sup>{\theta_i}+e</sup>{\theta_i}}} {\partial \theta_k} \\
-&amp;=
--\frac
-{\sum_{i\neq k}e<sup>{\theta_i}+e</sup>{\theta_k}}{e^{\theta_k}}
-\cdot
-\frac{e^{\theta_k}}
-{\sum_{j}e^{\theta_j}} \cdot
-\frac{e<sup>{\theta_i}}{\sum_{j}e</sup>{\theta_j}} \\
-&amp;= \hat{y}_i
-\end{split}
-\end{equation}
-总结，可以写成
-$$\frac{CE}{\boldsymbol{\theta}} = \boldsymbol{\hat{y}}-\boldsymbol{y}$$</p>
+<li><p>当$i \neq k$<br>\begin{equation}<br>\begin{split}<br>\frac{\partial CE}{\partial \theta_i}&amp;=\frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{j} e^{\theta_j}}}{\partial \theta_i} \\<br>&amp;= \frac{\partial \log \frac{e^{\theta_{k}}}{\sum_{j \neq i}e^{\theta_i}+e^{\theta_i}}} {\partial \theta_k} \\<br>&amp;= </p>
 </li>
 </ul>
+<p>-\frac<br>{\sum_{i\neq k}e^{\theta_i}+e^{\theta_k}}{e^{\theta_k}}<br>\cdot<br>\frac{e^{\theta_k}}<br>{\sum_{j}e^{\theta_j}} \cdot<br>\frac{e^{\theta_i}}{\sum_{j}e^{\theta_j}} \\<br>&amp;= \hat{y}_i<br>\end{split}<br>\end{equation}<br>总结，可以写成<br>$$\frac{CE}{\boldsymbol{\theta}} = \boldsymbol{\hat{y}}-\boldsymbol{y}$$</p>
 <ol start="3">
-<li>有了前面的积累，这个直接用链式法则即可
-\begin{equation}
-\begin{split}
-\frac{\partial CE}{\partial \boldsymbol{x}} &amp;= \frac{\partial CE}{\partial \boldsymbol{z_2}} \cdot \frac{\partial z_2}{\partial \boldsymbol{h}} \cdot \frac{\partial h}{\partial \boldsymbol{z_1}} \cdot \frac{\partial z_1}{\partial \boldsymbol{x}}   \\
-&amp;= (\boldsymbol{\hat{y}} - \boldsymbol{y}) \cdot \boldsymbol{W}_2^T  \cdot z_1(1-z_1) \cdot \boldsymbol{W}_1^{T}
-\end{split}
-\end{equation}</li>
-<li>参数个数
-其实就是统计 $\boldsymbol{W_1}, \boldsymbol{W_2}, \boldsymbol{b_1},\boldsymbol{b_2}$个数。
-显然是 $$D_x\cdot H + H + H \cdot D_y + D_y$$</li>
+<li>有了前面的积累，这个直接用链式法则即可<br>\begin{equation}<br>\begin{split}<br>\frac{\partial CE}{\partial \boldsymbol{x}} &amp;= \frac{\partial CE}{\partial \boldsymbol{z_2}} \cdot \frac{\partial z_2}{\partial \boldsymbol{h}} \cdot \frac{\partial h}{\partial \boldsymbol{z_1}} \cdot \frac{\partial z_1}{\partial \boldsymbol{x}}   \\<br>&amp;= (\boldsymbol{\hat{y}} - \boldsymbol{y}) \cdot \boldsymbol{W}_2^T  \cdot z_1(1-z_1) \cdot \boldsymbol{W}_1^{T}<br>\end{split}<br>\end{equation}</li>
+<li>参数个数<br>其实就是统计 $\boldsymbol{W_1}, \boldsymbol{W_2}, \boldsymbol{b_1},\boldsymbol{b_2}$个数。<br>显然是 $$D_x\cdot H + H + H \cdot D_y + D_y$$</li>
 </ol>
-<h2>Word2Vec</h2>
-<ol>
-<li>
-<p><img src="word2vec_gradient.jpg" alt="">
-这里提示了，其实就是之前cross entropy 对于softmax 的输入的求导，不妨设 $\boldsymbol{u}_w^T \boldsymbol{v}_c = \hat{y}_w$, 也就是$\boldsymbol{U}\boldsymbol{v}_c = \boldsymbol{\hat{y}}$, 其中 $\boldsymbol{U} \in R^{V \times d}$, V 代表字典大小
-显然，由链式法则可以得到$$\frac{\partial J}{\partial \boldsymbol{v}_c} = \boldsymbol{U}(\hat{y} - \boldsymbol{y})$$</p>
+<h2 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h2><ol>
+<li><p><img src="word2vec_gradient.jpg" alt=""><br>这里提示了，其实就是之前cross entropy 对于softmax 的输入的求导，不妨设 $\boldsymbol{u}_w^T \boldsymbol{v}_c = \hat{y}_w$, 也就是$\boldsymbol{U}\boldsymbol{v}_c = \boldsymbol{\hat{y}}$, 其中 $\boldsymbol{U} \in R^{V \times d}$, V 代表字典大小<br>显然，由链式法则可以得到$$\frac{\partial J}{\partial \boldsymbol{v}_c} = \boldsymbol{U}(\hat{y} - \boldsymbol{y})$$</p>
 </li>
-<li>
-<p>同样由链式法则得到
-$$\frac{\partial J}{\partial \boldsymbol{U}} = \boldsymbol{v}_c (\hat{\boldsymbol{y}} - \boldsymbol{y})^T$$</p>
+<li><p>同样由链式法则得到<br>$$\frac{\partial J}{\partial \boldsymbol{U}} = \boldsymbol{v}_c (\hat{\boldsymbol{y}} - \boldsymbol{y})^T$$</p>
 </li>
-<li>
-<p>Negative sampling loss 下导数的计算
-同理，都用链式法则即可, 还是比较简单的<img src="word2vec_negsam.jpg" alt=""></p>
+<li><p>Negative sampling loss 下导数的计算<br>同理，都用链式法则即可, 还是比较简单的<img src="word2vec_negsam.jpg" alt=""></p>
 </li>
-<li>
-<p>所有梯度的计算
-<img src="word2vec_allgrad.jpg" alt="">
-<img src="word2vec_allgradans.jpg" alt=""></p>
-</li>
+<li><p>所有梯度的计算<br><img src="word2vec_allgrad.jpg" alt=""><br><img src="word2vec_allgradans.jpg" alt=""></p>
+<h2 id="情感分析-Sentiment-Analysis"><a href="#情感分析-Sentiment-Analysis" class="headerlink" title="情感分析 Sentiment Analysis"></a>情感分析 Sentiment Analysis</h2></li>
 </ol>
-<h2>情感分析 Sentiment Analysis</h2>
 
       
     </div>
@@ -555,7 +498,7 @@ $$\frac{\partial J}{\partial \boldsymbol{U}} = \boldsymbol{v}_c (\hat{\boldsymbo
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -599,7 +542,7 @@ $$\frac{\partial J}{\partial \boldsymbol{U}} = \boldsymbol{v}_c (\hat{\boldsymbo
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Softmax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Neural Network Basics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">情感分析 Sentiment Analysis</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax"><span class="nav-number">1.</span> <span class="nav-text">Softmax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Network-Basics"><span class="nav-number">2.</span> <span class="nav-text">Neural Network Basics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Word2Vec"><span class="nav-number">3.</span> <span class="nav-text">Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#情感分析-Sentiment-Analysis"><span class="nav-number">4.</span> <span class="nav-text">情感分析 Sentiment Analysis</span></a></li></ol></div>
             
 
           </div>
