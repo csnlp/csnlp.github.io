@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="HardwareMemory Wall: The Motivation of Memory Hierarchy Parallem ProgrammingHow to Parallelize Your ProgramFoster’s Methodology Partitioning: Divide the computation to be performed and the data operat">
+<meta name="description" content="Hardware Memory Wall: The Motivation of Memory Hierarchy  Parallem Programming How to Parallelize Your Program Foster&apos;s Methodology  Partitioning: Divide the computation to be performed and the data o">
 <meta name="keywords" content="Computer Architecture, Multiple Processors">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Multiple Processors">
 <meta property="og:url" content="http://yoursite.com/2019/11/13/multiple-processors/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="HardwareMemory Wall: The Motivation of Memory Hierarchy Parallem ProgrammingHow to Parallelize Your ProgramFoster’s Methodology Partitioning: Divide the computation to be performed and the data operat">
+<meta property="og:description" content="Hardware Memory Wall: The Motivation of Memory Hierarchy  Parallem Programming How to Parallelize Your Program Foster&apos;s Methodology  Partitioning: Divide the computation to be performed and the data o">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/11/13/multiple-processors/memory_wall.jpg">
 <meta property="og:updated_time" content="2020-01-30T09:52:09.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Multiple Processors">
-<meta name="twitter:description" content="HardwareMemory Wall: The Motivation of Memory Hierarchy Parallem ProgrammingHow to Parallelize Your ProgramFoster’s Methodology Partitioning: Divide the computation to be performed and the data operat">
+<meta name="twitter:description" content="Hardware Memory Wall: The Motivation of Memory Hierarchy  Parallem Programming How to Parallelize Your Program Foster&apos;s Methodology  Partitioning: Divide the computation to be performed and the data o">
 <meta name="twitter:image" content="http://yoursite.com/2019/11/13/multiple-processors/memory_wall.jpg">
 
 
@@ -365,27 +365,39 @@
       
 
       
-        <h1 id="Hardware"><a href="#Hardware" class="headerlink" title="Hardware"></a>Hardware</h1><h2 id="Memory-Wall-The-Motivation-of-Memory-Hierarchy"><a href="#Memory-Wall-The-Motivation-of-Memory-Hierarchy" class="headerlink" title="Memory Wall: The Motivation of Memory Hierarchy"></a>Memory Wall: The Motivation of Memory Hierarchy</h2><p><img src="memory_wall.jpg" alt=""></p>
-<h1 id="Parallem-Programming"><a href="#Parallem-Programming" class="headerlink" title="Parallem Programming"></a>Parallem Programming</h1><h2 id="How-to-Parallelize-Your-Program"><a href="#How-to-Parallelize-Your-Program" class="headerlink" title="How to Parallelize Your Program"></a>How to Parallelize Your Program</h2><h3 id="Foster’s-Methodology"><a href="#Foster’s-Methodology" class="headerlink" title="Foster’s Methodology"></a>Foster’s Methodology</h3><ol>
-<li><strong>Partitioning:</strong> Divide the computation to be performed and the data operated on by the computation into small tasks. </li>
-<li><strong>Communication:</strong> determine what communication needs to be carried out among the tasks identified in previous step. </li>
-<li><strong>Agglomerate or aggregation:</strong> combine tasks and communications identified in the first step into larger tasks. </li>
-<li><strong>Mapping:</strong> assign the composite tasks identified in the previous step to processes/threads. This should be done so that communications is minimized and each process/thread gets roughly the same amount of work. </li>
+        <h1>Hardware</h1>
+<h2>Memory Wall: The Motivation of Memory Hierarchy</h2>
+<p><img src="memory_wall.jpg" alt=""></p>
+<h1>Parallem Programming</h1>
+<h2>How to Parallelize Your Program</h2>
+<h3>Foster's Methodology</h3>
+<ol>
+<li><strong>Partitioning:</strong> Divide the computation to be performed and the data operated on by the computation into small tasks.</li>
+<li><strong>Communication:</strong> determine what communication needs to be carried out among the tasks identified in previous step.</li>
+<li><strong>Agglomerate or aggregation:</strong> combine tasks and communications identified in the first step into larger tasks.</li>
+<li><strong>Mapping:</strong> assign the composite tasks identified in the previous step to processes/threads. This should be done so that communications is minimized and each process/thread gets roughly the same amount of work.</li>
 </ol>
-<h2 id="Patterns-in-Parallelism"><a href="#Patterns-in-Parallelism" class="headerlink" title="Patterns in Parallelism"></a>Patterns in Parallelism</h2><h1 id="Threads-…-Pthreads"><a href="#Threads-…-Pthreads" class="headerlink" title="Threads … Pthreads"></a>Threads … Pthreads</h1><h2 id="Threads"><a href="#Threads" class="headerlink" title="Threads"></a>Threads</h2><p><strong>Process VS Threads:</strong><br>Process is the unit for resource allocation and a unit of protection. Process has its own address space. </p>
-<p><strong>The definition of Thread:</strong> sequence of related instructions executed independently of other instruction sequences. </p>
-<h2 id="Different-Types-of-Threads"><a href="#Different-Types-of-Threads" class="headerlink" title="Different Types of Threads"></a>Different Types of Threads</h2><ol>
-<li>User-Level Threads<br>All thread management is done by the application and the kernel is not aware of the existence of threads. </li>
+<h2>Patterns in Parallelism</h2>
+<h1>Threads ... Pthreads</h1>
+<h2>Threads</h2>
+<p><strong>Process VS Threads:</strong>
+Process is the unit for resource allocation and a unit of protection. Process has its own address space.</p>
+<p><strong>The definition of Thread:</strong> sequence of related instructions executed independently of other instruction sequences.</p>
+<h2>Different Types of Threads</h2>
+<ol>
+<li>User-Level Threads
+All thread management is done by the application and the kernel is not aware of the existence of threads.</li>
 <li>Kernel-Level Threads</li>
 <li>Harware Threads</li>
 </ol>
-<h2 id="POSIX-Threads"><a href="#POSIX-Threads" class="headerlink" title="POSIX Threads"></a>POSIX Threads</h2><p>Pthread is a POSIX standard for threads. It has following characteristics: </p>
+<h2>POSIX Threads</h2>
+<p>Pthread is a POSIX standard for threads. It has following characteristics:</p>
 <ol>
-<li>Low-level threading libraries. </li>
-<li>Native threading interface for Linux now. </li>
+<li>Low-level threading libraries.</li>
+<li>Native threading interface for Linux now.</li>
 <li>Use kernel-level thread.</li>
 <li>Developed by the IEEE committees in charge of spefifying a Portable Operating System Interface(POSIX)</li>
-<li>Shared memory. </li>
+<li>Shared memory.</li>
 </ol>
 
       
@@ -506,7 +518,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -517,7 +529,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -528,7 +540,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -561,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hardware"><span class="nav-number">1.</span> <span class="nav-text">Hardware</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Wall-The-Motivation-of-Memory-Hierarchy"><span class="nav-number">1.1.</span> <span class="nav-text">Memory Wall: The Motivation of Memory Hierarchy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Parallem-Programming"><span class="nav-number">2.</span> <span class="nav-text">Parallem Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Parallelize-Your-Program"><span class="nav-number">2.1.</span> <span class="nav-text">How to Parallelize Your Program</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Foster’s-Methodology"><span class="nav-number">2.1.1.</span> <span class="nav-text">Foster’s Methodology</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Patterns-in-Parallelism"><span class="nav-number">2.2.</span> <span class="nav-text">Patterns in Parallelism</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Threads-…-Pthreads"><span class="nav-number">3.</span> <span class="nav-text">Threads … Pthreads</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Threads"><span class="nav-number">3.1.</span> <span class="nav-text">Threads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Different-Types-of-Threads"><span class="nav-number">3.2.</span> <span class="nav-text">Different Types of Threads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POSIX-Threads"><span class="nav-number">3.3.</span> <span class="nav-text">POSIX Threads</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Hardware</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Memory Wall: The Motivation of Memory Hierarchy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Parallem Programming</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">How to Parallelize Your Program</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.1.</span> <span class="nav-text">Foster&#39;s Methodology</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">Patterns in Parallelism</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Threads ... Pthreads</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">Threads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">Different Types of Threads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">POSIX Threads</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -715,7 +727,24 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
@@ -768,43 +797,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
   
 
 

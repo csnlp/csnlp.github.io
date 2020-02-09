@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="Firstly introduce some basic knowledge about GPU to better illustrate the concept of multithreading.  GPUGPUs use a SIMT(Single Instruction, Multiple Thread) model, where individual scalar instruction">
+<meta name="description" content="Firstly introduce some basic knowledge about GPU to better illustrate the concept of multithreading. GPU GPUs use a SIMT(Single Instruction, Multiple Thread) model, where individual scalar instruction">
 <meta name="keywords" content="Computer Architecture">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Multithreading">
 <meta property="og:url" content="http://yoursite.com/2019/10/23/multithreading/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Firstly introduce some basic knowledge about GPU to better illustrate the concept of multithreading.  GPUGPUs use a SIMT(Single Instruction, Multiple Thread) model, where individual scalar instruction">
+<meta property="og:description" content="Firstly introduce some basic knowledge about GPU to better illustrate the concept of multithreading. GPU GPUs use a SIMT(Single Instruction, Multiple Thread) model, where individual scalar instruction">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/10/23/multithreading/multithreaded_pipeline.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/10/23/multithreading/multithread_categories.jpg">
 <meta property="og:updated_time" content="2020-01-30T09:55:09.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Multithreading">
-<meta name="twitter:description" content="Firstly introduce some basic knowledge about GPU to better illustrate the concept of multithreading.  GPUGPUs use a SIMT(Single Instruction, Multiple Thread) model, where individual scalar instruction">
+<meta name="twitter:description" content="Firstly introduce some basic knowledge about GPU to better illustrate the concept of multithreading. GPU GPUs use a SIMT(Single Instruction, Multiple Thread) model, where individual scalar instruction">
 <meta name="twitter:image" content="http://yoursite.com/2019/10/23/multithreading/multithreaded_pipeline.jpg">
 
 
@@ -377,30 +377,39 @@
       
 
       
-        <p>Firstly introduce some basic knowledge about GPU to better illustrate the concept of multithreading. </p>
-<h1 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h1><p>GPUs use a SIMT(Single Instruction, Multiple Thread) model, where individual scalar instruction streams for each CUDA thread are grouped together for SIMD execution. </p>
+        <p>Firstly introduce some basic knowledge about GPU to better illustrate the concept of multithreading.</p>
+<h1>GPU</h1>
+<p>GPUs use a SIMT(Single Instruction, Multiple Thread) model, where individual scalar instruction streams for each CUDA thread are grouped together for SIMD execution.</p>
 <p>GPU is more lk</p>
-<h1 id="Multithreading-A-Short-Review"><a href="#Multithreading-A-Short-Review" class="headerlink" title="Multithreading: A Short Review"></a>Multithreading: A Short Review</h1><h2 id="Motivation-of-Multithreading"><a href="#Motivation-of-Multithreading" class="headerlink" title="Motivation of Multithreading"></a>Motivation of Multithreading</h2><ol>
-<li>Difficult to continue to extract instruction-level parallelism or data level parallelism from a single sequential thread of control. </li>
-<li>Many workloads can make use of thread-level parallelism. </li>
-<li>Multithreading use TLP to improve utilization of a single processor. </li>
-</ol>
-<h2 id="Coarse-Grain-Multithreading"><a href="#Coarse-Grain-Multithreading" class="headerlink" title="Coarse-Grain Multithreading"></a>Coarse-Grain Multithreading</h2><p>There is a question: how can we guarantee no dependencies between instructions in a pipeline?</p>
-<p>One possible solution: to interleave execution of instructions from different program threads on same pipeline. </p>
-<p>A simple multithreaded pipeline<br><img src="multithreaded_pipeline.jpg" alt=""></p>
-<p>However, multithreading has its cost: </p>
+<h1>Multithreading: A Short Review</h1>
+<h2>Motivation of Multithreading</h2>
 <ol>
-<li>Each thread requires its own user state: PC, GPRs and so on. </li>
-<li>It also needs to record its own systems state: page table, base register, exception handling register. </li>
-<li>Other overheads: <ul>
-<li>Additional cache / TLB conflicts from competing threading. </li>
-<li>Need larger cahce/TLB capacity. </li>
-<li>More OS overhead to schedule more threads. <h3 id="Thread-Scheduling-Policies"><a href="#Thread-Scheduling-Policies" class="headerlink" title="Thread Scheduling Policies"></a>Thread Scheduling Policies</h3></li>
+<li>Difficult to continue to extract instruction-level parallelism or data level parallelism from a single sequential thread of control.</li>
+<li>Many workloads can make use of thread-level parallelism.</li>
+<li>Multithreading use TLP to improve utilization of a single processor.</li>
+</ol>
+<h2>Coarse-Grain Multithreading</h2>
+<p>There is a question: how can we guarantee no dependencies between instructions in a pipeline?</p>
+<p>One possible solution: to interleave execution of instructions from different program threads on same pipeline.</p>
+<p>A simple multithreaded pipeline
+<img src="multithreaded_pipeline.jpg" alt=""></p>
+<p>However, multithreading has its cost:</p>
+<ol>
+<li>Each thread requires its own user state: PC, GPRs and so on.</li>
+<li>It also needs to record its own systems state: page table, base register, exception handling register.</li>
+<li>Other overheads:
+<ul>
+<li>Additional cache / TLB conflicts from competing threading.</li>
+<li>Need larger cahce/TLB capacity.</li>
+<li>More OS overhead to schedule more threads.</li>
 </ul>
 </li>
 </ol>
-<h2 id="Simultaneous-Multithreading"><a href="#Simultaneous-Multithreading" class="headerlink" title="Simultaneous Multithreading"></a>Simultaneous Multithreading</h2><p>Simultaneous Multithreading(SMT) use fine-grain control already presented inside an OOO superscalar to allow instructions from multiple thread to enter execution on same lock cycle, which contributes to better utilization of machine resources. </p>
-<h2 id="Summary-of-Multithread"><a href="#Summary-of-Multithread" class="headerlink" title="Summary of Multithread"></a>Summary of Multithread</h2><p><img src="multithread_categories.jpg" alt=""></p>
+<h3>Thread Scheduling Policies</h3>
+<h2>Simultaneous Multithreading</h2>
+<p>Simultaneous Multithreading(SMT) use fine-grain control already presented inside an OOO superscalar to allow instructions from multiple thread to enter execution on same lock cycle, which contributes to better utilization of machine resources.</p>
+<h2>Summary of Multithread</h2>
+<p><img src="multithread_categories.jpg" alt=""></p>
 
       
     </div>
@@ -520,7 +529,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -531,7 +540,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -542,7 +551,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -575,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GPU"><span class="nav-number">1.</span> <span class="nav-text">GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multithreading-A-Short-Review"><span class="nav-number">2.</span> <span class="nav-text">Multithreading: A Short Review</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-of-Multithreading"><span class="nav-number">2.1.</span> <span class="nav-text">Motivation of Multithreading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coarse-Grain-Multithreading"><span class="nav-number">2.2.</span> <span class="nav-text">Coarse-Grain Multithreading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Thread-Scheduling-Policies"><span class="nav-number">2.2.1.</span> <span class="nav-text">Thread Scheduling Policies</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simultaneous-Multithreading"><span class="nav-number">2.3.</span> <span class="nav-text">Simultaneous Multithreading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-of-Multithread"><span class="nav-number">2.4.</span> <span class="nav-text">Summary of Multithread</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">GPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Multithreading: A Short Review</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">Motivation of Multithreading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.</span> <span class="nav-text">Coarse-Grain Multithreading</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">2.2.1.</span> <span class="nav-text">Thread Scheduling Policies</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.3.</span> <span class="nav-text">Simultaneous Multithreading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.4.</span> <span class="nav-text">Summary of Multithread</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -729,7 +738,24 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
@@ -782,43 +808,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
   
 
 

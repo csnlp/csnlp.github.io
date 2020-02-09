@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Introduction to VLIWVLIW processors issue a fixed number of instructions formatted either as one large instruction or as a fixed instruction packet with the parallelism among instructions explicitly i">
+<meta name="description" content="Introduction to VLIW VLIW processors issue a fixed number of instructions formatted either as one large instruction or as a fixed instruction packet with the parallelism among instructions explicitly">
 <meta name="keywords" content="Computer Architecture">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VLIW">
 <meta property="og:url" content="http://yoursite.com/2019/11/03/VLIW/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Introduction to VLIWVLIW processors issue a fixed number of instructions formatted either as one large instruction or as a fixed instruction packet with the parallelism among instructions explicitly i">
+<meta property="og:description" content="Introduction to VLIW VLIW processors issue a fixed number of instructions formatted either as one large instruction or as a fixed instruction packet with the parallelism among instructions explicitly">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/11/03/VLIW/VLIW_introduction.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/11/03/VLIW/loop_unrolling_code.jpg">
@@ -94,7 +94,7 @@
 <meta property="og:updated_time" content="2020-01-30T05:20:05.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VLIW">
-<meta name="twitter:description" content="Introduction to VLIWVLIW processors issue a fixed number of instructions formatted either as one large instruction or as a fixed instruction packet with the parallelism among instructions explicitly i">
+<meta name="twitter:description" content="Introduction to VLIW VLIW processors issue a fixed number of instructions formatted either as one large instruction or as a fixed instruction packet with the parallelism among instructions explicitly">
 <meta name="twitter:image" content="http://yoursite.com/2019/11/03/VLIW/VLIW_introduction.jpg">
 
 
@@ -379,47 +379,58 @@
       
 
       
-        <h1 id="Introduction-to-VLIW"><a href="#Introduction-to-VLIW" class="headerlink" title="Introduction to VLIW"></a>Introduction to VLIW</h1><p>VLIW processors issue a fixed number of instructions formatted either as <strong>one large instruction</strong> or as <strong>a fixed instruction packet with the parallelism among instructions explicitly indicated by the instruction</strong>.<br><img src="VLIW_introduction.jpg" alt=""></p>
+        <h1>Introduction to VLIW</h1>
+<p>VLIW processors issue a fixed number of instructions formatted either as <strong>one large instruction</strong> or as <strong>a fixed instruction packet with the parallelism among instructions explicitly indicated by the instruction</strong>.
+<img src="VLIW_introduction.jpg" alt=""></p>
 <ol>
-<li>Multple operations are packed into one instruction. </li>
-<li>Each operation slot is for a fixed function. </li>
-<li>Constant operation latencies are specified. </li>
-<li>Architecture required guarantee of<ul>
+<li>Multple operations are packed into one instruction.</li>
+<li>Each operation slot is for a fixed function.</li>
+<li>Constant operation latencies are specified.</li>
+<li>Architecture required guarantee of
+<ul>
 <li>Parallelsim within an instruction</li>
-<li>No data use before data ready. </li>
+<li>No data use before data ready.</li>
 </ul>
 </li>
 </ol>
-<h3 id="VLIW-Equals-EQ-Scheduling-Model"><a href="#VLIW-Equals-EQ-Scheduling-Model" class="headerlink" title="VLIW Equals(EQ) Scheduling Model"></a>VLIW Equals(EQ) Scheduling Model</h3><ul>
-<li>Each operation takes exactly specified latency. </li>
+<h3>VLIW Equals(EQ) Scheduling Model</h3>
+<ul>
+<li>Each operation takes exactly specified latency.</li>
 <li>Efficient register usage</li>
-<li>No need for register renaming or buffering. </li>
-<li>Compiler depends on not having registers visible early. </li>
+<li>No need for register renaming or buffering.</li>
+<li>Compiler depends on not having registers visible early.</li>
 </ul>
-<h2 id="VLIW-Compiler-Optimizations"><a href="#VLIW-Compiler-Optimizations" class="headerlink" title="VLIW Compiler Optimizations"></a>VLIW Compiler Optimizations</h2><p><strong>The responsibilities of VLIW compiler</strong></p>
+<h2>VLIW Compiler Optimizations</h2>
+<p><strong>The responsibilities of VLIW compiler</strong></p>
 <ol>
-<li>Schedule operations to maximize parallel execution. </li>
-<li>Guarantee intro-instruction parallelism. </li>
+<li>Schedule operations to maximize parallel execution.</li>
+<li>Guarantee intro-instruction parallelism.</li>
 <li>Schedule to avoid data hazards.</li>
 </ol>
-<h3 id="Loop-Unrolling"><a href="#Loop-Unrolling" class="headerlink" title="Loop Unrolling"></a>Loop Unrolling</h3><p><img src="loop_unrolling_code.jpg" alt=""></p>
-<p>Give its assembly language:<br><img src="loop_unrolling_assembly.jpg" alt=""></p>
-<h3 id="What-if-There-are-no-loops"><a href="#What-if-There-are-no-loops" class="headerlink" title="What if There are no loops?"></a>What if There are no loops?</h3><p>Firstly, define a concept named <strong>Basic block:</strong><br>Basic block: single entry and single exit.<br><img src="basic_block.jpg" alt=""></p>
+<h3>Loop Unrolling</h3>
+<p><img src="loop_unrolling_code.jpg" alt=""></p>
+<p>Give its assembly language:
+<img src="loop_unrolling_assembly.jpg" alt=""></p>
+<h3>What if There are no loops?</h3>
+<p>Firstly, define a concept named <strong>Basic block:</strong>
+Basic block: single entry and single exit.
+<img src="basic_block.jpg" alt=""></p>
 <ul>
-<li>Branch limit basic block size in control-flow intensive irregular code. </li>
-<li>It’s difficult to find ILP in individual basic blocks. </li>
+<li>Branch limit basic block size in control-flow intensive irregular code.</li>
+<li>It's difficult to find ILP in individual basic blocks.</li>
 </ul>
-<h2 id="Classic-VLIW-Challenges"><a href="#Classic-VLIW-Challenges" class="headerlink" title="Classic VLIW Challenges"></a>Classic VLIW Challenges</h2><ol>
-<li>Object-code compatbility: have to recompile all code for every machine even for two machine in same generation. </li>
-<li>Object code size: intruction padding wastes instruction memory and loop unrolling/software pipelining replicates code. </li>
-<li>Scheduling variable latency memory operations: caches and memory bank conflicts impose statically unpredicatable variability. </li>
+<h2>Classic VLIW Challenges</h2>
+<ol>
+<li>Object-code compatbility: have to recompile all code for every machine even for two machine in same generation.</li>
+<li>Object code size: intruction padding wastes instruction memory and loop unrolling/software pipelining replicates code.</li>
+<li>Scheduling variable latency memory operations: caches and memory bank conflicts impose statically unpredicatable variability.</li>
 <li>Knowing branch probabilities.</li>
-<li>Scheduling for statically unpredictable branches. </li>
-<li>Precise interrupts can be challenging. </li>
+<li>Scheduling for statically unpredictable branches.</li>
+<li>Precise interrupts can be challenging.</li>
 </ol>
 <p>How to SOLVE these challenges?</p>
 <ol>
-<li>VLIW instruction encoding: </li>
+<li>VLIW instruction encoding:</li>
 </ol>
 
       
@@ -540,7 +551,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -551,7 +562,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -562,7 +573,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -595,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-to-VLIW"><span class="nav-number">1.</span> <span class="nav-text">Introduction to VLIW</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VLIW-Equals-EQ-Scheduling-Model"><span class="nav-number">1.0.1.</span> <span class="nav-text">VLIW Equals(EQ) Scheduling Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VLIW-Compiler-Optimizations"><span class="nav-number">1.1.</span> <span class="nav-text">VLIW Compiler Optimizations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Loop-Unrolling"><span class="nav-number">1.1.1.</span> <span class="nav-text">Loop Unrolling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What-if-There-are-no-loops"><span class="nav-number">1.1.2.</span> <span class="nav-text">What if There are no loops?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Classic-VLIW-Challenges"><span class="nav-number">1.2.</span> <span class="nav-text">Classic VLIW Challenges</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Introduction to VLIW</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">VLIW Equals(EQ) Scheduling Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">VLIW Compiler Optimizations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.1.</span> <span class="nav-text">Loop Unrolling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.2.</span> <span class="nav-text">What if There are no loops?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Classic VLIW Challenges</span></a></li></ol></div>
             
 
           </div>
@@ -749,7 +760,24 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
@@ -802,43 +830,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
   
 
 

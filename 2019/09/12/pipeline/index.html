@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="Basic Knowledge about PipelinePipeline PhaseSome abbreviations:   IF: instruction fetch D/RF: decode &amp;amp; register fetch phase EX: execute phase MEM: memory phase WB: write-back phase  An Ideal Pipel">
+<meta name="description" content="Basic Knowledge about Pipeline Pipeline Phase Some abbreviations:  IF: instruction fetch D/RF: decode &amp;amp; register fetch phase EX: execute phase MEM: memory phase WB: write-back phase  An Ideal Pipe">
 <meta name="keywords" content="Computer Architecture; Pipeline">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pipeline">
 <meta property="og:url" content="http://yoursite.com/2019/09/12/pipeline/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Basic Knowledge about PipelinePipeline PhaseSome abbreviations:   IF: instruction fetch D/RF: decode &amp;amp; register fetch phase EX: execute phase MEM: memory phase WB: write-back phase  An Ideal Pipel">
+<meta property="og:description" content="Basic Knowledge about Pipeline Pipeline Phase Some abbreviations:  IF: instruction fetch D/RF: decode &amp;amp; register fetch phase EX: execute phase MEM: memory phase WB: write-back phase  An Ideal Pipe">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/09/12/pipeline/pipeline_diagram.jpg">
 <meta property="og:updated_time" content="2020-02-02T09:50:26.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pipeline">
-<meta name="twitter:description" content="Basic Knowledge about PipelinePipeline PhaseSome abbreviations:   IF: instruction fetch D/RF: decode &amp;amp; register fetch phase EX: execute phase MEM: memory phase WB: write-back phase  An Ideal Pipel">
+<meta name="twitter:description" content="Basic Knowledge about Pipeline Pipeline Phase Some abbreviations:  IF: instruction fetch D/RF: decode &amp;amp; register fetch phase EX: execute phase MEM: memory phase WB: write-back phase  An Ideal Pipe">
 <meta name="twitter:image" content="http://yoursite.com/2019/09/12/pipeline/pipeline_diagram.jpg">
 
 
@@ -376,7 +376,9 @@
       
 
       
-        <h1 id="Basic-Knowledge-about-Pipeline"><a href="#Basic-Knowledge-about-Pipeline" class="headerlink" title="Basic Knowledge about Pipeline"></a>Basic Knowledge about Pipeline</h1><h2 id="Pipeline-Phase"><a href="#Pipeline-Phase" class="headerlink" title="Pipeline Phase"></a>Pipeline Phase</h2><p>Some abbreviations: </p>
+        <h1>Basic Knowledge about Pipeline</h1>
+<h2>Pipeline Phase</h2>
+<p>Some abbreviations:</p>
 <ul>
 <li>IF: instruction fetch</li>
 <li>D/RF: decode &amp; register fetch phase</li>
@@ -386,37 +388,43 @@
 </ul>
 <p>An Ideal Pipeline</p>
 <ul>
-<li>Same process: all objects go through the same stages. </li>
-<li>No shared resource: no sharing of resources between any two stages. </li>
-<li>Equal propagation delay: propagation delay through all pipeline stages is equal. </li>
-<li>No interplay: scheduling of a transaction entering the pipeline is not affected by the transactions in other stages. </li>
+<li>Same process: all objects go through the same stages.</li>
+<li>No shared resource: no sharing of resources between any two stages.</li>
+<li>Equal propagation delay: propagation delay through all pipeline stages is equal.</li>
+<li>No interplay: scheduling of a transaction entering the pipeline is not affected by the transactions in other stages.</li>
 </ul>
-<h2 id="Pipeline-Graph"><a href="#Pipeline-Graph" class="headerlink" title="Pipeline Graph"></a>Pipeline Graph</h2><p><img src="pipeline_diagram.jpg" alt=""></p>
+<h2>Pipeline Graph</h2>
+<p><img src="pipeline_diagram.jpg" alt=""></p>
 <p><em>Always Remember, computer architecture is always a tradeoff philosophy.</em></p>
-<h2 id="Data-Hazard"><a href="#Data-Hazard" class="headerlink" title="Data Hazard"></a>Data Hazard</h2><ol>
-<li>Read-after-Write(RAW) hazard: Most common in basic pipeline method. </li>
+<h2>Data Hazard</h2>
+<ol>
+<li>Read-after-Write(RAW) hazard: Most common in basic pipeline method.</li>
 <li>Write-after-Read(WAR) hazard:</li>
 <li>Write-after-Write(WAW) hazard</li>
 </ol>
-<h2 id="Control-Hazard"><a href="#Control-Hazard" class="headerlink" title="Control Hazard"></a>Control Hazard</h2><p>For MIPS, the branch condition cann’t get its results until execute stage:<br>If the branch is taken, we need to: </p>
+<h2>Control Hazard</h2>
+<p>For MIPS, the branch condition cann't get its results until execute stage:
+If the branch is taken, we need to:</p>
 <ul>
-<li>kill the two following instructions. </li>
-<li>the instruction at the decode stage is invalid.<br>For control hazard, the instruction right after the branch instruction need to kill its self. </li>
+<li>kill the two following instructions.</li>
+<li>the instruction at the decode stage is invalid.
+For control hazard, the instruction right after the branch instruction need to kill its self.</li>
 </ul>
-<p>How to reduce branch penalty? </p>
+<p>How to reduce branch penalty?</p>
 <ol>
 <li>One pipeline bubble can be removed if an extra comparator is used in the decode stage of the branch instruction, its disadvantage, however, is that it might elongate cycle time.[Resolve in decode stage]</li>
 <li>Change the ISA semantics so that the instruction that the instruction that follows a jump or branch is always excuted, in other words, give the compiler the flexibility to put in a useful instruction where normally a pipeline buble would have resulted. [Branch Delay Slots]</li>
 </ol>
 <p>Why an instruction may not be dispatched every clcle(CPI&gt;1)?</p>
 <ol>
-<li>Full bypassing may be too expensive to implement. <ul>
-<li>Typically all frequent used paths are provided. </li>
+<li>Full bypassing may be too expensive to implement.
+<ul>
+<li>Typically all frequent used paths are provided.</li>
 <li>However, some infrequently used bypass paths may increase cycle time and couteract the benefit of reducing CPI</li>
 </ul>
 </li>
-<li>Load instruction have at least one cycle latency. </li>
-<li>Conditional branches may cause bubbles. </li>
+<li>Load instruction have at least one cycle latency.</li>
+<li>Conditional branches may cause bubbles.</li>
 </ol>
 
       
@@ -537,7 +545,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -548,7 +556,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -559,7 +567,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -592,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Knowledge-about-Pipeline"><span class="nav-number">1.</span> <span class="nav-text">Basic Knowledge about Pipeline</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pipeline-Phase"><span class="nav-number">1.1.</span> <span class="nav-text">Pipeline Phase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pipeline-Graph"><span class="nav-number">1.2.</span> <span class="nav-text">Pipeline Graph</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Hazard"><span class="nav-number">1.3.</span> <span class="nav-text">Data Hazard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Control-Hazard"><span class="nav-number">1.4.</span> <span class="nav-text">Control Hazard</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Basic Knowledge about Pipeline</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Pipeline Phase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Pipeline Graph</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Data Hazard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">Control Hazard</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -746,7 +754,24 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
@@ -799,43 +824,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
   
 
 

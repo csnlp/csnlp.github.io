@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Interrupts The definition of interrupts:An external or internal event that needs to be processed by another program. The event is usually unexpected or rare from program’s point of view.   Cause of Ex">
+<meta name="description" content="Interrupts  The definition of interrupts: An external or internal event that needs to be processed by another program. The event is usually unexpected or rare from program&apos;s point of view. Cause of Ex">
 <meta name="keywords" content="Computer Architecture">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Superscalar">
 <meta property="og:url" content="http://yoursite.com/2019/09/21/superscalar/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Interrupts The definition of interrupts:An external or internal event that needs to be processed by another program. The event is usually unexpected or rare from program’s point of view.   Cause of Ex">
+<meta property="og:description" content="Interrupts  The definition of interrupts: An external or internal event that needs to be processed by another program. The event is usually unexpected or rare from program&apos;s point of view. Cause of Ex">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2020-01-30T09:55:47.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Superscalar">
-<meta name="twitter:description" content="Interrupts The definition of interrupts:An external or internal event that needs to be processed by another program. The event is usually unexpected or rare from program’s point of view.   Cause of Ex">
+<meta name="twitter:description" content="Interrupts  The definition of interrupts: An external or internal event that needs to be processed by another program. The event is usually unexpected or rare from program&apos;s point of view. Cause of Ex">
 
 
 
@@ -363,10 +363,12 @@
       
 
       
-        <h2 id="Interrupts"><a href="#Interrupts" class="headerlink" title="Interrupts"></a>Interrupts</h2><ol>
-<li><p>The definition of interrupts:<br>An external or internal event that needs to be processed by another program. The event is usually unexpected or rare from program’s point of view. </p>
-</li>
-<li><p>Cause of Exceptions</p>
+        <h2>Interrupts</h2>
+<ol>
+<li>The definition of interrupts:
+An external or internal event that needs to be processed by another program. The event is usually unexpected or rare from program's point of view.</li>
+<li>Cause of Exceptions</li>
+</ol>
 <ul>
 <li>Asynchronous: an external event</li>
 </ul>
@@ -385,65 +387,82 @@
 <li>virtual memory exceptions: page fault</li>
 <li>software exceptions</li>
 </ul>
-</li>
-<li><p>When the processor decide to process the interrupt</p>
+<ol start="3">
+<li>When the processor decide to process the interrupt
 <ul>
-<li>It stops the current program at instruction $l_i$, completes all the instructions up to $l_{i-1}$, which is know as precise interrupt. </li>
-<li>It saves the PC(program counter) of instruction $l_i$ is a special register, which is known as EPC. </li>
-<li>It disables interrupt and gives the control right to a designed interrupt handler running in the kernal mode. </li>
+<li>It stops the current program at instruction $l_i$, completes all the instructions up to $l_{i-1}$, which is know as precise interrupt.</li>
+<li>It saves the PC(program counter) of instruction $l_i$ is a special register, which is known as EPC.</li>
+<li>It disables interrupt and gives the control right to a designed interrupt handler running in the kernal mode.</li>
 </ul>
 </li>
 </ol>
-<h3 id="Exception-Handling"><a href="#Exception-Handling" class="headerlink" title="Exception Handling"></a>Exception Handling</h3><ol>
+<h3>Exception Handling</h3>
+<ol>
 <li>How to handle multiple simultaneous exceptions in different pipeline stages?</li>
 </ol>
-<p>Let the oldest instruction that cause an exception kill all instruction behind in the pipeline. </p>
+<p>Let the oldest instruction that cause an exception kill all instruction behind in the pipeline.</p>
 <ol start="2">
 <li>How and where to handle external asynchronous interrupts?</li>
 </ol>
-<p>See the reference: </p>
+<p>See the reference:</p>
 <ol>
 <li>《Computer Architecture: A Quantitive Approach》: Chapter 3: <em>Instruction-Level Parallelism and Its Exploitation</em></li>
 <li>Coursera: David</li>
 </ol>
-<h2 id="Speculation-and-Branches"><a href="#Speculation-and-Branches" class="headerlink" title="Speculation and Branches"></a>Speculation and Branches</h2><h2 id="Register-Renaming-Introduction"><a href="#Register-Renaming-Introduction" class="headerlink" title="Register Renaming Introduction"></a>Register Renaming Introduction</h2><h3 id="WAW-and-WAR-“Name”-Dependencies"><a href="#WAW-and-WAR-“Name”-Dependencies" class="headerlink" title="WAW and WAR “Name” Dependencies"></a>WAW and WAR “Name” Dependencies</h3><ol>
-<li>WAW and WAR are not <em>True</em> data dependencies. </li>
-<li>RAW is <em>True</em> data dependency because reader needs results of writer. </li>
+<h2>Speculation and Branches</h2>
+<h2>Register Renaming Introduction</h2>
+<h3>WAW and WAR &quot;Name&quot; Dependencies</h3>
+<ol>
+<li>WAW and WAR are not <em>True</em> data dependencies.</li>
+<li>RAW is <em>True</em> data dependency because reader needs results of writer.</li>
 <li><em>Name dependencies</em> exist because we have limited number of <strong>Names</strong>(register specifiers or memory addresses)</li>
 </ol>
-<p>Question: What problems exist with adding infinite numbers of registers to a computer instruction set architecture?<br>A. It takes huge area in the circuit to store these register values<br>B. Takes up encoding space and encoding space is limited.<br>C. It is difficult to manage infinite registers.<br>D. There is no problem at all. </p>
-<p>The right answer is B. Infinite numbers of registers will take up too much encoding space. </p>
+<p>Question: What problems exist with adding infinite numbers of registers to a computer instruction set architecture?
+A. It takes huge area in the circuit to store these register values
+B. Takes up encoding space and encoding space is limited.
+C. It is difficult to manage infinite registers.
+D. There is no problem at all.</p>
+<p>The right answer is B. Infinite numbers of registers will take up too much encoding space.</p>
 <ul>
 <li>Adding more <em>Names</em>(registers/memory) removes dependence, but architecture namespace is limited. (32 registers requires 5 bits, 128 register require 7bits)</li>
 </ul>
-<p>So, simplify increasing number of registers can not solve the problems. </p>
-<h3 id="Register-Renaming"><a href="#Register-Renaming" class="headerlink" title="Register Renaming"></a>Register Renaming</h3><p>Register renaming means change naming of register in hardware to eliminate WAW and WAR hazards. </p>
+<p>So, simplify increasing number of registers can not solve the problems.</p>
+<h3>Register Renaming</h3>
+<p>Register renaming means change naming of register in hardware to eliminate WAW and WAR hazards.</p>
 <p>There are mainly two schemes of register renaming</p>
 <ol>
-<li>Add pointers in the instruction Queue/ReOrder Buffer. </li>
-<li>Store values in the instruction Queue/ReOrder Buffer. </li>
+<li>Add pointers in the instruction Queue/ReOrder Buffer.</li>
+<li>Store values in the instruction Queue/ReOrder Buffer.</li>
 </ol>
-<p>See the reference: </p>
+<p>See the reference:</p>
 <ol>
 <li>《Computer Architecture: A Quantitive Approach》: Chapter 3: <em>Instruction-Level Parallelism and Its Exploitation</em></li>
 <li>Coursera: David</li>
 </ol>
-<h2 id="Speculation-and-Branches-1"><a href="#Speculation-and-Branches-1" class="headerlink" title="Speculation and Branches"></a>Speculation and Branches</h2><h2 id="Register-Renaming-Introduction-1"><a href="#Register-Renaming-Introduction-1" class="headerlink" title="Register Renaming Introduction"></a>Register Renaming Introduction</h2><h3 id="WAW-and-WAR-“Name”-Dependencies-1"><a href="#WAW-and-WAR-“Name”-Dependencies-1" class="headerlink" title="WAW and WAR “Name” Dependencies"></a>WAW and WAR “Name” Dependencies</h3><ol>
-<li>WAW and WAR are not <em>True</em> data dependencies. </li>
-<li>RAW is <em>True</em> data dependency because reader needs results of writer. </li>
+<h2>Speculation and Branches</h2>
+<h2>Register Renaming Introduction</h2>
+<h3>WAW and WAR &quot;Name&quot; Dependencies</h3>
+<ol>
+<li>WAW and WAR are not <em>True</em> data dependencies.</li>
+<li>RAW is <em>True</em> data dependency because reader needs results of writer.</li>
 <li><em>Name dependencies</em> exist because we have limited number of <strong>Names</strong>(register specifiers or memory addresses)</li>
 </ol>
-<p>Question: What problems exist with adding infinite numbers of registers to a computer instruction set architecture?<br>A. It takes huge area in the circuit to store these register values<br>B. Takes up encoding space and encoding space is limited.<br>C. It is difficult to manage infinite registers.<br>D. There is no problem at all. </p>
-<p>The right answer is B. Infinite numbers of registers will take up too much encoding space. </p>
+<p>Question: What problems exist with adding infinite numbers of registers to a computer instruction set architecture?
+A. It takes huge area in the circuit to store these register values
+B. Takes up encoding space and encoding space is limited.
+C. It is difficult to manage infinite registers.
+D. There is no problem at all.</p>
+<p>The right answer is B. Infinite numbers of registers will take up too much encoding space.</p>
 <ul>
 <li>Adding more <em>Names</em>(registers/memory) removes dependence, but architecture namespace is limited. (32 registers requires 5 bits, 128 register require 7bits)</li>
 </ul>
-<p>So, simplify increasing number of registers can not solve the problems. </p>
-<h3 id="Register-Renaming-1"><a href="#Register-Renaming-1" class="headerlink" title="Register Renaming"></a>Register Renaming</h3><p>Register renaming means change naming of register in hardware to eliminate WAW and WAR hazards. </p>
+<p>So, simplify increasing number of registers can not solve the problems.</p>
+<h3>Register Renaming</h3>
+<p>Register renaming means change naming of register in hardware to eliminate WAW and WAR hazards.</p>
 <p>There are mainly two schemes of register renaming</p>
 <ol>
-<li>Add pointers in the instruction Queue/ReOrder Buffer. </li>
-<li>Store values in the instruction Queue/ReOrder Buffer. </li>
+<li>Add pointers in the instruction Queue/ReOrder Buffer.</li>
+<li>Store values in the instruction Queue/ReOrder Buffer.</li>
 </ol>
 
       
@@ -564,7 +583,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -575,7 +594,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -586,7 +605,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -619,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Interrupts"><span class="nav-number">1.</span> <span class="nav-text">Interrupts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exception-Handling"><span class="nav-number">1.1.</span> <span class="nav-text">Exception Handling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Speculation-and-Branches"><span class="nav-number">2.</span> <span class="nav-text">Speculation and Branches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Register-Renaming-Introduction"><span class="nav-number">3.</span> <span class="nav-text">Register Renaming Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WAW-and-WAR-“Name”-Dependencies"><span class="nav-number">3.1.</span> <span class="nav-text">WAW and WAR “Name” Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Register-Renaming"><span class="nav-number">3.2.</span> <span class="nav-text">Register Renaming</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Speculation-and-Branches-1"><span class="nav-number">4.</span> <span class="nav-text">Speculation and Branches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Register-Renaming-Introduction-1"><span class="nav-number">5.</span> <span class="nav-text">Register Renaming Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WAW-and-WAR-“Name”-Dependencies-1"><span class="nav-number">5.1.</span> <span class="nav-text">WAW and WAR “Name” Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Register-Renaming-1"><span class="nav-number">5.2.</span> <span class="nav-text">Register Renaming</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Interrupts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Exception Handling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Speculation and Branches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Register Renaming Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">WAW and WAR &quot;Name&quot; Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">Register Renaming</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Speculation and Branches</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">Register Renaming Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.1.</span> <span class="nav-text">WAW and WAR &quot;Name&quot; Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">5.2.</span> <span class="nav-text">Register Renaming</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -773,7 +792,24 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 
@@ -826,43 +862,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
   
 
 
