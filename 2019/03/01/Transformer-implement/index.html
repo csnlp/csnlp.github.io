@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="CSNLP学徒">
 <meta property="og:description" content="就像张俊林老师BERT提到的, 要想理解BERT, Transformer 是必须要知道的,而且Transformer有代替RNN,CNN成为NLP中STOA的特征提取器。说Transformer 是STOA的特征提取器的原因主要有两点  效果好: Transformer &amp;gt; CNN &amp;gt; RNN 速度快: Transformer $\approx$ CNN &amp;gt; RNN 而本文基本">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-30T06:17:01.947Z">
+<meta property="og:updated_time" content="2020-02-09T05:33:57.454Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="跟着教程实习Transformer代码">
 <meta name="twitter:description" content="就像张俊林老师BERT提到的, 要想理解BERT, Transformer 是必须要知道的,而且Transformer有代替RNN,CNN成为NLP中STOA的特征提取器。说Transformer 是STOA的特征提取器的原因主要有两点  效果好: Transformer &amp;gt; CNN &amp;gt; RNN 速度快: Transformer $\approx$ CNN &amp;gt; RNN 而本文基本">
@@ -637,7 +637,7 @@ $$</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -648,7 +648,7 @@ $$</p>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -659,7 +659,7 @@ $$</p>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -846,24 +846,7 @@ $$</p>
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -916,6 +899,43 @@ $$</p>
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

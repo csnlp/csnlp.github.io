@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/dialogue_generation.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/hred.jpg">
-<meta property="og:updated_time" content="2020-02-09T04:44:19.607Z">
+<meta property="og:updated_time" content="2020-02-09T13:50:46.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hierarchy Dialogue Generation">
 <meta name="twitter:description" content="大部分data-driven的对话生成模型都是基于End-to-End model的，但是这种End-to-End model 有其缺点:  难以表征多轮对话生成中的上下文信息: 多轮对话中的Context 信息 基于极大似然估计为优化目标很容易造成Safe Response problem。  为了更好的利用上下文信息，这篇博客介绍 Hierarchy 模型在Dialogue Generatio">
@@ -398,7 +398,7 @@
 <li>word level</li>
 </ol>
 <p><blockquote><p>A dialogue is modelled as a sequence of utterances(sub-sequences), and sub-sequences of tokens.</p>
-<footer><strong>[author[</strong><cite>source]] [link] [source_link_title]</cite></footer></blockquote>
+</blockquote>
 在此背景下，一个对话session 可以看成是一个 utterances 的序列，而每一个utterance 是一个 token 的序列:
 
 
@@ -414,14 +414,21 @@
 <p>HRED 有3 个 RNN models:</p>
 <ol>
 <li><strong>An encoder RNN:</strong> 将每一个utterance 都encode 成为一个向量。</li>
-<li>A context RNN: 输入为 将encoder RNN 所得到的向量 和</li>
-<li>A decoder RNN: 输入 Context vector.</li>
+<li><strong>A context RNN</strong>: 输入为 将encoder RNN 所得到的向量 和</li>
+<li><strong>A decoder RNN</strong>: 输入 Context vector.</li>
 </ol>
 <p>但是有以下几点需要注意:</p>
 <ol>
-<li>Encoder RNN 是GRU 结构: 也就是意味着它的输入数量为2:
-$$h_{n, 0}^{enc} = 0, h^{enc}<em>{n, m} = f^{enc}</em>{\theta}(h_{n, m-1}, w_{n, m}) \forall m = 1, \cdot, M_m$$
-其中, $w_{n, m}$ 代表第 n 个utterance 的第 m 个 word 的词向量
+<li>Encoder RNN 是GRU 结构: 也就是意味着它的输入数量为2, 分别为句子中当前位置的词向量$w_{n, m}$和 上一个时刻的encoder RNN 隐状态 $h^{enc}_{n, m-1}$。</li>
+</ol>
+<p>$$ h_{n, 0}^{enc} = 0, h^{enc}<em>{n, m} = f<sup>{enc}_{\theta}(h</sup>{enc}</em>{n, m-1}, w_{n, m}) \forall m = 1, \cdots, M_m $$</p>
+<p>其中, $w_{n, m}$ 代表第 n 个utterance 的第 m 个 word 的词向量</p>
+<ol start="2">
+<li>Context RNN 也是一个GRU 结构: 也就是意味着它的输入数量也是2, 分别为对话轮数当前位置的encoder 的最后的隐向量 $h^{enc}<em>{n, M_n}$ 和 上一个时刻的context RNN 的隐状态: $h^{con}</em>{n-1}$。
+$$h_{n, 0}^{con} = 0, h^{con}<em>{n} = f<sup>{con}_{\theta}(h</sup>{con}</em>{n-1}, h^{enc}_{n})$$</li>
+<li>Decoder RNN : however, 却是一个LSTM 结构, 输入为3个: 上一时刻decoder 的状态: $h^{dec}<em>{n, m-1}$, 输入的词向量: $w</em>{n, m}$, 截止到上一个对话turn 的Context RNN 的状态: $h^{con}<em>{n-1}$。
+$$h^{dec}</em>{n, 0} = 0, h^{dec}<em>{n, m} = f<sup>{dec}_{\theta}(h</sup>{dec}</em>{n, m-1}, w_{n, m}, h^{con}<em>{n-1})$$
+最终的word distribution 就是将 $h^{dec}</em>{n, m}$ 过了一层 MLP 之后得到的。
 <img src="./hred.jpg" alt=""></li>
 </ol>
 <h1>VHRED model: HRED model 的改进版本</h1>
@@ -433,10 +440,37 @@ $$h_{n, 0}^{enc} = 0, h^{enc}<em>{n, m} = f^{enc}</em>{\theta}(h_{n, m-1}, w_{n,
 
 
 </p>
-<p>Most of existing data-driven dialogue generation models are based on End-to-End model, which have the following crucial limitations:</p>
+<h2>HRED 依然面临着严峻的Safe Response 问题</h2>
+<p>看起来 HRED 一切正常，但是 HRED 与 RNNLM 一样会导致safe response problem, 关于safe response, 我同样有相关博客来论述这一问题。
+这里放一段VHRED 论文中关于 HRED 和 RNNLM 会导致safe response 的原因的分析:
+<blockquote><p><strong>The Restricted Shallow Generation Process:</strong> It has been observed that RNNLM and HRED, and similar models based on RNN architecture, have crucial problems generating meaningful and diverse dialogue response. We believe these problems are caused by the flat sequential generation process followed by RNNLM and HRED, where each word is sampled conditioned only on previous words. We call this a shallow generation process, because only source of variation is modelled through the conditional output distribution.</p>
+<ol>
+<li>This process is problematic from a probabilistic perspective, because the model is forced to generate all high-level structure locally on a step-by-step basis. For example, for generating dialogue responses such a model has to decide the conversation topic in the middle of the generation process-when it is generating the first topic-related word-and, afterwards, for each future word the model will have to decide whether to change or to remain on the same topic. This makes it difficult for the model to generate long-term structure.</li>
+<li>The shallow generation process is also problematic from a computational learning perspective: the state $h_m$ in the RNNLM-or correspondingly the state of the decoder RNN in HRED-has to summarize all the past information up to time step $m$ in order to:
 <ul>
-<li>Can not model the context information</li>
+<li>generate a probable next token(short-term objective).</li>
+<li>occupy a position in embedding space which sustains an ouput trajectory, for generating probable future tokens(long-term objective).</li>
 </ul>
+</li>
+</ol>
+<p>Due to the vanishing gradient effect, the short-term goals will dominate the output distribution. In particular, for sequence with high variability, the models are likely to favor short-term predictions as opposed to long-term predictions, because it is easier to only learn $h_m$ for predicting the next token compared to sustaining a long-term trajactory $h_m, h_{m+1}, h_{m+2}, \cdots,$ which at every time step is perturbed by noisy input(e.g. words given as input).</p>
+</blockquote></p>
+<p>这里我觉得其给出的 computational learning 角度的分析还是很有道理的, 在生成下一个token的时候，有长期目标和短期目标。短期目标就是产生一个合适的词，长期就是保证当前产生的词汇能够很好的适配到embedding 空间里边(fits the output trajectory well)，保证整个response 是合适的。很显然, 短期目标是很容易满足的, 但是需要完成远大目标的长期目标是很难实现的。</p>
+<h2>解决 restricted shallow generation 的 VHRED 模型</h2>
+<p>一定意义上, VHRED 就是为了解决上述问题而出现的。这个模型在 utterance level 引入一个随机隐变量 $z$。VHRED 将response generation 分成两个阶段:</p>
+<ol>
+<li>随机采样一个隐变量 $z$。</li>
+<li>生成最终的output sequence。</li>
+</ol>
+<p>VHRED 将每一个 utterance 都对应成为 $\mathbf{z}_n \in \mathbb{R}^{d_z}$, for $n = 1, \cdots, N$。VHRED 生成Response 的过程可以分为两个阶段:</p>
+<ol>
+<li>根据已有的 utterance $\mathbf{w}_{&lt;n}$ 生成 $\mathbf{z}_n$:</li>
+</ol>
+<p>$$P_{\theta}(\mathbf{z}<em>n \vert \mathbf{w}</em>{&lt;n})$$</p>
+<ol start="2">
+<li>根据 $\mathbf{z}<em>{n}$ 及 $\mathbf{w}</em>{&lt;n}$ 生成当前utterance $\mathbf{w}<em>n$:
+$$P</em>{\theta}(\mathbf{w}<em>{n} \vert \mathbf{z}<em>n, \mathbf{w}</em>{&lt;n}) = \Pi^{M_n}</em>{m=1} P_{\theta}(w_{n, m} \vert \mathbf{z}<em>{n}, \mathbf{w}</em>{&lt;n}, w_{n, &lt;m})$$</li>
+</ol>
 
       
     </div>
@@ -556,7 +590,7 @@ $$h_{n, 0}^{enc} = 0, h^{enc}<em>{n, m} = f^{enc}</em>{\theta}(h_{n, m-1}, w_{n,
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -567,7 +601,7 @@ $$h_{n, 0}^{enc} = 0, h^{enc}<em>{n, m} = f^{enc}</em>{\theta}(h_{n, m-1}, w_{n,
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -578,7 +612,7 @@ $$h_{n, 0}^{enc} = 0, h^{enc}<em>{n, m} = f^{enc}</em>{\theta}(h_{n, m-1}, w_{n,
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -611,7 +645,7 @@ $$h_{n, 0}^{enc} = 0, h^{enc}<em>{n, m} = f^{enc}</em>{\theta}(h_{n, m-1}, w_{n,
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">最早的HRED Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">HRED model in Dialogue Generation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">HRED 模型的结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">VHRED model: HRED model 的改进版本</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">最早的HRED Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">HRED model in Dialogue Generation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.1.</span> <span class="nav-text">HRED 模型的结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">VHRED model: HRED model 的改进版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">HRED 依然面临着严峻的Safe Response 问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">解决 restricted shallow generation 的 VHRED 模型</span></a></li></ol></li></ol></div>
             
 
           </div>

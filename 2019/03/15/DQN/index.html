@@ -88,7 +88,7 @@
 <meta property="og:description" content="Reinforcement Learning 有两大类算法  Policy-Based: 典型的如Policy Gradient,针对连续场景,直接优化得到policy Value-Based: 典型的就是DQN,一般适合离散空间,通过value 反推policy, 会出现策略退化  CartPole 问题 我们先看这个CartPole问题:  CartPole 就是期望杆一直朝上; Reward">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/15/DQN/gym.gif">
-<meta property="og:updated_time" content="2020-01-30T05:47:21.043Z">
+<meta property="og:updated_time" content="2020-02-09T05:30:18.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用DQN实现CartPole">
 <meta name="twitter:description" content="Reinforcement Learning 有两大类算法  Policy-Based: 典型的如Policy Gradient,针对连续场景,直接优化得到policy Value-Based: 典型的就是DQN,一般适合离散空间,通过value 反推policy, 会出现策略退化  CartPole 问题 我们先看这个CartPole问题:  CartPole 就是期望杆一直朝上; Reward">
@@ -454,8 +454,8 @@ $$
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/12/pipeline/" rel="prev" title="Pipeline">
-                Pipeline <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/18/Task-Completion-Dialogue/" rel="prev" title="手把手搭建任务型对话系统">
+                手把手搭建任务型对话系统 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,7 +533,7 @@ $$
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -544,7 +544,7 @@ $$
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -555,7 +555,7 @@ $$
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -742,24 +742,7 @@ $$
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -812,6 +795,43 @@ $$
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

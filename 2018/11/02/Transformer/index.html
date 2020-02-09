@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/11/02/Transformer/transformer_position_embedding.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/11/02/Transformer/transformer_encoder.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/11/02/Transformer/transformer_structure.jpg">
-<meta property="og:updated_time" content="2020-02-02T00:23:17.426Z">
+<meta property="og:updated_time" content="2020-02-09T05:41:24.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Transformer">
 <meta name="twitter:description" content="本文其实写的有些迟到，毕竟这是谷歌17年6月的工作，不过好戏不怕晚，这项工作亮点在于不用CNN,RNN也能得到STOA的效果, 而理论上的指导意义在于  Self-Attention思想 Transformer 结构  这里模型结构强推另一个博客，讲的十分清楚，按照数据的处理流程来讲，十分清楚。 Transformer 其实Transformer 还是一个Seq2Seq 的结构，但是Transfo">
@@ -403,7 +403,8 @@
 <p><img src="transformer_encoder_selfattention.jpg" alt="">
 反映到公式上
 $$\text{MultiHead}(Q, K, V) = \text{Concat}(head_1, \dots, head_h)W^{O}$$
-where   $$\text{head}<em>i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$   $$\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_v}})V$$
+where   $$\text{head}<em>i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$<br>
+and $$\text{Attention}(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_v}})V$$
 其中 对于Self-Attention来讲$K = Q = K \in R^{d</em>{model}}$ ,$W_i^Q \in R^{d_{model} \times d_k}$, $W_i^K \in R^{d_{model} \times d_k}$, $W_i^V \in R^{d_{model} \times d_V}$</p>
 <p>这么做的Motivation是什么
 <blockquote><p>Instead of performing a single attention fuction with $d_{model}$ dimensional keys, values and queries, we found it benefical to linearly project the queries, keys and values h times with different learned linear projects to $d_k, d_k$ and $d_v$ dimensions respectively.</p>
@@ -556,7 +557,7 @@ $$\text{LayerNorm}(x + SubLayer(x))$$</li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -567,7 +568,7 @@ $$\text{LayerNorm}(x + SubLayer(x))$$</li>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -578,7 +579,7 @@ $$\text{LayerNorm}(x + SubLayer(x))$$</li>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -765,24 +766,7 @@ $$\text{LayerNorm}(x + SubLayer(x))$$</li>
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -835,6 +819,43 @@ $$\text{LayerNorm}(x + SubLayer(x))$$</li>
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

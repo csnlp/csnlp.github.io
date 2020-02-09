@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="CSNLP学徒">
 <meta property="og:description" content="本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现 对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标 基于词重叠的指标(word overlap-based metrics) 词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-01-30T06:36:29.476Z">
+<meta property="og:updated_time" content="2020-02-09T05:35:08.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP对话任务常用指标及其实现代码">
 <meta name="twitter:description" content="本文主要针对NLP中dialogue 这一任务的评估指标进行介绍,并且给出其代码实现 对话系统其实目前尚未有标准评估指标,更多的是人工评估,而本次介绍的指标很多很多本来是其他任务场景下的指标 基于词重叠的指标(word overlap-based metrics) 词重叠其实是对比真实response(ground truth,用$r$表示) 和 模型返回的response(candidates,">
@@ -501,7 +501,7 @@ BLEU 其实是一种准确率计算方法(n-gram precision), 也就是只关注�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -512,7 +512,7 @@ BLEU 其实是一种准确率计算方法(n-gram precision), 也就是只关注�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -523,7 +523,7 @@ BLEU 其实是一种准确率计算方法(n-gram precision), 也就是只关注�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -710,24 +710,7 @@ BLEU 其实是一种准确率计算方法(n-gram precision), 也就是只关注�
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -780,6 +763,43 @@ BLEU 其实是一种准确率计算方法(n-gram precision), 也就是只关注�
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
