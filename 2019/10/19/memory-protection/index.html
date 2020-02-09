@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="Memory Management From  early absolute addressing schemes to model virtual memory systems with support for virtual machine monitors.  Modern memory management system can be separated into orthogonal f">
+<meta name="description" content="Memory Management From + early absolute addressing schemes to + model virtual memory systems with support for virtual machine monitors. Modern memory management system can be separated into orthogonal">
 <meta name="keywords" content="Computer Architecture">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Memory protection">
 <meta property="og:url" content="http://yoursite.com/2019/10/19/memory-protection/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Memory Management From  early absolute addressing schemes to model virtual memory systems with support for virtual machine monitors.  Modern memory management system can be separated into orthogonal f">
+<meta property="og:description" content="Memory Management From + early absolute addressing schemes to + model virtual memory systems with support for virtual machine monitors. Modern memory management system can be separated into orthogonal">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/10/19/memory-protection/address_translation_pipeline.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/10/19/memory-protection/overview_address_translation.jpg">
 <meta property="og:updated_time" content="2019-10-22T22:54:05.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Memory protection">
-<meta name="twitter:description" content="Memory Management From  early absolute addressing schemes to model virtual memory systems with support for virtual machine monitors.  Modern memory management system can be separated into orthogonal f">
+<meta name="twitter:description" content="Memory Management From + early absolute addressing schemes to + model virtual memory systems with support for virtual machine monitors. Modern memory management system can be separated into orthogonal">
 <meta name="twitter:image" content="http://yoursite.com/2019/10/19/memory-protection/address_translation_pipeline.jpg">
 
 
@@ -333,54 +333,33 @@
       
 
       
-        <h1>Memory Management</h1>
-<p>From</p>
-<ul>
-<li>early absolute addressing schemes
-to</li>
-<li>model virtual memory systems with support for virtual machine monitors.</li>
-</ul>
-<p>Modern memory management system can be separated into orthogonal functions:</p>
-<ol>
-<li>Translation: translating virtual address to physical address</li>
-<li>Protection: permission to access word in memory.</li>
-<li>Virtual memory: transparent extension of memory space using slower disk space.</li>
-</ol>
-<p>With address translation, the CPU pipeline turns into:
-<img src="address_translation_pipeline.jpg" alt=""></p>
-<h1>Dynamic Address Translation</h1>
-<p>We all know about <em>base</em> and <em>bound</em> register. However, what's the motivation hehind base register and bound register.</p>
-<ol>
-<li>Location-independent programs: programming and storage management ease ==&gt; need for a base register.</li>
-<li>Protection: independent programs should not affect each other inadvertently ==&gt; need for a bound register.</li>
-</ol>
-<h1>Paged Memory Systems</h1>
-<h1>Virtual Memory</h1>
+        <h1 id="memory-management">Memory Management</h1>
+<p>From + early absolute addressing schemes to + model virtual memory systems with support for virtual machine monitors.</p>
+<p>Modern memory management system can be separated into orthogonal functions: 1. Translation: translating virtual address to physical address 2. Protection: permission to access word in memory. 3. Virtual memory: transparent extension of memory space using slower disk space.</p>
+<p>With address translation, the CPU pipeline turns into: <img src="address_translation_pipeline.jpg"></p>
+<h1 id="dynamic-address-translation">Dynamic Address Translation</h1>
+<p>We all know about <em>base</em> and <em>bound</em> register. However, what's the motivation hehind base register and bound register. 1. Location-independent programs: programming and storage management ease ==&gt; need for a base register. 2. Protection: independent programs should not affect each other inadvertently ==&gt; need for a bound register.</p>
+<h1 id="paged-memory-systems">Paged Memory Systems</h1>
+<h1 id="virtual-memory">Virtual Memory</h1>
 <ul>
 <li>Pages: fixed-size block.</li>
 <li>Segments: variable-size block.</li>
 </ul>
-<p>An overview for address translation:
-<img src="overview_address_translation.jpg" alt=""></p>
-<p>To better understand this pipeline, we need to learn</p>
-<ol>
-<li>TLB</li>
-<li>Page Table</li>
-<li>Protection Check</li>
-</ol>
-<h2>TLB(Translation Lookaside Buffer) Designs</h2>
-<ol>
+<p>An overview for address translation: <img src="overview_address_translation.jpg"></p>
+<p>To better understand this pipeline, we need to learn 1. TLB 2. Page Table 3. Protection Check</p>
+<h2 id="tlbtranslation-lookaside-buffer-designs">TLB(Translation Lookaside Buffer) Designs</h2>
+<ol type="1">
 <li>Typically 16-128 entries, usually fully associative.</li>
 <li>Random or FIFO replacement policy.</li>
 <li>No process information in TLB.</li>
 <li>TLB Reach: size of largest virtual address space that can be simultaneously mapped by TLB.</li>
 </ol>
-<h2>TLB Extensions</h2>
-<ol>
+<h2 id="tlb-extensions">TLB Extensions</h2>
+<ol type="1">
 <li>Add Address Space Identifier(ASID), which allows TBL entries from multiple processes to be in TLB at same time. ID of address space(Process) is matched on.</li>
 <li>Variable page size, which can help increase reach on a per page basis.</li>
 </ol>
-<h2>How to Handle a TLB Miss</h2>
+<h2 id="how-to-handle-a-tlb-miss">How to Handle a TLB Miss</h2>
 
       
     </div>
@@ -555,7 +534,7 @@ to</li>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Memory Management</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Dynamic Address Translation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Paged Memory Systems</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Virtual Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.1.</span> <span class="nav-text">TLB(Translation Lookaside Buffer) Designs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.2.</span> <span class="nav-text">TLB Extensions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.3.</span> <span class="nav-text">How to Handle a TLB Miss</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#memory-management"><span class="nav-number">1.</span> <span class="nav-text">Memory Management</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dynamic-address-translation"><span class="nav-number">2.</span> <span class="nav-text">Dynamic Address Translation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#paged-memory-systems"><span class="nav-number">3.</span> <span class="nav-text">Paged Memory Systems</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#virtual-memory"><span class="nav-number">4.</span> <span class="nav-text">Virtual Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tlbtranslation-lookaside-buffer-designs"><span class="nav-number">4.1.</span> <span class="nav-text">TLB(Translation Lookaside Buffer) Designs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tlb-extensions"><span class="nav-number">4.2.</span> <span class="nav-text">TLB Extensions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-handle-a-tlb-miss"><span class="nav-number">4.3.</span> <span class="nav-text">How to Handle a TLB Miss</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -709,24 +688,7 @@ to</li>
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

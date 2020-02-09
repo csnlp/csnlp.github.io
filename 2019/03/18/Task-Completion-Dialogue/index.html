@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="这篇博客重在实现,力求多快好省的搭建出来一个Task-oriented Dialogue System, 对于原理部分不做太多解释 参考资料可以参考  A User Simulator for Task-Completion Dialogues https://github.com/MiuLab/TC-Bot   NLU DM NLG  Natural Language Understanding">
+<meta name="description" content="这篇博客重在实现,力求多快好省的搭建出来一个Task-oriented Dialogue System, 对于原理部分不做太多解释 参考资料可以参考 1. A User Simulator for Task-Completion Dialogues 2. https://github.com/MiuLab/TC-Bot  NLU DM NLG # Natural Language Understa">
 <meta name="keywords" content="NLP,Dialogue System">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手把手搭建任务型对话系统">
 <meta property="og:url" content="http://yoursite.com/2019/03/18/Task-Completion-Dialogue/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="这篇博客重在实现,力求多快好省的搭建出来一个Task-oriented Dialogue System, 对于原理部分不做太多解释 参考资料可以参考  A User Simulator for Task-Completion Dialogues https://github.com/MiuLab/TC-Bot   NLU DM NLG  Natural Language Understanding">
+<meta property="og:description" content="这篇博客重在实现,力求多快好省的搭建出来一个Task-oriented Dialogue System, 对于原理部分不做太多解释 参考资料可以参考 1. A User Simulator for Task-Completion Dialogues 2. https://github.com/MiuLab/TC-Bot  NLU DM NLG # Natural Language Understa">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2020-02-09T08:53:40.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手把手搭建任务型对话系统">
-<meta name="twitter:description" content="这篇博客重在实现,力求多快好省的搭建出来一个Task-oriented Dialogue System, 对于原理部分不做太多解释 参考资料可以参考  A User Simulator for Task-Completion Dialogues https://github.com/MiuLab/TC-Bot   NLU DM NLG  Natural Language Understanding">
+<meta name="twitter:description" content="这篇博客重在实现,力求多快好省的搭建出来一个Task-oriented Dialogue System, 对于原理部分不做太多解释 参考资料可以参考 1. A User Simulator for Task-Completion Dialogues 2. https://github.com/MiuLab/TC-Bot  NLU DM NLG # Natural Language Understa">
 
 
 
@@ -363,47 +363,24 @@
       
 
       
-        <p>这篇博客重在实现,力求多快好省的搭建出来一个Task-oriented Dialogue System, 对于原理部分不做太多解释
-参考资料可以参考</p>
-<ol>
-<li>A User Simulator for Task-Completion Dialogues</li>
-<li>https://github.com/MiuLab/TC-Bot</li>
-</ol>
+        <p>这篇博客重在实现,力求多快好省的搭建出来一个Task-oriented Dialogue System, 对于原理部分不做太多解释 参考资料可以参考 1. A User Simulator for Task-Completion Dialogues 2. https://github.com/MiuLab/TC-Bot</p>
 <ul>
 <li>NLU</li>
 <li>DM</li>
-<li>NLG</li>
-</ul>
-<h1>Natural Language Understanding</h1>
-<p>NLU 主要完成</p>
-<ul>
+<li>NLG # Natural Language Understanding NLU 主要完成</li>
 <li>Intent Prediction</li>
-<li>Slot Filling</li>
+<li>Slot Filling # Dialogue Management 通常，可以通过Reinforcement Learning 来优化dialogue policy。但是RL的方法需要与真实用户进行多轮交互，成本比较高。为了解决这一问题，可以建立"模拟用户(Simulated User)"来对agent 进行优化，等agent 优化到一定程度再和真实用户进行交互进行进一步优化。</li>
 </ul>
-<h1>Dialogue Management</h1>
-<p>通常，可以通过Reinforcement Learning 来优化dialogue policy。但是RL的方法需要与真实用户进行多轮交互，成本比较高。为了解决这一问题，可以建立&quot;模拟用户(Simulated User)&quot;来对agent 进行优化，等agent 优化到一定程度再和真实用户进行交互进行进一步优化。</p>
-<h1>Natural Language Generation</h1>
-<h2>Agent 类</h2>
-<p>一共有两个主要方法</p>
-<ul>
-<li>initialize_eposode(self)</li>
-<li>state_to_action(self, state, available_actions)</li>
-</ul>
-<p>其中, state_to_action 可以看成是 dialogue policy learning(DPL) 部分的功能: 根据系统state 选择相应action.
-我们拿经典的DQNAgent 举例
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">state_to_action</span><span class="params">(self, state)</span>:</span></span><br><span class="line">   <span class="string">""" DQN: Input state, output action """</span></span><br><span class="line">   </span><br><span class="line">   self.representation = self.prepare_state_representation(state)</span><br><span class="line">   self.action = self.run_policy(self.representation)</span><br><span class="line">   act_slot_response = copy.deepcopy(self.feasible_actions[self.action])</span><br><span class="line">   <span class="keyword">return</span> &#123;<span class="string">'act_slot_response'</span>: act_slot_response, <span class="string">'act_slot_value_response'</span>: <span class="keyword">None</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可以看到思路还是很清晰的</p>
-<ol>
-<li>self.prepare_state_representation(state): DPL先将agent系统的状态:state 进行抽象。</li>
-<li>self.run_policy(self.representation): DPL根据DQN选择一个action</li>
-<li>act_slot_response: 将选择的action进一步映射为act</li>
-</ol>
-<p>其中对话中state 表示方法
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user_action = state[<span class="string">'user_action'</span>]</span><br><span class="line">current_slots = state[<span class="string">'current_slots'</span>]</span><br><span class="line">kb_results_dict = state[<span class="string">'kb_results_dict'</span>]</span><br><span class="line">agent_last = state[<span class="string">'agent_action'</span>]</span><br><span class="line">turn = state[<span class="string">'turn'</span>]</span><br></pre></td></tr></table></figure></p>
+<h1 id="natural-language-generation">Natural Language Generation</h1>
+<h2 id="agent-类">Agent 类</h2>
+<p>一共有两个主要方法 + initialize_eposode(self) + state_to_action(self, state, available_actions)</p>
+<p>其中, state_to_action 可以看成是 dialogue policy learning(DPL) 部分的功能: 根据系统state 选择相应action. 我们拿经典的DQNAgent 举例 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">state_to_action</span><span class="params">(self, state)</span>:</span></span><br><span class="line">   <span class="string">""" DQN: Input state, output action """</span></span><br><span class="line">   </span><br><span class="line">   self.representation = self.prepare_state_representation(state)</span><br><span class="line">   self.action = self.run_policy(self.representation)</span><br><span class="line">   act_slot_response = copy.deepcopy(self.feasible_actions[self.action])</span><br><span class="line">   <span class="keyword">return</span> &#123;<span class="string">'act_slot_response'</span>: act_slot_response, <span class="string">'act_slot_value_response'</span>: <span class="keyword">None</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到思路还是很清晰的 1. self.prepare_state_representation(state): DPL先将agent系统的状态:state 进行抽象。 2. self.run_policy(self.representation): DPL根据DQN选择一个action 3. act_slot_response: 将选择的action进一步映射为act</p>
+<p>其中对话中state 表示方法 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user_action = state[<span class="string">'user_action'</span>]</span><br><span class="line">current_slots = state[<span class="string">'current_slots'</span>]</span><br><span class="line">kb_results_dict = state[<span class="string">'kb_results_dict'</span>]</span><br><span class="line">agent_last = state[<span class="string">'agent_action'</span>]</span><br><span class="line">turn = state[<span class="string">'turn'</span>]</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>For User Action</li>
 </ul>
-<ol>
+<ol type="1">
 <li>Current user action representation: user_act_rep</li>
 <li>User inform slots representation: user_inform_slots_rep</li>
 <li>User request slots representation: user_request_slots_rep</li>
@@ -411,13 +388,13 @@
 <ul>
 <li>For Current Slots</li>
 </ul>
-<ol start="4">
+<ol start="4" type="1">
 <li>current_slots[inform_slots]: current_slots_rep</li>
 </ol>
 <ul>
 <li>For Agent_Last</li>
 </ul>
-<ol start="5">
+<ol start="5" type="1">
 <li>agent_last['diaact']: agent_act_act</li>
 <li>agent_last['inform_slots']: agent_inform_slots_rep</li>
 <li>agent_last['request_slots']: agent_request_slots_rep</li>
@@ -425,14 +402,14 @@
 <ul>
 <li>For KB Result</li>
 </ul>
-<ol start="8">
+<ol start="8" type="1">
 <li>kb_results_dict: kb_count_rep</li>
 <li>kb_binary: kb_binary_rep</li>
 </ol>
 <ul>
 <li>For Dialogue Turns number</li>
 </ul>
-<ol start="10">
+<ol start="10" type="1">
 <li>trun: turn_rep</li>
 <li>turn: turn_onehot_rep</li>
 </ol>
@@ -612,7 +589,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Natural Language Understanding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Dialogue Management</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Natural Language Generation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">Agent 类</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#natural-language-generation"><span class="nav-number">1.</span> <span class="nav-text">Natural Language Generation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#agent-类"><span class="nav-number">1.1.</span> <span class="nav-text">Agent 类</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -766,24 +743,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

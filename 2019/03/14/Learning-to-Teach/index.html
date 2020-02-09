@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="Learning to Teach 这篇博客写一写Learning to Teach(L2T), L2T这个概念是MSRA 在2018年ICLR上提出来的。L2T 包含两个模型:  Student Model(传统机器学习模型) Teacher Model  直接上模型图  Learning to Teach 的特殊之处 不同于传统机器学习, L2T 有一个 Teacher Model 来为Stu">
+<meta name="description" content="Learning to Teach 这篇博客写一写Learning to Teach(L2T), L2T这个概念是MSRA 在2018年ICLR上提出来的。L2T 包含两个模型: + Student Model(传统机器学习模型) + Teacher Model 直接上模型图  ### Learning to Teach 的特殊之处 不同于传统机器学习, L2T 有一个 Teacher Model">
 <meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Learning-to-Teach &amp; Curriculum Learning">
 <meta property="og:url" content="http://yoursite.com/2019/03/14/Learning-to-Teach/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Learning to Teach 这篇博客写一写Learning to Teach(L2T), L2T这个概念是MSRA 在2018年ICLR上提出来的。L2T 包含两个模型:  Student Model(传统机器学习模型) Teacher Model  直接上模型图  Learning to Teach 的特殊之处 不同于传统机器学习, L2T 有一个 Teacher Model 来为Stu">
+<meta property="og:description" content="Learning to Teach 这篇博客写一写Learning to Teach(L2T), L2T这个概念是MSRA 在2018年ICLR上提出来的。L2T 包含两个模型: + Student Model(传统机器学习模型) + Teacher Model 直接上模型图  ### Learning to Teach 的特殊之处 不同于传统机器学习, L2T 有一个 Teacher Model">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/14/Learning-to-Teach/L2T.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/03/14/Learning-to-Teach/TSCL.jpg">
 <meta property="og:updated_time" content="2020-02-09T05:31:10.926Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning-to-Teach &amp; Curriculum Learning">
-<meta name="twitter:description" content="Learning to Teach 这篇博客写一写Learning to Teach(L2T), L2T这个概念是MSRA 在2018年ICLR上提出来的。L2T 包含两个模型:  Student Model(传统机器学习模型) Teacher Model  直接上模型图  Learning to Teach 的特殊之处 不同于传统机器学习, L2T 有一个 Teacher Model 来为Stu">
+<meta name="twitter:description" content="Learning to Teach 这篇博客写一写Learning to Teach(L2T), L2T这个概念是MSRA 在2018年ICLR上提出来的。L2T 包含两个模型: + Student Model(传统机器学习模型) + Teacher Model 直接上模型图  ### Learning to Teach 的特殊之处 不同于传统机器学习, L2T 有一个 Teacher Model">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/14/Learning-to-Teach/L2T.jpg">
 
 
@@ -366,45 +366,16 @@
       
 
       
-        <h2>Learning to Teach</h2>
-<p>这篇博客写一写Learning to Teach(L2T), L2T这个概念是MSRA 在2018年ICLR上提出来的。L2T 包含两个模型:</p>
-<ul>
-<li>Student Model(传统机器学习模型)</li>
-<li>Teacher Model</li>
-</ul>
-<p>直接上模型图 <img src="L2T.jpg" alt=""></p>
-<h3>Learning to Teach 的特殊之处</h3>
-<p>不同于传统机器学习, L2T 有一个 Teacher Model 来为Student Model 提供输入, 包括3种类型:</p>
-<ul>
-<li>Training data
-训练数据集 D: 可以类比于人类教师选择部分书籍作为教科书,从而保证学生能够学得轻松</li>
-<li>Loss Function
-损失函数 L: 可以类比成人类教师会出一个测验试题,来考察学生的学习进度</li>
-<li>Hypothesis Space
-假设空间 $\Omega$: 可以类比成对于一个特定的问题，小学生可能只会用加减乘除，中学生可能用函数方程，大学生可能会使用线性代数</li>
-</ul>
-<p>根据模型图，可以将L2T中teacher model优化过程看为一个 决策过程(sequential decision process)，</p>
-<ul>
-<li>State: 目前teacher model 所能接触到的可用信息,在$t$时刻可以表示为$s_t$；通常情况 t 时刻的state 是通过 t-1时刻的student model, 也即$f_{t-1}$ 和teacher model 自身之前的历史状态</li>
-<li>Action: 根据特定任务,可能是 $[D, L, \Omega]$的组合,在$t$时刻可以表示为$a_t$</li>
-<li>Policy: $\phi_\theta: S \to A$, $\phi_{\theta}$ 可以看成是teacher model</li>
-</ul>
-<p>而对于student model 来讲，在$t$时刻, student model 会以$a_t$作为输入，其输出为$f_{w_t}$。 $f_{w_t}$可以看成传统的机器学习模型</p>
-<p>可以看到，对于student model， 可以采用传统的机器学习优化方案。而对于teacher model, 我们可以采用reinforcement learning 来优化。
-teacher model 可以看成是 $Policy$, 而environment 可以看成是 $State$。而reward的定义是通过student model 的feedback 提供的。</p>
-<h3>L2T 特例情况：Data Teaching &amp; Neural Netowork</h3>
-<p>所谓的Data Teaching 其实很容易理解，就是本来teacher model 的Action 是$[D, L, \Omega]$的组合，但是现在我们固定$L, \Omega$, 因此teacher model 只涉及到 training data $D$ 的选择. 此时,</p>
-<h3>State Action Reward 定义</h3>
-<p>State, Action, Reward 重新定义如下</p>
-<ul>
-<li>State: $s_t = (D_t, f_t)$; 也即是目前的training dataset 和 目前的student model</li>
-<li>Action: $a = _{m=1}^{M}$, where M is the batch size, 代表是否将本次batch 的数据的某个数据留在 $D_t$ 中</li>
-<li>Reward: 我们当然期待student model 训练学习的越快越好，假定 $i_r$ 代表在第$i_r$个batch 首次达到了某个Accuracy. Reward 可以定义为 $-i_r$</li>
-</ul>
-<h3>利用Reinforcement Learning 进行优化</h3>
-<h2>Teacher-Student Curriculum Learning</h2>
-<p>这个可以划归到 Carriculum Learning 范畴，鉴于其与Learning to Teach 的高度相识性，这里简单介绍一下:
-<img src="TSCL.jpg" alt=""></p>
+        <h2 id="learning-to-teach">Learning to Teach</h2>
+<p>这篇博客写一写Learning to Teach(L2T), L2T这个概念是MSRA 在2018年ICLR上提出来的。L2T 包含两个模型: + Student Model(传统机器学习模型) + Teacher Model</p>
+<p>直接上模型图 <img src="L2T.jpg"> ### Learning to Teach 的特殊之处 不同于传统机器学习, L2T 有一个 Teacher Model 来为Student Model 提供输入, 包括3种类型: + Training data 训练数据集 D: 可以类比于人类教师选择部分书籍作为教科书,从而保证学生能够学得轻松 + Loss Function 损失函数 L: 可以类比成人类教师会出一个测验试题,来考察学生的学习进度 + Hypothesis Space 假设空间 <span class="math inline">\(\Omega\)</span>: 可以类比成对于一个特定的问题，小学生可能只会用加减乘除，中学生可能用函数方程，大学生可能会使用线性代数</p>
+<p>根据模型图，可以将L2T中teacher model优化过程看为一个 决策过程(sequential decision process)， + State: 目前teacher model 所能接触到的可用信息,在<span class="math inline">\(t\)</span>时刻可以表示为<span class="math inline">\(s_t\)</span>；通常情况 t 时刻的state 是通过 t-1时刻的student model, 也即<span class="math inline">\(f_{t-1}\)</span> 和teacher model 自身之前的历史状态 + Action: 根据特定任务,可能是 <span class="math inline">\([D, L, \Omega]\)</span>的组合,在<span class="math inline">\(t\)</span>时刻可以表示为<span class="math inline">\(a_t\)</span> + Policy: <span class="math inline">\(\phi_\theta: S \to A\)</span>, <span class="math inline">\(\phi_{\theta}\)</span> 可以看成是teacher model</p>
+<p>而对于student model 来讲，在<span class="math inline">\(t\)</span>时刻, student model 会以<span class="math inline">\(a_t\)</span>作为输入，其输出为<span class="math inline">\(f_{w_t}\)</span>。 <span class="math inline">\(f_{w_t}\)</span>可以看成传统的机器学习模型</p>
+<p>可以看到，对于student model， 可以采用传统的机器学习优化方案。而对于teacher model, 我们可以采用reinforcement learning 来优化。 teacher model 可以看成是 <span class="math inline">\(Policy\)</span>, 而environment 可以看成是 <span class="math inline">\(State\)</span>。而reward的定义是通过student model 的feedback 提供的。</p>
+<h3 id="l2t-特例情况data-teaching-neural-netowork">L2T 特例情况：Data Teaching &amp; Neural Netowork</h3>
+<p>所谓的Data Teaching 其实很容易理解，就是本来teacher model 的Action 是<span class="math inline">\([D, L, \Omega]\)</span>的组合，但是现在我们固定<span class="math inline">\(L, \Omega\)</span>, 因此teacher model 只涉及到 training data <span class="math inline">\(D\)</span> 的选择. 此时, ### State Action Reward 定义 State, Action, Reward 重新定义如下 + State: <span class="math inline">\(s_t = (D_t, f_t)\)</span>; 也即是目前的training dataset 和 目前的student model + Action: <span class="math inline">\(a = {\{a_m\}}_{m=1}^{M}\)</span>, where M is the batch size, 代表是否将本次batch 的数据的某个数据留在 <span class="math inline">\(D_t\)</span> 中 + Reward: 我们当然期待student model 训练学习的越快越好，假定 <span class="math inline">\(i_r\)</span> 代表在第<span class="math inline">\(i_r\)</span>个batch 首次达到了某个Accuracy. Reward 可以定义为 <span class="math inline">\(-i_r\)</span> ### 利用Reinforcement Learning 进行优化</p>
+<h2 id="teacher-student-curriculum-learning">Teacher-Student Curriculum Learning</h2>
+<p>这个可以划归到 Carriculum Learning 范畴，鉴于其与Learning to Teach 的高度相识性，这里简单介绍一下: <img src="TSCL.jpg"></p>
 
       
     </div>
@@ -579,7 +550,7 @@ teacher model 可以看成是 $Policy$, 而environment 可以看成是 $State$�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Learning to Teach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Learning to Teach 的特殊之处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">L2T 特例情况：Data Teaching &amp; Neural Netowork</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">State Action Reward 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">利用Reinforcement Learning 进行优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Teacher-Student Curriculum Learning</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#learning-to-teach"><span class="nav-number">1.</span> <span class="nav-text">Learning to Teach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#l2t-特例情况data-teaching-neural-netowork"><span class="nav-number">1.1.</span> <span class="nav-text">L2T 特例情况：Data Teaching &amp; Neural Netowork</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#teacher-student-curriculum-learning"><span class="nav-number">2.</span> <span class="nav-text">Teacher-Student Curriculum Learning</span></a></li></ol></div>
             
 
           </div>
@@ -805,24 +776,7 @@ teacher model 可以看成是 $Policy$, 而environment 可以看成是 $State$�
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

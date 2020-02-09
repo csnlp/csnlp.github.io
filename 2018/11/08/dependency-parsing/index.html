@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作 通过Stanford CS224N 课程来讲解这一课题 句法分析手推过程 每一步保留三个结构  stack: stack 存着目前正在处理的words buffer: buff">
+<meta name="description" content="句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作 通过Stanford CS224N 课程来讲解这一课题 ## 句法分析手推过程 每一步保留三个结构 + stack: stack 存着目前正在处理的words + buffer">
 <meta name="keywords" content="NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dependency Parsing 依存句法分析">
 <meta property="og:url" content="http://yoursite.com/2018/11/08/dependency-parsing/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作 通过Stanford CS224N 课程来讲解这一课题 句法分析手推过程 每一步保留三个结构  stack: stack 存着目前正在处理的words buffer: buff">
+<meta property="og:description" content="句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作 通过Stanford CS224N 课程来讲解这一课题 ## 句法分析手推过程 每一步保留三个结构 + stack: stack 存着目前正在处理的words + buffer">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/dependency-parsing/dependency_parser_sent.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/dependency-parsing/adam.jpg">
 <meta property="og:updated_time" content="2020-01-30T06:33:54.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dependency Parsing 依存句法分析">
-<meta name="twitter:description" content="句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作 通过Stanford CS224N 课程来讲解这一课题 句法分析手推过程 每一步保留三个结构  stack: stack 存着目前正在处理的words buffer: buff">
+<meta name="twitter:description" content="句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作 通过Stanford CS224N 课程来讲解这一课题 ## 句法分析手推过程 每一步保留三个结构 + stack: stack 存着目前正在处理的words + buffer">
 <meta name="twitter:image" content="http://yoursite.com/2018/11/08/dependency-parsing/dependency_parser_sent.jpg">
 
 
@@ -366,76 +366,16 @@
       
 
       
-        <p>句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作
-通过Stanford CS224N 课程来讲解这一课题</p>
-<h2>句法分析手推过程</h2>
-<p>每一步保留三个结构</p>
-<ul>
-<li>stack: stack 存着目前正在处理的words</li>
-<li>buffer: buffer 存着目前尚未处理的words</li>
-<li>dependencies: 通过parser预测得到的dependencies</li>
-</ul>
-<p>初始状态下，stack 是空的， buffer是满的。
-在每一步，都可以应用一种transition， 一共有三种类型的transition会被操作</p>
-<ul>
-<li>SHIFT: 将buffer的第一个item 从buffer 移动到stack 中去</li>
-<li>LEFT-ARC: 将stack 的第二个item 标记为依赖于 stack 的第一个item, 并且将stack 中的第二个item 从stack 中删除 得到一组依存关系:first item --&gt; second item</li>
-<li>RIGHT-ARC:将stack的第一个item 标注为依赖于stack的第二个item, 并且将stack的第一个item 从stack 中删除 得到一组依存关系: second item --&gt; first item</li>
-</ul>
-<p>这里按照Stanford CS224N 课程举例来做了一个 dependency parser 分析
-Root I parsed this sentence correctly.</p>
-<ol>
-<li>初始状态 stack = [ROOT] buffer = [I parsed this sentence correctly]</li>
-<li>SHIFT 操作
-此时， stack = [ROOT I] buffer = [parsed this sentence correctly]
-I 和 ROOT 之间没有什么关系，无需进一步操作
-而对于 SHIFT, LEFT-ARC, RIGHT-ARC 这三种操作可以看成是一个分类器的结果，因此parser 可以使用一个分类器来进行操作的选择</li>
-<li>SHIFT 操作
-此时 stack = [ROOT I parsed] buffer = [this sentence correctly]</li>
-<li>LEFT-ARC
-I 用来修饰 parsed 得到一组依存关系 parsed --&gt; I
-此时 stack = [ROOT, parsed], buffer = [this sentence correctly]</li>
-<li>SHIFT 操作
-此时， stack = [ROOT, parsed, this], buffer = [sentence correctly]</li>
-<li>SHIFT 操作
-此时， stack = [ROOT, parsed, this, sentence], buffer = [correctly]</li>
-<li>LEFT-ARC
-得到一组依存关系 sentence --&gt; this
-此时，stack = [ROOT, parsed, sentence], buffer = [correctly]</li>
-<li>RIGHT-ARC
-得到一组依存关系 parsed --&gt; sentence
-此时， stack = [ROOT, parsed], buffer = [correctly]</li>
-<li>SHIFT
-此时， stack = [ROOT, parsed, correctly], buffer = []</li>
-<li>RIGHT-ARC
-得到一组依存关系 parsed --&gt; correctly
-此时， stack = [ROOT, parsed], buffer = []</li>
-<li>RIGHT-ARC
-得到一组依存关系 ROOT --&gt; parsed
-此时， stack = [ROOT], buffer = []
-<img src="dependency_parser_sent.jpg" alt=""></li>
-</ol>
-<h2>句法分析需要多少步骤</h2>
-<p>一个含有n 个词语的sentence, 需要多少步骤才能完全分析完？
-其实分析一下起点和终点即可 起点: stack = [ROOT], 终点: stack = [ROOT], 每一步都会向stack 中增加或者减少一个元素，因此一共需要 $2n$ 步才能分析完一个句子</p>
-<h2>init 和 parse_step 函数</h2>
-<h2>minibatch_parse</h2>
-<h2>参数初始化函数</h2>
-<h2>drop out 函数</h2>
-<p>为了保证期望不变，也就是 $\mathbf{E}<em>{P</em>{drop}}[h_{drop}] = h$, 显然是$h_{drop} = \frac{1}{1-p_{drop}} h$</p>
-<h2>Adam</h2>
-<p>先直接看Adam 的最终形式
-<img src="adam.jpg" alt=""></p>
-<ol>
-<li>关于$\boldsymbol{m}$ 的更新其实是用了动量机制，动量机制有两个解释</li>
-</ol>
-<ul>
-<li>m 的$\beta_1$ 部分仍然保持不变，仅仅改变$1 - \beta_1$, 原因在于如果此时 $\nabla_{\theta} J_{minibatch}(\theta)$比较小(也就是来到了一个局部最优点)，但是此时梯度还残留着上一步梯度值，能够突破这个“local optimum(局部最优)”</li>
-<li>$\beta_1$ 部分是之前的各个minibatch 的梯度， $(1-\beta_1)$ 是现在这个minibatch 的，这样的梯度更新形式更像是全局梯度，也就是更加接近 gradient descent.</li>
-</ul>
-<ol start="2">
-<li>至于$\boldsymbol{v}$ 而言，这是adaptive learning rate的内容
-对于梯度的每个维度进行放缩，对于$\boldsymbol{v}$ 比较小的维度梯度变得相对大一些，对于比较大的维度梯度更新的小一些</li>
+        <p>句法分析是个历史非常悠久的NLP课题，但是也不是太好理解，而且有很多依赖于语言学的内容，这里简单介绍一下 Dependency Parsing(依存句法分析) 以及最近一些结合deep learning 来做句法分析的工作 通过Stanford CS224N 课程来讲解这一课题 ## 句法分析手推过程 每一步保留三个结构 + stack: stack 存着目前正在处理的words + buffer: buffer 存着目前尚未处理的words + dependencies: 通过parser预测得到的dependencies</p>
+<p>初始状态下，stack 是空的， buffer是满的。 在每一步，都可以应用一种transition， 一共有三种类型的transition会被操作 + SHIFT: 将buffer的第一个item 从buffer 移动到stack 中去 + LEFT-ARC: 将stack 的第二个item 标记为依赖于 stack 的第一个item, 并且将stack 中的第二个item 从stack 中删除 得到一组依存关系:first item --&gt; second item + RIGHT-ARC:将stack的第一个item 标注为依赖于stack的第二个item, 并且将stack的第一个item 从stack 中删除 得到一组依存关系: second item --&gt; first item</p>
+<p>这里按照Stanford CS224N 课程举例来做了一个 dependency parser 分析 Root I parsed this sentence correctly. 1. 初始状态 stack = [ROOT] buffer = [I parsed this sentence correctly] 2. SHIFT 操作 此时， stack = [ROOT I] buffer = [parsed this sentence correctly] I 和 ROOT 之间没有什么关系，无需进一步操作 而对于 SHIFT, LEFT-ARC, RIGHT-ARC 这三种操作可以看成是一个分类器的结果，因此parser 可以使用一个分类器来进行操作的选择 3. SHIFT 操作 此时 stack = [ROOT I parsed] buffer = [this sentence correctly] 4. LEFT-ARC I 用来修饰 parsed 得到一组依存关系 parsed --&gt; I 此时 stack = [ROOT, parsed], buffer = [this sentence correctly] 5. SHIFT 操作 此时， stack = [ROOT, parsed, this], buffer = [sentence correctly] 6. SHIFT 操作 此时， stack = [ROOT, parsed, this, sentence], buffer = [correctly] 7. LEFT-ARC 得到一组依存关系 sentence --&gt; this 此时，stack = [ROOT, parsed, sentence], buffer = [correctly] 8. RIGHT-ARC 得到一组依存关系 parsed --&gt; sentence 此时， stack = [ROOT, parsed], buffer = [correctly] 9. SHIFT 此时， stack = [ROOT, parsed, correctly], buffer = [] 10. RIGHT-ARC 得到一组依存关系 parsed --&gt; correctly 此时， stack = [ROOT, parsed], buffer = [] 11. RIGHT-ARC 得到一组依存关系 ROOT --&gt; parsed 此时， stack = [ROOT], buffer = [] <img src="dependency_parser_sent.jpg"> ## 句法分析需要多少步骤 一个含有n 个词语的sentence, 需要多少步骤才能完全分析完？ 其实分析一下起点和终点即可 起点: stack = [ROOT], 终点: stack = [ROOT], 每一步都会向stack 中增加或者减少一个元素，因此一共需要 <span class="math inline">\(2n\)</span> 步才能分析完一个句子</p>
+<h2 id="init-和-parse_step-函数">init 和 parse_step 函数</h2>
+<h2 id="minibatch_parse">minibatch_parse</h2>
+<h2 id="参数初始化函数">参数初始化函数</h2>
+<h2 id="drop-out-函数">drop out 函数</h2>
+<p>为了保证期望不变，也就是 <span class="math inline">\(\mathbf{E}_{P_{drop}}[h_{drop}] = h\)</span>, 显然是<span class="math inline">\(h_{drop} = \frac{1}{1-p_{drop}} h\)</span> ## Adam 先直接看Adam 的最终形式 <img src="adam.jpg"> 1. 关于<span class="math inline">\(\boldsymbol{m}\)</span> 的更新其实是用了动量机制，动量机制有两个解释 + m 的<span class="math inline">\(\beta_1\)</span> 部分仍然保持不变，仅仅改变<span class="math inline">\(1 - \beta_1\)</span>, 原因在于如果此时 <span class="math inline">\(\nabla_{\theta} J_{minibatch}(\theta)\)</span>比较小(也就是来到了一个局部最优点)，但是此时梯度还残留着上一步梯度值，能够突破这个“local optimum(局部最优)” + <span class="math inline">\(\beta_1\)</span> 部分是之前的各个minibatch 的梯度， <span class="math inline">\((1-\beta_1)\)</span> 是现在这个minibatch 的，这样的梯度更新形式更像是全局梯度，也就是更加接近 gradient descent.</p>
+<ol start="2" type="1">
+<li>至于<span class="math inline">\(\boldsymbol{v}\)</span> 而言，这是adaptive learning rate的内容 对于梯度的每个维度进行放缩，对于<span class="math inline">\(\boldsymbol{v}\)</span> 比较小的维度梯度变得相对大一些，对于比较大的维度梯度更新的小一些</li>
 </ol>
 
       
@@ -611,7 +551,7 @@ I 用来修饰 parsed 得到一组依存关系 parsed --&gt; I
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">句法分析手推过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">句法分析需要多少步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">init 和 parse_step 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">minibatch_parse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">参数初始化函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">6.</span> <span class="nav-text">drop out 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">7.</span> <span class="nav-text">Adam</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#init-和-parse_step-函数"><span class="nav-number">1.</span> <span class="nav-text">init 和 parse_step 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#minibatch_parse"><span class="nav-number">2.</span> <span class="nav-text">minibatch_parse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数初始化函数"><span class="nav-number">3.</span> <span class="nav-text">参数初始化函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drop-out-函数"><span class="nav-number">4.</span> <span class="nav-text">drop out 函数</span></a></li></ol></div>
             
 
           </div>
@@ -765,24 +705,7 @@ I 用来修饰 parsed 得到一组依存关系 parsed --&gt; I
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

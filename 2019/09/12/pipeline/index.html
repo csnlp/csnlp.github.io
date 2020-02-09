@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="Basic Knowledge about Pipeline Pipeline Phase Some abbreviations:  IF: instruction fetch D/RF: decode &amp;amp; register fetch phase EX: execute phase MEM: memory phase WB: write-back phase  An Ideal Pipe">
+<meta name="description" content="Basic Knowledge about Pipeline Pipeline Phase Some abbreviations: + IF: instruction fetch + D/RF: decode &amp;amp; register fetch phase + EX: execute phase + MEM: memory phase + WB: write-back phase An Id">
 <meta name="keywords" content="Computer Architecture; Pipeline">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pipeline">
 <meta property="og:url" content="http://yoursite.com/2019/09/12/pipeline/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Basic Knowledge about Pipeline Pipeline Phase Some abbreviations:  IF: instruction fetch D/RF: decode &amp;amp; register fetch phase EX: execute phase MEM: memory phase WB: write-back phase  An Ideal Pipe">
+<meta property="og:description" content="Basic Knowledge about Pipeline Pipeline Phase Some abbreviations: + IF: instruction fetch + D/RF: decode &amp;amp; register fetch phase + EX: execute phase + MEM: memory phase + WB: write-back phase An Id">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/09/12/pipeline/pipeline_diagram.jpg">
 <meta property="og:updated_time" content="2020-02-02T09:50:26.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pipeline">
-<meta name="twitter:description" content="Basic Knowledge about Pipeline Pipeline Phase Some abbreviations:  IF: instruction fetch D/RF: decode &amp;amp; register fetch phase EX: execute phase MEM: memory phase WB: write-back phase  An Ideal Pipe">
+<meta name="twitter:description" content="Basic Knowledge about Pipeline Pipeline Phase Some abbreviations: + IF: instruction fetch + D/RF: decode &amp;amp; register fetch phase + EX: execute phase + MEM: memory phase + WB: write-back phase An Id">
 <meta name="twitter:image" content="http://yoursite.com/2019/09/12/pipeline/pipeline_diagram.jpg">
 
 
@@ -376,56 +376,23 @@
       
 
       
-        <h1>Basic Knowledge about Pipeline</h1>
-<h2>Pipeline Phase</h2>
-<p>Some abbreviations:</p>
-<ul>
-<li>IF: instruction fetch</li>
-<li>D/RF: decode &amp; register fetch phase</li>
-<li>EX: execute phase</li>
-<li>MEM: memory phase</li>
-<li>WB: write-back phase</li>
-</ul>
-<p>An Ideal Pipeline</p>
-<ul>
-<li>Same process: all objects go through the same stages.</li>
-<li>No shared resource: no sharing of resources between any two stages.</li>
-<li>Equal propagation delay: propagation delay through all pipeline stages is equal.</li>
-<li>No interplay: scheduling of a transaction entering the pipeline is not affected by the transactions in other stages.</li>
-</ul>
-<h2>Pipeline Graph</h2>
-<p><img src="pipeline_diagram.jpg" alt=""></p>
+        <h1 id="basic-knowledge-about-pipeline">Basic Knowledge about Pipeline</h1>
+<h2 id="pipeline-phase">Pipeline Phase</h2>
+<p>Some abbreviations: + IF: instruction fetch + D/RF: decode &amp; register fetch phase + EX: execute phase + MEM: memory phase + WB: write-back phase</p>
+<p>An Ideal Pipeline + Same process: all objects go through the same stages. + No shared resource: no sharing of resources between any two stages. + Equal propagation delay: propagation delay through all pipeline stages is equal. + No interplay: scheduling of a transaction entering the pipeline is not affected by the transactions in other stages.</p>
+<h2 id="pipeline-graph">Pipeline Graph</h2>
+<p><img src="pipeline_diagram.jpg"></p>
 <p><em>Always Remember, computer architecture is always a tradeoff philosophy.</em></p>
-<h2>Data Hazard</h2>
-<ol>
+<h2 id="data-hazard">Data Hazard</h2>
+<ol type="1">
 <li>Read-after-Write(RAW) hazard: Most common in basic pipeline method.</li>
 <li>Write-after-Read(WAR) hazard:</li>
 <li>Write-after-Write(WAW) hazard</li>
 </ol>
-<h2>Control Hazard</h2>
-<p>For MIPS, the branch condition cann't get its results until execute stage:
-If the branch is taken, we need to:</p>
-<ul>
-<li>kill the two following instructions.</li>
-<li>the instruction at the decode stage is invalid.
-For control hazard, the instruction right after the branch instruction need to kill its self.</li>
-</ul>
-<p>How to reduce branch penalty?</p>
-<ol>
-<li>One pipeline bubble can be removed if an extra comparator is used in the decode stage of the branch instruction, its disadvantage, however, is that it might elongate cycle time.[Resolve in decode stage]</li>
-<li>Change the ISA semantics so that the instruction that the instruction that follows a jump or branch is always excuted, in other words, give the compiler the flexibility to put in a useful instruction where normally a pipeline buble would have resulted. [Branch Delay Slots]</li>
-</ol>
-<p>Why an instruction may not be dispatched every clcle(CPI&gt;1)?</p>
-<ol>
-<li>Full bypassing may be too expensive to implement.
-<ul>
-<li>Typically all frequent used paths are provided.</li>
-<li>However, some infrequently used bypass paths may increase cycle time and couteract the benefit of reducing CPI</li>
-</ul>
-</li>
-<li>Load instruction have at least one cycle latency.</li>
-<li>Conditional branches may cause bubbles.</li>
-</ol>
+<h2 id="control-hazard">Control Hazard</h2>
+<p>For MIPS, the branch condition cann't get its results until execute stage: If the branch is taken, we need to: + kill the two following instructions. + the instruction at the decode stage is invalid. For control hazard, the instruction right after the branch instruction need to kill its self.</p>
+<p>How to reduce branch penalty? 1. One pipeline bubble can be removed if an extra comparator is used in the decode stage of the branch instruction, its disadvantage, however, is that it might elongate cycle time.[Resolve in decode stage] 2. Change the ISA semantics so that the instruction that the instruction that follows a jump or branch is always excuted, in other words, give the compiler the flexibility to put in a useful instruction where normally a pipeline buble would have resulted. [Branch Delay Slots]</p>
+<p>Why an instruction may not be dispatched every clcle(CPI&gt;1)? 1. Full bypassing may be too expensive to implement. + Typically all frequent used paths are provided. + However, some infrequently used bypass paths may increase cycle time and couteract the benefit of reducing CPI 2. Load instruction have at least one cycle latency. 3. Conditional branches may cause bubbles.</p>
 
       
     </div>
@@ -600,7 +567,7 @@ For control hazard, the instruction right after the branch instruction need to k
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Basic Knowledge about Pipeline</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">Pipeline Phase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Pipeline Graph</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.</span> <span class="nav-text">Data Hazard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.4.</span> <span class="nav-text">Control Hazard</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#basic-knowledge-about-pipeline"><span class="nav-number">1.</span> <span class="nav-text">Basic Knowledge about Pipeline</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pipeline-phase"><span class="nav-number">1.1.</span> <span class="nav-text">Pipeline Phase</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pipeline-graph"><span class="nav-number">1.2.</span> <span class="nav-text">Pipeline Graph</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data-hazard"><span class="nav-number">1.3.</span> <span class="nav-text">Data Hazard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#control-hazard"><span class="nav-number">1.4.</span> <span class="nav-text">Control Hazard</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -754,24 +721,7 @@ For control hazard, the instruction right after the branch instruction need to k
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

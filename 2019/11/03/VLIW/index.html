@@ -379,48 +379,28 @@
       
 
       
-        <h1>Introduction to VLIW</h1>
-<p>VLIW processors issue a fixed number of instructions formatted either as <strong>one large instruction</strong> or as <strong>a fixed instruction packet with the parallelism among instructions explicitly indicated by the instruction</strong>.
-<img src="VLIW_introduction.jpg" alt=""></p>
-<ol>
-<li>Multple operations are packed into one instruction.</li>
-<li>Each operation slot is for a fixed function.</li>
-<li>Constant operation latencies are specified.</li>
-<li>Architecture required guarantee of
-<ul>
-<li>Parallelsim within an instruction</li>
-<li>No data use before data ready.</li>
-</ul>
-</li>
-</ol>
-<h3>VLIW Equals(EQ) Scheduling Model</h3>
+        <h1 id="introduction-to-vliw">Introduction to VLIW</h1>
+<p>VLIW processors issue a fixed number of instructions formatted either as <strong>one large instruction</strong> or as <strong>a fixed instruction packet with the parallelism among instructions explicitly indicated by the instruction</strong>. <img src="VLIW_introduction.jpg"> 1. Multple operations are packed into one instruction. 2. Each operation slot is for a fixed function. 3. Constant operation latencies are specified. 4. Architecture required guarantee of + Parallelsim within an instruction + No data use before data ready.</p>
+<h3 id="vliw-equalseq-scheduling-model">VLIW Equals(EQ) Scheduling Model</h3>
 <ul>
 <li>Each operation takes exactly specified latency.</li>
 <li>Efficient register usage</li>
 <li>No need for register renaming or buffering.</li>
 <li>Compiler depends on not having registers visible early.</li>
 </ul>
-<h2>VLIW Compiler Optimizations</h2>
-<p><strong>The responsibilities of VLIW compiler</strong></p>
-<ol>
-<li>Schedule operations to maximize parallel execution.</li>
-<li>Guarantee intro-instruction parallelism.</li>
-<li>Schedule to avoid data hazards.</li>
-</ol>
-<h3>Loop Unrolling</h3>
-<p><img src="loop_unrolling_code.jpg" alt=""></p>
-<p>Give its assembly language:
-<img src="loop_unrolling_assembly.jpg" alt=""></p>
-<h3>What if There are no loops?</h3>
-<p>Firstly, define a concept named <strong>Basic block:</strong>
-Basic block: single entry and single exit.
-<img src="basic_block.jpg" alt=""></p>
+<h2 id="vliw-compiler-optimizations">VLIW Compiler Optimizations</h2>
+<p><strong>The responsibilities of VLIW compiler</strong> 1. Schedule operations to maximize parallel execution. 2. Guarantee intro-instruction parallelism. 3. Schedule to avoid data hazards.</p>
+<h3 id="loop-unrolling">Loop Unrolling</h3>
+<p><img src="loop_unrolling_code.jpg"></p>
+<p>Give its assembly language: <img src="loop_unrolling_assembly.jpg"></p>
+<h3 id="what-if-there-are-no-loops">What if There are no loops?</h3>
+<p>Firstly, define a concept named <strong>Basic block:</strong> Basic block: single entry and single exit. <img src="basic_block.jpg"></p>
 <ul>
 <li>Branch limit basic block size in control-flow intensive irregular code.</li>
 <li>It's difficult to find ILP in individual basic blocks.</li>
 </ul>
-<h2>Classic VLIW Challenges</h2>
-<ol>
+<h2 id="classic-vliw-challenges">Classic VLIW Challenges</h2>
+<ol type="1">
 <li>Object-code compatbility: have to recompile all code for every machine even for two machine in same generation.</li>
 <li>Object code size: intruction padding wastes instruction memory and loop unrolling/software pipelining replicates code.</li>
 <li>Scheduling variable latency memory operations: caches and memory bank conflicts impose statically unpredicatable variability.</li>
@@ -428,10 +408,7 @@ Basic block: single entry and single exit.
 <li>Scheduling for statically unpredictable branches.</li>
 <li>Precise interrupts can be challenging.</li>
 </ol>
-<p>How to SOLVE these challenges?</p>
-<ol>
-<li>VLIW instruction encoding:</li>
-</ol>
+<p>How to SOLVE these challenges? 1. VLIW instruction encoding:</p>
 
       
     </div>
@@ -606,7 +583,7 @@ Basic block: single entry and single exit.
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Introduction to VLIW</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">VLIW Equals(EQ) Scheduling Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">VLIW Compiler Optimizations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.1.</span> <span class="nav-text">Loop Unrolling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.2.</span> <span class="nav-text">What if There are no loops?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">Classic VLIW Challenges</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction-to-vliw"><span class="nav-number">1.</span> <span class="nav-text">Introduction to VLIW</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vliw-equalseq-scheduling-model"><span class="nav-number">1.0.1.</span> <span class="nav-text">VLIW Equals(EQ) Scheduling Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vliw-compiler-optimizations"><span class="nav-number">1.1.</span> <span class="nav-text">VLIW Compiler Optimizations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#loop-unrolling"><span class="nav-number">1.1.1.</span> <span class="nav-text">Loop Unrolling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#what-if-there-are-no-loops"><span class="nav-number">1.1.2.</span> <span class="nav-text">What if There are no loops?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#classic-vliw-challenges"><span class="nav-number">1.2.</span> <span class="nav-text">Classic VLIW Challenges</span></a></li></ol></div>
             
 
           </div>
@@ -760,24 +737,7 @@ Basic block: single entry and single exit.
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

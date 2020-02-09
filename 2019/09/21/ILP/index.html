@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Data Dependences and Hazards An instructin j is data dependent on instruction i if either of the following holds:  Instruction i produces a result that may be used by instruction j. Instruction j is d">
+<meta name="description" content="Data Dependences and Hazards An instructin j is data dependent on instruction i if either of the following holds: - Instruction i produces a result that may be used by instruction j. - Instruction j i">
 <meta name="keywords" content="Computer Architecture">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Instruction-Level Parallelism and Its Exploitation">
 <meta property="og:url" content="http://yoursite.com/2019/09/21/ILP/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Data Dependences and Hazards An instructin j is data dependent on instruction i if either of the following holds:  Instruction i produces a result that may be used by instruction j. Instruction j is d">
+<meta property="og:description" content="Data Dependences and Hazards An instructin j is data dependent on instruction i if either of the following holds: - Instruction i produces a result that may be used by instruction j. - Instruction j i">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2020-01-30T06:01:23.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Instruction-Level Parallelism and Its Exploitation">
-<meta name="twitter:description" content="Data Dependences and Hazards An instructin j is data dependent on instruction i if either of the following holds:  Instruction i produces a result that may be used by instruction j. Instruction j is d">
+<meta name="twitter:description" content="Data Dependences and Hazards An instructin j is data dependent on instruction i if either of the following holds: - Instruction i produces a result that may be used by instruction j. - Instruction j i">
 
 
 
@@ -374,32 +374,20 @@
       
 
       
-        <h2>Data Dependences and Hazards</h2>
-<p>An instructin j is <em>data dependent</em> on instruction i if either of the following holds:</p>
-<ul>
-<li>Instruction i produces a result that may be used by instruction j.</li>
-<li>Instruction j is data dependent on instructin k, and instruction k is data dependent on instruction i. (A chain of dependence)</li>
-</ul>
-<h2>Name Dependences</h2>
+        <h2 id="data-dependences-and-hazards">Data Dependences and Hazards</h2>
+<p>An instructin j is <em>data dependent</em> on instruction i if either of the following holds: - Instruction i produces a result that may be used by instruction j. - Instruction j is data dependent on instructin k, and instruction k is data dependent on instruction i. (A chain of dependence)</p>
+<h2 id="name-dependences">Name Dependences</h2>
 <p>A name dependence occurs when two instructions use the same register or memory location, called a name. However, there is no flow of data between the instructions associated with that name.</p>
-<p>There are two kinds of name dependences:</p>
-<ol>
-<li>Antidependence: instruction j <em>write</em> a register or memory location that instruction i <em>read</em>.</li>
-<li>Output dependence: instruction i and instruction j write the same register or memory location.</li>
-</ol>
-<h2>Data Hazards</h2>
-<ol>
+<p>There are two kinds of name dependences: 1. Antidependence: instruction j <em>write</em> a register or memory location that instruction i <em>read</em>. 2. Output dependence: instruction i and instruction j write the same register or memory location.</p>
+<h2 id="data-hazards">Data Hazards</h2>
+<ol type="1">
 <li>RAW: j tries to read a source before i write it, so j incorrectly gets the old value.</li>
-<li>WAW: $j$ tries to write an operand before it is written by $i$.</li>
-<li>WAW: $j$ tries to write a destination before t is read by $i$, i incorrectly gets the new value.</li>
+<li>WAW: <span class="math inline">\(j\)</span> tries to write an operand before it is written by <span class="math inline">\(i\)</span>.</li>
+<li>WAW: <span class="math inline">\(j\)</span> tries to write a destination before t is read by <span class="math inline">\(i\)</span>, i incorrectly gets the new value.</li>
 </ol>
-<h2>Control Dependences</h2>
-<h2>What You Should Do Once You Detect Dependence in Hardware ?</h2>
-<p>Obviously, you have at least two choices:</p>
-<ol>
-<li>Stall the dependent instruction right away.</li>
-<li>Stall the dependent instruction only when necessary, i.e, data forwarding/bypassing.</li>
-</ol>
+<h2 id="control-dependences">Control Dependences</h2>
+<h2 id="what-you-should-do-once-you-detect-dependence-in-hardware">What You Should Do Once You Detect Dependence in Hardware ?</h2>
+<p>Obviously, you have at least two choices: 1. Stall the dependent instruction right away. 2. Stall the dependent instruction only when necessary, i.e, data forwarding/bypassing.</p>
 <p>Give an problem: A consumer(dependent) instruction has to wait in decode stage until the producer instruction writes its value in the register file.</p>
 <p>Our goal: add additional</p>
 
@@ -576,7 +564,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Data Dependences and Hazards</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Name Dependences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Data Hazards</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Control Dependences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">5.</span> <span class="nav-text">What You Should Do Once You Detect Dependence in Hardware ?</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#data-dependences-and-hazards"><span class="nav-number">1.</span> <span class="nav-text">Data Dependences and Hazards</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#name-dependences"><span class="nav-number">2.</span> <span class="nav-text">Name Dependences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data-hazards"><span class="nav-number">3.</span> <span class="nav-text">Data Hazards</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#control-dependences"><span class="nav-number">4.</span> <span class="nav-text">Control Dependences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-you-should-do-once-you-detect-dependence-in-hardware"><span class="nav-number">5.</span> <span class="nav-text">What You Should Do Once You Detect Dependence in Hardware ?</span></a></li></ol></div>
             
 
           </div>
@@ -730,24 +718,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

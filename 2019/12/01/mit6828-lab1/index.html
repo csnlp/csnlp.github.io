@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Preface Our environment:  Host: Mac Air Virtualbox: Ubuntu 14.04  Install The QEMU MIT6.828 uses QEMU as simulator. To install QEMU, we use the command like: 1sudo apt-get install qemu Part 1: PC Boot">
+<meta name="description" content="Preface Our environment: 1. Host: Mac Air 2. Virtualbox: Ubuntu 14.04 Install The QEMU MIT6.828 uses QEMU as simulator. To install QEMU, we use the command like: 1sudo apt-get install qemu Part 1: PC">
 <meta name="keywords" content="Operating System">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MIT 6.828 Lab 1: Booting a PC">
 <meta property="og:url" content="http://yoursite.com/2019/12/01/mit6828-lab1/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Preface Our environment:  Host: Mac Air Virtualbox: Ubuntu 14.04  Install The QEMU MIT6.828 uses QEMU as simulator. To install QEMU, we use the command like: 1sudo apt-get install qemu Part 1: PC Boot">
+<meta property="og:description" content="Preface Our environment: 1. Host: Mac Air 2. Virtualbox: Ubuntu 14.04 Install The QEMU MIT6.828 uses QEMU as simulator. To install QEMU, we use the command like: 1sudo apt-get install qemu Part 1: PC">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2020-02-09T08:55:50.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6.828 Lab 1: Booting a PC">
-<meta name="twitter:description" content="Preface Our environment:  Host: Mac Air Virtualbox: Ubuntu 14.04  Install The QEMU MIT6.828 uses QEMU as simulator. To install QEMU, we use the command like: 1sudo apt-get install qemu Part 1: PC Boot">
+<meta name="twitter:description" content="Preface Our environment: 1. Host: Mac Air 2. Virtualbox: Ubuntu 14.04 Install The QEMU MIT6.828 uses QEMU as simulator. To install QEMU, we use the command like: 1sudo apt-get install qemu Part 1: PC">
 
 
 
@@ -330,45 +330,21 @@
       
 
       
-        <h1>Preface</h1>
-<p>Our environment:</p>
-<ol>
-<li>Host: Mac Air</li>
-<li>Virtualbox: Ubuntu 14.04</li>
-</ol>
-<h1>Install The QEMU</h1>
-<p>MIT6.828 uses QEMU as simulator. To install QEMU, we use the command like:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qemu</span><br></pre></td></tr></table></figure></p>
-<h1>Part 1: PC Bootstrap</h1>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://pdos.csail.mit.edu/6.828/2018/jos.git lab</span><br><span class="line">cd lab</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-Well, error like &quot;undefined reference to '__udivdi3'&quot; happen. The reason is that we don't have 32-bit gcc multilib. Install it by the following command:</p>
-<p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-4.8-multilib</span><br></pre></td></tr></table></figure></p>
-<p>Then just run
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make qemu</span><br></pre></td></tr></table></figure>
-You will see the following outputs:
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">qemu-system-i386 -drive file=obj/kern/kernel.img,index=0,media=disk,format=raw -serial mon:stdio -gdb tcp::26000 -D qemu.log </span><br><span class="line">6828 decimal is XXX octal!</span><br><span class="line">entering test_backtrace 5</span><br><span class="line">entering test_backtrace 4</span><br><span class="line">entering test_backtrace 3</span><br><span class="line">entering test_backtrace 2</span><br><span class="line">entering test_backtrace 1</span><br><span class="line">entering test_backtrace 0</span><br><span class="line">leaving test_backtrace 0</span><br><span class="line">leaving test_backtrace 1</span><br><span class="line">leaving test_backtrace 2</span><br><span class="line">leaving test_backtrace 3</span><br><span class="line">leaving test_backtrace 4</span><br><span class="line">leaving test_backtrace 5</span><br><span class="line">Welcome to the JOS kernel monitor!</span><br><span class="line">Type &apos;help&apos; for a list of commands.</span><br><span class="line">K&gt; </span><br></pre></td></tr></table></figure></p>
-<h1>Exercise 3</h1>
-<p>先看一下要求:
-*Exercise 3. Take a look at the lab tools guide, especially the section on GDB commands. Even if you're familiar with GDB, this includes some esoteric GDB commands that are useful for OS work.</p>
+        <h1 id="preface">Preface</h1>
+<p>Our environment: 1. Host: Mac Air 2. Virtualbox: Ubuntu 14.04</p>
+<h1 id="install-the-qemu">Install The QEMU</h1>
+<p>MIT6.828 uses QEMU as simulator. To install QEMU, we use the command like: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qemu</span><br></pre></td></tr></table></figure></p>
+<h1 id="part-1-pc-bootstrap">Part 1: PC Bootstrap</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://pdos.csail.mit.edu/6.828/2018/jos.git lab</span><br><span class="line">cd lab</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>Well, error like "undefined reference to '__udivdi3'" happen. The reason is that we don't have 32-bit gcc multilib. Install it by the following command:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-4.8-multilib</span><br></pre></td></tr></table></figure>
+<p>Then just run <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make qemu</span><br></pre></td></tr></table></figure> You will see the following outputs: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">qemu-system-i386 -drive file=obj/kern/kernel.img,index=0,media=disk,format=raw -serial mon:stdio -gdb tcp::26000 -D qemu.log </span><br><span class="line">6828 decimal is XXX octal!</span><br><span class="line">entering test_backtrace 5</span><br><span class="line">entering test_backtrace 4</span><br><span class="line">entering test_backtrace 3</span><br><span class="line">entering test_backtrace 2</span><br><span class="line">entering test_backtrace 1</span><br><span class="line">entering test_backtrace 0</span><br><span class="line">leaving test_backtrace 0</span><br><span class="line">leaving test_backtrace 1</span><br><span class="line">leaving test_backtrace 2</span><br><span class="line">leaving test_backtrace 3</span><br><span class="line">leaving test_backtrace 4</span><br><span class="line">leaving test_backtrace 5</span><br><span class="line">Welcome to the JOS kernel monitor!</span><br><span class="line">Type &apos;help&apos; for a list of commands.</span><br><span class="line">K&gt; </span><br></pre></td></tr></table></figure></p>
+<h1 id="exercise-3">Exercise 3</h1>
+<p>先看一下要求: *Exercise 3. Take a look at the lab tools guide, especially the section on GDB commands. Even if you're familiar with GDB, this includes some esoteric GDB commands that are useful for OS work.</p>
 <p>Set a breakpoint at address 0x7c00, which is where the boot sector will be loaded. Continue execution until that breakpoint. Trace through the code in boot/boot.S, using the source code and the disassembly file obj/boot/boot.asm to keep track of where you are. Also use the x/i command in GDB to disassemble sequences of instructions in the boot loader, and compare the original boot loader source code with both the disassembly in obj/boot/boot.asm and GDB.</p>
 <p>Trace into bootmain() in boot/main.c, and then into readsect(). Identify the exact assembly instructions that correspond to each of the statements in readsect(). Trace through the rest of readsect() and back out into bootmain(), and identify the begin and end of the for loop that reads the remaining sectors of the kernel from the disk. Find out what code will run when the loop is finished, set a breakpoint there, and continue to that breakpoint. Then step through the remainder of the boot loader.*</p>
-<p>为什么说 0x7c00 这个地址很特殊
-我的执行建议</p>
-<ol>
-<li>先过一遍 lab tools guide 的 GDB 部分，方便GDB 调试, 附上lab tools guide 链接: https://pdos.csail.mit.edu/6.828/2018/labguide.html</li>
-<li>我们会用到的 GDB 指令
-<ul>
-<li><em>b function</em> or <em>b file:line</em>: 打断点</li>
-<li>*b *addr *: *在EIP addr 处打断点。</li>
-<li><em>c</em>: 继续执行直到断点</li>
-</ul>
-</li>
-</ol>
-<p>看一下具体的要求:</p>
-<ol>
-<li>跟踪 /boot/boot.S 的执行过程, 可以采用 <em>obj/boot/boot.asm</em> 来进行跟踪（trace through）</li>
-<li></li>
-</ol>
+<p>为什么说 0x7c00 这个地址很特殊 我的执行建议 1. 先过一遍 lab tools guide 的 GDB 部分，方便GDB 调试, 附上lab tools guide 链接: https://pdos.csail.mit.edu/6.828/2018/labguide.html 2. 我们会用到的 GDB 指令 + <em>b function</em> or <em>b file:line</em>: 打断点 + <em>b *addr </em>: <em>在EIP addr 处打断点。 + </em>c*: 继续执行直到断点</p>
+<p>看一下具体的要求: 1. 跟踪 /boot/boot.S 的执行过程, 可以采用 <em>obj/boot/boot.asm</em> 来进行跟踪（trace through） 2.</p>
 
       
     </div>
@@ -543,7 +519,7 @@ You will see the following outputs:
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Preface</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Install The QEMU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Part 1: PC Bootstrap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">4.</span> <span class="nav-text">Exercise 3</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#preface"><span class="nav-number">1.</span> <span class="nav-text">Preface</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#install-the-qemu"><span class="nav-number">2.</span> <span class="nav-text">Install The QEMU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#part-1-pc-bootstrap"><span class="nav-number">3.</span> <span class="nav-text">Part 1: PC Bootstrap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exercise-3"><span class="nav-number">4.</span> <span class="nav-text">Exercise 3</span></a></li></ol></div>
             
 
           </div>
@@ -697,24 +673,7 @@ You will see the following outputs:
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 

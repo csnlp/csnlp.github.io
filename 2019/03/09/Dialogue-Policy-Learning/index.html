@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="A Unified View 这事Jianfeng Gao(Microsoft Research) 在多个场所提到的,将对话系统转化成一个Optimal Decision Making 问题  Dialogue as a Markov Decision Process   Given state $s$, select action $a$ according to policy $\pai$ R">
+<meta name="description" content="A Unified View 这事Jianfeng Gao(Microsoft Research) 在多个场所提到的,将对话系统转化成一个Optimal Decision Making 问题 + Dialogue as a Markov Decision Process 1. Given state \(s\), select action \(a\) according to policy \(">
 <meta name="keywords" content="NLP,Dialogue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dialogue Policy Learning">
 <meta property="og:url" content="http://yoursite.com/2019/03/09/Dialogue-Policy-Learning/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="A Unified View 这事Jianfeng Gao(Microsoft Research) 在多个场所提到的,将对话系统转化成一个Optimal Decision Making 问题  Dialogue as a Markov Decision Process   Given state $s$, select action $a$ according to policy $\pai$ R">
+<meta property="og:description" content="A Unified View 这事Jianfeng Gao(Microsoft Research) 在多个场所提到的,将对话系统转化成一个Optimal Decision Making 问题 + Dialogue as a Markov Decision Process 1. Given state \(s\), select action \(a\) according to policy \(">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2020-02-09T05:31:57.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dialogue Policy Learning">
-<meta name="twitter:description" content="A Unified View 这事Jianfeng Gao(Microsoft Research) 在多个场所提到的,将对话系统转化成一个Optimal Decision Making 问题  Dialogue as a Markov Decision Process   Given state $s$, select action $a$ according to policy $\pai$ R">
+<meta name="twitter:description" content="A Unified View 这事Jianfeng Gao(Microsoft Research) 在多个场所提到的,将对话系统转化成一个Optimal Decision Making 问题 + Dialogue as a Markov Decision Process 1. Given state \(s\), select action \(a\) according to policy \(">
 
 
 
@@ -374,26 +374,14 @@
       
 
       
-        <h2>A Unified View</h2>
-<p>这事Jianfeng Gao(Microsoft Research) 在多个场所提到的,将对话系统转化成一个Optimal Decision Making 问题</p>
-<ul>
-<li>Dialogue as a Markov Decision Process</li>
-</ul>
-<ol>
-<li>Given state $s$, select action $a$ according to policy $\pai$</li>
-<li>Receive reward $r$, observe new state $a'$</li>
-<li>Continue the cycle until the episode terminate</li>
-</ol>
-<p>Task-oriented Dialogue System 的整体结构
-在Deep Learning, Reinforcement Learning 火爆之后，可以将 task-oriented 的对话系统看成是一个 Partially Observable Markov Decision Process(POMDP)
-这里先介绍 Dialogue Policy Learning 的内容, 这里直接从论文讲起</p>
-<h2>Policy Based Method</h2>
-<p>代表论文
-<a href="https://arxiv.org/abs/1604.04562" target="_blank" rel="noopener">Wen 2016</a></p>
-<h2>基于Reinforcement Learning 方法</h2>
+        <h2 id="a-unified-view">A Unified View</h2>
+<p>这事Jianfeng Gao(Microsoft Research) 在多个场所提到的,将对话系统转化成一个Optimal Decision Making 问题 + Dialogue as a Markov Decision Process 1. Given state <span class="math inline">\(s\)</span>, select action <span class="math inline">\(a\)</span> according to policy <span class="math inline">\(\pai\)</span> 2. Receive reward <span class="math inline">\(r\)</span>, observe new state <span class="math inline">\(a&#39;\)</span> 3. Continue the cycle until the episode terminate</p>
+<p>Task-oriented Dialogue System 的整体结构 在Deep Learning, Reinforcement Learning 火爆之后，可以将 task-oriented 的对话系统看成是一个 Partially Observable Markov Decision Process(POMDP) 这里先介绍 Dialogue Policy Learning 的内容, 这里直接从论文讲起</p>
+<h2 id="policy-based-method">Policy Based Method</h2>
+<p>代表论文 <a href="https://arxiv.org/abs/1604.04562" target="_blank" rel="noopener">Wen 2016</a></p>
+<h2 id="基于reinforcement-learning-方法">基于Reinforcement Learning 方法</h2>
 <p>将Dialogue Management 视为一个决策问题，并采用Reinforcement Learning 方法来优化 dialogue policy. 其中的Reward 定义为最终的用户满意度减去对话轮数。其中用户满意度是为了达成服务目标，而对话轮数则是尽可能少的对话轮数达成沟通目的。</p>
-<p>但是基于RL 的方法有一个很严重的问题: 严重依赖与用户的交互。
-为了解决这一问题可以使用真实对话数据构造一个 user simulator, 这个user simulator 可以用来优化 agent 的policy. 但是这个构造的user simulator 质量却不怎么样</p>
+<p>但是基于RL 的方法有一个很严重的问题: 严重依赖与用户的交互。 为了解决这一问题可以使用真实对话数据构造一个 user simulator, 这个user simulator 可以用来优化 agent 的policy. 但是这个构造的user simulator 质量却不怎么样</p>
 
       
     </div>
@@ -570,7 +558,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">A Unified View</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">Policy Based Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">基于Reinforcement Learning 方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#a-unified-view"><span class="nav-number">1.</span> <span class="nav-text">A Unified View</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#policy-based-method"><span class="nav-number">2.</span> <span class="nav-text">Policy Based Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于reinforcement-learning-方法"><span class="nav-number">3.</span> <span class="nav-text">基于Reinforcement Learning 方法</span></a></li></ol></div>
             
 
           </div>
@@ -796,24 +784,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

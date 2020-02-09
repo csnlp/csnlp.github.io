@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Machine Model Some types of machine models:  There are also many implementations of these machine models:  ISA Characteristics  Most RISX architectures, like MIPS, have three classes of instructions:">
+<meta name="description" content="Machine Model Some types of machine models:  There are also many implementations of these machine models:  # ISA Characteristics  Most RISX architectures, like MIPS, have three classes of instructions">
 <meta name="keywords" content="Computer Architecture">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ISA Fundamentals">
 <meta property="og:url" content="http://yoursite.com/2019/10/04/ISA/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
-<meta property="og:description" content="Machine Model Some types of machine models:  There are also many implementations of these machine models:  ISA Characteristics  Most RISX architectures, like MIPS, have three classes of instructions:">
+<meta property="og:description" content="Machine Model Some types of machine models:  There are also many implementations of these machine models:  # ISA Characteristics  Most RISX architectures, like MIPS, have three classes of instructions">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/10/04/ISA/machine_model.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/10/04/ISA/real_world_isa">
@@ -93,7 +93,7 @@
 <meta property="og:updated_time" content="2020-01-30T06:00:21.991Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ISA Fundamentals">
-<meta name="twitter:description" content="Machine Model Some types of machine models:  There are also many implementations of these machine models:  ISA Characteristics  Most RISX architectures, like MIPS, have three classes of instructions:">
+<meta name="twitter:description" content="Machine Model Some types of machine models:  There are also many implementations of these machine models:  # ISA Characteristics  Most RISX architectures, like MIPS, have three classes of instructions">
 <meta name="twitter:image" content="http://yoursite.com/2019/10/04/ISA/machine_model.jpg">
 
 
@@ -367,21 +367,13 @@
       
 
       
-        <h1>Machine Model</h1>
-<p>Some types of machine models:
-<img src="machine_model.jpg" alt=""></p>
-<p>There are also many implementations of these machine models:
-<img src="real_world_isa" alt=""></p>
-<h1>ISA Characteristics</h1>
-<p><img src="classes_of_instructions.jpg" alt=""></p>
-<p>Most RISX architectures, like MIPS, have three classes of instructions:</p>
-<ol>
-<li>ALU instructions</li>
-<li>Load and Store instructions</li>
-<li>Branches and jumps</li>
-</ol>
-<p>$$CPI = P_{ALU} \times CPI_{ALU} + P_{BR} \times CPI_{BR} + P_{LD} (P_{HIT} CPI_{HIT} + P_{MISS} CPI_{MISS})$$</p>
-<h1>Microcoded Microarchitecture</h1>
+        <h1 id="machine-model">Machine Model</h1>
+<p>Some types of machine models: <img src="machine_model.jpg"></p>
+<p>There are also many implementations of these machine models: <img src="real_world_isa"> # ISA Characteristics</p>
+<p><img src="classes_of_instructions.jpg"></p>
+<p>Most RISX architectures, like MIPS, have three classes of instructions: 1. ALU instructions 2. Load and Store instructions 3. Branches and jumps</p>
+<p><span class="math display">\[CPI = P_{ALU} \times CPI_{ALU} + P_{BR} \times CPI_{BR} + P_{LD} (P_{HIT} CPI_{HIT} + P_{MISS} CPI_{MISS})\]</span></p>
+<h1 id="microcoded-microarchitecture">Microcoded Microarchitecture</h1>
 
       
     </div>
@@ -556,7 +548,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Machine Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">ISA Characteristics</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">Microcoded Microarchitecture</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#machine-model"><span class="nav-number">1.</span> <span class="nav-text">Machine Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#microcoded-microarchitecture"><span class="nav-number">2.</span> <span class="nav-text">Microcoded Microarchitecture</span></a></li></ol></div>
             
 
           </div>
@@ -710,24 +702,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
