@@ -501,7 +501,12 @@ This blog is to document the progress in NLP fie
       
         
           
-          大部分data-driven的对话生成模型都是基于End-to-End model的，但是这种End-to-End model 有其缺点: + 难以表征多轮对话生成中的上下文信息: 多轮对话中的Context 信息 + 基于极大似然估计为优化目标很容易造成Safe Response problem。
+          大部分data-driven的对话生成模型都是基于End-to-End model的，但是这种End-to-End model 有其缺点:
+
+难以表征多轮对话生成中的上下文信息: 多轮对话中的Context 信息
+基于极大似然估计为优化目标很容易造成Safe Response problem。
+
+为
           ...
           <!--noindex-->
           <div class="post-button text-center">
