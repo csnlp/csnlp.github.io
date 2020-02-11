@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/dialogue_generation.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/hred.jpg">
 <meta property="og:image" content="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/vhred_model.jpg">
-<meta property="og:updated_time" content="2020-02-10T14:21:45.600Z">
+<meta property="og:updated_time" content="2020-02-11T12:54:40.250Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hierarchy Dialogue Generation">
 <meta name="twitter:description" content="大部分data-driven的对话生成模型都是基于End-to-End model的，但是这种End-to-End model 有其缺点:  难以表征多轮对话生成中的上下文信息: 多轮对话中的Context 信息 基于极大似然估计为优化目标很容易造成Safe Response problem。  为了更好的利用上下文信息，这篇博客介绍 Hierarchy 模型在Dialogue Generatio">
@@ -465,9 +465,20 @@
 <p>具体来说, VHRED 模型仍然只有3部分:</p>
 <ol type="1">
 <li><strong>Encoder RNN</strong>: 负责将一个 utterance 编码成一个向量。</li>
-<li><strong>Context RNN</strong>: 将 Encoder RNN 编码 <span class="math inline">\(n\)</span>'th 得到的 向量编码得到 Context hidden state <span class="math inline">\(h^{con}_{n}\)</span>。由 <span class="math inline">\(h^{con}_{n}\)</span> 映射得到 分布的均值<span class="math inline">\(\mu(\mathbf{w}_{&lt;n})\)</span> 和标准差 <span class="math inline">\(\Sigma(\mathbf{w}_{&lt;n})\)</span><br>
-</li>
+<li><strong>Context RNN</strong>: 将 Encoder RNN 编码 <span class="math inline">\(n\)</span>'th 得到的 向量编码得到 Context hidden state <span class="math inline">\(h^{con}_{n}\)</span>。根据 <span class="math inline">\(h^{con}_{n}\)</span> 和目前得到的均值<span class="math inline">\(\mu(\mathbf{w}_{&lt;n})\)</span> 和标准差 <span class="math inline">\(\Sigma(\mathbf{w}_{&lt;n})\)</span> 采样得到隐变量 <span class="math inline">\(\mathbf{z}\)</span>。注意, <span class="math inline">\(\mu\)</span> 和 <span class="math inline">\(\Sigma\)</span> 都是神经网络,</li>
 <li><strong>Decoder RNN</strong>:</li>
+</ol>
+<p>按照生成流程来讲, 总体流程如下:</p>
+<ol type="1">
+<li><p>Encoder RNN 编码得到 token-level 的向量: <span class="math inline">\(h^{enc}_{n, M_n}\)</span>。</p></li>
+<li><p>在Context RNN 根据 token-level 的向量得到 context-level 的向量: <span class="math inline">\(h^{con}_{n}\)</span>。</p></li>
+<li><p><strong>特殊之处</strong>: 对于第 n 个 utterance，VHRED 利用一个前置网络(Feed-Forward network)来确定最终的均值(<span class="math inline">\(\mu\)</span>)和方差(<span class="math inline">\(\Sigma\)</span>)。对于这个Feed-forward 网络的input, output 值得好好解释一番:</p>
+<ul>
+<li>input: <span class="math inline">\(h^{con}_{n=1}\)</span> 和 <span class="math inline">\(h^{enc}_{n, M_n}\)</span> 拼接得到的向量。</li>
+<li>output: Feed-forward 网络的output 通过矩阵乘法(matrix multiplication) 得到了均值 <span class="math inline">\(\mu\)</span>, 通过矩阵乘法和softplus function 得到对角协方差矩阵(diagonal covariance matrix)。</li>
+</ul></li>
+<li><p>在生成阶段, VHRED model 从 先验分布: <span class="math inline">\(\mathcal{N}(\mathbf{\mu}_{prior}(\mathcal{w}_{&lt;n}), \mathcal{\Sigma}_{prior}(\mathcal{w}_{&lt;n}))\)</span> 中采样得到随机隐变量 <span class="math inline">\(\mathbf{z}_{n}\)</span>.</p></li>
+<li><p><span class="math inline">\(\mathbf{z}_n\)</span> 和 <span class="math inline">\(h^{con}_{n-1}\)</span> 一并作为Decoder RNN 的输入: <span class="math display">\[h^{dec}_{n, 0} = 0, h^{dec}_{n, m} = f^{dec}_{\theta}(h^{dec}_{n, m-1}, w_{n, m}, h^{con}_{n-1}, \mathbf{z}_n)\]</span> <span class="math display">\[\forall m = 1, \cdots, M_n\]</span></p></li>
 </ol>
 
       
@@ -869,7 +880,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
