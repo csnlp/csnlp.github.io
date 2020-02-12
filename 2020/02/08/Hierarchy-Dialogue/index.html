@@ -83,18 +83,18 @@
 <meta name="keywords" content="Dilogue Generation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hierarchy Dialogue Generation">
-<meta property="og:url" content="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/index.html">
+<meta property="og:url" content="https://csnlp.github.io/2020/02/08/Hierarchy-Dialogue/index.html">
 <meta property="og:site_name" content="CSNLP学徒">
 <meta property="og:description" content="大部分data-driven的对话生成模型都是基于End-to-End model的，但是这种End-to-End model 有其缺点:  难以表征多轮对话生成中的上下文信息: 多轮对话中的Context 信息 基于极大似然估计为优化目标很容易造成Safe Response problem。  为了更好的利用上下文信息，这篇博客介绍 Hierarchy 模型在Dialogue Generatio">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/dialogue_generation.jpg">
-<meta property="og:image" content="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/hred.jpg">
-<meta property="og:image" content="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/vhred_model.jpg">
-<meta property="og:updated_time" content="2020-02-11T12:54:40.250Z">
+<meta property="og:image" content="https://csnlp.github.io/2020/02/08/Hierarchy-Dialogue/dialogue_generation.jpg">
+<meta property="og:image" content="https://csnlp.github.io/2020/02/08/Hierarchy-Dialogue/hred.jpg">
+<meta property="og:image" content="https://csnlp.github.io/2020/02/08/Hierarchy-Dialogue/vhred_model.jpg">
+<meta property="og:updated_time" content="2020-02-12T12:11:11.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hierarchy Dialogue Generation">
 <meta name="twitter:description" content="大部分data-driven的对话生成模型都是基于End-to-End model的，但是这种End-to-End model 有其缺点:  难以表征多轮对话生成中的上下文信息: 多轮对话中的Context 信息 基于极大似然估计为优化目标很容易造成Safe Response problem。  为了更好的利用上下文信息，这篇博客介绍 Hierarchy 模型在Dialogue Generatio">
-<meta name="twitter:image" content="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/dialogue_generation.jpg">
+<meta name="twitter:image" content="https://csnlp.github.io/2020/02/08/Hierarchy-Dialogue/dialogue_generation.jpg">
 
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/">
+  <link rel="canonical" href="https://csnlp.github.io/2020/02/08/Hierarchy-Dialogue/">
 
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/08/Hierarchy-Dialogue/">
+    <link itemprop="mainEntityOfPage" href="https://csnlp.github.io/2020/02/08/Hierarchy-Dialogue/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="CSNLP Apprentice">
@@ -386,11 +386,24 @@
 <p>为了更好的利用上下文信息，这篇博客介绍 Hierarchy 模型在Dialogue Generation 的应用，很好的建模了上下文信息。</p>
 <h1 id="最早的hred-model">最早的HRED Model</h1>
 <p>HRED(Hierarchy Recurrent Encoder Decoder) model 最早是在<em>A Hierarchical Recurrent Encoder-Decoder for Generative Context-Aware Query Suggestion</em>.</p>
-<p>这个标题本身就含有了很多信息, HRED 最早提出是为了 Query Generation 考虑的，而Context-aware 这一个词汇也很好的说明了 HRED 的优点: <strong>很好的利用了Context 信息</strong>。 在 原始的HRED 中，有两个Level 的信息:</p>
+
+
+	<div class="row">
+    <embed src="./origin_hred.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+<p>这个标题本身就含有了很多信息, HRED 最早提出是为了 Query Generation 考虑的，而Context-aware 这一个词汇也很好的说明了 HRED 的优点: <strong>很好的利用了Context 信息</strong>。 在 原始的HRED 中，有两个Level 的信息: query-level and session-level.</p>
+<p>整个流程包括3方面:</p>
 <ol type="1">
-<li>query level</li>
-<li>word level</li>
+<li>Query-Level Encoding.</li>
+<li>Session-Level Encoding.</li>
+<li>Next-Query Decoding.</li>
 </ol>
+<h2 id="query-level-encoding">Query-Level Encoding</h2>
+<p>对于 query <span class="math inline">\(Q_n = \{w_{n, 0}, \cdots, w_{n, M_{n} - 1}\}\)</span> 而言， Query-level RNN 的具体操作为: <span class="math display">\[h_{m, 0} = 0, h_{n, m} = GRU_{enc}(h_{n, m-1}, w_{n, m}), m = 1, \cdots, M_n\]</span> where <span class="math inline">\(h_{m, n} \in \mathbb{R}^{d}\)</span>. 最后一个时刻的隐变量: <span class="math inline">\(h_{n, M_{n}}\)</span> 可以理解成表征了 query <span class="math inline">\(n\)</span> 这个 utterance 的所有信息 ## Session-Level Encoding Session-level RNN 的输入即为 <span class="math inline">\(h_{1, M_1}, h_{2, M_2}, \cdots, h_{n, M_n}\)</span> , Session-Level RNN 就是为了</p>
+<h2 id="next-query-decoding">Next-Query Decoding</h2>
 <h1 id="hred-model-in-dialogue-generation">HRED model in Dialogue Generation</h1>
 <p>类比于原始的 HRED model, dialogue generation 也可以从两个 level 来构建 Context 信息:</p>
 <ol type="1">
@@ -479,7 +492,17 @@
 </ul></li>
 <li><p>在生成阶段, VHRED model 从 先验分布: <span class="math inline">\(\mathcal{N}(\mathbf{\mu}_{prior}(\mathcal{w}_{&lt;n}), \mathcal{\Sigma}_{prior}(\mathcal{w}_{&lt;n}))\)</span> 中采样得到随机隐变量 <span class="math inline">\(\mathbf{z}_{n}\)</span>.</p></li>
 <li><p><span class="math inline">\(\mathbf{z}_n\)</span> 和 <span class="math inline">\(h^{con}_{n-1}\)</span> 一并作为Decoder RNN 的输入: <span class="math display">\[h^{dec}_{n, 0} = 0, h^{dec}_{n, m} = f^{dec}_{\theta}(h^{dec}_{n, m-1}, w_{n, m}, h^{con}_{n-1}, \mathbf{z}_n)\]</span> <span class="math display">\[\forall m = 1, \cdots, M_n\]</span></p></li>
+<li><p>步骤 5 中得到的 <span class="math inline">\(h^{dec}_{n, m}\)</span> 先通过一个MLP, 再通过一个仿射变换以及softmax 函数之后即得到了最终的<span class="math inline">\(w_{n, m+1}\)</span>的output distribution. (The output distribution is given by transforming <span class="math inline">\(h^{dec}_{n, m}\)</span> through a one-layer neural network(MLP) <span class="math inline">\(f^{mlp}_{\theta}\)</span> followed by an affine transformation and the softmax function): <span class="math display">\[P_{\theta}(w_{n, m+1} \vert w_{n, \leq m}, \mathbf{w}_{&lt;n}) = \frac{e^{O \cdot f^{mlp}_{\theta} (h^{dec}_{n, m})}}{\sum_{w&#39;} e^{O \cdot f^{mlp}_{\theta} (h^{dec}_{n, m})}}\]</span></p></li>
 </ol>
+<p>其中, <span class="math inline">\(O \in \mathcal{R}^{| V | \times d}\)</span> 是output distribution matrix 的 word embedding matrix.</p>
+<h2 id="vhred-为什么能解决-safe-response-problem-呢">VHRED 为什么能解决 safe response problem 呢？</h2>
+<p>VHRED 引入了一个隐变量: <span class="math inline">\(\mathbf{z}\)</span> 来引入两种level 的 variation:</p>
+<ol type="1">
+<li>Utterance-level(sequence-level): 由先验分布 <span class="math inline">\(\mathcal{N}\)</span> 引入. <em>At the utterance-level with the conditional prior distribution over </em>。</li>
+<li>Word-level(sub-sequence-level): 由具体的word 生成过程引入。At the word-level with the conditional distribution over word tokens.</li>
+</ol>
+<p>在这个意义上来讲, <span class="math inline">\(\mathbf{z}\)</span> 其实对应high-level 的信息策略: 譬如 对话主题(conversation topic), 对话参与者的对话目标(speaker goals), 对话参与者的情感(sentiments)，可以说 <span class="math inline">\(\mathbf{z}\)</span> 其实是对应一个很抽象 且 high-level 的信息。<span class="math inline">\(\mathbf{z}\)</span> 能帮助实现 long-term objective: <blockquote><p>Occupy a position in embedding space which sustains an output trajectory, for generating probable future tokens(long-term objective.)</p>
+</blockquote></p>
 
       
     </div>
@@ -654,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#最早的hred-model"><span class="nav-number">1.</span> <span class="nav-text">最早的HRED Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hred-model-in-dialogue-generation"><span class="nav-number">2.</span> <span class="nav-text">HRED model in Dialogue Generation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hred-模型的结构"><span class="nav-number">2.1.</span> <span class="nav-text">HRED 模型的结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vhred-model-hred-model-的改进版本"><span class="nav-number">3.</span> <span class="nav-text">VHRED model: HRED model 的改进版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hred-依然面临着严峻的safe-response-问题"><span class="nav-number">3.1.</span> <span class="nav-text">HRED 依然面临着严峻的Safe Response 问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决-restricted-shallow-generation-的-vhred-模型"><span class="nav-number">3.2.</span> <span class="nav-text">解决 restricted shallow generation 的 VHRED 模型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#最早的hred-model"><span class="nav-number">1.</span> <span class="nav-text">最早的HRED Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#query-level-encoding"><span class="nav-number">1.1.</span> <span class="nav-text">Query-Level Encoding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-query-decoding"><span class="nav-number">1.2.</span> <span class="nav-text">Next-Query Decoding</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hred-model-in-dialogue-generation"><span class="nav-number">2.</span> <span class="nav-text">HRED model in Dialogue Generation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hred-模型的结构"><span class="nav-number">2.1.</span> <span class="nav-text">HRED 模型的结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vhred-model-hred-model-的改进版本"><span class="nav-number">3.</span> <span class="nav-text">VHRED model: HRED model 的改进版本</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hred-依然面临着严峻的safe-response-问题"><span class="nav-number">3.1.</span> <span class="nav-text">HRED 依然面临着严峻的Safe Response 问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决-restricted-shallow-generation-的-vhred-模型"><span class="nav-number">3.2.</span> <span class="nav-text">解决 restricted shallow generation 的 VHRED 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vhred-为什么能解决-safe-response-problem-呢"><span class="nav-number">3.3.</span> <span class="nav-text">VHRED 为什么能解决 safe response problem 呢？</span></a></li></ol></li></ol></div>
             
 
           </div>
