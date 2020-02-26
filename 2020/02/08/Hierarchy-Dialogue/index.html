@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://csnlp.github.io/2020/02/08/Hierarchy-Dialogue/dialogue_generation.jpg">
 <meta property="og:image" content="https://csnlp.github.io/2020/02/08/Hierarchy-Dialogue/hred.jpg">
 <meta property="og:image" content="https://csnlp.github.io/2020/02/08/Hierarchy-Dialogue/vhred_model.jpg">
-<meta property="og:updated_time" content="2020-02-12T12:11:11.132Z">
+<meta property="og:updated_time" content="2020-02-15T08:17:27.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hierarchy Dialogue Generation">
 <meta name="twitter:description" content="大部分data-driven的对话生成模型都是基于End-to-End model的，但是这种End-to-End model 有其缺点:  难以表征多轮对话生成中的上下文信息: 多轮对话中的Context 信息 基于极大似然估计为优化目标很容易造成Safe Response problem。  为了更好的利用上下文信息，这篇博客介绍 Hierarchy 模型在Dialogue Generatio">
@@ -402,7 +402,7 @@
 <li>Next-Query Decoding.</li>
 </ol>
 <h2 id="query-level-encoding">Query-Level Encoding</h2>
-<p>对于 query <span class="math inline">\(Q_n = \{w_{n, 0}, \cdots, w_{n, M_{n} - 1}\}\)</span> 而言， Query-level RNN 的具体操作为: <span class="math display">\[h_{m, 0} = 0, h_{n, m} = GRU_{enc}(h_{n, m-1}, w_{n, m}), m = 1, \cdots, M_n\]</span> where <span class="math inline">\(h_{m, n} \in \mathbb{R}^{d}\)</span>. 最后一个时刻的隐变量: <span class="math inline">\(h_{n, M_{n}}\)</span> 可以理解成表征了 query <span class="math inline">\(n\)</span> 这个 utterance 的所有信息 ## Session-Level Encoding Session-level RNN 的输入即为 <span class="math inline">\(h_{1, M_1}, h_{2, M_2}, \cdots, h_{n, M_n}\)</span> , Session-Level RNN 就是为了</p>
+<p>对于 query <span class="math inline">\(Q_m = \{w_{m, 0}, \cdots, w_{m, N_{m} - 1}\}\)</span> 而言， Query-level RNN 的具体操作为: <span class="math display">\[h_{m, 0} = 0, h_{m, n} = GRU_{enc}(h_{m, n-1}, w_{m, n}), n = 1, \cdots, N_m\]</span> where <span class="math inline">\(h_{m, n} \in \mathbb{R}^{d}\)</span>. 最后一个时刻的隐变量: <span class="math inline">\(h_{m, N_{m}}\)</span> 可以理解成表征了 query <span class="math inline">\(m\)</span> 这个 utterance 的所有信息 为了符号过多傻傻分不清(To keep the notation uncluttered), 用 <span class="math inline">\(q_m \equiv h_{m, N_m}\)</span>, 也就是 <span class="math inline">\(q_m\)</span> 代表了query <span class="math inline">\(m\)</span> 的语义信息。 ## Session-Level Encoding Session-level RNN 的输入即为 <span class="math inline">\(q_{1}, q_{2}, \cdots, q_{M}\)</span> , Session-Level RNN 就是为了将序列 <span class="math inline">\(q_{1}, q_{2}, \cdots, q_{M}\)</span> 编码得到最终的session-level 的状态: <span class="math display">\[s_m = GRU_{ses}(s_{m-1}, q_m), m = 1, \cdots, M\]</span></p>
 <h2 id="next-query-decoding">Next-Query Decoding</h2>
 <h1 id="hred-model-in-dialogue-generation">HRED model in Dialogue Generation</h1>
 <p>类比于原始的 HRED model, dialogue generation 也可以从两个 level 来构建 Context 信息:</p>
@@ -543,8 +543,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/11/01/HELLO/" rel="prev" title="人工置顶">
-                人工置顶 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/02/12/test/" rel="prev" title="test">
+                test <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -622,7 +622,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
